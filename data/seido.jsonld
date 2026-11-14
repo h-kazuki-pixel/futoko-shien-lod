@@ -78,6 +78,27 @@
    "note": "保護者が申請する制度ではない。利用料の補助と混同されやすい。算定の詳細は交付要綱にある"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40000-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40000-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40000",
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡県",
+    "identifier": "40000"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "ICT活用型不登校児童生徒支援事業(みらいサポーター事業)",
+   "eligibility": "県内の公立・私立の小中学校、義務教育学校に在籍する不登校の児童生徒(福岡市・北九州市の公立小中学校を除く)",
+   "source": "https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html",
+   "sourceName": "福岡県「ICT活用型不登校児童生徒支援事業(みらいサポーター事業)について」",
+   "basisPhrase": "みらいサポーター事業",
+   "note": "大学生のボランティアが、オンラインで支援する。利用料と申し込み方法の記載は見つからなかった"
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-fs-hojo",
    "@type": "schema:GovernmentService",
    "identifier": "40100-fs-hojo",
@@ -221,6 +242,26 @@
    "note": "転入学の条件の詳細は生徒募集案内にある"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40202-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40202-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40202",
+    "@type": "schema:AdministrativeArea",
+    "name": "大牟田市",
+    "identifier": "40202"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "大牟田市立宅峰中学校 ほしぞら分校",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "大牟田市立宅峰中学校",
+   "note": "文部科学省の一覧による。一覧での指定年は令和6年。対象や開校の時期は、市の資料でまだ確かめていない"
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40203-fs-hojo",
    "@type": "schema:GovernmentService",
    "identifier": "40203-fs-hojo",
@@ -285,6 +326,206 @@
    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
    "basisPhrase": "設置者一覧",
    "noneBasis": "文部科学省の設置者一覧に、福岡県久留米市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40204-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40204-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40204",
+    "@type": "schema:AdministrativeArea",
+    "name": "直方市",
+    "identifier": "40204"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県直方市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40205-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40205-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40205",
+    "@type": "schema:AdministrativeArea",
+    "name": "飯塚市",
+    "identifier": "40205"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県飯塚市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40206-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40206-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40206",
+    "@type": "schema:AdministrativeArea",
+    "name": "田川市",
+    "identifier": "40206"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県田川市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40207-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40207-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40207",
+    "@type": "schema:AdministrativeArea",
+    "name": "柳川市",
+    "identifier": "40207"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県柳川市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40210-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40210-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40210",
+    "@type": "schema:AdministrativeArea",
+    "name": "八女市",
+    "identifier": "40210"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県八女市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40211-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40211-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40211",
+    "@type": "schema:AdministrativeArea",
+    "name": "筑後市",
+    "identifier": "40211"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県筑後市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40212-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40212-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40212",
+    "@type": "schema:AdministrativeArea",
+    "name": "大川市",
+    "identifier": "40212"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県大川市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40213-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40213-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40213",
+    "@type": "schema:AdministrativeArea",
+    "name": "行橋市",
+    "identifier": "40213"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県行橋市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40214-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40214-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40214",
+    "@type": "schema:AdministrativeArea",
+    "name": "豊前市",
+    "identifier": "40214"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県豊前市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40215-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40215-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40215",
+    "@type": "schema:AdministrativeArea",
+    "name": "中間市",
+    "identifier": "40215"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県中間市を設置場所とする学校が載っていない(確認日の時点)",
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
   },
   {
@@ -978,6 +1219,106 @@
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40225-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40225-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40225",
+    "@type": "schema:AdministrativeArea",
+    "name": "うきは市",
+    "identifier": "40225"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県うきは市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40226-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40226-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40226",
+    "@type": "schema:AdministrativeArea",
+    "name": "宮若市",
+    "identifier": "40226"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県宮若市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40227-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40227-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40227",
+    "@type": "schema:AdministrativeArea",
+    "name": "嘉麻市",
+    "identifier": "40227"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県嘉麻市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40228-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40228-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40228",
+    "@type": "schema:AdministrativeArea",
+    "name": "朝倉市",
+    "identifier": "40228"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県朝倉市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40229-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40229-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40229",
+    "@type": "schema:AdministrativeArea",
+    "name": "みやま市",
+    "identifier": "40229"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県みやま市を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-fs-hojo",
    "@type": "schema:GovernmentService",
    "identifier": "40230-fs-hojo",
@@ -1473,6 +1814,44 @@
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40344-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40344-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40344",
+    "@type": "schema:AdministrativeArea",
+    "name": "須恵町",
+    "identifier": "40344"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-hito-yomitori",
+   "note": "作者が町のページを見たが、記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40344-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40344-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40344",
+    "@type": "schema:AdministrativeArea",
+    "name": "須恵町",
+    "identifier": "40344"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-hito-yomitori",
+   "note": "作者が町のページを見たが、町が行うオンライン支援の記載は見つからなかった。無いことは確認していない。県には、オンラインで支援する事業(みらいサポーター事業)がある",
+   "searchedAt": [
+    "https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html"
+   ]
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40344-shien-center",
    "@type": "schema:GovernmentService",
    "identifier": "40344-shien-center",
@@ -1813,6 +2192,386 @@
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40381-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40381-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40381",
+    "@type": "schema:AdministrativeArea",
+    "name": "芦屋町",
+    "identifier": "40381"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県芦屋町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40382-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40382-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40382",
+    "@type": "schema:AdministrativeArea",
+    "name": "水巻町",
+    "identifier": "40382"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県水巻町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40383-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40383-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40383",
+    "@type": "schema:AdministrativeArea",
+    "name": "岡垣町",
+    "identifier": "40383"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県岡垣町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40384-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40384-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40384",
+    "@type": "schema:AdministrativeArea",
+    "name": "遠賀町",
+    "identifier": "40384"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県遠賀町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40401-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40401-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40401",
+    "@type": "schema:AdministrativeArea",
+    "name": "小竹町",
+    "identifier": "40401"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県小竹町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40402-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40402-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40402",
+    "@type": "schema:AdministrativeArea",
+    "name": "鞍手町",
+    "identifier": "40402"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県鞍手町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40421-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40421-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40421",
+    "@type": "schema:AdministrativeArea",
+    "name": "桂川町",
+    "identifier": "40421"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県桂川町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40447-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40447-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40447",
+    "@type": "schema:AdministrativeArea",
+    "name": "筑前町",
+    "identifier": "40447"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県筑前町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40448-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40448-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40448",
+    "@type": "schema:AdministrativeArea",
+    "name": "東峰村",
+    "identifier": "40448"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県東峰村を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40503-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40503-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40503",
+    "@type": "schema:AdministrativeArea",
+    "name": "大刀洗町",
+    "identifier": "40503"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県大刀洗町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40522-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40522-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40522",
+    "@type": "schema:AdministrativeArea",
+    "name": "大木町",
+    "identifier": "40522"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県大木町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40544-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40544-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40544",
+    "@type": "schema:AdministrativeArea",
+    "name": "広川町",
+    "identifier": "40544"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県広川町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40601-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40601-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40601",
+    "@type": "schema:AdministrativeArea",
+    "name": "香春町",
+    "identifier": "40601"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県香春町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40602-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40602-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40602",
+    "@type": "schema:AdministrativeArea",
+    "name": "添田町",
+    "identifier": "40602"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県添田町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40604-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40604-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40604",
+    "@type": "schema:AdministrativeArea",
+    "name": "糸田町",
+    "identifier": "40604"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県糸田町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40605-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40605-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40605",
+    "@type": "schema:AdministrativeArea",
+    "name": "川崎町",
+    "identifier": "40605"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県川崎町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40608-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40608-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40608",
+    "@type": "schema:AdministrativeArea",
+    "name": "大任町",
+    "identifier": "40608"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県大任町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40609-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40609-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40609",
+    "@type": "schema:AdministrativeArea",
+    "name": "赤村",
+    "identifier": "40609"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県赤村を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40610-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40610-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40610",
+    "@type": "schema:AdministrativeArea",
+    "name": "福智町",
+    "identifier": "40610"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県福智町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40621-fs-hojo",
    "@type": "schema:GovernmentService",
    "identifier": "40621-fs-hojo",
@@ -1856,6 +2615,86 @@
    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
    "basisPhrase": "設置者一覧",
    "noneBasis": "文部科学省の設置者一覧に、福岡県苅田町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40625-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40625-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40625",
+    "@type": "schema:AdministrativeArea",
+    "name": "みやこ町",
+    "identifier": "40625"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県みやこ町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40642-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40642-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40642",
+    "@type": "schema:AdministrativeArea",
+    "name": "吉富町",
+    "identifier": "40642"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県吉富町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40646-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40646-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40646",
+    "@type": "schema:AdministrativeArea",
+    "name": "上毛町",
+    "identifier": "40646"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県上毛町を設置場所とする学校が載っていない(確認日の時点)",
+   "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40647-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40647-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40647",
+    "@type": "schema:AdministrativeArea",
+    "name": "築上町",
+    "identifier": "40647"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "設置者一覧",
+   "noneBasis": "文部科学省の設置者一覧に、福岡県築上町を設置場所とする学校が載っていない(確認日の時点)",
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
   }
  ]
