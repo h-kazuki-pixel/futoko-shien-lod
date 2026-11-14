@@ -132,3 +132,23 @@ def test_name_parts_are_reported_but_do_not_decide():
     r = collate.collate(row(制度名="みほん市 補助金(まぼろし教室)"), text)
     assert r["ページに無い名前の部分"] == ["まぼろし教室"]
     assert r["一致"]
+
+
+LIST_PAGE = "<h1>みほん学校の設置者一覧</h1><table><tr><td>1</td><td>みほん市立あおぞら中学校</td><td>福岡県みほん市</td></tr></table>"
+
+
+def test_absence_matches_when_name_is_not_listed():
+    text = fetch.html_to_text(LIST_PAGE)
+    r = collate.collate_absence(row(市町村="べつの町", 根拠の箇所="設置者一覧"), text)
+    assert r["一致"]
+
+
+def test_absence_fails_when_name_is_listed():
+    text = fetch.html_to_text(LIST_PAGE)
+    r = collate.collate_absence(row(市町村="みほん市", 根拠の箇所="設置者一覧"), text)
+    assert not r["一致"]
+
+
+def test_absence_fails_on_wrong_page():
+    r = collate.collate_absence(row(市町村="べつの町", 根拠の箇所="設置者一覧"), "お探しのページは見つかりません")
+    assert not r["一致"]

@@ -123,3 +123,27 @@ def collate(row: dict[str, str], page_text: str) -> dict:
         "ページに無い名前の部分": name_parts_missing(row.get("制度名", "") or "", page_norm),
         "一致": literal_ok and not missing,
     }
+
+
+PREFECTURE = "福岡県"
+
+
+def collate_absence(row: dict[str, str], page_text: str) -> dict:
+    """「なし」の照合。出典が、設置校などを並べた公式の一覧であるときに使う。
+
+    1. 根拠の箇所がページにある(狙った一覧のページであることの確認)
+    2. 「県名+市町村名」がページに出てこない
+    の両方がそろえば一致。一覧に載っていないことしか分からない点に注意する。
+    """
+    page_norm = normalize(page_text)
+    basis = normalize(row.get("根拠の箇所", "") or "")
+    literal_ok = bool(basis) and basis in page_norm
+    name = normalize(PREFECTURE + (row.get("市町村", "") or ""))
+    listed = name in page_norm
+    return {
+        "id": row.get("id", ""),
+        "根拠の箇所がページにある": literal_ok,
+        "ページに無い数字": ["一覧に市町村名がある"] if listed else [],
+        "ページに無い名前の部分": [],
+        "一致": literal_ok and not listed,
+    }

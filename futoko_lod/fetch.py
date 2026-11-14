@@ -152,7 +152,8 @@ def run(path: str, interval: float = INTERVAL_SEC) -> list[dict]:
     pages: dict[str, dict] = {}
     results = []
     for row in rows:
-        if row["状態"] not in ("あり", "予定"):
+        absence = row["状態"] == "なし" and bool(row["出典URL"])
+        if row["状態"] not in ("あり", "予定") and not absence:
             results.append({"id": row["id"], "状態": row["状態"], "判定": "照合の対象外"})
             continue
         url = row["出典URL"]
@@ -165,7 +166,7 @@ def run(path: str, interval: float = INTERVAL_SEC) -> list[dict]:
         if page["text"] is None:
             entry["判定"] = "取得できず"
         else:
-            c = collate_mod.collate(row, page["text"])
+            c = (collate_mod.collate_absence if absence else collate_mod.collate)(row, page["text"])
             entry.update({k: v for k, v in c.items() if k != "id"})
             entry["判定"] = "一致" if c["一致"] else "不一致"
         results.append(entry)

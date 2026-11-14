@@ -100,6 +100,16 @@ def test_nashi_needs_basis():
 def test_nashi_by_machine_needs_official_document():
     row = kakunin_dekizu(状態="なし", 探した場所="", なしの根拠="ページに記載なし")
     assert "なしの根拠" in rules(row)
+    row["出典URL"] = "https://www.mext.go.jp/list.htm"
+    assert "なしの根拠" in rules(row)  # 根拠の箇所も要る
+    row["根拠の箇所"] = "設置者一覧"
+    assert schema.check_row(row) == []
+
+
+def test_nashi_cannot_carry_content():
+    row = kakunin_dekizu(状態="なし", 探した場所="", なしの根拠="一覧に無い", 出典URL="https://www.mext.go.jp/list.htm",
+                         根拠の箇所="設置者一覧", 制度名="まぼろし学校")
+    assert "なし" in rules(row)
 
 
 def test_nashi_by_inquiry_passes():
