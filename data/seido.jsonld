@@ -591,11 +591,11 @@
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
    "name": "大野城市立みずほ中学校",
-   "startText": "令和8年(指定年)",
-   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
-   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
-   "basisPhrase": "大野城市立みずほ中学校",
-   "note": "文部科学省の一覧による。市のページに「みずほ中学校(大野中学校分校)」として場所の記載がある。開校の時期と対象が載った市の資料は、URLをまだ記録していない"
+   "eligibility": "市内在住の中学1年生〜中学3年生",
+   "source": "https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html",
+   "sourceName": "大野城市「大野城市立みずほ中学校 転入学者希望者説明会・見学会」",
+   "basisPhrase": "大野城市立みずほ中学校(学びの多様化学校)",
+   "note": "大野中学校の分校。定員は各学年10名程度。文部科学省の設置者一覧での指定年は令和8年"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40220-fs-hojo",
@@ -1471,6 +1471,28 @@
    "basisPhrase": "設置者一覧",
    "noneBasis": "文部科学省の設置者一覧に、福岡県志免町を設置場所とする学校が載っていない(確認日の時点)",
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40344-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40344-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40344",
+    "@type": "schema:AdministrativeArea",
+    "name": "須恵町",
+    "identifier": "40344"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "須恵町適応指導教室「やまももルーム」",
+   "eligibility": "心理的・情緒的な理由で、登校したくてもできない状態にある児童生徒",
+   "amountText": "授業に関する費用はかからない。体験活動等は別に徴収する場合がある",
+   "source": "https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html",
+   "sourceName": "須恵町公式ページ(学校教育課)",
+   "basisPhrase": "やまももルーム",
+   "note": "対象は小学5・6年生から中学生。通室した日は出席日数として認定される。内容は町の案内資料(PDF)による。資料のURLは未記録"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40344-tayouka",
