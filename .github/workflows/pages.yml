@@ -57,8 +57,8 @@ jobs:
           {
             echo "## 公開された URL の確認"
             echo
-            echo "| URL | HTTP(転送を辿った後) | 転送の回数 | 形式 | 他のサイトからの読み込み |"
-            echo "|---|---|---|---|---|"
+            echo "| URL | HTTP(転送を辿った後) | 転送の回数 | 形式 | 他のサイトからの読み込み | 最初の応答 |"
+            echo "|---|---|---|---|---|---|"
           } >> "$GITHUB_STEP_SUMMARY"
           fail=0
           for path in "" "ichiran/" "ns" "ns.ttl" "dataset.ttl" "seido.csv" "seido.jsonld" "seido.ttl" \
@@ -66,7 +66,9 @@ jobs:
             out=$(curl -sSL -o /dev/null -D headers.txt -w "%{http_code}|%{num_redirects}|%{content_type}" "$base$path" || echo "失敗||")
             cors=$(grep -i "^access-control-allow-origin:" headers.txt | tail -1 | tr -d '\r' | cut -d' ' -f2)
             IFS='|' read -r code redirects type <<< "$out"
-            echo "| $base$path | $code | $redirects | $type | ${cors:-無い} |" >> "$GITHUB_STEP_SUMMARY"
+            first=$(head -1 headers.txt | tr -d '\r')
+            # 実行結果の記録(ログ)にも出す。まとめは、作業環境から読めないため
+            echo "| $base$path | $code | $redirects | $type | ${cors:-無い} | 最初の応答: $first |" | tee -a "$GITHUB_STEP_SUMMARY"
             [ "$code" = "200" ] || fail=1
             sleep 1
           done
