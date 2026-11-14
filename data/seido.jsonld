@@ -518,6 +518,44 @@
    "note": "放課後等デイサービスは対象外"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40219-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
+    "@type": "schema:AdministrativeArea",
+    "name": "大野城市",
+    "identifier": "40219"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.onojo.fukuoka.jp/kosodate/kiji0037070/index.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40219-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
+    "@type": "schema:AdministrativeArea",
+    "name": "大野城市",
+    "identifier": "40219"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "「大野城市教育サポートセンター」は相談窓口として案内されている。通う教室(教育支援センター)の記載は見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.onojo.fukuoka.jp/kosodate/kiji0037070/index.html"
+   ]
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-shusseki",
    "@type": "schema:GovernmentService",
    "identifier": "40219-shusseki",
