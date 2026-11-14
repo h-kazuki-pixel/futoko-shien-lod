@@ -268,6 +268,209 @@
    "basisPhrase": "校外教育支援教室"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40217-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
+    "@type": "schema:AdministrativeArea",
+    "name": "筑紫野市",
+    "identifier": "40217"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html",
+    "https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40217-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
+    "@type": "schema:AdministrativeArea",
+    "name": "筑紫野市",
+    "identifier": "40217"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html",
+    "https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40217-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
+    "@type": "schema:AdministrativeArea",
+    "name": "筑紫野市",
+    "identifier": "40217"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "つくし学級",
+   "eligibility": "登校に不安のある児童生徒",
+   "amountText": "体験活動などの実費を除き無料",
+   "source": "https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html",
+   "sourceName": "筑紫野市「登校に不安のある児童生徒への支援」",
+   "basisPhrase": "つくし学級",
+   "note": "場所は勤労青少年ホーム内。通級した日は学校長の判断で出席扱い(案内パンフレット)。学校教育課内の「教育支援センター」は相談窓口"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40217-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
+    "@type": "schema:AdministrativeArea",
+    "name": "筑紫野市",
+    "identifier": "40217"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "支援パンフレットに、民間施設の利用が一定の要件で出席認定されるとの記載はある。要綱や施設一覧の公表は見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html",
+    "https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40217-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
+    "@type": "schema:AdministrativeArea",
+    "name": "筑紫野市",
+    "identifier": "40217"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html",
+    "https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40218-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40218-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
+    "@type": "schema:AdministrativeArea",
+    "name": "春日市",
+    "identifier": "40218"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html",
+    "https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40218-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40218-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
+    "@type": "schema:AdministrativeArea",
+    "name": "春日市",
+    "identifier": "40218"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html",
+    "https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40218-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40218-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
+    "@type": "schema:AdministrativeArea",
+    "name": "春日市",
+    "identifier": "40218"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "春日市教育支援センター(マイスクール)",
+   "eligibility": "不登校の状態や兆候にある児童生徒",
+   "source": "https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html",
+   "sourceName": "春日市「春日市教育支援センター(マイスクール)」",
+   "basisPhrase": "春日市教育支援センター(マイスクール)",
+   "note": "学習活動は指導要録上の出席扱いにできると書かれている"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40218-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40218-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
+    "@type": "schema:AdministrativeArea",
+    "name": "春日市",
+    "identifier": "40218"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "サポートマップに市内の民間フリースクールの紹介はある。出席扱いの要綱や施設一覧の公表は見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html",
+    "https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40218-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40218-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
+    "@type": "schema:AdministrativeArea",
+    "name": "春日市",
+    "identifier": "40218"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html",
+    "https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf"
+   ]
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-fs-hojo",
    "@type": "schema:GovernmentService",
    "identifier": "40219-fs-hojo",
@@ -316,6 +519,105 @@
    "note": "令和8年1月末現在の一覧; 施設名・種別・所在地を公表"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40221-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40221-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
+    "@type": "schema:AdministrativeArea",
+    "name": "太宰府市",
+    "identifier": "40221"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.dazaifu.lg.jp/soshiki/28/2085.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40221-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40221-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
+    "@type": "schema:AdministrativeArea",
+    "name": "太宰府市",
+    "identifier": "40221"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "とびゆめキャンパス(メタバース)",
+   "startText": "令和7年度",
+   "source": "https://www.city.dazaifu.lg.jp/soshiki/28/2085.html",
+   "sourceName": "太宰府市「太宰府市教育支援センター」",
+   "basisPhrase": "メタバース(とびゆめキャンパス)",
+   "note": "リーフレットでは「ゆめキャン」と呼ばれ、参加が学校の出席になると書かれている"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40221-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40221-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
+    "@type": "schema:AdministrativeArea",
+    "name": "太宰府市",
+    "identifier": "40221"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "太宰府市教育支援センター(つばさ学級)",
+   "eligibility": "学校を休みがちな児童生徒や、教室での学習が苦手な児童生徒",
+   "amountText": "つばさ学級は学級費として毎月100円程度",
+   "source": "https://www.city.dazaifu.lg.jp/soshiki/28/2085.html",
+   "sourceName": "太宰府市「太宰府市教育支援センター」",
+   "basisPhrase": "太宰府市教育支援センター"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40221-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40221-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
+    "@type": "schema:AdministrativeArea",
+    "name": "太宰府市",
+    "identifier": "40221"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.dazaifu.lg.jp/soshiki/28/2085.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40221-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40221-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
+    "@type": "schema:AdministrativeArea",
+    "name": "太宰府市",
+    "identifier": "40221"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.dazaifu.lg.jp/soshiki/28/2085.html"
+   ]
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-fs-hojo",
    "@type": "schema:GovernmentService",
    "identifier": "40223-fs-hojo",
@@ -359,6 +661,306 @@
    "source": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php",
    "sourceName": "古賀市公式ページ",
    "basisPhrase": "古賀市教育支援センター あすなろ教室"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40224-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40224-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
+    "@type": "schema:AdministrativeArea",
+    "name": "福津市",
+    "identifier": "40224"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html",
+    "https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40224-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40224-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
+    "@type": "schema:AdministrativeArea",
+    "name": "福津市",
+    "identifier": "40224"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html",
+    "https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40224-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40224-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
+    "@type": "schema:AdministrativeArea",
+    "name": "福津市",
+    "identifier": "40224"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "教育支援センター「ひだまり」",
+   "eligibility": "不登校の子ども",
+   "source": "https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf",
+   "sourceName": "福津市不登校支援リーフレット",
+   "basisPhrase": "教育支援センター「ひだまり」",
+   "note": "ここでの活動は学校の出席扱いになると書かれている。場所の記載は見つからなかった"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40224-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40224-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
+    "@type": "schema:AdministrativeArea",
+    "name": "福津市",
+    "identifier": "40224"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "不登校児童生徒の「指導要録上の出席扱い」に係るガイドライン",
+   "eligibility": "義務教育段階の不登校の児童生徒",
+   "source": "https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html",
+   "sourceName": "福津市「不登校支援」",
+   "basisPhrase": "出席扱いに係るガイドライン",
+   "guidelineState": "取得済み",
+   "guideline": "https://www.city.fukutsu.lg.jp/material/files/group/27/gaidorain.pdf",
+   "note": "学校外の公的機関やフリースクール等での活動、自宅でのICT学習を出席扱いにする判断の目安。対象施設の一覧の掲載は見つからなかった"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40224-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40224-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
+    "@type": "schema:AdministrativeArea",
+    "name": "福津市",
+    "identifier": "40224"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html",
+    "https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40230-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
+    "@type": "schema:AdministrativeArea",
+    "name": "糸島市",
+    "identifier": "40230"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html",
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40230-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
+    "@type": "schema:AdministrativeArea",
+    "name": "糸島市",
+    "identifier": "40230"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html",
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40230-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
+    "@type": "schema:AdministrativeArea",
+    "name": "糸島市",
+    "identifier": "40230"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "糸島市教育支援センター(教育支援室 すばる教室)",
+   "source": "https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html",
+   "sourceName": "糸島市「糸島市教育支援センターのご案内」",
+   "basisPhrase": "糸島市教育支援センター",
+   "note": "通う教室は「すばる教室」。図書館横の教育支援センターの中にある。対象の記載は見つからなかった"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40230-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
+    "@type": "schema:AdministrativeArea",
+    "name": "糸島市",
+    "identifier": "40230"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html",
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40230-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
+    "@type": "schema:AdministrativeArea",
+    "name": "糸島市",
+    "identifier": "40230"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html",
+    "https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40231-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40231-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
+    "@type": "schema:AdministrativeArea",
+    "name": "那珂川市",
+    "identifier": "40231"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40231-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40231-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
+    "@type": "schema:AdministrativeArea",
+    "name": "那珂川市",
+    "identifier": "40231"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40231-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40231-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
+    "@type": "schema:AdministrativeArea",
+    "name": "那珂川市",
+    "identifier": "40231"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "適応指導教室「わかば」",
+   "source": "https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html",
+   "sourceName": "那珂川市「不登校対策」",
+   "basisPhrase": "教育サポートセンター内適応指導教室",
+   "note": "教育サポートセンターの中にある。対象と利用料の記載は見つからなかった"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40231-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40231-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
+    "@type": "schema:AdministrativeArea",
+    "name": "那珂川市",
+    "identifier": "40231"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40231-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40231-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
+    "@type": "schema:AdministrativeArea",
+    "name": "那珂川市",
+    "identifier": "40231"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html"
+   ]
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40621-fs-hojo",
