@@ -1,0 +1,21 @@
+# つなぐ先(e-Stat 統計LOD、e-Gov 法令検索)の URI を実際に引いて確かめる。
+name: links
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - futoko_lod/links.py
+      - .github/workflows/links.yml
+permissions:
+  contents: read
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m futoko_lod.links --summary "$GITHUB_STEP_SUMMARY"
