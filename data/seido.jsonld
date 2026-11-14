@@ -56,6 +56,7 @@
    "@type": "schema:GovernmentService",
    "identifier": "40219-fs-hojo",
    "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
     "@type": "schema:AdministrativeArea",
     "name": "大野城市",
     "identifier": "40219"
@@ -82,6 +83,7 @@
    "@type": "schema:GovernmentService",
    "identifier": "40223-fs-hojo",
    "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
     "@type": "schema:AdministrativeArea",
     "name": "古賀市",
     "identifier": "40223"
@@ -106,6 +108,7 @@
    "@type": "schema:GovernmentService",
    "identifier": "40203-fs-hojo",
    "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40203",
     "@type": "schema:AdministrativeArea",
     "name": "久留米市",
     "identifier": "40203"
@@ -131,6 +134,7 @@
    "@type": "schema:GovernmentService",
    "identifier": "40621-fs-hojo",
    "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40621",
     "@type": "schema:AdministrativeArea",
     "name": "苅田町",
     "identifier": "40621"
@@ -156,6 +160,7 @@
    "@type": "schema:GovernmentService",
    "identifier": "40130-fs-hojo",
    "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
     "@type": "schema:AdministrativeArea",
     "name": "福岡市",
     "identifier": "40130"
@@ -174,6 +179,7 @@
    "@type": "schema:GovernmentService",
    "identifier": "40100-fs-hojo",
    "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40100",
     "@type": "schema:AdministrativeArea",
     "name": "北九州市",
     "identifier": "40100"
@@ -192,6 +198,7 @@
    "@type": "schema:GovernmentService",
    "identifier": "40100-tayouka",
    "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40100",
     "@type": "schema:AdministrativeArea",
     "name": "北九州市",
     "identifier": "40100"

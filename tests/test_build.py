@@ -31,3 +31,10 @@ def test_jsonld_parses_as_rdf():
     rows = schema.load("data/seido.csv")
     services = set(g.subjects(rdflib.RDF.type, rdflib.URIRef("https://schema.org/GovernmentService")))
     assert len(services) == len(rows)
+
+
+def test_area_links_to_estat_standard_area_code():
+    doc = json.loads(build.build())
+    for node in doc["@graph"]:
+        area = node["areaServed"]
+        assert area["@id"] == "http://data.e-stat.go.jp/lod/sac/C" + area["identifier"]

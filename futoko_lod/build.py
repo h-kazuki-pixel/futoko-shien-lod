@@ -1,8 +1,8 @@
 """data/seido.csv から data/seido.jsonld を作る。
 
 URI の土台(BASE)と語彙(fsl:)は仮のもの。固定の URL を決めるときに見直す。
-e-Stat 統計LOD・e-Gov 法令・学校コードへのリンクは、公式の説明で URI の書式を
-確かめるまで入れない。
+市町村は e-Stat 統計LOD の標準地域コード(時期を持たないコード)につなぐ。書式の出典と、
+実際に引いて確かめる手順は links.py にある。e-Gov 法令・学校コードへのリンクはまだ入れていない。
 
 使い方: python -m futoko_lod.build          (作り直す)
         python -m futoko_lod.build --check  (作り直した結果と今のファイルが同じか確かめる)
@@ -17,6 +17,7 @@ from pathlib import Path
 from . import schema
 
 BASE = "https://h-kazuki-pixel.github.io/futoko-shien-lod/"  # 仮
+SAC = "http://data.e-stat.go.jp/lod/sac/C"  # e-Stat 統計LOD 標準地域コード
 
 CONTEXT = {
     "schema": "https://schema.org/",
@@ -56,6 +57,7 @@ def to_node(row: dict[str, str]) -> dict:
         "@type": "schema:GovernmentService",
         "identifier": v("id"),
         "areaServed": {
+            "@id": SAC + v("市町村コード"),
             "@type": "schema:AdministrativeArea",
             "name": v("市町村"),
             "identifier": v("市町村コード"),
