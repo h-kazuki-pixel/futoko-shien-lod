@@ -1,0 +1,212 @@
+{
+ "@context": {
+  "schema": "https://schema.org/",
+  "dct": "http://purl.org/dc/terms/",
+  "name": "schema:name",
+  "areaServed": "schema:areaServed",
+  "serviceType": "schema:serviceType",
+  "audience": "schema:audience",
+  "description": "schema:description",
+  "source": {
+   "@id": "dct:source",
+   "@type": "@id"
+  },
+  "dateChecked": "dct:date",
+  "identifier": "schema:identifier",
+  "status": "schema:additionalType"
+ },
+ "@graph": [
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40219-fs-hojo",
+   "name": "フリースクール利用児童生徒支援補助事業",
+   "serviceType": "利用料の補助(保護者向け)",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "大野城市",
+    "identifier": "40219"
+   },
+   "audience": "市内在住で市立小中学校に在籍する児童生徒の保護者。申請日の前1年以内におおむね30日以上登校していないこと、在籍校長が出席扱いを認めた施設であること等",
+   "description": "月額の授業料・体験活動費等の2分の1、上限10,000円; 令和6年度; 放課後等デイサービスは対象外",
+   "source": "https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40223-fs-hojo",
+   "name": "フリースクール等利用児童生徒支援補助金",
+   "serviceType": "利用料の補助(保護者向け)",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "古賀市",
+    "identifier": "40223"
+   },
+   "audience": "市内に住所を有する不登校児童生徒の保護者。申請日の前1年におおむね30日以上登校していないこと、他の補助を受けていないこと",
+   "description": "月ごとの上限5,000円; 要綱は令和7年3月31日制定(教育委員会告示第2号); 申請は年2回(10月末・3月末)",
+   "source": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40203-fs-hojo",
+   "name": "フリースクール等利用児童生徒支援事業",
+   "serviceType": "利用料の補助(保護者向け)",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "久留米市",
+    "identifier": "40203"
+   },
+   "audience": "保護者等と児童生徒が市内に住所を有すること。申請日の前1年におおむね30日以上登校していないこと等",
+   "description": "利用開始に係る経費(入学金・利用料・教材費等)の保護者負担額または3万円のいずれか低い額; 令和7年4月1日以降の利用開始分; 毎月の補助ではなく利用開始時の補助。年1回まで、同一施設は1回まで",
+   "source": "https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40621-fs-hojo",
+   "name": "フリースクール等利用児童生徒支援補助金制度",
+   "serviceType": "利用料の補助(保護者向け)",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "苅田町",
+    "identifier": "40621"
+   },
+   "audience": "町内に住所を有し、申請日前1年に概ね30日以上登校していない児童生徒の保護者。教育支援センター(すみれ教室)または在籍校長が出席扱いとする民間フリースクールを利用",
+   "description": "月額上限5,000円; 令和8年度; 8月の利用分は対象外",
+   "source": "https://www.town.kanda.lg.jp/page/16801.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40130-fs-hojo",
+   "name": "(制度名なし)",
+   "serviceType": "利用料の補助(保護者向け)",
+   "status": "確認できず",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡市",
+    "identifier": "40130"
+   },
+   "audience": "",
+   "description": "公式ページに制度の記載が見つからなかった。制度が無いことは確認していない。市への問い合わせが必要",
+   "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40100-fs-hojo",
+   "name": "(制度名なし)",
+   "serviceType": "利用料の補助(保護者向け)",
+   "status": "確認できず",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "北九州市",
+    "identifier": "40100"
+   },
+   "audience": "",
+   "description": "公式ページに制度の記載が見つからなかった。制度が無いことは確認していない。市への問い合わせが必要",
+   "source": "https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40000-fs-unei",
+   "name": "福岡県フリースクール支援事業補助金",
+   "serviceType": "施設への補助(設置者向け)",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡県",
+    "identifier": "40000"
+   },
+   "audience": "不登校児童生徒への相談・指導を主たる目的とする施設の設置者(非営利法人。学校法人を除く)",
+   "description": "経費から収入を引いた額と、児童生徒数×27万円の低い方の2分の1。200万円以内; 保護者が申請する制度ではない。利用料の補助と混同されやすい",
+   "source": "https://www.pref.fukuoka.lg.jp/contents/free3.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40130-tayouka",
+   "name": "福岡市立百道松原中学校",
+   "serviceType": "学びの多様化学校",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡市",
+    "identifier": "40130"
+   },
+   "audience": "市内に住民登録のある新中学1〜3年生で、不登校または不登校傾向の生徒",
+   "description": "令和7年4月開校; 転入学には面談と授業体験が必要",
+   "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/R8seitoboshuuannnai.pdf",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40100-tayouka",
+   "name": "北九州市立あいおい中学校",
+   "serviceType": "学びの多様化学校",
+   "status": "予定",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "北九州市",
+    "identifier": "40100"
+   },
+   "audience": "不登校・不登校傾向の中学生(各学年15名程度)",
+   "description": "令和9年4月開校予定; 設置場所は北九州市立教育センター内",
+   "source": "https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40203-shien-center",
+   "name": "校外教育支援教室「らるご久留米」",
+   "serviceType": "教育支援センター(校外)",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "久留米市",
+    "identifier": "40203"
+   },
+   "audience": "市内在住の不登校児童生徒。本人と保護者の希望、在籍学校長の承認等",
+   "description": "",
+   "source": "https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2026largo.html",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40223-shien-center",
+   "name": "古賀市教育支援センター「あすなろ教室」",
+   "serviceType": "教育支援センター(校外)",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "古賀市",
+    "identifier": "40223"
+   },
+   "audience": "学校に行くのが難しい古賀市在住の小・中学校児童生徒",
+   "description": "",
+   "source": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php",
+   "dateChecked": "2026-11-14"
+  },
+  {
+   "@type": "schema:GovernmentService",
+   "identifier": "40219-shusseki-list",
+   "name": "出席扱いしているフリースクール等一覧",
+   "serviceType": "出席扱いの施設一覧の公表",
+   "status": "あり",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "大野城市",
+    "identifier": "40219"
+   },
+   "audience": "大野城市立小中学校の児童生徒",
+   "description": "令和8年1月末現在の一覧; 施設名・種別・所在地を公表",
+   "source": "https://city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html",
+   "dateChecked": "2026-11-14"
+  }
+ ]
+}

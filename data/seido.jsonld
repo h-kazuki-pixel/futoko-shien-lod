@@ -1,0 +1,236 @@
+{
+ "@context": {
+  "schema": "https://schema.org/",
+  "dct": "http://purl.org/dc/terms/",
+  "xsd": "http://www.w3.org/2001/XMLSchema#",
+  "fsl": "https://h-kazuki-pixel.github.io/futoko-shien-lod/ns#",
+  "identifier": "schema:identifier",
+  "name": "schema:name",
+  "areaServed": "schema:areaServed",
+  "kind": {
+   "@id": "fsl:kind",
+   "@type": "@id"
+  },
+  "status": {
+   "@id": "fsl:status",
+   "@type": "@id"
+  },
+  "paymentForm": {
+   "@id": "fsl:paymentForm",
+   "@type": "@id"
+  },
+  "eligibility": "fsl:eligibility",
+  "amountText": "fsl:amountText",
+  "amountMaxYen": {
+   "@id": "fsl:amountMaxYen",
+   "@type": "xsd:integer"
+  },
+  "subsidyRate": "fsl:subsidyRate",
+  "startText": "fsl:startText",
+  "source": {
+   "@id": "dct:source",
+   "@type": "@id"
+  },
+  "sourceName": "fsl:sourceName",
+  "basisPhrase": "fsl:basisPhrase",
+  "guidelineState": "fsl:guidelineState",
+  "guideline": {
+   "@id": "fsl:guideline",
+   "@type": "@id"
+  },
+  "searchedAt": "fsl:searchedAt",
+  "noneBasis": "fsl:noneBasis",
+  "note": "fsl:note",
+  "dateChecked": {
+   "@id": "fsl:dateChecked",
+   "@type": "xsd:date"
+  },
+  "checkMethod": {
+   "@id": "fsl:checkMethod",
+   "@type": "@id"
+  }
+ },
+ "@graph": [
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40219-fs-hojo",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "大野城市",
+    "identifier": "40219"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "name": "フリースクール利用児童生徒支援補助事業",
+   "paymentForm": "fsl:form-maitsuki",
+   "eligibility": "市内在住で市立小中学校に在籍する児童生徒の保護者。申請日の前1年以内におおむね30日以上登校していないこと、在籍校長が出席扱いを認めた施設であること等",
+   "amountText": "月額の授業料・体験活動費等の2分の1、上限10,000円",
+   "amountMaxYen": "10000",
+   "subsidyRate": "1/2",
+   "startText": "令和6年度",
+   "source": "https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html",
+   "sourceName": "大野城市公式ページ",
+   "basisPhrase": "10,000円を上限",
+   "guidelineState": "ページにリンクなし",
+   "note": "放課後等デイサービスは対象外"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40223-fs-hojo",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "古賀市",
+    "identifier": "40223"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "name": "フリースクール等利用児童生徒支援補助金",
+   "paymentForm": "fsl:form-maitsuki",
+   "eligibility": "市内に住所を有する不登校児童生徒の保護者。申請日の前1年におおむね30日以上登校していないこと、他の補助を受けていないこと",
+   "amountText": "月ごとの上限5,000円",
+   "amountMaxYen": "5000",
+   "source": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php",
+   "sourceName": "古賀市公式ページ",
+   "basisPhrase": "月ごとの上限額5,000円",
+   "guidelineState": "リンクあり・URL未取得",
+   "note": "要綱は令和7年3月31日制定(教育委員会告示第2号); 申請は年2回(10月末・3月末)"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40203-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40203-fs-hojo",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "久留米市",
+    "identifier": "40203"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "name": "フリースクール等利用児童生徒支援事業",
+   "paymentForm": "fsl:form-kaishiji-1kai",
+   "eligibility": "保護者等と児童生徒が市内に住所を有すること。申請日の前1年におおむね30日以上登校していないこと等",
+   "amountText": "利用開始に係る経費(入学金・利用料・教材費等)の保護者負担額または3万円のいずれか低い額",
+   "amountMaxYen": "30000",
+   "startText": "令和7年4月1日以降の利用開始分",
+   "source": "https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html",
+   "sourceName": "久留米市公式ページ",
+   "basisPhrase": "3万円のいずれか低い額",
+   "guidelineState": "ページにリンクなし",
+   "note": "毎月の補助ではなく利用開始時の補助。年1回まで、同一施設は1回まで"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40621-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40621-fs-hojo",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "苅田町",
+    "identifier": "40621"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "name": "フリースクール等利用児童生徒支援補助金制度",
+   "paymentForm": "fsl:form-maitsuki",
+   "eligibility": "町内に住所を有し、申請日前1年に概ね30日以上登校していない児童生徒の保護者。教育支援センター(すみれ教室)または在籍校長が出席扱いとする民間フリースクールを利用",
+   "amountText": "月額上限5,000円",
+   "amountMaxYen": "5000",
+   "startText": "令和8年度",
+   "source": "https://www.town.kanda.lg.jp/page/16801.html",
+   "sourceName": "苅田町公式ページ",
+   "basisPhrase": "上限額は、月額5,000円",
+   "guidelineState": "リンクあり・URL未取得",
+   "note": "8月の利用分は対象外"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40130-fs-hojo",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡市",
+    "identifier": "40130"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに制度の記載が見つからなかった。制度が無いことは確認していない。市への問い合わせが必要",
+   "searchedAt": [
+    "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40100-fs-hojo",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "北九州市",
+    "identifier": "40100"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに制度の記載が見つからなかった。制度が無いことは確認していない。市への問い合わせが必要",
+   "searchedAt": [
+    "https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40000-fs-unei",
+   "@type": "schema:GovernmentService",
+   "identifier": "40000-fs-unei",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡県",
+    "identifier": "40000"
+   },
+   "kind": "fsl:kind-fs-unei",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "name": "福岡県フリースクール支援事業補助金",
+   "eligibility": "不登校児童生徒への相談・指導を主たる目的とする施設の設置者(非営利法人。学校法人を除く)",
+   "amountText": "経費から収入を引いた額と、児童生徒数×27万円の低い方の2分の1。200万円以内",
+   "amountMaxYen": "2000000",
+   "subsidyRate": "1/2",
+   "source": "https://www.pref.fukuoka.lg.jp/contents/free3.html",
+   "sourceName": "福岡県公式ページ、同補助金Q&A",
+   "basisPhrase": "補助率１/２",
+   "guidelineState": "リンクあり・URL未取得",
+   "note": "保護者が申請する制度ではない。利用料の補助と混同されやすい"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40100-tayouka",
+   "areaServed": {
+    "@type": "schema:AdministrativeArea",
+    "name": "北九州市",
+    "identifier": "40100"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-yotei",
+   "dateChecked": "2026-11-14",
+   "checkMethod": "fsl:method-kikai",
+   "name": "北九州市立あいおい中学校",
+   "eligibility": "不登校・不登校傾向の中学生(各学年15名程度)",
+   "startText": "令和9年4月開校予定",
+   "source": "https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html",
+   "sourceName": "北九州市教育委員会の支援一覧ページ",
+   "basisPhrase": "令和9年4月の開校を予定",
+   "note": "設置場所は北九州市立教育センター内"
+  }
+ ]
+}
