@@ -82,7 +82,7 @@ id,項目,Muse判定,根拠,メモ,開いたURL,人が見る,選んだ理由
 40223-fs-hojo,対象,合っている,交付申請日の前１年の期間において、おおむね３０日以上,,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,,
 40223-fs-hojo,金額,合っている,"補助金の額・・・・月ごとの上限額5,000円",,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,,
 40223-fs-hojo,補助の形,合っている,"月ごとの上限額5,000円",,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,,
-40223-fs-hojo,備考,分からない,,ページに月ごとの上限と申請期間（10月末日まで・3月末日まで）はあるが、要綱の附則の施行日（令和7年4月1日）と失効日（令和11年3月31日）の記載は見るページに無く確かめられなかった,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,見る,Muse が「分からない」
+40223-fs-hojo,備考,合っている,「令和７年４月１日から施行」「令和１１年３月３１日限り、その効力を失う」,やり直し(11/15): 要綱 PDF の附則で施行日と失効日を確認,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php | https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf,,
 40223-shien-center,種類と状態,合っている,ここへの通級は、在籍校での出席日数とみなされます,,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php | https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php,見る,抜き取り(種 20261115)
 40223-shien-center,制度名,合っている,古賀市教育支援センター あすなろ教室,,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php | https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php,見る,抜き取り(種 20261115)
 40223-shien-center,対象,合っている,学校に行くのが難しい古賀市在住の小・中学校児童生徒,,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php | https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php,見る,抜き取り(種 20261115)
