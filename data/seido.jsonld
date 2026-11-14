@@ -595,7 +595,7 @@
    "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
    "basisPhrase": "大野城市立みずほ中学校",
-   "note": "文部科学省の一覧による。開校の時期や対象は、市の資料でまだ確かめていない"
+   "note": "文部科学省の一覧による。市のページに「みずほ中学校(大野中学校分校)」として場所の記載がある。開校の時期と対象が載った市の資料は、URLをまだ記録していない"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40220-fs-hojo",
@@ -615,7 +615,9 @@
    "searchedAt": [
     "https://www.city.munakata.lg.jp/kiji0033003/index.html",
     "https://www.city.munakata.lg.jp/kiji0033002/index.html",
-    "https://www.city.munakata.lg.jp/kiji0033001/index.html"
+    "https://www.city.munakata.lg.jp/kiji0033001/index.html",
+    "https://www.city.munakata.lg.jp/kiji0038920/index.html",
+    "https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf"
    ]
   },
   {
@@ -632,11 +634,13 @@
    "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "note": "市の不登校支援フローチャートに、県のオンライン学習支援の事業(みらいサポーター事業)の案内はある。市が行うオンライン支援の記載は見つからなかった。無いことは確認していない",
    "searchedAt": [
     "https://www.city.munakata.lg.jp/kiji0033003/index.html",
     "https://www.city.munakata.lg.jp/kiji0033002/index.html",
-    "https://www.city.munakata.lg.jp/kiji0033001/index.html"
+    "https://www.city.munakata.lg.jp/kiji0033001/index.html",
+    "https://www.city.munakata.lg.jp/kiji0038920/index.html",
+    "https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf"
    ]
   },
   {
@@ -675,11 +679,13 @@
    "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "note": "市の不登校支援フローチャートに、民間施設等は一定の要件を満たせば出席扱いにでき学校が判断する、との記載はある。要綱や施設一覧の公表は見つからなかった。無いことは確認していない",
    "searchedAt": [
     "https://www.city.munakata.lg.jp/kiji0033003/index.html",
     "https://www.city.munakata.lg.jp/kiji0033002/index.html",
-    "https://www.city.munakata.lg.jp/kiji0033001/index.html"
+    "https://www.city.munakata.lg.jp/kiji0033001/index.html",
+    "https://www.city.munakata.lg.jp/kiji0038920/index.html",
+    "https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf"
    ]
   },
   {
@@ -1169,6 +1175,86 @@
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40341-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
+    "@type": "schema:AdministrativeArea",
+    "name": "宇美町",
+    "identifier": "40341"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.umi.lg.jp/soshiki/39/70131.html",
+    "https://www.town.umi.lg.jp/site/manabinotayouka/"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40341-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
+    "@type": "schema:AdministrativeArea",
+    "name": "宇美町",
+    "identifier": "40341"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.umi.lg.jp/soshiki/39/70131.html",
+    "https://www.town.umi.lg.jp/site/manabinotayouka/"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40341-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
+    "@type": "schema:AdministrativeArea",
+    "name": "宇美町",
+    "identifier": "40341"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "ひきこもり相談室の案内はある。教育支援センターの記載は見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.umi.lg.jp/soshiki/39/70131.html",
+    "https://www.town.umi.lg.jp/site/manabinotayouka/"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40341-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
+    "@type": "schema:AdministrativeArea",
+    "name": "宇美町",
+    "identifier": "40341"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.umi.lg.jp/soshiki/39/70131.html",
+    "https://www.town.umi.lg.jp/site/manabinotayouka/"
+   ]
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-tayouka",
    "@type": "schema:GovernmentService",
    "identifier": "40341-tayouka",
@@ -1191,6 +1277,86 @@
    "note": "文部科学省の一覧では、2校とも指定年は令和7年。入学等の手続きは町の取扱要綱にある"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40342-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
+    "@type": "schema:AdministrativeArea",
+    "name": "篠栗町",
+    "identifier": "40342"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
+    "https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40342-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
+    "@type": "schema:AdministrativeArea",
+    "name": "篠栗町",
+    "identifier": "40342"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
+    "https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40342-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
+    "@type": "schema:AdministrativeArea",
+    "name": "篠栗町",
+    "identifier": "40342"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "篠栗町教育支援センター",
+   "source": "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
+   "sourceName": "篠栗町「町民の命を守るささぐりづくり」のための相談窓口のご案内",
+   "basisPhrase": "篠栗町教育支援センター",
+   "note": "相談窓口の一覧に、不登校の児童に関する窓口として載っている。通う教室があるかは確かめていない。一覧には期限の過ぎた案内が残っており、古い可能性がある"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40342-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
+    "@type": "schema:AdministrativeArea",
+    "name": "篠栗町",
+    "identifier": "40342"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
+    "https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html"
+   ]
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-tayouka",
    "@type": "schema:GovernmentService",
    "identifier": "40342-tayouka",
@@ -1209,6 +1375,82 @@
    "basisPhrase": "設置者一覧",
    "noneBasis": "文部科学省の設置者一覧に、福岡県篠栗町を設置場所とする学校が載っていない(確認日の時点)",
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40343-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40343-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
+    "@type": "schema:AdministrativeArea",
+    "name": "志免町",
+    "identifier": "40343"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40343-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40343-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
+    "@type": "schema:AdministrativeArea",
+    "name": "志免町",
+    "identifier": "40343"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40343-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40343-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
+    "@type": "schema:AdministrativeArea",
+    "name": "志免町",
+    "identifier": "40343"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "不登校・ひきこもりの個別相談の案内はある。教育支援センターの記載は見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40343-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40343-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
+    "@type": "schema:AdministrativeArea",
+    "name": "志免町",
+    "identifier": "40343"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
+   ]
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40343-tayouka",
@@ -1445,6 +1687,88 @@
    "basisPhrase": "設置者一覧",
    "noneBasis": "文部科学省の設置者一覧に、福岡県久山町を設置場所とする学校が載っていない(確認日の時点)",
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40349-fs-hojo",
+   "@type": "schema:GovernmentService",
+   "identifier": "40349-fs-hojo",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
+    "@type": "schema:AdministrativeArea",
+    "name": "粕屋町",
+    "identifier": "40349"
+   },
+   "kind": "fsl:kind-fs-hojo",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html",
+    "https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40349-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40349-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
+    "@type": "schema:AdministrativeArea",
+    "name": "粕屋町",
+    "identifier": "40349"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html",
+    "https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40349-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40349-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
+    "@type": "schema:AdministrativeArea",
+    "name": "粕屋町",
+    "identifier": "40349"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "粕屋町教育委員会教育相談室「ぽると」(サポートルーム)",
+   "eligibility": "小学生・中学生",
+   "amountText": "相談は無料",
+   "source": "https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf",
+   "sourceName": "粕屋町教育委員会教育相談室「ぽると」の案内",
+   "basisPhrase": "サポートルーム",
+   "note": "学校に行けない児童生徒のためのサポートルームがあると書かれている。場所はかすやこども館。資料に「教育支援センター」「適応指導教室」の語は無い"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40349-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40349-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
+    "@type": "schema:AdministrativeArea",
+    "name": "粕屋町",
+    "identifier": "40349"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html",
+    "https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf"
+   ]
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40349-tayouka",
