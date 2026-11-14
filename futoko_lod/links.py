@@ -14,6 +14,8 @@ GitHub Actions で回す。使い方: python -m futoko_lod.links
 from __future__ import annotations
 
 import argparse
+import html
+import re
 import time
 import urllib.error
 import urllib.request
@@ -57,12 +59,29 @@ def main() -> int:
 
     lines = ["## つなぐ先の確認", "", "### e-Stat 統計LOD(標準地域コード)", ""]
     lines += ["| コード | 名前 | URI | HTTP | 形式 | 中身に名前がある |", "|---|---|---|---|---|---|"]
-    for code, name in sorted(areas.items()):
+    accept = "text/turtle, application/rdf+xml;q=0.9, */*;q=0.5"
+    sample = ""
+    # 最後の1件は、存在しないはずのコード(引けてしまわないかの対照)
+    for code, name in sorted(areas.items()) + [("40999", "(存在しないコードの対照)")]:
         url = SAC.format(code=code)
-        r = get(url, "text/turtle, application/rdf+xml;q=0.9, */*;q=0.5")
-        found = "ある" if name in r["text"] else "無い"
-        lines.append(f"| {code} | {name} | {url} | {r['HTTP']} | {r['形式'].split(';')[0]} | {found} |")
+        r = get(url, accept)
+        text = html.unescape(r["text"])
+        where = "時期なしのコード" if name in text else ""
+        if not where:
+            # 名前は時期つきのコードの側にある。最新のコード(sacs:latestCode)を辿る
+            m = re.search(r"latestCode[^>]*?resource=\"([^\"]+)\"", text)
+            if m:
+                time.sleep(2)
+                r2 = get(m.group(1), accept)
+                if name in html.unescape(r2["text"]):
+                    where = f"最新のコード {m.group(1).rsplit('/', 1)[-1]}"
+        if code == "40219":
+            sample = text[:700]
+        lines.append(
+            f"| {code} | {name} | {url} | {r['HTTP']} | {r['形式'].split(';')[0]} | {where or '無い'} ({len(text)}字) |"
+        )
         time.sleep(2)
+    lines += ["", "大野城市(C40219)の返り値の先頭:", "", "```", sample, "```"]
 
     lines += ["", "### e-Gov 法令検索", "", "| 引いた先 | HTTP | 形式 | 中身に法律の名前がある |", "|---|---|---|---|"]
     for url in (LAW_API.format(id=LAW_ID), LAW_PAGE.format(id=LAW_ID)):
