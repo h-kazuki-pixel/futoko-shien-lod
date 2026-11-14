@@ -1,0 +1,73 @@
+# 公開の形(GitHub Pages)。data/seido.csv から一式を作って公開し、公開された URL を引いて確かめる。
+# 置き場所と URI の決まりは docs/公開の形.md。
+# はじめに1回だけ、リポジトリの Settings → Pages で Source を「GitHub Actions」にする。
+name: pages
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - data/seido.csv
+      - data/shichoson.csv
+      - futoko_lod/publish.py
+      - futoko_lod/build.py
+      - futoko_lod/schema.py
+      - .github/workflows/pages.yml
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+      - name: 公開データの検査(1件でも落ちれば公開しない)
+        run: python -m futoko_lod.schema data/seido.csv
+      - name: 公開の形のテスト(Turtle と JSON-LD が同じトリプルか、など)
+        run: python -m pytest -q tests/test_publish.py tests/test_build.py
+      - run: python -m futoko_lod.publish --out _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+  check:
+    # 公開された URL を実際に引く。届かなければ失敗させる。形式(Content-Type)は記録して目で見る。
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 公開された URL を引く
+        run: |
+          base="https://h-kazuki-pixel.github.io/futoko-shien-lod/"
+          {
+            echo "## 公開された URL の確認"
+            echo
+            echo "| URL | HTTP(転送を辿った後) | 転送の回数 | 形式 | 他のサイトからの読み込み |"
+            echo "|---|---|---|---|---|"
+          } >> "$GITHUB_STEP_SUMMARY"
+          fail=0
+          for path in "" "ichiran/" "ns" "ns.ttl" "dataset.ttl" "seido.csv" "seido.jsonld" "seido.ttl" \
+                      "id/40219-fs-hojo" "id/40219-fs-hojo/" "id/40219-fs-hojo.ttl" "id/40219-fs-hojo.jsonld"; do
+            out=$(curl -sSL -o /dev/null -D headers.txt -w "%{http_code}|%{num_redirects}|%{content_type}" "$base$path" || echo "失敗||")
+            cors=$(grep -i "^access-control-allow-origin:" headers.txt | tail -1 | tr -d '\r' | cut -d' ' -f2)
+            IFS='|' read -r code redirects type <<< "$out"
+            echo "| $base$path | $code | $redirects | $type | ${cors:-無い} |" >> "$GITHUB_STEP_SUMMARY"
+            [ "$code" = "200" ] || fail=1
+            sleep 1
+          done
+          exit $fail
