@@ -188,30 +188,6 @@
    ]
   },
   {
-   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40000-fs-unei",
-   "@type": "schema:GovernmentService",
-   "identifier": "40000-fs-unei",
-   "areaServed": {
-    "@type": "schema:AdministrativeArea",
-    "name": "福岡県",
-    "identifier": "40000"
-   },
-   "kind": "fsl:kind-fs-unei",
-   "status": "fsl:status-ari",
-   "dateChecked": "2026-11-14",
-   "checkMethod": "fsl:method-kikai",
-   "name": "福岡県フリースクール支援事業補助金",
-   "eligibility": "不登校児童生徒への相談・指導を主たる目的とする施設の設置者(非営利法人。学校法人を除く)",
-   "amountText": "経費から収入を引いた額と、児童生徒数×27万円の低い方の2分の1。200万円以内",
-   "amountMaxYen": "2000000",
-   "subsidyRate": "1/2",
-   "source": "https://www.pref.fukuoka.lg.jp/contents/free3.html",
-   "sourceName": "福岡県公式ページ、同補助金Q&A",
-   "basisPhrase": "補助率１/２",
-   "guidelineState": "リンクあり・URL未取得",
-   "note": "保護者が申請する制度ではない。利用料の補助と混同されやすい"
-  },
-  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-tayouka",
    "@type": "schema:GovernmentService",
    "identifier": "40100-tayouka",
