@@ -22,6 +22,7 @@ def block() -> str:
     rows = schema.load("data/seido.csv")
     areas = schema.read_csv("data/shichoson.csv")
     c = collections.Counter(r["状態"] for r in rows)
+    saikakunin = sum(r["確認方法"] == "人の再確認" for r in rows)
     cell = {(r["市町村コード"], schema.KIND_BY_LABEL[r["制度の種類"]]): r["状態"] for r in rows}
     metro = [a for a in areas if a["福岡都市圏"] == "○"]
     lines, done, filled = [HEAD, "|---|---|---|---|---|---|"], 0, collections.Counter()
@@ -59,7 +60,7 @@ def block() -> str:
 
 学びの多様化学校の「なし」は、文部科学省の設置者一覧に、その市町村を設置場所とする学校が載っていないという意味。設置の検討や予定は、この一覧からは分からない。
 
-公開データは、機械の読み取りと照合だけで、人の再確認をまだしていない。照合の結果は、GitHub Actions の `shougou` の実行結果で見られる。
+人が出典のページと見比べた行(確認方法が「人の再確認」)は{saikakunin}件。ほかは、機械の読み取りと照合だけ。別の呼び出しによる点検の結果は `docs/検証の結果.md`。照合の結果は、GitHub Actions の `shougou` の実行結果で見られる。
 
 """
 

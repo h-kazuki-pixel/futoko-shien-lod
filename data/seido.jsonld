@@ -96,7 +96,7 @@
    "source": "https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html",
    "sourceName": "福岡県「ICT活用型不登校児童生徒支援事業(みらいサポーター事業)について」",
    "basisPhrase": "みらいサポーター事業",
-   "note": "大学生のボランティアが、オンラインで支援する。県のチラシによると、利用料は無料。申し込みは、学校や市町村の教育センター、またはチラシから(チラシは人が読んで確かめた)"
+   "note": "大学生のボランティアがオンラインで支援する。利用料は無料、申し込みは学校・市町村の教育センター・チラシから(チラシ /uploaded/attachment/268359.pdf を人が読んで確認。出典のページには無い)"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-fs-hojo",
@@ -131,13 +131,13 @@
    "status": "fsl:status-yotei",
    "dateChecked": "2026-11-14",
    "checkMethod": "fsl:method-kikai",
-   "name": "北九州市立あいおい中学校",
+   "name": "北九州市立の学びの多様化学校(中学校)",
    "eligibility": "不登校・不登校傾向の中学生(各学年15名程度)",
    "startText": "令和9年4月開校予定",
    "source": "https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html",
    "sourceName": "北九州市教育委員会の支援一覧ページ",
    "basisPhrase": "令和9年4月の開校を予定",
-   "note": "設置場所は北九州市立教育センター内"
+   "note": "設置場所(市立教育センター内)は市の詳細ページ(/kyouiku/03000056.html)にある。学校名は「あいおい中学校」とする読み取りがあるが、出典のページに無く未確認"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-fs-hojo",
@@ -173,11 +173,11 @@
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
    "name": "オンラインルーム",
-   "eligibility": "集団への関わりが苦手な不登校の児童生徒",
+   "eligibility": "引きこもりがちで集団への関わりが苦手な不登校の児童生徒",
    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
    "sourceName": "福岡市教育委員会「不登校に関する支援」",
    "basisPhrase": "オンラインルームを開設しています",
-   "note": "端末を使い、他の児童生徒やスクールカウンセラーと交流する場"
+   "note": "端末を使い、他の児童生徒やスクールカウンセラーと交流する場。自宅から参加できることは、同じページから張られた案内(onlineroom-annai.pdf)による"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-shien-center",
@@ -239,7 +239,7 @@
    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
    "sourceName": "福岡市教育委員会「不登校に関する支援」",
    "basisPhrase": "学びの多様化学校「福岡市立百道松原中学校」",
-   "note": "転入学の条件の詳細は生徒募集案内にある"
+   "note": "対象と条件は生徒募集案内(令和8年度版、同じページから張られたPDF)による。市内に住民登録があること、面談と約1か月の授業体験が必須"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40202-tayouka",
@@ -809,7 +809,7 @@
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-ari",
    "dateChecked": "2026-11-15",
-   "checkMethod": "fsl:method-kikai",
+   "checkMethod": "fsl:method-hito",
    "name": "出席扱いしているフリースクール等一覧",
    "eligibility": "大野城市立小中学校の児童生徒",
    "source": "https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html",
@@ -836,7 +836,7 @@
    "source": "https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html",
    "sourceName": "大野城市「大野城市立みずほ中学校 転入学者希望者説明会・見学会」",
    "basisPhrase": "大野城市立みずほ中学校(学びの多様化学校)",
-   "note": "大野中学校の分校。定員は各学年10名程度。文部科学省の設置者一覧での指定年は令和8年"
+   "note": "大野中学校の分校。定員は各学年10名程度。文部科学省の設置者一覧での指定年は令和8年。開校の時期は出典のページに無い"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40220-fs-hojo",
@@ -904,7 +904,7 @@
    "source": "https://www.city.munakata.lg.jp/kiji0033002/index.html",
    "sourceName": "宗像市「教育サポート室エール」",
    "basisPhrase": "教育サポート室エール",
-   "note": "市教育委員会が運営。通室した日は指導要録上の出席扱い。ほかに居場所の施設「子どもの自立サポートセンターホープ」がある"
+   "note": "市教育委員会が運営。通室した日は、原則として指導要録上の出席扱い"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40220-shusseki",
@@ -1072,7 +1072,7 @@
    "sourceName": "古賀市公式ページ",
    "basisPhrase": "月ごとの上限額5,000円",
    "guidelineState": "リンクあり・URL未取得",
-   "note": "要綱は令和7年3月31日制定(教育委員会告示第2号); 申請は年2回(10月末・3月末)"
+   "note": "要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請は年2回(10月末・3月末)。制定日と告示番号は確かめられていない"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-online",
@@ -1414,7 +1414,7 @@
    "source": "https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html",
    "sourceName": "糸島市「糸島市教育支援センターのご案内」",
    "basisPhrase": "糸島市教育支援センター",
-   "note": "通う教室は「すばる教室」。図書館横の教育支援センターの中にある。対象の記載は見つからなかった"
+   "note": "通う教室「すばる教室」の説明は、同じページに添付の subaru.pdf にある。場所はページでは市立図書館の別館2階。対象の記載は見つからなかった"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-shusseki",
@@ -1653,7 +1653,7 @@
    "basisPhrase": "原田小学校ハピネス分校",
    "guidelineState": "取得済み",
    "guideline": "https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html",
-   "note": "文部科学省の一覧では、2校とも指定年は令和7年。入学等の手続きは町の取扱要綱にある"
+   "note": "文部科学省の一覧では、2校とも指定年は令和7年。入学等の手続きは町の取扱要綱にある(一覧: mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm)"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-fs-hojo",
@@ -1706,14 +1706,14 @@
     "identifier": "40342"
    },
    "kind": "fsl:kind-shien-center",
-   "status": "fsl:status-ari",
+   "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "name": "篠栗町教育支援センター",
-   "source": "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
-   "sourceName": "篠栗町「町民の命を守るささぐりづくり」のための相談窓口のご案内",
-   "basisPhrase": "篠栗町教育支援センター",
-   "note": "相談窓口の一覧に、不登校の児童に関する窓口として載っている。通う教室があるかは確かめていない。一覧には期限の過ぎた案内が残っており、古い可能性がある"
+   "note": "相談窓口の一覧に「篠栗町教育支援センター」の名前と電話番号がある。通う教室かは読み取れなかった。一覧は古い可能性がある。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
+    "https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html"
+   ]
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-shusseki",
@@ -1909,7 +1909,7 @@
    "source": "https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html",
    "sourceName": "須恵町公式ページ(学校教育課)",
    "basisPhrase": "やまももルーム",
-   "note": "対象は小学5・6年生から中学生。通室した日は出席日数として認定される。内容は町の案内資料(PDF)による。資料のURLは未記録"
+   "note": "対象は小学5・6年生から中学生。通室した日は出席日数として認定される。内容は町の案内資料による: https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40344-tayouka",
@@ -2178,16 +2178,14 @@
     "identifier": "40349"
    },
    "kind": "fsl:kind-shien-center",
-   "status": "fsl:status-ari",
+   "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "name": "粕屋町教育委員会教育相談室「ぽると」(サポートルーム)",
-   "eligibility": "小学生・中学生",
-   "amountText": "相談は無料",
-   "source": "https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf",
-   "sourceName": "粕屋町教育委員会教育相談室「ぽると」の案内",
-   "basisPhrase": "サポートルーム",
-   "note": "学校に行けない児童生徒のためのサポートルームがあると書かれている。場所はかすやこども館。資料に「教育支援センター」「適応指導教室」の語は無い"
+   "note": "教育相談室「ぽると」の案内に、学校に行けない児童生徒のためのサポートルームがあると書かれている。教育支援センターに当たるかは読み取れなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf",
+    "https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html"
+   ]
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40349-shusseki",
@@ -2625,7 +2623,7 @@
    "checkMethod": "fsl:method-kikai",
    "name": "フリースクール等利用児童生徒支援補助金制度",
    "paymentForm": "fsl:form-maitsuki",
-   "eligibility": "町内に住所を有し、申請日前1年に概ね30日以上登校していない児童生徒の保護者。教育支援センター(すみれ教室)または在籍校長が出席扱いとする民間フリースクールを利用",
+   "eligibility": "町内に住所を有し、申請日前1年に概ね30日以上登校していない児童生徒の保護者。フリースクール等を利用し、同じ経費に他の補助を受けていないこと",
    "amountText": "月額上限5,000円",
    "amountMaxYen": "5000",
    "startText": "令和8年度",
@@ -2633,7 +2631,7 @@
    "sourceName": "苅田町公式ページ",
    "basisPhrase": "上限額は、月額5,000円",
    "guidelineState": "リンクあり・URL未取得",
-   "note": "8月の利用分は対象外"
+   "note": "8月の利用分は対象外。申請は年度末まで。目的の文に教育支援センター(すみれ教室)と民間フリースクールが挙がる。民間は在籍校長が出席扱いとするもの。対象経費は民間事業者に支払う授業料等"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40621-tayouka",
