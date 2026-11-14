@@ -208,3 +208,26 @@ def test_guideline_state_and_url_go_together():
 def test_public_data_loads():
     rows = schema.load("data/seido.csv")
     assert len(rows) >= 1
+
+
+# --- 上限額の数字は、根拠の箇所の中に無ければならない ---
+
+
+def test_max_amount_must_appear_in_basis():
+    assert "上限額_円" in rules(base(根拠の箇所="補助額の上限"))
+    assert "上限額_円" in rules(base(上限額_円="10000"))
+    assert schema.check_row(base(上限額_円="30000", 金額="3万円まで", 根拠の箇所="3万円を上限")) == []
+
+
+# --- 市町村の台帳 ---
+
+
+def test_area_master_code_and_name():
+    areas = {"40999": "みほん市"}
+    assert schema.check_rows([base()], areas=areas) == []
+    assert any(p.rule == "市町村の台帳" for p in schema.check_rows([base()], areas={"40998": "べつの市"}))
+    assert any(p.rule == "市町村の台帳" for p in schema.check_rows([base(市町村="みほん町")], areas=areas))
+
+
+def test_candidates_load():
+    schema.load("data/kouho.csv")

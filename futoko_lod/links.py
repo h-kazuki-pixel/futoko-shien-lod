@@ -52,10 +52,10 @@ def main() -> int:
     ap.add_argument("--summary", default="")
     args = ap.parse_args()
 
-    areas: dict[str, str] = {}
+    areas: dict[str, str] = dict(schema.load_areas() or {})
     for path in ("data/seido.csv", "data/horyu.csv"):
         for row in schema.read_csv(path):
-            areas[row["市町村コード"]] = row["市町村"]
+            areas.setdefault(row["市町村コード"], row["市町村"])
 
     lines = ["## つなぐ先の確認", "", "### e-Stat 統計LOD(標準地域コード)", ""]
     lines += ["| コード | 名前 | URI | HTTP | 形式 | 中身に名前がある |", "|---|---|---|---|---|---|"]

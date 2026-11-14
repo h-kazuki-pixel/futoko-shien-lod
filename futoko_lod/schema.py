@@ -212,6 +212,12 @@ def check_row(row: dict[str, str], extra_domains: frozenset[str] = frozenset()) 
         bad("上限額_円", f"円の整数で書く(カンマなし): {v('上限額_円')!r}")
     if v("補助率") and not re.fullmatch(r"[1-9]\d*/[1-9]\d*", v("補助率")):
         bad("補助率", f"1/2 のように書く: {v('補助率')!r}")
+    if status in ("あり", "予定") and v("上限額_円") and v("根拠の箇所"):
+        # 金額の数字そのものを根拠の箇所に含める。別の数字を上限額と取り違えにくくする
+        from .collate import tokens
+
+        if f"yen:{v('上限額_円')}" not in tokens(v("根拠の箇所")):
+            bad("上限額_円", "上限額の数字が根拠の箇所の中に無い。金額そのものを含む語句を根拠にする")
     if len(v("根拠の箇所")) > MAX_BASIS:
         bad("根拠の箇所", f"{MAX_BASIS}字まで。公式ページの文章を写さない")
     for key in ("対象", "金額", "開始", "備考"):
@@ -221,12 +227,23 @@ def check_row(row: dict[str, str], extra_domains: frozenset[str] = frozenset()) 
     return out
 
 
-def check_rows(rows: list[dict[str, str]], extra_domains: frozenset[str] = frozenset()) -> list[Problem]:
+def check_rows(
+    rows: list[dict[str, str]],
+    extra_domains: frozenset[str] = frozenset(),
+    areas: dict[str, str] | None = None,
+) -> list[Problem]:
+    """areas は市町村の台帳(コード→名前)。渡されたら、コードと名前が台帳と合うかも見る。"""
     problems: list[Problem] = []
     seen: set[str] = set()
     for row in rows:
         problems.extend(check_row(row, extra_domains))
         rid = row.get("id", "")
+        if areas is not None:
+            code, name = (row.get("市町村コード") or "").strip(), (row.get("市町村") or "").strip()
+            if code not in areas:
+                problems.append(Problem(rid, "市町村の台帳", f"コード {code} が data/shichoson.csv に無い"))
+            elif areas[code] != name:
+                problems.append(Problem(rid, "市町村の台帳", f"コード {code} の名前は台帳では {areas[code]}。データは {name}"))
         if rid in seen:
             problems.append(Problem(rid, "id", "同じ id が2回ある"))
         seen.add(rid)
@@ -253,12 +270,19 @@ def load_extra_domains(path: str | Path = "data/koushiki_domain.csv") -> frozens
     return frozenset(r["ドメイン"].strip().lower() for r in read_csv(p) if r.get("ドメイン"))
 
 
+def load_areas(path: str | Path = "data/shichoson.csv") -> dict[str, str] | None:
+    p = Path(path)
+    if not p.exists():
+        return None
+    return {r["市町村コード"].strip(): r["市町村"].strip() for r in read_csv(p)}
+
+
 def load(path: str | Path, extra_domains: frozenset[str] | None = None) -> list[dict[str, str]]:
-    """公開データを読む。1件でも検査に落ちれば DataError。"""
+    """データを読む。1件でも検査に落ちれば DataError。"""
     rows = read_csv(path)
     if extra_domains is None:
         extra_domains = load_extra_domains(Path(path).parent / "koushiki_domain.csv")
-    problems = check_rows(rows, extra_domains)
+    problems = check_rows(rows, extra_domains, load_areas(Path(path).parent / "shichoson.csv"))
     if problems:
         raise DataError(problems)
     return rows

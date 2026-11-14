@@ -82,10 +82,11 @@ def pdf_to_text(body: bytes) -> str | None:
     return " ".join((page.extract_text() or "") for page in reader.pages)
 
 
-_robots: dict[str, urllib.robotparser.RobotFileParser | None] = {}
+_robots: dict[str, tuple[urllib.robotparser.RobotFileParser | None, str]] = {}
 
 
-def allowed_by_robots(url: str) -> bool:
+def robots_decision(url: str) -> tuple[bool, str]:
+    """robots.txt を読んで、取りに行ってよいかを返す。(よいか, 判断の理由)"""
     parsed = urlparse(url)
     root = f"{parsed.scheme}://{parsed.netloc}"
     if root not in _robots:
@@ -94,24 +95,35 @@ def allowed_by_robots(url: str) -> bool:
             req = urllib.request.Request(root + "/robots.txt", headers={"User-Agent": USER_AGENT})
             with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as res:
                 rp.parse(decode(res.read(), res.headers.get("Content-Type", "")).splitlines())
-            _robots[root] = rp
+            _robots[root] = (rp, "robots.txt を読んだ")
         except urllib.error.HTTPError as e:
-            # robots.txt が無い(404 など)なら制限なし。401/403 は全面禁止として扱う
-            _robots[root] = None if e.code not in (401, 403) else rp
             if e.code in (401, 403):
                 rp.parse(["User-agent: *", "Disallow: /"])
-        except Exception:
-            _robots[root] = None
+                _robots[root] = (rp, f"robots.txt が HTTP {e.code}。禁止として扱う")
+            elif 400 <= e.code < 500:
+                _robots[root] = (None, f"robots.txt は無い(HTTP {e.code})。制限なし")
+            else:
+                rp.parse(["User-agent: *", "Disallow: /"])
+                _robots[root] = (rp, f"robots.txt を確かめられず(HTTP {e.code})。取りに行かない")
+        except Exception as e:
+            rp.parse(["User-agent: *", "Disallow: /"])
+            _robots[root] = (rp, f"robots.txt を確かめられず({type(e).__name__})。取りに行かない")
         time.sleep(1)
-    rp = _robots[root]
-    return True if rp is None else rp.can_fetch(USER_AGENT, url)
+    rp, note = _robots[root]
+    return (True if rp is None else rp.can_fetch(USER_AGENT, url)), note
+
+
+def allowed_by_robots(url: str) -> bool:
+    return robots_decision(url)[0]
 
 
 def fetch(url: str) -> dict:
     """1つの URL を取りに行く。本文の文字列と、記録を返す。"""
     record = {"url": url, "取得日時": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds")}
-    if not allowed_by_robots(url):
-        return {**record, "結果": "robots.txt で禁止", "text": None}
+    ok, note = robots_decision(url)
+    record["robots"] = note
+    if not ok:
+        return {**record, "結果": "robots.txt により取得しない", "text": None}
     try:
         req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
         with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as res:
@@ -160,19 +172,21 @@ def run(path: str, interval: float = INTERVAL_SEC) -> list[dict]:
     return results
 
 
-def summary_markdown(results: list[dict]) -> str:
+def summary_markdown(results: list[dict], title: str = "出典との照合") -> str:
     counts: dict[str, int] = {}
     for r in results:
         counts[r["判定"]] = counts.get(r["判定"], 0) + 1
-    lines = ["## 出典との照合", "", "| 判定 | 件数 |", "|---|---|"]
+    lines = [f"## {title}", "", "| 判定 | 件数 |", "|---|---|"]
     lines += [f"| {k} | {v} |" for k, v in sorted(counts.items())]
-    lines += ["", "| id | 判定 | 取得 | 根拠の箇所 | ページに無い数字 |", "|---|---|---|---|---|"]
+    lines += ["", "| id | 判定 | 取得 | robots | 根拠の箇所 | ページに無い数字 |", "|---|---|---|---|---|---|"]
     for r in results:
         if r["判定"] == "照合の対象外":
             continue
         basis = {True: "ある", False: "無い"}.get(r.get("根拠の箇所がページにある"), "—")
         missing = ", ".join(r.get("ページに無い数字", [])) or "—"
-        lines.append(f"| {r['id']} | {r['判定']} | {r.get('結果', '')} | {basis} | {missing} |")
+        lines.append(f"| {r['id']} | {r['判定']} | {r.get('結果', '')} | {r.get('robots', '')} | {basis} | {missing} |")
+    matched = [r["id"] for r in results if r["判定"] == "一致"]
+    lines += ["", "一致した id: " + ",".join(matched)]
     return "\n".join(lines) + "\n"
 
 
@@ -186,7 +200,7 @@ def main() -> int:
     results = run(args.path, args.interval)
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=1)
-    md = summary_markdown(results)
+    md = summary_markdown(results, f"出典との照合({args.path})")
     print(md)
     if args.summary:
         with open(args.summary, "a", encoding="utf-8") as f:

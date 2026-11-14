@@ -113,3 +113,15 @@ def test_empty_basis_never_matches():
 def test_decode_shift_jis():
     body = "<meta charset=\"Shift_JIS\"><p>上限5,000円</p>".encode("cp932")
     assert "上限5,000円" in fetch.decode(body, "text/html")
+
+
+def test_robots_unreachable_means_do_not_fetch(monkeypatch):
+    def boom(*a, **k):
+        raise TimeoutError()
+
+    monkeypatch.setattr(fetch.urllib.request, "urlopen", boom)
+    monkeypatch.setattr(fetch.time, "sleep", lambda s: None)
+    fetch._robots.clear()
+    ok, note = fetch.robots_decision("https://www.city.mihon.lg.jp/a.html")
+    assert not ok and "確かめられず" in note
+    fetch._robots.clear()

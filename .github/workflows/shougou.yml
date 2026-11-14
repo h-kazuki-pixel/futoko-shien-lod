@@ -8,6 +8,7 @@ on:
     branches: [main]
     paths:
       - data/seido.csv
+      - data/kouho.csv
       - .github/workflows/shougou.yml
 permissions:
   contents: read
@@ -24,9 +25,11 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install pypdf
-      - name: 取得と照合
+      - name: 候補の取得と照合(一致したものだけ公開データに入れる)
+        run: python -m futoko_lod.fetch data/kouho.csv --out shougou-kouho.json --summary "$GITHUB_STEP_SUMMARY"
+      - name: 公開データの取得と照合
         run: python -m futoko_lod.fetch data/seido.csv --out shougou.json --summary "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         with:
           name: shougou
-          path: shougou.json
+          path: shougou*.json

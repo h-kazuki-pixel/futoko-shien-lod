@@ -15,6 +15,8 @@ jobs:
       - run: pip install -r requirements-dev.txt
       - name: 公開データの検査(1件でも落ちれば失敗)
         run: python -m futoko_lod.schema data/seido.csv
+      - name: 候補の検査
+        run: python -m futoko_lod.schema data/kouho.csv
       - name: JSON-LD が CSV と合っているか
         run: python -m futoko_lod.build --check
       - run: python -m pytest -q

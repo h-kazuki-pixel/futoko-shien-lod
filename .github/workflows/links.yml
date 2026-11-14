@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - futoko_lod/links.py
+      - data/shichoson.csv
       - .github/workflows/links.yml
 permissions:
   contents: read
