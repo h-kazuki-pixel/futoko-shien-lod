@@ -1075,6 +1075,25 @@
    "note": "要綱は令和7年3月31日制定(教育委員会告示第2号); 申請は年2回(10月末・3月末)"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40223-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
+    "@type": "schema:AdministrativeArea",
+    "name": "古賀市",
+    "identifier": "40223"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "校内教育支援センターでオンライン指導を受けられるとの記載はある。自宅などから参加するオンラインの支援の記載は見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php"
+   ]
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-shien-center",
    "@type": "schema:GovernmentService",
    "identifier": "40223-shien-center",
@@ -1093,6 +1112,25 @@
    "source": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php",
    "sourceName": "古賀市公式ページ",
    "basisPhrase": "古賀市教育支援センター あすなろ教室"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40223-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
+    "@type": "schema:AdministrativeArea",
+    "name": "古賀市",
+    "identifier": "40223"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "民間のフリースクール、自宅でのICT学習、児童センター、隣保館での学習を出席扱いにする仕組みがあるとの記載はある。要件は各学校に問い合わせる形で、要綱や施設一覧の公表は見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php"
+   ]
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-tayouka",
