@@ -1,0 +1,32 @@
+# 出典のページを取りに行き、データの項目と照合する。
+# 公開データが変わったときと、手で起動したときに回る。
+# robots.txt に従い、1ページごとに間隔をあける。ページの本文は保存しない。
+name: shougou
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - data/seido.csv
+      - .github/workflows/shougou.yml
+permissions:
+  contents: read
+concurrency:
+  group: shougou
+  cancel-in-progress: false
+jobs:
+  shougou:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pypdf
+      - name: 取得と照合
+        run: python -m futoko_lod.fetch data/seido.csv --out shougou.json --summary "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: shougou
+          path: shougou.json

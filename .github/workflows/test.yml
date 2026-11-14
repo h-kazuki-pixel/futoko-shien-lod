@@ -1,0 +1,20 @@
+name: test
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements-dev.txt
+      - name: 公開データの検査(1件でも落ちれば失敗)
+        run: python -m futoko_lod.schema data/seido.csv
+      - name: JSON-LD が CSV と合っているか
+        run: python -m futoko_lod.build --check
+      - run: python -m pytest -q
