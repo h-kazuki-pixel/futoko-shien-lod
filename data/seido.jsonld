@@ -138,6 +138,89 @@
    ]
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-online",
+   "@type": "schema:GovernmentService",
+   "identifier": "40130-online",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡市",
+    "identifier": "40130"
+   },
+   "kind": "fsl:kind-online",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "オンラインルーム",
+   "eligibility": "集団への関わりが苦手な不登校の児童生徒",
+   "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
+   "sourceName": "福岡市教育委員会「不登校に関する支援」",
+   "basisPhrase": "オンラインルームを開設しています",
+   "note": "端末を使い、他の児童生徒やスクールカウンセラーと交流する場"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-shien-center",
+   "@type": "schema:GovernmentService",
+   "identifier": "40130-shien-center",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡市",
+    "identifier": "40130"
+   },
+   "kind": "fsl:kind-shien-center",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "教育支援センター(まつ風学級・はまかぜ学級・すまいる学級)",
+   "eligibility": "市内在住の小中学生。小学生は保護者の送迎が条件",
+   "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf",
+   "sourceName": "教育支援センターの紹介(福岡市教育委員会)",
+   "basisPhrase": "教育支援センターの紹介",
+   "note": "すまいる学級の各教室は小学校の建物の中にある"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40130-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡市",
+    "identifier": "40130"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-kakunin-dekizu",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "note": "公式ページに、出席扱いの要綱や施設一覧の記載が見つからなかった。無いことは確認していない",
+   "searchedAt": [
+    "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html"
+   ]
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-tayouka",
+   "@type": "schema:GovernmentService",
+   "identifier": "40130-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
+    "@type": "schema:AdministrativeArea",
+    "name": "福岡市",
+    "identifier": "40130"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "福岡市立百道松原中学校",
+   "eligibility": "不登校または不登校傾向の中学生。転入学には面談が必須",
+   "startText": "令和7年4月開校",
+   "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
+   "sourceName": "福岡市教育委員会「不登校に関する支援」",
+   "basisPhrase": "学びの多様化学校「福岡市立百道松原中学校」",
+   "note": "転入学の条件の詳細は生徒募集案内にある"
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40203-fs-hojo",
    "@type": "schema:GovernmentService",
    "identifier": "40203-fs-hojo",
@@ -210,6 +293,27 @@
    "basisPhrase": "10,000円を上限",
    "guidelineState": "ページにリンクなし",
    "note": "放課後等デイサービスは対象外"
+  },
+  {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-shusseki",
+   "@type": "schema:GovernmentService",
+   "identifier": "40219-shusseki",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
+    "@type": "schema:AdministrativeArea",
+    "name": "大野城市",
+    "identifier": "40219"
+   },
+   "kind": "fsl:kind-shusseki",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-15",
+   "checkMethod": "fsl:method-kikai",
+   "name": "出席扱いしているフリースクール等一覧",
+   "eligibility": "大野城市立小中学校の児童生徒",
+   "source": "https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html",
+   "sourceName": "大野城市公式ページ",
+   "basisPhrase": "令和8年1月末現在",
+   "note": "令和8年1月末現在の一覧; 施設名・種別・所在地を公表"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-fs-hojo",
