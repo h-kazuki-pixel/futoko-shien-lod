@@ -69,7 +69,8 @@ FORMS = {
 
 METHODS = {
     "機械の読み取り": "kikai",
-    "人の再確認": "hito",
+    "人の読み取り": "hito-yomitori",  # 人が公式ページを見て項目にした(機械の読み取りを経ていない)
+    "人の再確認": "hito",  # 機械の読み取りを、人が公式ページと見比べた
     "問い合わせ": "toiawase",
 }
 
@@ -165,7 +166,7 @@ def check_row(row: dict[str, str], extra_domains: frozenset[str] = frozenset()) 
         bad("状態", f"あり/予定/なし/確認できず のどれかにする: {status!r}")
 
     if v("確認方法") not in METHODS:
-        bad("確認方法", f"機械の読み取り/人の再確認/問い合わせ のどれかにする: {v('確認方法')!r}")
+        bad("確認方法", f"機械の読み取り/人の読み取り/人の再確認/問い合わせ のどれかにする: {v('確認方法')!r}")
     if not _valid_date(v("確認日")):
         bad("確認日", f"YYYY-MM-DD で書く: {v('確認日')!r}")
 
