@@ -4,31 +4,31 @@ id,項目,Muse判定,根拠,メモ,開いたURL,人が見る,選んだ理由
 40000-fs-unei,対象,合っている,施設の設置者は、非営利法人（学校法人を除く。）,,https://www.pref.fukuoka.lg.jp/contents/free3.html | https://www.pref.fukuoka.lg.jp/uploaded/life/823193_62929542_misc.pdf,見る,抜き取り(種 20261115)
 40000-fs-unei,金額,合っている,補助率2分の1を乗じ算定し、交付決定の上限額は200万円です,,https://www.pref.fukuoka.lg.jp/contents/free3.html | https://www.pref.fukuoka.lg.jp/uploaded/life/823193_62929542_misc.pdf,見る,抜き取り(種 20261115)
 40000-fs-unei,備考,合っている,施設の設置者に対して、施設の活動のために支出する経費の一部を助成,,https://www.pref.fukuoka.lg.jp/contents/free3.html | https://www.pref.fukuoka.lg.jp/uploaded/life/823193_62929542_misc.pdf,見る,抜き取り(種 20261115)
-40000-online,種類と状態,分からない,,開けず: 見るページは取得エラー、補助の資料PDFは取得タイムアウトで開けなかったため確認できない,,見る,Muse が「分からない」
-40000-online,制度名,分からない,,開けず: 見るページは取得エラー、補助の資料PDFは取得タイムアウトで開けなかったため確認できない,,見る,Muse が「分からない」
-40000-online,対象,分からない,,開けず: 見るページは取得エラー、補助の資料PDFは取得タイムアウトで開けなかったため確認できない,,見る,Muse が「分からない」
-40000-online,備考,分からない,,開けず: 見るページは取得エラー、補助の資料PDF（チラシ）は取得タイムアウトで開けなかったため、備考の内容を確認できない,,見る,Muse が「分からない」
+40000-online,種類と状態,合っている,zoomを使ったオンラインで大学生ボランティア（みらいサポーター）が支援します,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,,
+40000-online,制度名,合っている,ICT活用型不登校児童生徒支援事業（みらいサポーター事業）,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,,
+40000-online,対象,合っている,福岡県内の公立小・中学校、義務教育学校、私立小・中学校に在籍する不登校児童生徒,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,,
+40000-online,備考,合っている,大学生とオンラインで話してみませんか？,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた。チラシは文字を抽出できず、表示を目で読んだ,https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html | https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf,,
 40100-tayouka,種類と状態,合っている,令和9年4月に学びの多様化学校（中学校）を設置することとしています,,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html | https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,
 40100-tayouka,制度名,合っている,北九州市立「学びの多様化学校」の設置に係る検討会議,,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html | https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,
 40100-tayouka,対象,合っている,対象：不登校・不登校傾向の中学生（各学年15名程度）,,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html | https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,
 40100-tayouka,開始,合っている,令和9年4月の開校を予定しています,,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html | https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,
 40100-tayouka,備考,違う,北九州市立あいおい中学校（学びの多様化学校）,設置場所が市立教育センター内である点は合っているが、補助の資料のページの関連リンクに「北九州市立あいおい中学校（学びの多様化学校）」と明記されており、学校名が出典のページに無く未確認という記述と食い違う,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html | https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,見る,Muse が「違う」
-40130-online,種類と状態,分からない,,開けず: 見るページは取得エラー、補助の資料PDFはPage not found（ネットワークエラー）で開けなかったため確認できない,,見る,Muse が「分からない」
-40130-online,制度名,分からない,,開けず: 見るページは取得エラー、補助の資料PDFはPage not found（ネットワークエラー）で開けなかったため確認できない,,見る,Muse が「分からない」
-40130-online,対象,分からない,,開けず: 見るページは取得エラー、補助の資料PDFはPage not found（ネットワークエラー）で開けなかったため確認できない,,見る,Muse が「分からない」
-40130-online,備考,分からない,,開けず: 見るページは取得エラー、補助の資料PDF（案内）はPage not found（ネットワークエラー）で開けなかったため、備考の内容を確認できない,,見る,Muse が「分からない」
+40130-online,種類と状態,合っている,他の児童生徒やスクールカウンセラーと交流するオンラインルームを開設,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,
+40130-online,制度名,合っている,オンラインルームを開設しています,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,
+40130-online,対象,合っている,引きこもりがちで集団への関わりが苦手な児童生徒,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,
+40130-online,備考,合っている,自宅、学校どちらからでも参加可能です,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html | https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf,,
 40130-shien-center,種類と状態,合っている,教育支援センターでは、様々な理由により不登校の状況にある子ども達に対し,,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,
 40130-shien-center,制度名,合っている,はまかぜ学級 まつ風学級 すまいる学級,,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,
 40130-shien-center,対象,合っている,福岡市内在住の小中学生（小学生は保護者による送迎が可能であることが条件）,,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,
 40130-shien-center,備考,合っている,東箱崎小学校内、東住吉小学校内、壱岐東小学校内,,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,
-40130-tayouka,種類と状態,分からない,,メインページ（soudan04.html）を開けず、開けた生徒募集案内（PDF）にも「学びの多様化学校」や文科省指定の記載が無かったため確認できない,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,見る,Muse が「分からない」
-40130-tayouka,制度名,分からない,,開けた生徒募集案内（PDF）には校名「百道松原中学校」と発行者・福岡市教育委員会の記載はあるが「福岡市立」の字句は無く、メインページ（soudan04.html）も開けなかったため、「福岡市立」まで含めた制度名は確かめられなかった,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,見る,Muse が「分からない」
+40130-tayouka,種類と状態,合っている,学びの多様化学校「福岡市立百道松原中学校」令和7年4月開校,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,
+40130-tayouka,制度名,合っている,福岡市立百道松原中学校,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,
 40130-tayouka,対象,合っている,不登校、または、不登校傾向の児童生徒,,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,,
-40130-tayouka,開始,分からない,,メインページを開けず、開けた令和8年度生徒募集案内（PDF）にも開校時期の記載が無かったため確認できない,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,見る,Muse が「分からない」
+40130-tayouka,開始,合っている,令和7年4月開校,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,
 40130-tayouka,備考,合っている,福岡市内に住民登録をしている新中学１年生から新中学３年生,,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,,
-40202-tayouka,種類と状態,分からない,,開けず: browser.openで取得失敗（HTTPステータスなし）。文科省の一覧ページを読めなかったため確認できない,,見る,Muse が「分からない」
-40202-tayouka,制度名,分からない,,開けず: browser.openで取得失敗（HTTPステータスなし）。文科省の一覧ページを読めなかったため確認できない,,見る,Muse が「分からない」
-40202-tayouka,備考,分からない,,開けず: browser.openで取得失敗（HTTPステータスなし）。文科省の一覧ページを読めなかったため確認できない,,見る,Muse が「分からない」
+40202-tayouka,種類と状態,合っている,大牟田市立宅峰中学校【分校名】ほしぞら分校,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,
+40202-tayouka,制度名,合っている,大牟田市立宅峰中学校【分校名】ほしぞら分校,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,
+40202-tayouka,備考,合っている,宅峰中学校【分校名】ほしぞら分校、指定年「令和6年」,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,
 40203-fs-hojo,種類と状態,合っている,保護者等に対し、利用開始に係る経費について一部を補助します,,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,見る,抜き取り(種 20261115)
 40203-fs-hojo,制度名,合っている,フリースクール等利用児童生徒支援事業,,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,見る,抜き取り(種 20261115)
 40203-fs-hojo,対象,合っている,保護者等と児童生徒が久留米市に住所を有する者,,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,見る,抜き取り(種 20261115)
@@ -63,7 +63,7 @@ id,項目,Muse判定,根拠,メモ,開いたURL,人が見る,選んだ理由
 40219-tayouka,種類と状態,合っている,大野城市立みずほ中学校（学びの多様化学校）,,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,,
 40219-tayouka,制度名,合っている,学校名 大野城市立みずほ中学校,,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,,
 40219-tayouka,対象,合っている,対象者 大野城市在住の中学1年生～中学3年生,,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,,
-40219-tayouka,備考,分からない,,分校と定員は市のページで確認できたが、文部科学省の一覧ページを開けず指定年が令和8年か確認できなかった。開けず: browser.openで取得失敗（上流取得エラー）,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,見る,Muse が「分からない」
+40219-tayouka,備考,合っている,大野城市立みずほ中学校、指定年「令和8年」,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた。文部科学省の一覧では形態が「分教室型」。備考の「分校」は市のページによる,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html | https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,
 40220-shien-center,種類と状態,合っている,宗像市教育委員会が運営している教室です,,https://www.city.munakata.lg.jp/kiji0033002/index.html,,
 40220-shien-center,制度名,合っている,教育サポート室エール,,https://www.city.munakata.lg.jp/kiji0033002/index.html,,
 40220-shien-center,対象,合っている,何らかの理由で学校に登校することができない小・中・義務教育学校,,https://www.city.munakata.lg.jp/kiji0033002/index.html,,
@@ -102,7 +102,7 @@ id,項目,Muse判定,根拠,メモ,開いたURL,人が見る,選んだ理由
 40231-shien-center,備考,合っている,教育サポートセンター内にある適応指導教室「わかば」,,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,見る,抜き取り(種 20261115)
 40341-tayouka,種類と状態,合っている,原田小学校ハピネス分校、宇美南中学校ハピネス分校,,https://www.town.umi.lg.jp/site/manabinotayouka/ | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,
 40341-tayouka,制度名,合っている,原田小学校ハピネス分校、宇美南中学校ハピネス分校,,https://www.town.umi.lg.jp/site/manabinotayouka/ | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,
-40341-tayouka,備考,分からない,,開けず: 文部科学省の一覧ページが開けず、2校の指定年が令和7年か確認できなかった。町の取扱要綱の存在は町ページで確認した,https://www.town.umi.lg.jp/site/manabinotayouka/ | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,見る,Muse が「分からない」
+40341-tayouka,備考,合っている,宇美町立原田小学校【分校名】ハピネス分校、指定年「令和7年」,やり直し(11/15): 前回は取得の道具の失敗。ブラウザで開けた,https://www.town.umi.lg.jp/site/manabinotayouka/ | https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,
 40344-shien-center,種類と状態,合っている,不登校状態（兆候）にある児童生徒が学校復帰や社会的自立を目指す,,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html | https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf,見る,Muse の判定を根拠にしない(robots.txt の扱いが不明)
 40344-shien-center,制度名,合っている,須恵町適応指導教室「やまももルーム」,,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html | https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf,見る,Muse の判定を根拠にしない(robots.txt の扱いが不明)
 40344-shien-center,対象,合っている,心理的または情緒的な理由で悩み、登校したくても出来ない状態,,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html | https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf,見る,Muse の判定を根拠にしない(robots.txt の扱いが不明)
