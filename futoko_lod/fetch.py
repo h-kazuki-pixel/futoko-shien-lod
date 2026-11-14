@@ -178,13 +178,16 @@ def summary_markdown(results: list[dict], title: str = "出典との照合") -> 
         counts[r["判定"]] = counts.get(r["判定"], 0) + 1
     lines = [f"## {title}", "", "| 判定 | 件数 |", "|---|---|"]
     lines += [f"| {k} | {v} |" for k, v in sorted(counts.items())]
-    lines += ["", "| id | 判定 | 取得 | robots | 根拠の箇所 | ページに無い数字 |", "|---|---|---|---|---|---|"]
+    lines += ["", "| id | 判定 | 取得 | robots | 根拠の箇所 | ページに無い数字 | ページに無い名前の部分(合否には使わない) |", "|---|---|---|---|---|---|---|"]
     for r in results:
         if r["判定"] == "照合の対象外":
             continue
         basis = {True: "ある", False: "無い"}.get(r.get("根拠の箇所がページにある"), "—")
         missing = ", ".join(r.get("ページに無い数字", [])) or "—"
-        lines.append(f"| {r['id']} | {r['判定']} | {r.get('結果', '')} | {r.get('robots', '')} | {basis} | {missing} |")
+        names = ", ".join(r.get("ページに無い名前の部分", [])) or "—"
+        lines.append(
+            f"| {r['id']} | {r['判定']} | {r.get('結果', '')} | {r.get('robots', '')} | {basis} | {missing} | {names} |"
+        )
     matched = [r["id"] for r in results if r["判定"] == "一致"]
     lines += ["", "一致した id: " + ",".join(matched)]
     return "\n".join(lines) + "\n"

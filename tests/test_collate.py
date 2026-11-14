@@ -125,3 +125,10 @@ def test_robots_unreachable_means_do_not_fetch(monkeypatch):
     ok, note = fetch.robots_decision("https://www.city.mihon.lg.jp/a.html")
     assert not ok and "確かめられず" in note
     fetch._robots.clear()
+
+
+def test_name_parts_are_reported_but_do_not_decide():
+    text = fetch.html_to_text(PAGE)
+    r = collate.collate(row(制度名="みほん市 補助金(まぼろし教室)"), text)
+    assert r["ページに無い名前の部分"] == ["まぼろし教室"]
+    assert r["一致"]

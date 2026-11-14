@@ -100,6 +100,16 @@ def record_tokens(row: dict[str, str]) -> set[str]:
     return want
 
 
+def name_parts_missing(name: str, page_norm: str) -> list[str]:
+    """制度名を括弧や中点で区切り、ページに無い部分を返す。
+
+    制度名は読む側がまとめて付けることがあるので、合否には使わない。
+    人が見るときの手がかりとして結果に出す。
+    """
+    parts = [x for x in re.split(r"[()「」『』・、\s]+", unicodedata.normalize("NFKC", name)) if x]
+    return [x for x in parts if normalize(x) not in page_norm]
+
+
 def collate(row: dict[str, str], page_text: str) -> dict:
     """1件を、出典のページの文字列と照合する。"""
     page_norm = normalize(page_text)
@@ -110,5 +120,6 @@ def collate(row: dict[str, str], page_text: str) -> dict:
         "id": row.get("id", ""),
         "根拠の箇所がページにある": literal_ok,
         "ページに無い数字": missing,
+        "ページに無い名前の部分": name_parts_missing(row.get("制度名", "") or "", page_norm),
         "一致": literal_ok and not missing,
     }
