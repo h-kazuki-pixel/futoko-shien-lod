@@ -12,6 +12,7 @@ on:
       - data/saikakunin.csv
       - data/toiawase.csv
       - data/torinaoshi/saishin.csv
+      - data/kumiawase/jidou_seito.csv
       - futoko_lod/publish.py
       - futoko_lod/build.py
       - futoko_lod/schema.py
@@ -65,7 +66,7 @@ jobs:
             echo "|---|---|---|---|---|---|"
           } >> "$GITHUB_STEP_SUMMARY"
           fail=0
-          for path in "" "about/" "ichiran/" "ns" "ns.ttl" "dataset.ttl" "seido.csv" "seido.jsonld" "seido.ttl" \
+          for path in "" "about/" "kumiawase/" "kumiawase.csv" "ichiran/" "ns" "ns.ttl" "dataset.ttl" "seido.csv" "seido.jsonld" "seido.ttl" \
                       "id/40219-fs-hojo" "id/40219-fs-hojo/" "id/40219-fs-hojo.ttl" "id/40219-fs-hojo.jsonld"; do
             out=$(curl -sSL -o /dev/null -D headers.txt -w "%{http_code}|%{num_redirects}|%{content_type}" "$base$path" || echo "失敗||")
             cors=$(grep -i "^access-control-allow-origin:" headers.txt | tail -1 | tr -d '\r' | cut -d' ' -f2)

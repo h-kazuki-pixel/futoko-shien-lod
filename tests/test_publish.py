@@ -260,3 +260,15 @@ def test_about_page_numbers_come_from_the_data(site, rows):
     assert f"「確認できず」が {c['確認できず']} 件ある" in text
     judged = sum(bool(r["判定"]) for r in schema.read_csv("data/saikakunin.csv"))
     assert f"項目のうち {judged}。" in text
+
+
+def test_combination_page_shows_the_fetched_numbers_and_their_year(site):
+    pupils = schema.read_csv("data/kumiawase/jidou_seito.csv")
+    text = (site / "kumiawase" / "index.html").read_text(encoding="utf-8")
+    for p in pupils:
+        assert p["市町村"] in text
+        if p["小学校児童数"]:
+            assert f'{int(p["小学校児童数"]):,}' in text
+    years = {p["小学校児童数の年"] for p in pupils if p["小学校児童数の年"]}
+    assert all(f"{y}年" in text for y in years) and "いまの人数ではない" in text
+    assert (site / "kumiawase.csv").read_bytes() == open("data/kumiawase/jidou_seito.csv", "rb").read()
