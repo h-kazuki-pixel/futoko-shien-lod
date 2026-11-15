@@ -51,12 +51,82 @@ def probe(name: str, code: str) -> None:
     show("コードの値からさかのぼる(同じコードを持つ資源)", f"""select ?s ?p where {{ ?s ?p ?o . filter(str(?o) in ("{code}", "{code}0", "{code[:2]}{code[2:]}")) }} limit 40""")
 
 
+CODE_PROP = "http://ja.dbpedia.org/property/コード"  # --probe で、大野城市が 40219 を持つことを確かめた(2026-11-16)
+LABEL = "http://www.w3.org/2000/01/rdf-schema#label"
+REDIRECT = "http://dbpedia.org/ontology/wikiPageRedirects"
+CSV_PATH = "data/dbpedia.csv"
+CSV_COLUMNS = ["市町村コード", "市町村", "DBpediaのURI", "DBpediaでの名前", "判定", "確かめた日"]
+
+
+def verify_query(codes: list[str]) -> str:
+    """地方公共団体コードがこちらのコードと合う資源を引く。名前からは URI を作らない。"""
+    inlist = ", ".join(f'"{c}"' for c in codes)
+    return f"""select ?s ?c ?label ?redirect where {{
+  ?s <{CODE_PROP}> ?c . filter(str(?c) in ({inlist}))
+  optional {{ ?s <{LABEL}> ?label }}
+  optional {{ ?s <{REDIRECT}> ?redirect }}
+}}"""
+
+
+def judge(areas: dict[str, str], rows: list[dict[str, str]], date: str) -> list[dict[str, str]]:
+    """コードごとに、採ってよい URI が1つに決まるかを判定する。
+
+    採るのは「一致」だけ: そのコードを持つ資源(転送でないもの)がちょうど1つで、名前がこちらの名前で始まる
+    (「川崎町 (福岡県)」のような、かっこ付きの名前を許す)。
+    """
+    by_code: dict[str, dict[str, str]] = {}
+    for r in rows:
+        if r.get("redirect"):
+            continue
+        by_code.setdefault(r["c"].strip(), {})[r["s"]] = r.get("label", "")
+    out = []
+    for code, name in areas.items():
+        found = by_code.get(code, {})
+        row = {"市町村コード": code, "市町村": name, "DBpediaのURI": "", "DBpediaでの名前": "", "判定": "", "確かめた日": date}
+        if not found:
+            row["判定"] = "このコードを持つ資源が返らなかった"
+        elif len(found) > 1:
+            row["判定"] = "同じコードを持つ資源が複数(" + " ".join(sorted(found)) + ")"
+        else:
+            (uri, label), = found.items()
+            row["DBpediaでの名前"] = label
+            if label == name or label.startswith(name + " ("):
+                row["DBpediaのURI"], row["判定"] = uri, "一致"
+            else:
+                row["判定"] = f"名前が違う({uri})"
+        out.append(row)
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--probe", nargs=2, metavar=("名前", "コード"))
+    ap.add_argument("--verify", nargs="?", const="show", choices=["show", "write"])
     args = ap.parse_args()
     if args.probe:
         probe(*args.probe)
+    if args.verify:
+        import csv
+        import datetime as dt
+        from pathlib import Path
+        from . import schema
+        areas = {a["市町村コード"]: a["市町村"] for a in schema.read_csv("data/shichoson.csv")}
+        rows = show("コードが合う資源", verify_query(list(areas)), limit=5)
+        if not rows:
+            print("1行も返らなかった。書き出さない")
+            return 1
+        out = judge(areas, rows, dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).date().isoformat())
+        for r in out:
+            if r["判定"] != "一致":
+                print("| " + " | ".join(r[c] for c in CSV_COLUMNS) + " |")
+        print(f"一致 {sum(r['判定'] == '一致' for r in out)} / {len(out)}")
+        if args.verify == "write":
+            Path(CSV_PATH).parent.mkdir(parents=True, exist_ok=True)
+            with open(CSV_PATH, "w", encoding="utf-8", newline="") as f:
+                w = csv.DictWriter(f, fieldnames=CSV_COLUMNS, lineterminator="\n")
+                w.writeheader()
+                w.writerows(out)
+            print(f"{CSV_PATH} を書いた")
     return 0
 
 
