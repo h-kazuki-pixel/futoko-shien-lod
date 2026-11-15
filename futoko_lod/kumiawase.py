@@ -124,14 +124,17 @@ def pupils_query(uris: list[str]) -> str:
 def predecessor_query(uris: list[str]) -> str:
     """いまのコードに観測値が無い市町村について、その市町村になる前の地域の観測値を引く。
 
-    那珂川市(C40231-20181001)は、観測値が1つも無く、sacs:succeedingMunicipality で前の地域から指されていた
-    (2026-11-16 に確かめた)。合併で前の地域が複数あるときは、ここで引けても使わない(latest_pupils の側で止める)。
+    那珂川市(C40231-20181001)は、観測値が1つも無かった。前の那珂川町は、最後の時期つきのコード(C40305-20181001)が
+    sacs:succeedingMunicipality でいまのコードを指し、観測値は同じ番号の別の時期つきのコード(C40305-19700401)に
+    付いていた(2026-11-16 に確かめた)。そこで、前の地域の番号に戻ってから、その時期つきのコードを全部見る。合併で前の地域が複数あるときは、ここで引けても使わない(latest_pupils の側で止める)。
     """
     values = " ".join(f"<{u}>" for u in uris)
     inds = ", ".join(f"<{CODE}{k}>" for k in PUPILS)
     return f"""select ?plain ?area ?ind ?t ?v where {{
   values ?plain {{ {values} }}
-  ?plain <{SACS}latestCode> ?now . ?area <{SACS}succeedingMunicipality> ?now .
+  ?plain <{SACS}latestCode> ?now . ?old <{SACS}succeedingMunicipality> ?now .
+  {{ ?oldplain <{SACS}pastCode> ?old }} union {{ ?oldplain <{SACS}latestCode> ?old }}
+  {{ ?oldplain <{SACS}pastCode> ?area }} union {{ ?oldplain <{SACS}latestCode> ?area }}
   {_observations(inds)}
 }}"""
 
