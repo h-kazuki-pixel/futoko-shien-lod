@@ -1,0 +1,48 @@
+# 定期的な取り直し。週1回、出典のページと探した場所のページを取り直し、前回から変わった所を残す。
+# 記録は data/torinaoshi/ にコミットする。公開データ(data/seido.csv)は書き換えない。
+# 出典と合わなくなった行、取得できなくなった行があれば、Issue で知らせる。
+# robots.txt に従い、1ページごとに間隔をあける。ページの本文は保存しない。
+name: torinaoshi
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "23 18 * * 0"  # 毎週 月曜 3:23(日本時間)
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: shougou  # shougou と同時に取りに行かない
+  cancel-in-progress: false
+jobs:
+  torinaoshi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pypdf
+      - name: 取り直して、前回と比べる
+        run: python -m futoko_lod.torinaoshi data/seido.csv --issue issue.md --summary "$GITHUB_STEP_SUMMARY"
+      - name: 記録をコミットする
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/torinaoshi
+          if git diff --cached --quiet; then
+            echo "記録に変わりは無い"
+          else
+            git commit -m "定期的な取り直しの記録($(date -u +%F))"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: 要確認があれば Issue で知らせる
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -s issue.md ]; then
+            gh issue create --title "定期的な取り直し: 要確認の行がある($(date -u +%F))" --body-file issue.md
+          else
+            echo "要確認は無い"
+          fi
