@@ -30,7 +30,8 @@ def sparql(query: str, timeout: int = 90) -> list[dict[str, str]]:
     with urllib.request.urlopen(req, timeout=timeout) as res:
         doc = json.loads(res.read().decode("utf-8"))
     time.sleep(INTERVAL_SEC)
-    return [{k: v["value"] for k, v in b.items()} for b in doc["results"]["bindings"]]
+    # 変数の名前は大文字で返ってくることがある(2026-11-16 に確かめた)。小文字にそろえる
+    return [{k.lower(): v["value"] for k, v in b.items()} for b in doc["results"]["bindings"]]
 
 
 def show(title: str, query: str) -> list[dict[str, str]]:
