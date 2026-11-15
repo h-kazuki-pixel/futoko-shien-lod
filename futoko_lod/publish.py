@@ -416,6 +416,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <tr><td><a href="seido.ttl">seido.ttl</a></td><td>Turtle</td></tr>
 <tr><td><a href="ns">ns</a> / <a href="ns.ttl">ns.ttl</a></td><td>語彙(項目と、種類・状態などの値)の説明</td></tr>
 <tr><td><a href="dataset.ttl">dataset.ttl</a></td><td>このデータセットの説明(DCAT)</td></tr>
+<tr><td><a href="kumiawase/">組み合わせの例</a> / <a href="kumiawase.csv">kumiawase.csv</a></td><td>e-Stat 統計LOD の児童数・生徒数と、標準地域コードの URI で並べた例。数字は e-Stat 統計LOD によるもの</td></tr>
 </tbody></table></div>
 <p>1件ごとの URI は <code>{e(BASE)}id/{{id}}</code>。同じ場所に <code>.ttl</code> と <code>.jsonld</code> を付けると、その1件のデータが取れる。市町村は、e-Stat 統計LOD の標準地域コードにつないでいる。</p>
 
@@ -577,59 +578,72 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 
 
 def kumiawase_html(rows: list[dict[str, str]], areas: list[dict[str, str]], pupils: list[dict[str, str]]) -> str:
-    """組み合わせの例。このデータと、e-Stat 統計LOD の児童数・生徒数を、標準地域コードで並べる。"""
+    """組み合わせの例。このデータと、e-Stat 統計LOD の児童数・生徒数を、標準地域コードの URI で並べる。"""
     from . import kumiawase as km
 
-    cell: dict[tuple[str, str], list[str]] = collections.defaultdict(list)
+    # つなぐ手がかりは URI。公開データの側は areaServed の URI、統計の側は引いたときの URI
+    cell: dict[tuple[str, str], list[dict[str, str]]] = collections.defaultdict(list)
     for r in rows:
-        cell[(r["市町村コード"], kind_slug(r))].append(r["状態"])
-    by_code = {p["市町村コード"]: p for p in pupils}
-    lines = []
+        cell[(build.to_node(r)["areaServed"]["@id"], kind_slug(r))].append(r)
+    by_uri = {p["標準地域コードのURI"]: p for p in pupils}
+    lines, notes = [], []
     for a in (a for a in areas if a["福岡都市圏"] == "○"):
-        p = by_code.get(a["市町村コード"], {})
-        states = [s for k in MATRIX_KINDS for s in cell.get((a["市町村コード"], k), [])]
-        c = collections.Counter(states)
+        uri = build.SAC + a["市町村コード"]
+        p = by_uri.get(uri, {})
+        found = [r for k in MATRIX_KINDS for r in cell.get((uri, k), [])]
+        c = collections.Counter(r["状態"] for r in found)
+        listed = sum(list_based_none(r) for r in found)
+        untouched = sum(not cell.get((uri, k)) for k in MATRIX_KINDS)
 
         def num(key: str) -> str:
-            return f'{int(p[key]):,}' if p.get(key) else "値が無い"
+            return f'{int(p[key]):,}' if p.get(key) else "返らなかった"
 
+        if p.get("備考"):
+            notes.append(f'{a["市町村"]}: {p["備考"]}')
         lines.append(
             f'<tr><th scope="row">{e(a["市町村"])}</th><td class="num">{num("小学校児童数")}</td><td class="num">{num("中学校生徒数")}</td>'
-            f'<td class="num">{c["あり"] + c["予定"]}</td><td class="num">{c["なし"]}</td><td class="num">{c["確認できず"]}</td>'
-            f'<td>{e(p.get("統計LODの地域コード", ""))}{(" " + e(p["備考"])) if p.get("備考") else ""}</td></tr>')
+            f'<td class="num">{c["あり"] + c["予定"]}</td><td class="num">{c["なし"]}{"※" if listed else ""}</td>'
+            f'<td class="num">{c["確認できず"]}</td><td class="num">{untouched}</td>'
+            f'<td><code>{e(p.get("統計LODの地域コード", ""))}</code></td></tr>')
     years = sorted({p[k] for p in pupils for k in ("小学校児童数の年", "中学校生徒数の年") if p.get(k)})
     fetched = max((p["取得日"] for p in pupils), default="")
-    missing = [p["市町村"] for p in pupils if not p.get("小学校児童数")]
-    query = km.pupils_query(["40219"])
+    got = sum(bool(p.get("小学校児童数")) for p in pupils)
+    sample = build.SAC + "40219"
+    notes_html = "".join(f"<li>{e(n)}</li>" for n in notes)
     body = f"""<h1>組み合わせの例: 子どもの数と並べる</h1>
-<p class="lead">このデータの市町村は、e-Stat 統計LOD の標準地域コードの URI で持っている。同じ URI を手がかりに、統計LOD にある小学校の児童数と中学校の生徒数を引き、制度の確かめ具合と並べた。</p>
-<p class="note">児童数・生徒数は <strong>{e("、".join(years))}年</strong>の値(統計LOD の「社会・人口統計体系」にある、いちばん新しい年)。いまの人数ではない。まちの大きさの目安として見てほしい。「確認できず」は、制度が無いという意味ではない。</p>
+<p class="lead">このデータの市町村は、e-Stat 統計LOD の標準地域コードの URI で持っている。公開している JSON-LD の <code>schema:areaServed</code> の URI から出発して、統計LOD にある小学校の児童数と中学校の生徒数を引き、制度の確かめ具合と並べた。</p>
+<p class="note">児童数・生徒数は <strong>{e("、".join(years))}年</strong>の値(この17市町について、統計LOD の「社会・人口統計体系」から引けた、いちばん新しい年)。いまの人数ではない。まちの大きさの目安として見てほしい。「確認できず」は、制度が無いという意味ではない。</p>
 
 <h2>福岡都市圏の17市町</h2>
 <div class="scroll"><table>
-<thead><tr><th scope="col">市町</th><th scope="col">小学校児童数</th><th scope="col">中学校生徒数</th><th scope="col">あり・予定</th><th scope="col">なし</th><th scope="col">確認できず</th><th scope="col">統計LOD の地域コード</th></tr></thead>
+<caption style="text-align:left;caption-side:top;color:var(--sub)">児童数・生徒数(e-Stat 統計LOD)と、5種類の制度の確かめ具合(このデータ)</caption>
+<thead><tr><th scope="col">市町</th><th scope="col">小学校児童数</th><th scope="col">中学校生徒数</th><th scope="col">あり・予定</th><th scope="col">なし</th><th scope="col">確認できず</th><th scope="col">未着手</th><th scope="col">統計LOD の地域コード</th></tr></thead>
 <tbody>
 {chr(10).join(lines)}
 </tbody></table></div>
-<p>右の3列は、5種類の制度のうち、それぞれの状態になっている数。市町の良し悪しを比べる表ではない。確かめが進んでいない市町ほど「確認できず」が多くなる。</p>
-<p>児童数・生徒数の出典: e-Stat 統計LOD(総務省統計局・独立行政法人統計センター)、社会・人口統計体系。{e(fetched)} に引いた。<a href="../kumiawase.csv">CSV</a></p>
+<p>右の4列は、5種類の制度のうち、それぞれの状態になっている数。<strong>市町の良し悪しを比べる表ではない。</strong>「確認できず」の多さは、こちらの調べが進んでいないことを表す。市町の落ち度ではない。</p>
+<p>※ の付いた「なし」は、公式の一覧(学びの多様化学校では、文部科学省の設置者一覧)に、その市町が載っていないという意味。市町が「無い」と答えたものではない。</p>
+{f"<ul>{notes_html}</ul>" if notes else ""}
+<p>児童数・生徒数の出典: <a href="https://data.e-stat.go.jp/lodw/" rel="noopener">e-Stat 統計LOD</a>(総務省統計局・独立行政法人統計センター)の「社会・人口統計体系」を、{e(fetched)} に引いて、表に直したもの。統計LOD のサイトは、内容を CC BY 4.0 で提供するとしている。引いた結果は <a href="../kumiawase.csv">CSV</a> にある。</p>
 
 <h2>つなぎ方</h2>
 <ol>
-<li>このデータの1件は、<code>schema:areaServed</code> で <code>http://data.e-stat.go.jp/lod/sac/C</code> + 5桁のコードを指す(時期を持たないコード)。</li>
+<li>このデータの1件は、<code>schema:areaServed</code> で <code>{e(sample)}</code> のような URI を指す(時期を持たないコード)。問い合わせは、公開している JSON-LD からこの URI を集めて始める。</li>
 <li>統計LOD の観測値は、時期つきのコード(例 <code>C40219-20110301</code>)を指している。時期なしのコードから <code>sacs:latestCode</code> と <code>sacs:pastCode</code> で辿る。</li>
 <li>辿った先の地域について、指標(小学校児童数 <code>E2501</code>、中学校生徒数 <code>E3501</code>)の観測値を引く。</li>
+<li>いまのコードに観測値が無い市町(市になってコードが替わった所)は、<code>sacs:succeedingMunicipality</code> を逆に辿って前の地域を見つけ、その値を使う。前の地域が2つ以上あるとき(合併)は、足さずに空のままにする。</li>
 </ol>
 <p>大野城市の分を引く問い合わせ(SPARQL)。送り先は <code>{e(km.ENDPOINT)}</code>。</p>
-<pre style="overflow-x:auto;background:var(--soft);padding:.75rem"><code>{e(query)}</code></pre>
+<pre style="overflow-x:auto;background:var(--soft);padding:.75rem"><code>{e(km.pupils_query([sample]))}</code></pre>
 
-<h2>分かったこと、できなかったこと</h2>
+<h2>分かったこと、できていないこと</h2>
 <ul>
-<li>時期なしのコードを直接指す観測値は無かった(大野城市で確かめた)。時期つきのコードへ辿る1手が要る。</li>
-<li>統計LOD にある児童数・生徒数は、{e(years[0] if years else "")}年までだった(この17市町で引いた範囲)。それより新しい年の値は、統計LOD からは取れなかった。</li>
-<li>{e("、".join(missing)) if missing else "17市町すべて"}{"は、統計LOD に値が無かった。市になってコードが替わった所で、前のコードへは辿れなかった。理由は確かめていない。" if missing else "で値が取れた。"}</li>
+<li>時期なしのコードを直接指す観測値は無かった(大野城市と那珂川市で確かめた)。時期つきのコードへ辿る1手が要る。</li>
+<li>17市町のうち {got} 市町で値が返った。値は{e(years[-1] if years else "")}年までだった(この17市町で引いた範囲)。それより新しい年の値は、統計LOD からは取れなかった。</li>
 <li>問い合わせの結果は、1000行で切られる。年を絞って引いている。</li>
-<li>同じつなぎ方で、人口や世帯などの統計とも並べられる。ほかの人がこのデータを使った例は、まだ無い。</li>
+<li>並べたのは児童数・生徒数だけ。ほかの統計(人口、世帯など)とは、まだ試していない。</li>
+<li>11年前の人数と、いまの制度を並べている。人数が大きく変わった市町では、目安としても粗い。</li>
+<li>ほかの人がこのデータを使った例は、まだ無い。</li>
 </ul>
 """
     return page(f"組み合わせの例 | {TITLE}", body, "../")

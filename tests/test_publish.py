@@ -262,13 +262,28 @@ def test_about_page_numbers_come_from_the_data(site, rows):
     assert f"項目のうち {judged}。" in text
 
 
-def test_combination_page_shows_the_fetched_numbers_and_their_year(site):
+def test_combination_page_matches_both_sources(site, rows):
     pupils = schema.read_csv("data/kumiawase/jidou_seito.csv")
     text = (site / "kumiawase" / "index.html").read_text(encoding="utf-8")
-    for p in pupils:
-        assert p["市町村"] in text
-        if p["小学校児童数"]:
-            assert f'{int(p["小学校児童数"]):,}' in text
+    areas = [a for a in schema.read_csv("data/shichoson.csv") if a["福岡都市圏"] == "○"]
+    by_uri = {p["標準地域コードのURI"]: p for p in pupils}
+    trs = [tr for tr in text.split("<tbody>")[1].split("</tbody>")[0].split("<tr>") if tr.strip()]
+    assert len(trs) == len(areas)
+    for a, tr in zip(areas, trs):
+        p = by_uri[build.SAC + a["市町村コード"]]
+        cells = [re.sub(r"<[^>]+>", "", c) for c in re.findall(r"<td[^>]*>(.*?)</td>", tr)]
+        mine = [r for r in rows if r["市町村コード"] == a["市町村コード"] and schema.KIND_BY_LABEL[r["制度の種類"]] in publish.MATRIX_KINDS]
+        n = {s: sum(r["状態"] == s for r in mine) for s in schema.STATUSES}
+        assert f'<th scope="row">{a["市町村"]}</th>' in tr
+        assert cells[0] == (f'{int(p["小学校児童数"]):,}' if p["小学校児童数"] else "返らなかった")
+        assert cells[1] == (f'{int(p["中学校生徒数"]):,}' if p["中学校生徒数"] else "返らなかった")
+        assert cells[2] == str(n["あり"] + n["予定"]) and cells[4] == str(n["確認できず"])
+        assert cells[3].rstrip("※") == str(n["なし"])
+        assert cells[3].endswith("※") == any(publish.list_based_none(r) for r in mine)
+        assert int(cells[2]) + int(cells[3].rstrip("※")) + int(cells[4]) + int(cells[5]) == 5
     years = {p["小学校児童数の年"] for p in pupils if p["小学校児童数の年"]}
-    assert all(f"{y}年" in text for y in years) and "いまの人数ではない" in text
+    assert all(f"{y}年" in text for y in years)
+    for must in ("いまの人数ではない", "良し悪しを比べる表ではない", "市町が「無い」と答えたものではない", "e-Stat 統計LOD"):
+        assert must in text
+    assert "無かった。市に" not in text  # 「返らなかった」を「無い」と言い切らない
     assert (site / "kumiawase.csv").read_bytes() == open("data/kumiawase/jidou_seito.csv", "rb").read()
