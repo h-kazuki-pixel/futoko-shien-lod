@@ -1,0 +1,33 @@
+# DBpedia Japanese の市町村の URI を確かめる。手で起動する。
+name: dbpedia
+on:
+  workflow_dispatch:
+    inputs:
+      args:
+        description: "python -m futoko_lod.dbpedia に渡すもの"
+        default: "--probe 大野城市 40219"
+permissions:
+  contents: write
+  actions: write
+jobs:
+  dbpedia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m futoko_lod.dbpedia ${{ inputs.args }}
+      - name: 書き出したものがあればコミットする
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/dbpedia.csv 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "書き出したものは無い"
+          else
+            git commit -m "DBpedia Japanese の市町村の URI を確かめた結果($(date -u +%F))"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
