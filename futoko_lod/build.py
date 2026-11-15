@@ -3,7 +3,7 @@
 URI の土台(BASE)は GitHub Pages の公開の場所(2026-11-15 に決定。変えない)。置き場所の決まりは docs/公開の形.md。
 文字列には言語(ja)を付ける。id と補助率は、言語を付けない。
 1件は「確かめた記録」(fsl:Record)。制度があると確かめた行(あり・予定)だけ、schema.org の GovernmentService でもある。
-市町村は e-Stat 統計LOD の標準地域コード(時期を持たないコード)につなぐ。書式の出典と、
+市町村は e-Stat 統計LOD の標準地域コード(時期を持たないコード)につなぐ。DBpedia Japanese の資源にもつなぐ(コードが合うことを確かめたものだけ)。書式の出典と、
 実際に引いて確かめる手順は links.py にある。e-Gov 法令・学校コードへのリンクはまだ入れていない。
 
 使い方: python -m futoko_lod.build          (作り直す)
@@ -30,6 +30,7 @@ CONTEXT = {
     "identifier": {"@id": "schema:identifier", "@language": None},
     "name": "schema:name",
     "areaServed": "schema:areaServed",
+    "sameAs": {"@id": "schema:sameAs", "@type": "@id"},
     "kind": {"@id": "fsl:kind", "@type": "@id"},
     "status": {"@id": "fsl:status", "@type": "@id"},
     "paymentForm": {"@id": "fsl:paymentForm", "@type": "@id"},
@@ -49,6 +50,18 @@ CONTEXT = {
     "dateChecked": {"@id": "fsl:dateChecked", "@type": "xsd:date"},
     "checkMethod": {"@id": "fsl:checkMethod", "@type": "@id"},
 }
+
+
+_dbpedia: dict[str, str] | None = None
+
+
+def dbpedia_uris(path: str = "data/dbpedia.csv") -> dict[str, str]:
+    """市町村コード → DBpedia Japanese の URI。確かめて「一致」になったものだけ(dbpedia.py が作る)。"""
+    global _dbpedia
+    if _dbpedia is None:
+        p = Path(path)
+        _dbpedia = {r["市町村コード"]: r["DBpediaのURI"] for r in schema.read_csv(p) if r["判定"] == "一致"} if p.exists() else {}
+    return _dbpedia
 
 
 def to_node(row: dict[str, str]) -> dict:
@@ -71,6 +84,10 @@ def to_node(row: dict[str, str]) -> dict:
         "dateChecked": v("確認日"),
         "checkMethod": f"fsl:method-{schema.METHODS[v('確認方法')]}",
     }
+    if v("市町村コード") in dbpedia_uris():
+        # 同じ市町村を表す、DBpedia Japanese の資源。e-Stat の URI は地域コードで、DBpedia の資源は自治体そのもの。
+        # 厳密に同じものとは言い切らず(owl:sameAs は使わない)、schema.org の sameAs(同じものを指す参照先)で持つ
+        node["areaServed"]["sameAs"] = dbpedia_uris()[v("市町村コード")]
     optional = {
         "name": v("制度名"),
         "paymentForm": f"fsl:form-{schema.FORMS[v('補助の形')]}" if v("補助の形") else "",

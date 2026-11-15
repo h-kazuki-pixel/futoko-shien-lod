@@ -418,7 +418,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <tr><td><a href="dataset.ttl">dataset.ttl</a></td><td>このデータセットの説明(DCAT)</td></tr>
 <tr><td><a href="kumiawase/">組み合わせの例</a> / <a href="kumiawase.csv">kumiawase.csv</a></td><td>e-Stat 統計LOD の児童数・生徒数と、標準地域コードの URI で並べた例。数字は e-Stat 統計LOD によるもの</td></tr>
 </tbody></table></div>
-<p>1件ごとの URI は <code>{e(BASE)}id/{{id}}</code>。同じ場所に <code>.ttl</code> と <code>.jsonld</code> を付けると、その1件のデータが取れる。市町村は、e-Stat 統計LOD の標準地域コードにつないでいる。</p>
+<p>1件ごとの URI は <code>{e(BASE)}id/{{id}}</code>。同じ場所に <code>.ttl</code> と <code>.jsonld</code> を付けると、その1件のデータが取れる。市町村は、e-Stat 統計LOD の標準地域コードと、DBpedia Japanese の資源につないでいる。</p>
 
 <h2>対象の範囲</h2>
 <p>根拠の法律({e(LAW)})の範囲に合わせ、義務教育の段階に向けた市町村の制度を対象にしている。福岡都市圏の17市町は5種類すべてを、そのほかの市町村は主に学びの多様化学校を調べている。個人の体験、施設の評価、口コミは載せない。</p>
@@ -446,7 +446,8 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
         return (row.get(key) or "").strip()
 
     items: list[tuple[str, str]] = [
-        ("市町村", f'{e(v("市町村"))} (<a href="{e(node["areaServed"]["@id"])}" rel="noopener">標準地域コード {e(v("市町村コード"))}</a>)'),
+        ("市町村", f'{e(v("市町村"))} (<a href="{e(node["areaServed"]["@id"])}" rel="noopener">標準地域コード {e(v("市町村コード"))}</a>'
+                   + (f'、<a href="{e(node["areaServed"]["sameAs"])}" rel="noopener">DBpedia Japanese</a>' if node["areaServed"].get("sameAs") else "") + ")"),
         ("制度の種類", e(v("制度の種類"))),
         ("状態", f'{badge(v("状態"))} {e(STATUS_MEANING[v("状態")])}'),
     ]
@@ -558,7 +559,7 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <ul>
 <li><strong>人が読む。</strong><a href="../">市町×種類の表</a>から、1件のページへ。出典のページへのリンク、確認日、確かめ方が載っている。</li>
 <li><strong>プログラムで読む。</strong><a href="../seido.csv">CSV</a>、<a href="../seido.jsonld">JSON-LD</a>、<a href="../seido.ttl">Turtle</a>。1件ごとに URI があり、<code>.ttl</code> か <code>.jsonld</code> を付けるとその1件が取れる。ほかのサイトの上のプログラムからも読める。</li>
-<li><strong>つなぐ。</strong>市町村は、e-Stat 統計LOD の標準地域コードの URI で持つ。統計LOD の児童数・生徒数と実際に並べた例が<a href="../kumiawase/">組み合わせの例</a>にある。出典は <code>dct:source</code> で公式ページにつながる。</li>
+<li><strong>つなぐ。</strong>市町村は、e-Stat 統計LOD の標準地域コードの URI で持つ。統計LOD の児童数・生徒数と実際に並べた例が<a href="../kumiawase/">組み合わせの例</a>にある。DBpedia Japanese の市町村の資源にも、<code>schema:sameAs</code> でつないでいる(地方公共団体コードが合うことを、1件ずつ引いて確かめたものだけ)。出典は <code>dct:source</code> で公式ページにつながる。</li>
 <li><strong>数える。</strong>{len(rows)}件すべてが「確かめた記録」(<code>fsl:Record</code>)。制度があると確かめた記録だけが、schema.org の <code>GovernmentService</code> でもある。語彙の説明は <a href="../ns">ns</a>。</li>
 </ul>
 <p>データは CC BY 4.0、プログラムは MIT ライセンス。作り方と検査の決まりは、<a href="{REPO}">リポジトリ</a>にある。同じ手順で、ほかの県にも広げられる。</p>

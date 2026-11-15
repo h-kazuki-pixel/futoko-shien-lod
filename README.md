@@ -74,6 +74,7 @@
 | つなぐ先 | 状態 |
 |---|---|
 | e-Stat 統計LOD の標準地域コード | つないだ。`http://data.e-stat.go.jp/lod/sac/C` + 5桁のコード。市町村の台帳(`data/shichoson.csv`)の61のコード(県内の60市町村と県)を実際に引き、返ってきた名前が合うことを確かめた(GitHub Actions の `links`、2026-11-15) |
+| DBpedia Japanese | つないだ。`schema:sameAs` で、市町村の資源へ。名前から URI を作らず、資源が持つ地方公共団体コードがこちらのコードと合うものだけを採る(`futoko_lod/dbpedia.py`、GitHub Actions の `dbpedia`)。台帳の61件すべてが一致(2026-11-16、`data/dbpedia.csv`) |
 | e-Gov 法令検索 | 法令ID を法令API で引けることまで確かめた。まだつないでいない |
 | 文部科学省の学校コード | 確かめていない |
 

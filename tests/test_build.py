@@ -41,3 +41,17 @@ def test_area_links_to_estat_standard_area_code():
     for node in doc["@graph"]:
         area = node["areaServed"]
         assert area["@id"] == "http://data.e-stat.go.jp/lod/sac/C" + area["identifier"]
+
+
+def test_dbpedia_links_are_only_the_verified_ones():
+    rows = {r["市町村コード"]: r for r in schema.read_csv("data/dbpedia.csv")}
+    doc = json.loads(build.build())
+    assert any("sameAs" in n["areaServed"] for n in doc["@graph"])
+    for node in doc["@graph"]:
+        area = node["areaServed"]
+        checked = rows.get(area["identifier"])
+        if "sameAs" in area:
+            assert checked["判定"] == "一致" and area["sameAs"] == checked["DBpediaのURI"]
+            assert area["sameAs"].startswith("http://ja.dbpedia.org/resource/")
+        else:
+            assert checked is None or checked["判定"] != "一致"

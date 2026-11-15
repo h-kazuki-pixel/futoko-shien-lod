@@ -11,6 +11,10 @@
   },
   "name": "schema:name",
   "areaServed": "schema:areaServed",
+  "sameAs": {
+   "@id": "schema:sameAs",
+   "@type": "@id"
+  },
   "kind": {
    "@id": "fsl:kind",
    "@type": "@id"
@@ -72,7 +76,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40000",
     "@type": "schema:AdministrativeArea",
     "name": "福岡県",
-    "identifier": "40000"
+    "identifier": "40000",
+    "sameAs": "http://ja.dbpedia.org/resource/福岡県"
    },
    "kind": "fsl:kind-fs-unei",
    "status": "fsl:status-ari",
@@ -101,7 +106,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40000",
     "@type": "schema:AdministrativeArea",
     "name": "福岡県",
-    "identifier": "40000"
+    "identifier": "40000",
+    "sameAs": "http://ja.dbpedia.org/resource/福岡県"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-ari",
@@ -124,7 +130,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40100",
     "@type": "schema:AdministrativeArea",
     "name": "北九州市",
-    "identifier": "40100"
+    "identifier": "40100",
+    "sameAs": "http://ja.dbpedia.org/resource/北九州市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -146,7 +153,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40100",
     "@type": "schema:AdministrativeArea",
     "name": "北九州市",
-    "identifier": "40100"
+    "identifier": "40100",
+    "sameAs": "http://ja.dbpedia.org/resource/北九州市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-yotei",
@@ -170,7 +178,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
     "@type": "schema:AdministrativeArea",
     "name": "福岡市",
-    "identifier": "40130"
+    "identifier": "40130",
+    "sameAs": "http://ja.dbpedia.org/resource/福岡市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -192,7 +201,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
     "@type": "schema:AdministrativeArea",
     "name": "福岡市",
-    "identifier": "40130"
+    "identifier": "40130",
+    "sameAs": "http://ja.dbpedia.org/resource/福岡市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-ari",
@@ -216,7 +226,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
     "@type": "schema:AdministrativeArea",
     "name": "福岡市",
-    "identifier": "40130"
+    "identifier": "40130",
+    "sameAs": "http://ja.dbpedia.org/resource/福岡市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -239,7 +250,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
     "@type": "schema:AdministrativeArea",
     "name": "福岡市",
-    "identifier": "40130"
+    "identifier": "40130",
+    "sameAs": "http://ja.dbpedia.org/resource/福岡市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -261,7 +273,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40130",
     "@type": "schema:AdministrativeArea",
     "name": "福岡市",
-    "identifier": "40130"
+    "identifier": "40130",
+    "sameAs": "http://ja.dbpedia.org/resource/福岡市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-ari",
@@ -286,7 +299,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40202",
     "@type": "schema:AdministrativeArea",
     "name": "大牟田市",
-    "identifier": "40202"
+    "identifier": "40202",
+    "sameAs": "http://ja.dbpedia.org/resource/大牟田市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-ari",
@@ -309,7 +323,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40203",
     "@type": "schema:AdministrativeArea",
     "name": "久留米市",
-    "identifier": "40203"
+    "identifier": "40203",
+    "sameAs": "http://ja.dbpedia.org/resource/久留米市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-ari",
@@ -338,7 +353,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40203",
     "@type": "schema:AdministrativeArea",
     "name": "久留米市",
-    "identifier": "40203"
+    "identifier": "40203",
+    "sameAs": "http://ja.dbpedia.org/resource/久留米市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -361,7 +377,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40203",
     "@type": "schema:AdministrativeArea",
     "name": "久留米市",
-    "identifier": "40203"
+    "identifier": "40203",
+    "sameAs": "http://ja.dbpedia.org/resource/久留米市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -383,7 +400,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40204",
     "@type": "schema:AdministrativeArea",
     "name": "直方市",
-    "identifier": "40204"
+    "identifier": "40204",
+    "sameAs": "http://ja.dbpedia.org/resource/直方市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -405,7 +423,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40205",
     "@type": "schema:AdministrativeArea",
     "name": "飯塚市",
-    "identifier": "40205"
+    "identifier": "40205",
+    "sameAs": "http://ja.dbpedia.org/resource/飯塚市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -427,7 +446,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40206",
     "@type": "schema:AdministrativeArea",
     "name": "田川市",
-    "identifier": "40206"
+    "identifier": "40206",
+    "sameAs": "http://ja.dbpedia.org/resource/田川市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -449,7 +469,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40207",
     "@type": "schema:AdministrativeArea",
     "name": "柳川市",
-    "identifier": "40207"
+    "identifier": "40207",
+    "sameAs": "http://ja.dbpedia.org/resource/柳川市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -471,7 +492,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40210",
     "@type": "schema:AdministrativeArea",
     "name": "八女市",
-    "identifier": "40210"
+    "identifier": "40210",
+    "sameAs": "http://ja.dbpedia.org/resource/八女市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -493,7 +515,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40211",
     "@type": "schema:AdministrativeArea",
     "name": "筑後市",
-    "identifier": "40211"
+    "identifier": "40211",
+    "sameAs": "http://ja.dbpedia.org/resource/筑後市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -515,7 +538,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40212",
     "@type": "schema:AdministrativeArea",
     "name": "大川市",
-    "identifier": "40212"
+    "identifier": "40212",
+    "sameAs": "http://ja.dbpedia.org/resource/大川市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -537,7 +561,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40213",
     "@type": "schema:AdministrativeArea",
     "name": "行橋市",
-    "identifier": "40213"
+    "identifier": "40213",
+    "sameAs": "http://ja.dbpedia.org/resource/行橋市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -559,7 +584,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40214",
     "@type": "schema:AdministrativeArea",
     "name": "豊前市",
-    "identifier": "40214"
+    "identifier": "40214",
+    "sameAs": "http://ja.dbpedia.org/resource/豊前市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -581,7 +607,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40215",
     "@type": "schema:AdministrativeArea",
     "name": "中間市",
-    "identifier": "40215"
+    "identifier": "40215",
+    "sameAs": "http://ja.dbpedia.org/resource/中間市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -603,7 +630,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
     "@type": "schema:AdministrativeArea",
     "name": "筑紫野市",
-    "identifier": "40217"
+    "identifier": "40217",
+    "sameAs": "http://ja.dbpedia.org/resource/筑紫野市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -625,7 +653,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
     "@type": "schema:AdministrativeArea",
     "name": "筑紫野市",
-    "identifier": "40217"
+    "identifier": "40217",
+    "sameAs": "http://ja.dbpedia.org/resource/筑紫野市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -648,7 +677,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
     "@type": "schema:AdministrativeArea",
     "name": "筑紫野市",
-    "identifier": "40217"
+    "identifier": "40217",
+    "sameAs": "http://ja.dbpedia.org/resource/筑紫野市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -672,7 +702,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
     "@type": "schema:AdministrativeArea",
     "name": "筑紫野市",
-    "identifier": "40217"
+    "identifier": "40217",
+    "sameAs": "http://ja.dbpedia.org/resource/筑紫野市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -694,7 +725,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40217",
     "@type": "schema:AdministrativeArea",
     "name": "筑紫野市",
-    "identifier": "40217"
+    "identifier": "40217",
+    "sameAs": "http://ja.dbpedia.org/resource/筑紫野市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -716,7 +748,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
     "@type": "schema:AdministrativeArea",
     "name": "春日市",
-    "identifier": "40218"
+    "identifier": "40218",
+    "sameAs": "http://ja.dbpedia.org/resource/春日市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -738,7 +771,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
     "@type": "schema:AdministrativeArea",
     "name": "春日市",
-    "identifier": "40218"
+    "identifier": "40218",
+    "sameAs": "http://ja.dbpedia.org/resource/春日市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -761,7 +795,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
     "@type": "schema:AdministrativeArea",
     "name": "春日市",
-    "identifier": "40218"
+    "identifier": "40218",
+    "sameAs": "http://ja.dbpedia.org/resource/春日市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -784,7 +819,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
     "@type": "schema:AdministrativeArea",
     "name": "春日市",
-    "identifier": "40218"
+    "identifier": "40218",
+    "sameAs": "http://ja.dbpedia.org/resource/春日市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -806,7 +842,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40218",
     "@type": "schema:AdministrativeArea",
     "name": "春日市",
-    "identifier": "40218"
+    "identifier": "40218",
+    "sameAs": "http://ja.dbpedia.org/resource/春日市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -829,7 +866,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
     "@type": "schema:AdministrativeArea",
     "name": "大野城市",
-    "identifier": "40219"
+    "identifier": "40219",
+    "sameAs": "http://ja.dbpedia.org/resource/大野城市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-ari",
@@ -858,7 +896,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
     "@type": "schema:AdministrativeArea",
     "name": "大野城市",
-    "identifier": "40219"
+    "identifier": "40219",
+    "sameAs": "http://ja.dbpedia.org/resource/大野城市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -879,7 +918,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
     "@type": "schema:AdministrativeArea",
     "name": "大野城市",
-    "identifier": "40219"
+    "identifier": "40219",
+    "sameAs": "http://ja.dbpedia.org/resource/大野城市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
@@ -901,7 +941,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
     "@type": "schema:AdministrativeArea",
     "name": "大野城市",
-    "identifier": "40219"
+    "identifier": "40219",
+    "sameAs": "http://ja.dbpedia.org/resource/大野城市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-ari",
@@ -925,7 +966,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40219",
     "@type": "schema:AdministrativeArea",
     "name": "大野城市",
-    "identifier": "40219"
+    "identifier": "40219",
+    "sameAs": "http://ja.dbpedia.org/resource/大野城市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-ari",
@@ -948,7 +990,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40220",
     "@type": "schema:AdministrativeArea",
     "name": "宗像市",
-    "identifier": "40220"
+    "identifier": "40220",
+    "sameAs": "http://ja.dbpedia.org/resource/宗像市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -973,7 +1016,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40220",
     "@type": "schema:AdministrativeArea",
     "name": "宗像市",
-    "identifier": "40220"
+    "identifier": "40220",
+    "sameAs": "http://ja.dbpedia.org/resource/宗像市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -999,7 +1043,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40220",
     "@type": "schema:AdministrativeArea",
     "name": "宗像市",
-    "identifier": "40220"
+    "identifier": "40220",
+    "sameAs": "http://ja.dbpedia.org/resource/宗像市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -1023,7 +1068,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40220",
     "@type": "schema:AdministrativeArea",
     "name": "宗像市",
-    "identifier": "40220"
+    "identifier": "40220",
+    "sameAs": "http://ja.dbpedia.org/resource/宗像市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -1048,7 +1094,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40220",
     "@type": "schema:AdministrativeArea",
     "name": "宗像市",
-    "identifier": "40220"
+    "identifier": "40220",
+    "sameAs": "http://ja.dbpedia.org/resource/宗像市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1070,7 +1117,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
     "@type": "schema:AdministrativeArea",
     "name": "太宰府市",
-    "identifier": "40221"
+    "identifier": "40221",
+    "sameAs": "http://ja.dbpedia.org/resource/太宰府市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -1092,7 +1140,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
     "@type": "schema:AdministrativeArea",
     "name": "太宰府市",
-    "identifier": "40221"
+    "identifier": "40221",
+    "sameAs": "http://ja.dbpedia.org/resource/太宰府市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-ari",
@@ -1116,7 +1165,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
     "@type": "schema:AdministrativeArea",
     "name": "太宰府市",
-    "identifier": "40221"
+    "identifier": "40221",
+    "sameAs": "http://ja.dbpedia.org/resource/太宰府市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -1139,7 +1189,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
     "@type": "schema:AdministrativeArea",
     "name": "太宰府市",
-    "identifier": "40221"
+    "identifier": "40221",
+    "sameAs": "http://ja.dbpedia.org/resource/太宰府市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -1160,7 +1211,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40221",
     "@type": "schema:AdministrativeArea",
     "name": "太宰府市",
-    "identifier": "40221"
+    "identifier": "40221",
+    "sameAs": "http://ja.dbpedia.org/resource/太宰府市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1183,7 +1235,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
     "@type": "schema:AdministrativeArea",
     "name": "古賀市",
-    "identifier": "40223"
+    "identifier": "40223",
+    "sameAs": "http://ja.dbpedia.org/resource/古賀市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-ari",
@@ -1211,7 +1264,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
     "@type": "schema:AdministrativeArea",
     "name": "古賀市",
-    "identifier": "40223"
+    "identifier": "40223",
+    "sameAs": "http://ja.dbpedia.org/resource/古賀市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -1233,7 +1287,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
     "@type": "schema:AdministrativeArea",
     "name": "古賀市",
-    "identifier": "40223"
+    "identifier": "40223",
+    "sameAs": "http://ja.dbpedia.org/resource/古賀市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -1255,7 +1310,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
     "@type": "schema:AdministrativeArea",
     "name": "古賀市",
-    "identifier": "40223"
+    "identifier": "40223",
+    "sameAs": "http://ja.dbpedia.org/resource/古賀市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -1276,7 +1332,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40223",
     "@type": "schema:AdministrativeArea",
     "name": "古賀市",
-    "identifier": "40223"
+    "identifier": "40223",
+    "sameAs": "http://ja.dbpedia.org/resource/古賀市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1298,7 +1355,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
     "@type": "schema:AdministrativeArea",
     "name": "福津市",
-    "identifier": "40224"
+    "identifier": "40224",
+    "sameAs": "http://ja.dbpedia.org/resource/福津市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -1320,7 +1378,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
     "@type": "schema:AdministrativeArea",
     "name": "福津市",
-    "identifier": "40224"
+    "identifier": "40224",
+    "sameAs": "http://ja.dbpedia.org/resource/福津市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -1343,7 +1402,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
     "@type": "schema:AdministrativeArea",
     "name": "福津市",
-    "identifier": "40224"
+    "identifier": "40224",
+    "sameAs": "http://ja.dbpedia.org/resource/福津市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -1367,7 +1427,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
     "@type": "schema:AdministrativeArea",
     "name": "福津市",
-    "identifier": "40224"
+    "identifier": "40224",
+    "sameAs": "http://ja.dbpedia.org/resource/福津市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-ari",
@@ -1392,7 +1453,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40224",
     "@type": "schema:AdministrativeArea",
     "name": "福津市",
-    "identifier": "40224"
+    "identifier": "40224",
+    "sameAs": "http://ja.dbpedia.org/resource/福津市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1414,7 +1476,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40225",
     "@type": "schema:AdministrativeArea",
     "name": "うきは市",
-    "identifier": "40225"
+    "identifier": "40225",
+    "sameAs": "http://ja.dbpedia.org/resource/うきは市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1436,7 +1499,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40226",
     "@type": "schema:AdministrativeArea",
     "name": "宮若市",
-    "identifier": "40226"
+    "identifier": "40226",
+    "sameAs": "http://ja.dbpedia.org/resource/宮若市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1458,7 +1522,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40227",
     "@type": "schema:AdministrativeArea",
     "name": "嘉麻市",
-    "identifier": "40227"
+    "identifier": "40227",
+    "sameAs": "http://ja.dbpedia.org/resource/嘉麻市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1480,7 +1545,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40228",
     "@type": "schema:AdministrativeArea",
     "name": "朝倉市",
-    "identifier": "40228"
+    "identifier": "40228",
+    "sameAs": "http://ja.dbpedia.org/resource/朝倉市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1502,7 +1568,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40229",
     "@type": "schema:AdministrativeArea",
     "name": "みやま市",
-    "identifier": "40229"
+    "identifier": "40229",
+    "sameAs": "http://ja.dbpedia.org/resource/みやま市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1524,7 +1591,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
     "@type": "schema:AdministrativeArea",
     "name": "糸島市",
-    "identifier": "40230"
+    "identifier": "40230",
+    "sameAs": "http://ja.dbpedia.org/resource/糸島市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -1546,7 +1614,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
     "@type": "schema:AdministrativeArea",
     "name": "糸島市",
-    "identifier": "40230"
+    "identifier": "40230",
+    "sameAs": "http://ja.dbpedia.org/resource/糸島市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -1569,7 +1638,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
     "@type": "schema:AdministrativeArea",
     "name": "糸島市",
-    "identifier": "40230"
+    "identifier": "40230",
+    "sameAs": "http://ja.dbpedia.org/resource/糸島市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -1591,7 +1661,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
     "@type": "schema:AdministrativeArea",
     "name": "糸島市",
-    "identifier": "40230"
+    "identifier": "40230",
+    "sameAs": "http://ja.dbpedia.org/resource/糸島市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -1613,7 +1684,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40230",
     "@type": "schema:AdministrativeArea",
     "name": "糸島市",
-    "identifier": "40230"
+    "identifier": "40230",
+    "sameAs": "http://ja.dbpedia.org/resource/糸島市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1635,7 +1707,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
     "@type": "schema:AdministrativeArea",
     "name": "那珂川市",
-    "identifier": "40231"
+    "identifier": "40231",
+    "sameAs": "http://ja.dbpedia.org/resource/那珂川市"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -1656,7 +1729,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
     "@type": "schema:AdministrativeArea",
     "name": "那珂川市",
-    "identifier": "40231"
+    "identifier": "40231",
+    "sameAs": "http://ja.dbpedia.org/resource/那珂川市"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -1678,7 +1752,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
     "@type": "schema:AdministrativeArea",
     "name": "那珂川市",
-    "identifier": "40231"
+    "identifier": "40231",
+    "sameAs": "http://ja.dbpedia.org/resource/那珂川市"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -1700,7 +1775,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
     "@type": "schema:AdministrativeArea",
     "name": "那珂川市",
-    "identifier": "40231"
+    "identifier": "40231",
+    "sameAs": "http://ja.dbpedia.org/resource/那珂川市"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -1721,7 +1797,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40231",
     "@type": "schema:AdministrativeArea",
     "name": "那珂川市",
-    "identifier": "40231"
+    "identifier": "40231",
+    "sameAs": "http://ja.dbpedia.org/resource/那珂川市"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1743,7 +1820,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
     "@type": "schema:AdministrativeArea",
     "name": "宇美町",
-    "identifier": "40341"
+    "identifier": "40341",
+    "sameAs": "http://ja.dbpedia.org/resource/宇美町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -1765,7 +1843,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
     "@type": "schema:AdministrativeArea",
     "name": "宇美町",
-    "identifier": "40341"
+    "identifier": "40341",
+    "sameAs": "http://ja.dbpedia.org/resource/宇美町"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -1787,7 +1866,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
     "@type": "schema:AdministrativeArea",
     "name": "宇美町",
-    "identifier": "40341"
+    "identifier": "40341",
+    "sameAs": "http://ja.dbpedia.org/resource/宇美町"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
@@ -1809,7 +1889,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
     "@type": "schema:AdministrativeArea",
     "name": "宇美町",
-    "identifier": "40341"
+    "identifier": "40341",
+    "sameAs": "http://ja.dbpedia.org/resource/宇美町"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -1832,7 +1913,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40341",
     "@type": "schema:AdministrativeArea",
     "name": "宇美町",
-    "identifier": "40341"
+    "identifier": "40341",
+    "sameAs": "http://ja.dbpedia.org/resource/宇美町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-ari",
@@ -1856,7 +1938,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
     "@type": "schema:AdministrativeArea",
     "name": "篠栗町",
-    "identifier": "40342"
+    "identifier": "40342",
+    "sameAs": "http://ja.dbpedia.org/resource/篠栗町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -1878,7 +1961,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
     "@type": "schema:AdministrativeArea",
     "name": "篠栗町",
-    "identifier": "40342"
+    "identifier": "40342",
+    "sameAs": "http://ja.dbpedia.org/resource/篠栗町"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -1900,7 +1984,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
     "@type": "schema:AdministrativeArea",
     "name": "篠栗町",
-    "identifier": "40342"
+    "identifier": "40342",
+    "sameAs": "http://ja.dbpedia.org/resource/篠栗町"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
@@ -1922,7 +2007,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
     "@type": "schema:AdministrativeArea",
     "name": "篠栗町",
-    "identifier": "40342"
+    "identifier": "40342",
+    "sameAs": "http://ja.dbpedia.org/resource/篠栗町"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -1944,7 +2030,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40342",
     "@type": "schema:AdministrativeArea",
     "name": "篠栗町",
-    "identifier": "40342"
+    "identifier": "40342",
+    "sameAs": "http://ja.dbpedia.org/resource/篠栗町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -1966,7 +2053,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
     "@type": "schema:AdministrativeArea",
     "name": "志免町",
-    "identifier": "40343"
+    "identifier": "40343",
+    "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -1987,7 +2075,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
     "@type": "schema:AdministrativeArea",
     "name": "志免町",
-    "identifier": "40343"
+    "identifier": "40343",
+    "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -2008,7 +2097,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
     "@type": "schema:AdministrativeArea",
     "name": "志免町",
-    "identifier": "40343"
+    "identifier": "40343",
+    "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
@@ -2029,7 +2119,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
     "@type": "schema:AdministrativeArea",
     "name": "志免町",
-    "identifier": "40343"
+    "identifier": "40343",
+    "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -2050,7 +2141,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40343",
     "@type": "schema:AdministrativeArea",
     "name": "志免町",
-    "identifier": "40343"
+    "identifier": "40343",
+    "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2072,7 +2164,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40344",
     "@type": "schema:AdministrativeArea",
     "name": "須恵町",
-    "identifier": "40344"
+    "identifier": "40344",
+    "sameAs": "http://ja.dbpedia.org/resource/須恵町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -2093,7 +2186,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40344",
     "@type": "schema:AdministrativeArea",
     "name": "須恵町",
-    "identifier": "40344"
+    "identifier": "40344",
+    "sameAs": "http://ja.dbpedia.org/resource/須恵町"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -2115,7 +2209,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40344",
     "@type": "schema:AdministrativeArea",
     "name": "須恵町",
-    "identifier": "40344"
+    "identifier": "40344",
+    "sameAs": "http://ja.dbpedia.org/resource/須恵町"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
@@ -2139,7 +2234,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40344",
     "@type": "schema:AdministrativeArea",
     "name": "須恵町",
-    "identifier": "40344"
+    "identifier": "40344",
+    "sameAs": "http://ja.dbpedia.org/resource/須恵町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2161,7 +2257,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40345",
     "@type": "schema:AdministrativeArea",
     "name": "新宮町",
-    "identifier": "40345"
+    "identifier": "40345",
+    "sameAs": "http://ja.dbpedia.org/resource/新宮町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -2182,7 +2279,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40345",
     "@type": "schema:AdministrativeArea",
     "name": "新宮町",
-    "identifier": "40345"
+    "identifier": "40345",
+    "sameAs": "http://ja.dbpedia.org/resource/新宮町"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -2203,7 +2301,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40345",
     "@type": "schema:AdministrativeArea",
     "name": "新宮町",
-    "identifier": "40345"
+    "identifier": "40345",
+    "sameAs": "http://ja.dbpedia.org/resource/新宮町"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
@@ -2224,7 +2323,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40345",
     "@type": "schema:AdministrativeArea",
     "name": "新宮町",
-    "identifier": "40345"
+    "identifier": "40345",
+    "sameAs": "http://ja.dbpedia.org/resource/新宮町"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -2245,7 +2345,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40345",
     "@type": "schema:AdministrativeArea",
     "name": "新宮町",
-    "identifier": "40345"
+    "identifier": "40345",
+    "sameAs": "http://ja.dbpedia.org/resource/新宮町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2267,7 +2368,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40348",
     "@type": "schema:AdministrativeArea",
     "name": "久山町",
-    "identifier": "40348"
+    "identifier": "40348",
+    "sameAs": "http://ja.dbpedia.org/resource/久山町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -2289,7 +2391,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40348",
     "@type": "schema:AdministrativeArea",
     "name": "久山町",
-    "identifier": "40348"
+    "identifier": "40348",
+    "sameAs": "http://ja.dbpedia.org/resource/久山町"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -2311,7 +2414,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40348",
     "@type": "schema:AdministrativeArea",
     "name": "久山町",
-    "identifier": "40348"
+    "identifier": "40348",
+    "sameAs": "http://ja.dbpedia.org/resource/久山町"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
@@ -2333,7 +2437,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40348",
     "@type": "schema:AdministrativeArea",
     "name": "久山町",
-    "identifier": "40348"
+    "identifier": "40348",
+    "sameAs": "http://ja.dbpedia.org/resource/久山町"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -2355,7 +2460,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40348",
     "@type": "schema:AdministrativeArea",
     "name": "久山町",
-    "identifier": "40348"
+    "identifier": "40348",
+    "sameAs": "http://ja.dbpedia.org/resource/久山町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2377,7 +2483,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
     "@type": "schema:AdministrativeArea",
     "name": "粕屋町",
-    "identifier": "40349"
+    "identifier": "40349",
+    "sameAs": "http://ja.dbpedia.org/resource/粕屋町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
@@ -2399,7 +2506,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
     "@type": "schema:AdministrativeArea",
     "name": "粕屋町",
-    "identifier": "40349"
+    "identifier": "40349",
+    "sameAs": "http://ja.dbpedia.org/resource/粕屋町"
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
@@ -2421,7 +2529,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
     "@type": "schema:AdministrativeArea",
     "name": "粕屋町",
-    "identifier": "40349"
+    "identifier": "40349",
+    "sameAs": "http://ja.dbpedia.org/resource/粕屋町"
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
@@ -2443,7 +2552,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
     "@type": "schema:AdministrativeArea",
     "name": "粕屋町",
-    "identifier": "40349"
+    "identifier": "40349",
+    "sameAs": "http://ja.dbpedia.org/resource/粕屋町"
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
@@ -2465,7 +2575,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40349",
     "@type": "schema:AdministrativeArea",
     "name": "粕屋町",
-    "identifier": "40349"
+    "identifier": "40349",
+    "sameAs": "http://ja.dbpedia.org/resource/粕屋町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2487,7 +2598,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40381",
     "@type": "schema:AdministrativeArea",
     "name": "芦屋町",
-    "identifier": "40381"
+    "identifier": "40381",
+    "sameAs": "http://ja.dbpedia.org/resource/芦屋町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2509,7 +2621,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40382",
     "@type": "schema:AdministrativeArea",
     "name": "水巻町",
-    "identifier": "40382"
+    "identifier": "40382",
+    "sameAs": "http://ja.dbpedia.org/resource/水巻町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2531,7 +2644,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40383",
     "@type": "schema:AdministrativeArea",
     "name": "岡垣町",
-    "identifier": "40383"
+    "identifier": "40383",
+    "sameAs": "http://ja.dbpedia.org/resource/岡垣町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2553,7 +2667,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40384",
     "@type": "schema:AdministrativeArea",
     "name": "遠賀町",
-    "identifier": "40384"
+    "identifier": "40384",
+    "sameAs": "http://ja.dbpedia.org/resource/遠賀町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2575,7 +2690,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40401",
     "@type": "schema:AdministrativeArea",
     "name": "小竹町",
-    "identifier": "40401"
+    "identifier": "40401",
+    "sameAs": "http://ja.dbpedia.org/resource/小竹町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2597,7 +2713,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40402",
     "@type": "schema:AdministrativeArea",
     "name": "鞍手町",
-    "identifier": "40402"
+    "identifier": "40402",
+    "sameAs": "http://ja.dbpedia.org/resource/鞍手町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2619,7 +2736,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40421",
     "@type": "schema:AdministrativeArea",
     "name": "桂川町",
-    "identifier": "40421"
+    "identifier": "40421",
+    "sameAs": "http://ja.dbpedia.org/resource/桂川町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2641,7 +2759,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40447",
     "@type": "schema:AdministrativeArea",
     "name": "筑前町",
-    "identifier": "40447"
+    "identifier": "40447",
+    "sameAs": "http://ja.dbpedia.org/resource/筑前町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2663,7 +2782,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40448",
     "@type": "schema:AdministrativeArea",
     "name": "東峰村",
-    "identifier": "40448"
+    "identifier": "40448",
+    "sameAs": "http://ja.dbpedia.org/resource/東峰村"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2685,7 +2805,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40503",
     "@type": "schema:AdministrativeArea",
     "name": "大刀洗町",
-    "identifier": "40503"
+    "identifier": "40503",
+    "sameAs": "http://ja.dbpedia.org/resource/大刀洗町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2707,7 +2828,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40522",
     "@type": "schema:AdministrativeArea",
     "name": "大木町",
-    "identifier": "40522"
+    "identifier": "40522",
+    "sameAs": "http://ja.dbpedia.org/resource/大木町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2729,7 +2851,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40544",
     "@type": "schema:AdministrativeArea",
     "name": "広川町",
-    "identifier": "40544"
+    "identifier": "40544",
+    "sameAs": "http://ja.dbpedia.org/resource/広川町_(福岡県)"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2751,7 +2874,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40601",
     "@type": "schema:AdministrativeArea",
     "name": "香春町",
-    "identifier": "40601"
+    "identifier": "40601",
+    "sameAs": "http://ja.dbpedia.org/resource/香春町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2773,7 +2897,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40602",
     "@type": "schema:AdministrativeArea",
     "name": "添田町",
-    "identifier": "40602"
+    "identifier": "40602",
+    "sameAs": "http://ja.dbpedia.org/resource/添田町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2795,7 +2920,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40604",
     "@type": "schema:AdministrativeArea",
     "name": "糸田町",
-    "identifier": "40604"
+    "identifier": "40604",
+    "sameAs": "http://ja.dbpedia.org/resource/糸田町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2817,7 +2943,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40605",
     "@type": "schema:AdministrativeArea",
     "name": "川崎町",
-    "identifier": "40605"
+    "identifier": "40605",
+    "sameAs": "http://ja.dbpedia.org/resource/川崎町_(福岡県)"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2839,7 +2966,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40608",
     "@type": "schema:AdministrativeArea",
     "name": "大任町",
-    "identifier": "40608"
+    "identifier": "40608",
+    "sameAs": "http://ja.dbpedia.org/resource/大任町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2861,7 +2989,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40609",
     "@type": "schema:AdministrativeArea",
     "name": "赤村",
-    "identifier": "40609"
+    "identifier": "40609",
+    "sameAs": "http://ja.dbpedia.org/resource/赤村"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2883,7 +3012,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40610",
     "@type": "schema:AdministrativeArea",
     "name": "福智町",
-    "identifier": "40610"
+    "identifier": "40610",
+    "sameAs": "http://ja.dbpedia.org/resource/福智町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2906,7 +3036,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40621",
     "@type": "schema:AdministrativeArea",
     "name": "苅田町",
-    "identifier": "40621"
+    "identifier": "40621",
+    "sameAs": "http://ja.dbpedia.org/resource/苅田町"
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-ari",
@@ -2934,7 +3065,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40621",
     "@type": "schema:AdministrativeArea",
     "name": "苅田町",
-    "identifier": "40621"
+    "identifier": "40621",
+    "sameAs": "http://ja.dbpedia.org/resource/苅田町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2956,7 +3088,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40625",
     "@type": "schema:AdministrativeArea",
     "name": "みやこ町",
-    "identifier": "40625"
+    "identifier": "40625",
+    "sameAs": "http://ja.dbpedia.org/resource/みやこ町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -2978,7 +3111,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40642",
     "@type": "schema:AdministrativeArea",
     "name": "吉富町",
-    "identifier": "40642"
+    "identifier": "40642",
+    "sameAs": "http://ja.dbpedia.org/resource/吉富町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -3000,7 +3134,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40646",
     "@type": "schema:AdministrativeArea",
     "name": "上毛町",
-    "identifier": "40646"
+    "identifier": "40646",
+    "sameAs": "http://ja.dbpedia.org/resource/上毛町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
@@ -3022,7 +3157,8 @@
     "@id": "http://data.e-stat.go.jp/lod/sac/C40647",
     "@type": "schema:AdministrativeArea",
     "name": "築上町",
-    "identifier": "40647"
+    "identifier": "40647",
+    "sameAs": "http://ja.dbpedia.org/resource/築上町"
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-nashi",
