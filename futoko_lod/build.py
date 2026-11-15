@@ -1,6 +1,7 @@
 """data/seido.csv から data/seido.jsonld を作る。
 
-URI の土台(BASE)と語彙(fsl:)は仮のもの。固定の URL を決めるときに見直す。
+URI の土台(BASE)は GitHub Pages の公開の場所(2026-11-15 に決定。変えない)。置き場所の決まりは docs/公開の形.md。
+文字列には言語(ja)を付ける。id と補助率は、言語を付けない。
 市町村は e-Stat 統計LOD の標準地域コード(時期を持たないコード)につなぐ。書式の出典と、
 実際に引いて確かめる手順は links.py にある。e-Gov 法令・学校コードへのリンクはまだ入れていない。
 
@@ -16,7 +17,7 @@ from pathlib import Path
 
 from . import schema
 
-BASE = "https://h-kazuki-pixel.github.io/futoko-shien-lod/"  # 仮
+BASE = "https://h-kazuki-pixel.github.io/futoko-shien-lod/"
 SAC = "http://data.e-stat.go.jp/lod/sac/C"  # e-Stat 統計LOD 標準地域コード
 
 CONTEXT = {
@@ -24,7 +25,8 @@ CONTEXT = {
     "dct": "http://purl.org/dc/terms/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "fsl": BASE + "ns#",
-    "identifier": "schema:identifier",
+    "@language": "ja",
+    "identifier": {"@id": "schema:identifier", "@language": None},
     "name": "schema:name",
     "areaServed": "schema:areaServed",
     "kind": {"@id": "fsl:kind", "@type": "@id"},
@@ -33,14 +35,14 @@ CONTEXT = {
     "eligibility": "fsl:eligibility",
     "amountText": "fsl:amountText",
     "amountMaxYen": {"@id": "fsl:amountMaxYen", "@type": "xsd:integer"},
-    "subsidyRate": "fsl:subsidyRate",
+    "subsidyRate": {"@id": "fsl:subsidyRate", "@language": None},
     "startText": "fsl:startText",
     "source": {"@id": "dct:source", "@type": "@id"},
     "sourceName": "fsl:sourceName",
     "basisPhrase": "fsl:basisPhrase",
     "guidelineState": "fsl:guidelineState",
     "guideline": {"@id": "fsl:guideline", "@type": "@id"},
-    "searchedAt": "fsl:searchedAt",
+    "searchedAt": {"@id": "fsl:searchedAt", "@type": "@id"},
     "noneBasis": "fsl:noneBasis",
     "note": "fsl:note",
     "dateChecked": {"@id": "fsl:dateChecked", "@type": "xsd:date"},

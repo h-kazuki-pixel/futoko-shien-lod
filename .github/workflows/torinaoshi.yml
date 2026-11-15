@@ -10,6 +10,7 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: write
 concurrency:
   group: shougou  # shougou と同時に取りに行かない
   cancel-in-progress: false
@@ -46,3 +47,7 @@ jobs:
           else
             echo "要確認は無い"
           fi
+      - name: 公開のページを作り直す(取り直した日をページに出すため)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow run pages.yml --ref main

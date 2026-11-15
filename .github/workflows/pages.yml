@@ -9,6 +9,9 @@ on:
     paths:
       - data/seido.csv
       - data/shichoson.csv
+      - data/saikakunin.csv
+      - data/toiawase.csv
+      - data/torinaoshi/saishin.csv
       - futoko_lod/publish.py
       - futoko_lod/build.py
       - futoko_lod/schema.py
@@ -51,6 +54,7 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: 公開された URL を引く
         run: |
           base="https://h-kazuki-pixel.github.io/futoko-shien-lod/"
@@ -72,4 +76,15 @@ jobs:
             [ "$code" = "200" ] || fail=1
             sleep 1
           done
+          # 1件ごとの URI を全部引く(ページ、Turtle、JSON-LD)。届かないものだけを記録に出す
+          n=0; bad=0
+          for id in $(tail -n +2 data/seido.csv | cut -d, -f1); do
+            for path in "id/$id" "id/$id.ttl" "id/$id.jsonld"; do
+              code=$(curl -sSL -o /dev/null -w "%{http_code}" "$base$path" || echo "失敗")
+              n=$((n+1))
+              if [ "$code" != "200" ]; then bad=$((bad+1)); echo "届かない: $base$path ($code)" | tee -a "$GITHUB_STEP_SUMMARY"; fi
+            done
+          done
+          echo "1件ごとの URI: $n 個を引き、届かなかったのは $bad 個" | tee -a "$GITHUB_STEP_SUMMARY"
+          [ "$bad" = "0" ] || fail=1
           exit $fail

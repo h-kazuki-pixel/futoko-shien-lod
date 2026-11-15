@@ -86,7 +86,7 @@ PROPERTIES = {
     "basisPhrase": ("根拠の箇所", "出典のページにある短い語句(40字まで)。照合に使う。", "xsd:string"),
     "guidelineState": ("要綱の状況", "要綱を取得できたか。", "xsd:string"),
     "guideline": ("要綱URL", "要綱の URL。", "rdfs:Resource"),
-    "searchedAt": ("探した場所", "探したページの URL。「確認できず」のときに必ず入る。", "xsd:string"),
+    "searchedAt": ("探した場所", "探したページの URL。「確認できず」のときに必ず入る。", "rdfs:Resource"),
     "noneBasis": ("なしの根拠", "無いと言える理由。「なし」のときに必ず入る。", "xsd:string"),
     "note": ("備考", "補足。", "xsd:string"),
     "dateChecked": ("確認日", "確かめた日。", "xsd:date"),
@@ -140,8 +140,12 @@ def node_triples(node: dict) -> list[tuple[str, list[tuple[str, list[str]]]]]:
                 blocks += node_triples(v)
             elif coerce == "@id":
                 objs.append(ref(v))
-            else:
+            elif coerce:
                 objs.append(lit(v, coerce))
+            else:
+                # 言語は CONTEXT の決まりに従う(全体は ja。項目ごとに外せる)
+                lang = term["@language"] if isinstance(term, dict) and "@language" in term else build.CONTEXT.get("@language")
+                objs.append(lit(v) + (f"@{lang}" if lang else ""))
         pos.append((pred, objs))
     return [(iri(node["@id"]), pos)] + blocks
 
@@ -280,7 +284,7 @@ def kind_slug(row: dict[str, str]) -> str:
     return schema.KIND_BY_LABEL[row["制度の種類"]]
 
 
-def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]]) -> str:
+def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict | None = None) -> str:
     cell = {(r["市町村コード"], kind_slug(r)): r for r in rows}
     metro = [a for a in areas if a["福岡都市圏"] == "○"]
     filled: collections.Counter = collections.Counter()
@@ -305,6 +309,20 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]]) -> str:
     methods = collections.Counter(r["確認方法"] for r in rows)
     answered_nashi = sum(r["状態"] == "なし" and r["確認方法"] == "問い合わせ" for r in rows)
     modified = max(r["確認日"] for r in rows)
+    records = records or {"torinaoshi": [], "saikakunin": [], "toiawase": []}
+    checks = []
+    if records["torinaoshi"]:
+        pages = {r["URL"]: r for r in records["torinaoshi"]}
+        day = max(r["取得日時"][:10] for r in pages.values())
+        got = sum(r["取得"] == "取得" for r in pages.values())
+        checks.append(f"出典と探した場所のページは、毎週取り直している。いちばん新しい取り直しは {e(day)}({len(pages)}ページのうち、取得できた {got})。")
+    if records["saikakunin"]:
+        items_all = len(records["saikakunin"])
+        c = collections.Counter(r["判定"] for r in records["saikakunin"] if r["判定"])
+        checks.append(f"「あり」「予定」の行は、項目ごとに人が出典と見比べる。{items_all}項目のうち、見比べたのは {sum(c.values())}"
+                      f"(合っている {c['合っている']}、違う {c['違う']}、分からない {c['分からない']})。")
+    checks.append(f"市町への問い合わせの記録は {len(records['toiawase'])} 件。")
+    checks_html = "".join(f"<p>{x}</p>\n" for x in checks)
     legend = "".join(f"<tr><td>{badge(s)}</td><td>{e(m)}</td></tr>" for s, m in STATUS_MEANING.items())
     legend += f"<tr><td>{badge('未着手')}</td><td>まだ読んでいない。</td></tr>"
     body = f"""<h1>{TITLE}</h1>
@@ -333,6 +351,8 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]]) -> str:
 <p>確かめ方の内訳: {"、".join(f"{e(m)} {methods[m]}件" for m in schema.METHODS)}。確認日のいちばん新しい行は {e(modified)}。</p>
 <p><a href="ichiran/">全{len(rows)}件の一覧</a></p>
 
+<h2>確かめ方の現状</h2>
+{checks_html}
 <h2>データ</h2>
 <div class="scroll"><table>
 <thead><tr><th scope="col">ファイル</th><th scope="col">形式</th></tr></thead>
@@ -366,7 +386,7 @@ def ichiran_html(rows: list[dict[str, str]]) -> str:
     return page(f"全件の一覧 | {TITLE}", body, "../")
 
 
-def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]]) -> str:
+def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]], records: dict | None = None) -> str:
     def v(key: str) -> str:
         return (row.get(key) or "").strip()
 
@@ -398,6 +418,16 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]])
         items.append(("備考", e(v("備考"))))
     items.append(("確認日", e(v("確認日"))))
     items.append(("確認方法", f'{e(v("確認方法"))}。{e(METHOD_MEANING[v("確認方法")])}'))
+    records = records or {"torinaoshi": [], "saikakunin": [], "toiawase": []}
+    recheck = recheck_line(row, records)
+    if recheck:
+        items.append(("人の再確認", e(recheck)))
+    inquiries = inquiry_lines(row, records)
+    if inquiries:
+        items.append(("問い合わせ", "<br>".join(e(x) for x in inquiries)))
+    refetch = refetch_lines(row, records)
+    if refetch:
+        items.append(("定期的な取り直し", "<br>".join(e(x) for x in refetch)))
     dl = "\n".join(f"<dt>{k}</dt><dd>{val}</dd>" for k, val in items)
 
     caution = ""
@@ -449,6 +479,67 @@ def ns_html() -> str:
                 '<link rel="alternate" type="text/turtle" href="ns.ttl">\n')
 
 
+# ---------- 確かめた記録(取り直し、人の再確認、問い合わせ) ----------
+
+def load_records(base: str | Path = "data") -> dict[str, list[dict[str, str]]]:
+    """データに添える記録を読む。ファイルが無ければ空。ここでは読むだけで、書き換えない。"""
+    base = Path(base)
+    return {
+        "torinaoshi": schema.read_csv(base / "torinaoshi" / "saishin.csv") if (base / "torinaoshi" / "saishin.csv").exists() else [],
+        "saikakunin": schema.read_csv(base / "saikakunin.csv") if (base / "saikakunin.csv").exists() else [],
+        "toiawase": schema.read_csv(base / "toiawase.csv") if (base / "toiawase.csv").exists() else [],
+    }
+
+
+def refetch_lines(row: dict[str, str], records: dict) -> list[str]:
+    mine = [r for r in records["torinaoshi"] if r["id"] == row["id"]]
+    lines = []
+    for r in (r for r in mine if r["役割"] == "出典"):
+        day = r["取得日時"][:10]
+        if r["取得"] != "取得":
+            why = r["取得"].removeprefix("取得できず(").removesuffix(")")
+            lines.append(f"出典: {day} に取り直したが、取得できなかった({why})")
+        else:
+            lines.append(f"出典: {day} に取り直し、照合は{r['判定']}")
+    places = [r for r in mine if r["役割"] == "探した場所"]
+    if places:
+        got = sum(r["取得"] == "取得" for r in places)
+        day = max(r["取得日時"][:10] for r in places)
+        lines.append(f"探した場所: {day} に{len(places)}ページを取り直した(取得できた {got})。変わった所は記録している")
+    return lines
+
+
+def recheck_line(row: dict[str, str], records: dict) -> str:
+    """人の再確認。判定の列に入っているのは、人が出典のページと見比べた結果だけ。"""
+    mine = [r for r in records["saikakunin"] if r["id"] == row["id"]]
+    if not mine:
+        return ""
+    c = collections.Counter(r["判定"] for r in mine if r["判定"])
+    if not c:
+        return f"人は、まだ出典と見比べていない(見比べる項目は {len(mine)})"
+    parts = "、".join(f"{k} {c[k]}" for k in ("合っている", "違う", "分からない") if c[k])
+    return f"人が出典と見比べた項目は {sum(c.values())} / {len(mine)}({parts})"
+
+
+def inquiry_lines(row: dict[str, str], records: dict) -> list[str]:
+    """問い合わせの記録。差し支えがあると言われた回答は、中身を載せない。"""
+    kind = row["制度の種類"]
+    lines = []
+    for r in records["toiawase"]:
+        reflected = row["id"] in r.get("反映したid", "").replace(",", " ").split()
+        same = r["市町村コード"] == row["市町村コード"] and r["種類"] in (kind, kind_slug(row), KIND_SHORT[kind_slug(row)])
+        if not (reflected or same):
+            continue
+        head = f"{r['日付']} {r['担当課']}に{r['方法']}で問い合わせた。"
+        if "差し支え" in r.get("公開の可否", ""):
+            lines.append(head + "回答は載せない(載せることに差し支えがあるとのこと)")
+        elif r["回答"].strip():
+            lines.append(head + f"回答: {r['回答']}")
+        else:
+            lines.append(head + "回答はまだ無い")
+    return lines
+
+
 # ---------- 書き出し ----------
 
 def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> dict[str, int]:
@@ -466,7 +557,8 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
 
     put(".nojekyll", "")
     put("style.css", CSS)
-    put("index.html", index_html(rows, areas))
+    records = load_records(Path(csv_path).parent)
+    put("index.html", index_html(rows, areas, records))
     put("ichiran/index.html", ichiran_html(rows))
     put("ns.html", ns_html())
     put("ns.ttl", vocab_turtle())
@@ -480,7 +572,7 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
     for row, node in zip(rows, nodes):
         rid = row["id"]
         (out / "id" / rid).mkdir()
-        put(f"id/{rid}/index.html", record_html(row, node, by_area[row["市町村コード"]]))
+        put(f"id/{rid}/index.html", record_html(row, node, by_area[row["市町村コード"]], records))
         put(f"id/{rid}.ttl", nodes_turtle([node]))
         put(f"id/{rid}.jsonld", json.dumps({"@context": build.CONTEXT, **node}, ensure_ascii=False, indent=1) + "\n")
     return {"件数": len(rows), "ファイル": sum(1 for p in out.rglob("*") if p.is_file())}

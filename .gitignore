@@ -3,3 +3,5 @@ __pycache__/
 .pytest_cache/
 shougou*.json
 *.pyc
+_site/
+issue.md

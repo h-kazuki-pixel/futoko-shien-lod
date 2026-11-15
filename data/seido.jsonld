@@ -4,7 +4,11 @@
   "dct": "http://purl.org/dc/terms/",
   "xsd": "http://www.w3.org/2001/XMLSchema#",
   "fsl": "https://h-kazuki-pixel.github.io/futoko-shien-lod/ns#",
-  "identifier": "schema:identifier",
+  "@language": "ja",
+  "identifier": {
+   "@id": "schema:identifier",
+   "@language": null
+  },
   "name": "schema:name",
   "areaServed": "schema:areaServed",
   "kind": {
@@ -25,7 +29,10 @@
    "@id": "fsl:amountMaxYen",
    "@type": "xsd:integer"
   },
-  "subsidyRate": "fsl:subsidyRate",
+  "subsidyRate": {
+   "@id": "fsl:subsidyRate",
+   "@language": null
+  },
   "startText": "fsl:startText",
   "source": {
    "@id": "dct:source",
@@ -38,7 +45,10 @@
    "@id": "fsl:guideline",
    "@type": "@id"
   },
-  "searchedAt": "fsl:searchedAt",
+  "searchedAt": {
+   "@id": "fsl:searchedAt",
+   "@type": "@id"
+  },
   "noneBasis": "fsl:noneBasis",
   "note": "fsl:note",
   "dateChecked": {

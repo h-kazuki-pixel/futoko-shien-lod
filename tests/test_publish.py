@@ -152,3 +152,62 @@ def test_pages_do_not_carry_long_text_beyond_the_data_limits(site, rows):
     # ページに載る項目は、検査で長さを抑えた項目だけ(公式ページの文章を載せない)
     for r in rows:
         assert len(r["根拠の箇所"]) <= schema.MAX_BASIS
+
+
+REC = {c: "" for c in schema.COLUMNS} | {
+    "id": "40999-fs-hojo", "市町村コード": "40999", "市町村": "見本町",
+    "制度の種類": "フリースクール等の利用料の補助(保護者向け)", "状態": "確認できず",
+}
+
+
+def recs(**kw):
+    return {"torinaoshi": [], "saikakunin": [], "toiawase": []} | kw
+
+
+def test_recheck_line_counts_only_filled_judgements():
+    rows = [{"id": "40999-fs-hojo", "判定": "合っている"}, {"id": "40999-fs-hojo", "判定": ""}, {"id": "x", "判定": "違う"}]
+    assert publish.recheck_line(REC, recs(saikakunin=rows)) == "人が出典と見比べた項目は 1 / 2(合っている 1)"
+    assert "まだ出典と見比べていない" in publish.recheck_line(REC, recs(saikakunin=[{"id": "40999-fs-hojo", "判定": ""}]))
+    assert publish.recheck_line(REC, recs()) == ""
+
+
+def test_inquiry_answer_is_hidden_when_publication_is_declined():
+    base = {"日付": "2026-11-20", "市町村コード": "40999", "市町村": "見本町", "担当課": "学校教育課", "方法": "メール",
+            "種類": "フリースクール等の利用料の補助(保護者向け)", "反映したid": ""}
+    shown = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "制度は無い", "公開の可否": ""}]))
+    assert shown == ["2026-11-20 学校教育課にメールで問い合わせた。回答: 制度は無い"]
+    hidden = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "内々の話", "公開の可否": "差し支えあり"}]))
+    assert len(hidden) == 1 and "内々の話" not in hidden[0] and "載せない" in hidden[0]
+    waiting = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "", "公開の可否": ""}]))
+    assert "回答はまだ無い" in waiting[0]
+    other = publish.inquiry_lines(REC, recs(toiawase=[base | {"市町村コード": "40998", "回答": "a", "公開の可否": ""}]))
+    assert other == []
+
+
+def test_refetch_lines_say_when_a_source_could_not_be_fetched():
+    rows = [
+        {"id": "40999-fs-hojo", "役割": "出典", "URL": "u", "取得日時": "2026-11-15T19:31:37+00:00", "取得": "取得できず(HTTP 404)", "判定": ""},
+        {"id": "40999-fs-hojo", "役割": "探した場所", "URL": "v", "取得日時": "2026-11-15T19:32:00+00:00", "取得": "取得", "判定": ""},
+    ]
+    lines = publish.refetch_lines(REC, recs(torinaoshi=rows))
+    assert lines[0] == "出典: 2026-11-15 に取り直したが、取得できなかった(HTTP 404)"
+    assert "1ページを取り直した(取得できた 1)" in lines[1]
+
+
+def test_record_pages_show_the_real_records(site, rows):
+    records = publish.load_records("data")
+    for r in rows:
+        text = (site / "id" / r["id"] / "index.html").read_text(encoding="utf-8")
+        for line in publish.refetch_lines(r, records) + publish.inquiry_lines(r, records):
+            assert html.escape(line) in text
+        if publish.recheck_line(r, records):
+            assert html.escape(publish.recheck_line(r, records)) in text
+
+
+def test_strings_carry_language_and_ids_do_not(site):
+    g = graph((site / "seido.ttl").read_text(encoding="utf-8"), "turtle")
+    fsl = rdflib.Namespace(publish.NS)
+    sdo = rdflib.Namespace("https://schema.org/")
+    assert all(o.language == "ja" for o in g.objects(None, fsl.note))
+    assert all(o.language is None for o in g.objects(None, sdo.identifier))
+    assert all(isinstance(o, rdflib.URIRef) for o in g.objects(None, fsl.searchedAt))
