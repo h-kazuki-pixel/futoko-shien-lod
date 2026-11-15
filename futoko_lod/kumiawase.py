@@ -61,12 +61,33 @@ def probe(code: str) -> None:
                 show("見本の中身", f"select ?p ?o where {{ <{o['s']}> ?p ?o }} limit 40")
 
 
+REF_AREA = "http://purl.org/linked-data/sdmx/2009/dimension#refArea"
+DATASET = "http://purl.org/linked-data/cube#dataSet"
+SSDS = "http://data.e-stat.go.jp/lod/dataset/g00200502/"  # 社会・人口統計体系(市区町村)。--probe で見つけた
+INDICATOR = "http://data.e-stat.go.jp/lod/ontology/g00200502/dimension/indicator"
+TIME = "http://data.e-stat.go.jp/lod/ontology/crossDomain/dimension/timePeriod"
+
+
+def indicators(code: str, part: str) -> None:
+    """社会・人口統計体系の1つの分野(am=人口、em=教育 など)に、その市町村のどんな指標が、何年まであるか。"""
+    q = f"""select ?ind ?label (min(?t) as ?from) (max(?t) as ?to) (count(?s) as ?n) where {{
+  <{SAC}{code}> <http://data.e-stat.go.jp/lod/terms/sacs#latestCode> ?area .
+  ?s <{REF_AREA}> ?area ; <{DATASET}> <{SSDS}d00200502{part}> ; <{INDICATOR}> ?ind ; <{TIME}> ?t .
+  optional {{ ?ind <http://www.w3.org/2000/01/rdf-schema#label> ?label . filter(lang(?label) = "ja") }}
+}} group by ?ind ?label order by ?ind limit 200"""
+    show(f"分野 {part} の指標(最新のコードの分)", q)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--probe", nargs="?", const="40219")
+    ap.add_argument("--indicators", nargs="+", metavar="コード 分野...")
     args = ap.parse_args()
     if args.probe:
         probe(args.probe)
+    if args.indicators:
+        for part in args.indicators[1:]:
+            indicators(args.indicators[0], part)
     return 0
 
 
