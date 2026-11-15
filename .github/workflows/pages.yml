@@ -80,7 +80,12 @@ jobs:
           n=0; bad=0
           for id in $(tail -n +2 data/seido.csv | cut -d, -f1); do
             for path in "id/$id" "id/$id.ttl" "id/$id.jsonld"; do
-              code=$(curl -sSL -o /dev/null -w "%{http_code}" "$base$path" || echo "失敗")
+              # 公開の直後は、たまに 503 が返る(11/16 に1件)。間をあけて3回まで試す
+              for try in 1 2 3; do
+                code=$(curl -sSL -o /dev/null -w "%{http_code}" "$base$path" || echo "失敗")
+                [ "$code" = "200" ] && break
+                sleep 5
+              done
               n=$((n+1))
               if [ "$code" != "200" ]; then bad=$((bad+1)); echo "届かない: $base$path ($code)" | tee -a "$GITHUB_STEP_SUMMARY"; fi
             done

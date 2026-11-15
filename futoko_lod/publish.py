@@ -34,6 +34,8 @@ NS = BASE + "ns#"
 DATASET = BASE + "#dataset"
 REPO = "https://github.com/h-kazuki-pixel/futoko-shien-lod"
 LICENSE = "https://creativecommons.org/licenses/by/4.0/"
+AUTHOR = "https://github.com/h-kazuki-pixel"
+ISSUED = "2026-11-15"  # はじめて公開した日
 TITLE = "不登校支援制度LOD"
 LAW = "義務教育の段階における普通教育に相当する教育の機会の確保等に関する法律"
 
@@ -45,6 +47,7 @@ PREFIXES = {
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "dcat": "http://www.w3.org/ns/dcat#",
+    "owl": "http://www.w3.org/2002/07/owl#",
     "fsl": NS,
 }
 
@@ -62,7 +65,7 @@ KIND_SHORT = {
 STATUS_MEANING = {
     "あり": "公式の出典、根拠の箇所、確認日がそろっている。",
     "予定": "始まる予定であることが、公式の出典に書かれている。",
-    "なし": "市町村が「無い」と答えた記録か、無いと分かる公式の資料がある。",
+    "なし": "市町村が「無い」と答えた記録か、公式の一覧に載っていないことを確かめた記録がある。どちらなのかは「なしの根拠」に書いてある。",
     "確認できず": "公式ページで見つからなかっただけ。制度が無いとは言っていない。",
 }
 METHOD_MEANING = {
@@ -77,18 +80,18 @@ PROPERTIES = {
     "kind": ("制度の種類", "6つの種類のどれか。", "skos:Concept"),
     "status": ("状態", "あり / 予定 / なし / 確認できず。「なし」と「確認できず」を混ぜない。", "skos:Concept"),
     "paymentForm": ("補助の形", "毎月の補助と1回きりの補助を取り違えないための区別。", "skos:Concept"),
-    "eligibility": ("対象", "だれが使えるか。要点に直したもの。", "xsd:string"),
-    "amountText": ("金額", "金額の決まり。", "xsd:string"),
+    "eligibility": ("対象", "だれが使えるか。要点に直したもの。", "rdf:langString"),
+    "amountText": ("金額", "金額の決まり。", "rdf:langString"),
     "amountMaxYen": ("上限額_円", "上限の金額。円の整数。", "xsd:integer"),
     "subsidyRate": ("補助率", "補助の割合。1/2 の形。", "xsd:string"),
-    "startText": ("開始", "いつから。", "xsd:string"),
-    "sourceName": ("出典名", "出典のページの呼び名。出典の URL は dct:source に入る。", "xsd:string"),
-    "basisPhrase": ("根拠の箇所", "出典のページにある短い語句(40字まで)。照合に使う。", "xsd:string"),
-    "guidelineState": ("要綱の状況", "要綱を取得できたか。", "xsd:string"),
+    "startText": ("開始", "いつから。", "rdf:langString"),
+    "sourceName": ("出典名", "出典のページの呼び名。出典の URL は dct:source に入る。", "rdf:langString"),
+    "basisPhrase": ("根拠の箇所", "出典のページにある短い語句(40字まで)。照合に使う。", "rdf:langString"),
+    "guidelineState": ("要綱の状況", "要綱を取得できたか。", "rdf:langString"),
     "guideline": ("要綱URL", "要綱の URL。", "rdfs:Resource"),
     "searchedAt": ("探した場所", "探したページの URL。「確認できず」のときに必ず入る。", "rdfs:Resource"),
-    "noneBasis": ("なしの根拠", "無いと言える理由。「なし」のときに必ず入る。", "xsd:string"),
-    "note": ("備考", "補足。", "xsd:string"),
+    "noneBasis": ("なしの根拠", "無いと言える理由。「なし」のときに必ず入る。", "rdf:langString"),
+    "note": ("備考", "補足。", "rdf:langString"),
     "dateChecked": ("確認日", "確かめた日。", "xsd:date"),
     "checkMethod": ("確認方法", "だれが、どう確かめたか。", "skos:Concept"),
 }
@@ -125,7 +128,8 @@ def ref(value: str) -> str:
 def node_triples(node: dict) -> list[tuple[str, list[tuple[str, list[str]]]]]:
     """JSON-LD の節を (主語, [(述語, [目的語...])]) の並びにする。入れ子(areaServed)は別の主語になる。"""
     blocks: list[tuple[str, list[tuple[str, list[str]]]]] = []
-    pos: list[tuple[str, list[str]]] = [("a", [node["@type"]])]
+    types = node["@type"] if isinstance(node["@type"], list) else [node["@type"]]
+    pos: list[tuple[str, list[str]]] = [("a", types)]
     for key, value in node.items():
         if key.startswith("@"):
             continue
@@ -167,15 +171,30 @@ def nodes_turtle(nodes: list[dict]) -> str:
 
 
 def vocab_turtle() -> str:
-    blocks = []
+    blocks = [
+        (iri(BASE + "ns"), [
+            ("a", ["owl:Ontology"]),
+            ("rdfs:label", [lit("不登校支援制度LOD の語彙") + "@ja"]),
+            ("rdfs:comment", [lit("市町村の不登校支援の制度について、確かめた記録を書くための項目と値。") + "@ja"]),
+            ("dct:license", [iri(LICENSE)]),
+        ]),
+        ("fsl:Record", [
+            ("a", ["rdfs:Class"]),
+            ("rdfs:label", [lit("確かめた記録") + "@ja"]),
+            ("rdfs:comment", [lit(
+                "1つの市町村の、1つの種類の制度について、確かめた結果の記録。制度が無い・確認できていない場合も記録になる。"
+                "制度があると確かめた記録(状態が あり・予定)だけが、schema:GovernmentService でもある。") + "@ja"]),
+            ("rdfs:isDefinedBy", [iri(BASE + "ns")]),
+        ]),
+    ]
     for name, (label, comment, rng) in PROPERTIES.items():
         blocks.append((f"fsl:{name}", [
             ("a", ["rdf:Property"]),
             ("rdfs:label", [lit(label) + "@ja"]),
             ("rdfs:comment", [lit(comment) + "@ja"]),
-            ("rdfs:domain", ["schema:GovernmentService"]),
+            ("rdfs:domain", ["fsl:Record"]),
             ("rdfs:range", [rng]),
-            ("rdfs:isDefinedBy", [iri(NS)]),
+            ("rdfs:isDefinedBy", [iri(BASE + "ns")]),
         ]))
     for scheme, title, prefix, concepts in SCHEMES:
         blocks.append((f"fsl:{scheme}", [("a", ["skos:ConceptScheme"]), ("skos:prefLabel", [lit(title) + "@ja"])]))
@@ -198,15 +217,22 @@ def dataset_turtle(rows: list[dict[str, str]]) -> str:
             "福岡県の市町村ごとの不登校支援の制度を、同じ項目で並べ、公式の出典と確認日を付けたデータ。"
             "「制度なし」と「確認できず」を分けて記録する。対象は義務教育の段階。") + "@ja"]),
         ("dct:license", [iri(LICENSE)]),
-        ("dct:creator", [iri("https://github.com/h-kazuki-pixel")]),
+        ("dct:creator", [iri(AUTHOR)]),
+        ("dct:publisher", [iri(AUTHOR)]),
+        ("dct:issued", [lit(ISSUED, "xsd:date")]),
         ("dct:modified", [lit(modified, "xsd:date")]),
+        ("dct:language", [lit("ja")]),
+        ("dcat:keyword", [lit(k) + "@ja" for k in ("不登校", "教育支援センター", "フリースクール", "学びの多様化学校", "福岡県")]),
+        ("dcat:contactPoint", [iri(REPO + "/issues")]),
         ("dct:spatial", [iri(build.SAC + "40000")]),
         ("dct:conformsTo", [iri(NS)]),
         ("dcat:landingPage", [iri(BASE)]),
         ("dcat:distribution", [iri(BASE + f) for f, _ in dists]),
     ])]
+    blocks.append((iri(AUTHOR), [("a", ["schema:Person"]), ("schema:name", [lit("h-kazuki-pixel")]), ("schema:url", [iri(AUTHOR)])]))
     for f, mime in dists:
-        blocks.append((iri(BASE + f), [("a", ["dcat:Distribution"]), ("dcat:downloadURL", [iri(BASE + f)]),
+        blocks.append((iri(BASE + f), [("a", ["dcat:Distribution"]), ("dcat:accessURL", [iri(BASE)]),
+                                       ("dcat:downloadURL", [iri(BASE + f)]),
                                        ("dcat:mediaType", [iri("https://www.iana.org/assignments/media-types/" + mime)]), ("dct:license", [iri(LICENSE)])]))
     return turtle(blocks)
 
@@ -280,22 +306,40 @@ def link(url: str) -> str:
     return f'<a href="{e(url)}" rel="noopener">{e(url)}</a>'
 
 
+def jst_day(stamp: str) -> str:
+    """取得日時(UTC)を、日本時間の日付にする。"""
+    import datetime as dt
+    try:
+        return dt.datetime.fromisoformat(stamp).astimezone(dt.timezone(dt.timedelta(hours=9))).date().isoformat()
+    except ValueError:
+        return stamp[:10]
+
+
+def list_based_none(row: dict[str, str]) -> bool:
+    """市町村の回答ではなく、公式の一覧に載っていないことを根拠にした「なし」。"""
+    return row["状態"] == "なし" and row["確認方法"] != "問い合わせ"
+
+
 def kind_slug(row: dict[str, str]) -> str:
     return schema.KIND_BY_LABEL[row["制度の種類"]]
 
 
 def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict | None = None) -> str:
-    cell = {(r["市町村コード"], kind_slug(r)): r for r in rows}
+    cell: dict[tuple[str, str], list[dict[str, str]]] = collections.defaultdict(list)
+    for r in rows:
+        cell[(r["市町村コード"], kind_slug(r))].append(r)
     metro = [a for a in areas if a["福岡都市圏"] == "○"]
     filled: collections.Counter = collections.Counter()
     lines = []
     for a in metro:
         tds = []
         for k in MATRIX_KINDS:
-            r = cell.get((a["市町村コード"], k))
-            if r:
-                filled[r["状態"]] += 1
-                tds.append(f'<td><a href="id/{e(r["id"])}/">{badge(r["状態"])}</a></td>')
+            found = cell.get((a["市町村コード"], k), [])
+            if found:
+                filled[found[0]["状態"]] += 1  # マスの数は、1つ目の行の状態で数える
+                tds.append("<td>" + " ".join(
+                    f'<a href="id/{e(r["id"])}/" aria-label="{e(a["市町村"])} {e(KIND_SHORT[k])}: {e(r["状態"])}">'
+                    f'{badge(r["状態"])}</a>' + ("※" if list_based_none(r) else "") for r in found) + "</td>")
             else:
                 tds.append(f"<td>{badge('未着手')}</td>")
         lines.append(f'<tr><th scope="row">{e(a["市町村"])}</th>{"".join(tds)}</tr>')
@@ -313,9 +357,9 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
     checks = []
     if records["torinaoshi"]:
         pages = {r["URL"]: r for r in records["torinaoshi"]}
-        day = max(r["取得日時"][:10] for r in pages.values())
+        day = max(jst_day(r["取得日時"]) for r in pages.values())
         got = sum(r["取得"] == "取得" for r in pages.values())
-        checks.append(f"出典と探した場所のページは、毎週取り直している。いちばん新しい取り直しは {e(day)}({len(pages)}ページのうち、取得できた {got})。")
+        checks.append(f"出典と探した場所のページは、週に1回取り直す。いちばん新しい取り直しは {e(day)}({len(pages)}ページのうち、取得できた {got})。")
     if records["saikakunin"]:
         items_all = len(records["saikakunin"])
         c = collections.Counter(r["判定"] for r in records["saikakunin"] if r["判定"])
@@ -323,6 +367,14 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
                       f"(合っている {c['合っている']}、違う {c['違う']}、分からない {c['分からない']})。")
     checks.append(f"市町への問い合わせの記録は {len(records['toiawase'])} 件。")
     checks_html = "".join(f"<p>{x}</p>\n" for x in checks)
+    metro_codes = {a["市町村コード"] for a in metro}
+    outside = [r for r in rows if r["市町村コード"] not in metro_codes and r["市町村コード"] != "40000"]
+    outside_other = sum(kind_slug(r) != "tayouka" for r in outside)
+    tayouka_codes = {r["市町村コード"] for r in rows if kind_slug(r) == "tayouka"}
+    missing = [a["市町村"] for a in areas if a["市町村コード"] != "40000" and a["市町村コード"] not in tayouka_codes]
+    scope_note = (f"都市圏の外の市町村は、主に学びの多様化学校を調べている(ほかの種類の行は {outside_other} 件)。"
+                  f"学びの多様化学校の行があるのは、県内60市町村のうち {len(tayouka_codes - {'40000'})}。"
+                  + (f"まだ行が無いのは {'、'.join(missing)}。" if missing else ""))
     legend = "".join(f"<tr><td>{badge(s)}</td><td>{e(m)}</td></tr>" for s, m in STATUS_MEANING.items())
     legend += f"<tr><td>{badge('未着手')}</td><td>まだ読んでいない。</td></tr>"
     body = f"""<h1>{TITLE}</h1>
@@ -336,18 +388,20 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <tbody>
 {chr(10).join(lines)}
 </tbody></table></div>
+<p>※ の付いた「なし」は、公式の一覧(学びの多様化学校では、文部科学省の設置者一覧)に、その市町が載っていないという意味。市町が「無い」と答えたものではない。設置の検討や予定は、この一覧からは分からない。</p>
+<p>「確認できず」は、公式ページで見つからなかっただけで、制度が無いという意味ではない。使えるかどうかは、市町の教育委員会に確かめてほしい。</p>
 
 <h2>状態の意味</h2>
-<div class="scroll"><table><tbody>{legend}</tbody></table></div>
+<div class="scroll"><table><thead><tr><th scope="col">状態</th><th scope="col">意味</th></tr></thead><tbody>{legend}</tbody></table></div>
 
 <h2>種類ごとの件数</h2>
-<p>全{len(rows)}件(あり {total['あり']}、予定 {total['予定']}、なし {total['なし']}、確認できず {total['確認できず']})。件数は種類で大きく違うので、分けて示す。都市圏の外の市町村は、学びの多様化学校だけを調べている。</p>
+<p>全{len(rows)}件(あり {total['あり']}、予定 {total['予定']}、なし {total['なし']}、確認できず {total['確認できず']})。件数は種類で大きく違うので、分けて示す。{e(scope_note)}</p>
 <div class="scroll"><table>
 <thead><tr><th scope="col">種類</th>{"".join(f'<th scope="col">{e(s)}</th>' for s in schema.STATUSES)}<th scope="col">計</th></tr></thead>
 <tbody>
 {chr(10).join(kind_lines)}
 </tbody></table></div>
-<p>学びの多様化学校の「なし」は、文部科学省の設置者一覧に、その市町村を設置場所とする学校が載っていないという意味。設置の検討や予定は、この一覧からは分からない。市町村の回答に基づく「なし」は {answered_nashi} 件。</p>
+<p>「なし」{total['なし']}件のうち、公式の一覧に載っていないことを根拠にしたものは {sum(list_based_none(r) for r in rows)} 件(いまは、すべて学びの多様化学校)。市町村の回答に基づく「なし」は {answered_nashi} 件。</p>
 <p>確かめ方の内訳: {"、".join(f"{e(m)} {methods[m]}件" for m in schema.METHODS)}。確認日のいちばん新しい行は {e(modified)}。</p>
 <p><a href="ichiran/">全{len(rows)}件の一覧</a></p>
 
@@ -366,14 +420,14 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <p>1件ごとの URI は <code>{e(BASE)}id/{{id}}</code>。同じ場所に <code>.ttl</code> と <code>.jsonld</code> を付けると、その1件のデータが取れる。市町村は、e-Stat 統計LOD の標準地域コードにつないでいる。</p>
 
 <h2>対象の範囲</h2>
-<p>根拠の法律({e(LAW)})の範囲に合わせ、義務教育の段階に向けた市町村の制度を対象にしている。福岡都市圏の17市町は5種類すべてを、県内の60市町村は学びの多様化学校と県の制度だけを調べている。個人の体験、施設の評価、口コミは載せない。</p>
+<p>根拠の法律({e(LAW)})の範囲に合わせ、義務教育の段階に向けた市町村の制度を対象にしている。福岡都市圏の17市町は5種類すべてを、そのほかの市町村は主に学びの多様化学校を調べている。個人の体験、施設の評価、口コミは載せない。</p>
 """
     return page(TITLE, body, "")
 
 
 def ichiran_html(rows: list[dict[str, str]]) -> str:
     trs = "\n".join(
-        f'<tr><td>{e(r["市町村"])}</td><td>{e(KIND_SHORT[kind_slug(r)])}</td><td>{badge(r["状態"])}</td>'
+        f'<tr><th scope="row">{e(r["市町村"])}</th><td>{e(KIND_SHORT[kind_slug(r)])}</td><td>{badge(r["状態"])}</td>'
         f'<td>{e(r["制度名"])}</td><td>{e(r["確認日"])}</td><td><a href="../id/{e(r["id"])}/">{e(r["id"])}</a></td></tr>'
         for r in rows)
     body = f"""<h1>全{len(rows)}件の一覧</h1>
@@ -432,7 +486,11 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
 
     caution = ""
     if v("状態") == "確認できず":
-        caution = '<p class="note">この1件は、公式ページで見つからなかっただけ。<strong>制度が無いという意味ではない。</strong>探したページは下にある。</p>\n'
+        caution = ('<p class="note">この1件は、公式ページで見つからなかっただけ。<strong>制度が無いという意味ではない。</strong>'
+                   '探したページは下にある。使えるかどうかは、市町村の教育委員会に確かめてほしい。</p>\n')
+    elif list_based_none(row):
+        caution = ('<p class="note">この「なし」は、<strong>公式の一覧に載っていない</strong>という意味。市町村が「無い」と答えたものではない。'
+                   '設置の検討や予定は、一覧からは分からない。</p>\n')
     sib = "".join(
         f'<li><a href="../{e(s["id"])}/">{e(KIND_SHORT[kind_slug(s)])}</a> {badge(s["状態"])}</li>'
         for s in sorted(siblings, key=lambda s: list(schema.KINDS).index(kind_slug(s))) if s["id"] != row["id"])
@@ -466,7 +524,7 @@ def ns_html() -> str:
         parts.append(f'<h2>{e(title)}</h2>\n<div class="scroll"><table>\n<thead><tr><th scope="col">値</th>'
                      f'<th scope="col">名前</th><th scope="col">意味</th></tr></thead>\n<tbody>\n{trs}\n</tbody></table></div>')
     body = f"""<h1>語彙(fsl:)</h1>
-<p>名前空間は <code>{e(NS)}</code>。同じ中身の Turtle は <a href="ns.ttl">ns.ttl</a>。1件の型は schema.org の <code>GovernmentService</code>、出典は <code>dct:source</code>、市町村は <code>schema:areaServed</code> で持つ。足りない項目だけを、ここで決めている。</p>
+<p>名前空間は <code>{e(NS)}</code>。同じ中身の Turtle は <a href="ns.ttl">ns.ttl</a>。1件は「確かめた記録」(<code>fsl:Record</code>)。制度があると確かめた記録(状態が あり・予定)だけが、schema.org の <code>GovernmentService</code> でもある。制度の数を数えるときは、型ではなく状態で絞ってほしい。出典は <code>dct:source</code>、市町村は <code>schema:areaServed</code> で持つ。足りない項目だけを、ここで決めている。</p>
 <h2>項目</h2>
 <div class="scroll"><table>
 <thead><tr><th scope="col">項目</th><th scope="col">CSV の列</th><th scope="col">決まり</th></tr></thead>
@@ -495,7 +553,7 @@ def refetch_lines(row: dict[str, str], records: dict) -> list[str]:
     mine = [r for r in records["torinaoshi"] if r["id"] == row["id"]]
     lines = []
     for r in (r for r in mine if r["役割"] == "出典"):
-        day = r["取得日時"][:10]
+        day = jst_day(r["取得日時"])
         if r["取得"] != "取得":
             why = r["取得"].removeprefix("取得できず(").removesuffix(")")
             lines.append(f"出典: {day} に取り直したが、取得できなかった({why})")
@@ -504,7 +562,7 @@ def refetch_lines(row: dict[str, str], records: dict) -> list[str]:
     places = [r for r in mine if r["役割"] == "探した場所"]
     if places:
         got = sum(r["取得"] == "取得" for r in places)
-        day = max(r["取得日時"][:10] for r in places)
+        day = max(jst_day(r["取得日時"]) for r in places)
         lines.append(f"探した場所: {day} に{len(places)}ページを取り直した(取得できた {got})。変わった所は記録している")
     return lines
 
@@ -522,19 +580,25 @@ def recheck_line(row: dict[str, str], records: dict) -> str:
 
 
 def inquiry_lines(row: dict[str, str], records: dict) -> list[str]:
-    """問い合わせの記録。差し支えがあると言われた回答は、中身を載せない。"""
-    kind = row["制度の種類"]
+    """問い合わせの記録。載せるのは、日付・方法・担当課と、回答があったかどうかだけ。
+
+    回答の文面は載せない(自由に書いた文で、人の名前が入るかもしれない)。回答の中身は、反映した行の項目と「なしの根拠」に出る。
+    突き合わせ: 「反映したid」があればそれだけを見る。無ければ、同じ市町村・同じ種類の行すべてに出す。
+    """
+    slug = kind_slug(row)
     lines = []
     for r in records["toiawase"]:
-        reflected = row["id"] in r.get("反映したid", "").replace(",", " ").split()
-        same = r["市町村コード"] == row["市町村コード"] and r["種類"] in (kind, kind_slug(row), KIND_SHORT[kind_slug(row)])
-        if not (reflected or same):
+        reflected = r.get("反映したid", "").replace(",", " ").replace("|", " ").split()
+        if reflected:
+            if row["id"] not in reflected:
+                continue
+        elif not (r["市町村コード"] == row["市町村コード"] and r["種類"].strip() in (row["制度の種類"], slug, KIND_SHORT[slug])):
             continue
         head = f"{r['日付']} {r['担当課']}に{r['方法']}で問い合わせた。"
-        if "差し支え" in r.get("公開の可否", ""):
-            lines.append(head + "回答は載せない(載せることに差し支えがあるとのこと)")
+        if r.get("公開の可否", "").strip().startswith("差し支えあり"):
+            lines.append(head + "回答は、データに使っていない(載せることに差し支えがあるとのこと)")
         elif r["回答"].strip():
-            lines.append(head + f"回答: {r['回答']}")
+            lines.append(head + ("回答があり、この1件に反映した" if reflected else "回答があった"))
         else:
             lines.append(head + "回答はまだ無い")
     return lines

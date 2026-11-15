@@ -29,8 +29,11 @@ def test_jsonld_parses_as_rdf():
     g = rdflib.Graph()
     g.parse(data=build.build(), format="json-ld")
     rows = schema.load("data/seido.csv")
+    records = set(g.subjects(rdflib.RDF.type, rdflib.URIRef(build.BASE + "ns#Record")))
+    assert len(records) == len(rows)
+    # 制度そのもの(GovernmentService)と言えるのは、あり・予定の行だけ。なし・確認できずを制度として数えさせない
     services = set(g.subjects(rdflib.RDF.type, rdflib.URIRef("https://schema.org/GovernmentService")))
-    assert len(services) == len(rows)
+    assert len(services) == sum(r["状態"] in ("あり", "予定") for r in rows)
 
 
 def test_area_links_to_estat_standard_area_code():

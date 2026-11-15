@@ -128,6 +128,8 @@ def test_matrix_matches_the_data(site, rows):
             r = cell.get((a["市町村コード"], k))
             if r:
                 assert f'href="id/{r["id"]}/"' in td and f">{r['状態']}<" in td
+                # 一覧に載っていないことを根拠にした「なし」には、必ず ※ が付く
+                assert ("※" in td) == publish.list_based_none(r)
             else:
                 assert "未着手" in td and "href" not in td
 
@@ -171,17 +173,29 @@ def test_recheck_line_counts_only_filled_judgements():
     assert publish.recheck_line(REC, recs()) == ""
 
 
-def test_inquiry_answer_is_hidden_when_publication_is_declined():
+def test_inquiry_never_shows_the_answer_text():
     base = {"日付": "2026-11-20", "市町村コード": "40999", "市町村": "見本町", "担当課": "学校教育課", "方法": "メール",
             "種類": "フリースクール等の利用料の補助(保護者向け)", "反映したid": ""}
-    shown = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "制度は無い", "公開の可否": ""}]))
-    assert shown == ["2026-11-20 学校教育課にメールで問い合わせた。回答: 制度は無い"]
-    hidden = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "内々の話", "公開の可否": "差し支えあり"}]))
-    assert len(hidden) == 1 and "内々の話" not in hidden[0] and "載せない" in hidden[0]
+    for kahi in ("", "不可", "差し支えなし", "差し支えあり"):
+        out = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "担当の見本さんによると制度は無い", "公開の可否": kahi}]))
+        assert len(out) == 1 and "見本さん" not in out[0] and "制度は無い" not in out[0]
+    declined = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "a", "公開の可否": "差し支えあり"}]))
+    assert "差し支えがあるとのこと" in declined[0]
+    fine = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "a", "公開の可否": "差し支えなし"}]))
+    assert "差し支えがある" not in fine[0] and "回答があった" in fine[0]
     waiting = publish.inquiry_lines(REC, recs(toiawase=[base | {"回答": "", "公開の可否": ""}]))
     assert "回答はまだ無い" in waiting[0]
-    other = publish.inquiry_lines(REC, recs(toiawase=[base | {"市町村コード": "40998", "回答": "a", "公開の可否": ""}]))
-    assert other == []
+
+
+def test_inquiry_is_matched_by_reflected_id_first():
+    base = {"日付": "2026-11-20", "市町村コード": "40999", "市町村": "見本町", "担当課": "学校教育課", "方法": "電話",
+            "種類": "フリースクール等の利用料の補助(保護者向け)", "回答": "a", "公開の可否": ""}
+    other_town = publish.inquiry_lines(REC, recs(toiawase=[base | {"市町村コード": "40998", "反映したid": ""}]))
+    other_kind = publish.inquiry_lines(REC, recs(toiawase=[base | {"種類": "学びの多様化学校", "反映したid": ""}]))
+    other_id = publish.inquiry_lines(REC, recs(toiawase=[base | {"反映したid": "40999-fs-hojo-2"}]))
+    mine = publish.inquiry_lines(REC, recs(toiawase=[base | {"反映したid": "40999-fs-hojo-2 40999-fs-hojo"}]))
+    assert other_town == [] and other_kind == [] and other_id == []
+    assert "この1件に反映した" in mine[0]
 
 
 def test_refetch_lines_say_when_a_source_could_not_be_fetched():
@@ -190,7 +204,7 @@ def test_refetch_lines_say_when_a_source_could_not_be_fetched():
         {"id": "40999-fs-hojo", "役割": "探した場所", "URL": "v", "取得日時": "2026-11-15T19:32:00+00:00", "取得": "取得", "判定": ""},
     ]
     lines = publish.refetch_lines(REC, recs(torinaoshi=rows))
-    assert lines[0] == "出典: 2026-11-15 に取り直したが、取得できなかった(HTTP 404)"
+    assert lines[0] == "出典: 2026-11-16 に取り直したが、取得できなかった(HTTP 404)"
     assert "1ページを取り直した(取得できた 1)" in lines[1]
 
 
@@ -211,3 +225,28 @@ def test_strings_carry_language_and_ids_do_not(site):
     assert all(o.language == "ja" for o in g.objects(None, fsl.note))
     assert all(o.language is None for o in g.objects(None, sdo.identifier))
     assert all(isinstance(o, rdflib.URIRef) for o in g.objects(None, fsl.searchedAt))
+
+
+def test_list_based_none_is_explained_on_its_page(site, rows):
+    for r in rows:
+        text = (site / "id" / r["id"] / "index.html").read_text(encoding="utf-8")
+        assert ("公式の一覧に載っていない</strong>" in text) == publish.list_based_none(r), r["id"]
+
+
+def test_only_existing_systems_are_government_services(site, rows):
+    g = graph((site / "seido.ttl").read_text(encoding="utf-8"), "turtle")
+    sdo = rdflib.Namespace("https://schema.org/")
+    fsl = rdflib.Namespace(publish.NS)
+    services = {str(s) for s in g.subjects(rdflib.RDF.type, sdo.GovernmentService)}
+    assert services == {f"{build.BASE}id/{r['id']}" for r in rows if r["状態"] in ("あり", "予定")}
+    assert len(set(g.subjects(rdflib.RDF.type, fsl.Record))) == len(rows)
+
+
+def test_scope_note_counts_come_from_the_data(site, rows):
+    text = (site / "index.html").read_text(encoding="utf-8")
+    areas = schema.read_csv("data/shichoson.csv")
+    have = {r["市町村コード"] for r in rows if r["制度の種類"] == "学びの多様化学校"} - {"40000"}
+    assert f"県内60市町村のうち {len(have)}" in text
+    for a in areas:
+        if a["市町村コード"] != "40000" and a["市町村コード"] not in have:
+            assert a["市町村"] in text.split("まだ行が無いのは")[1].split("。")[0]

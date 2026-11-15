@@ -2,6 +2,7 @@
 
 URI の土台(BASE)は GitHub Pages の公開の場所(2026-11-15 に決定。変えない)。置き場所の決まりは docs/公開の形.md。
 文字列には言語(ja)を付ける。id と補助率は、言語を付けない。
+1件は「確かめた記録」(fsl:Record)。制度があると確かめた行(あり・予定)だけ、schema.org の GovernmentService でもある。
 市町村は e-Stat 統計LOD の標準地域コード(時期を持たないコード)につなぐ。書式の出典と、
 実際に引いて確かめる手順は links.py にある。e-Gov 法令・学校コードへのリンクはまだ入れていない。
 
@@ -56,7 +57,8 @@ def to_node(row: dict[str, str]) -> dict:
 
     node: dict = {
         "@id": f"{BASE}id/{v('id')}",
-        "@type": "schema:GovernmentService",
+        # どの行も「確かめた記録」。制度そのものと言えるのは、あり・予定の行だけ
+        "@type": ["fsl:Record", "schema:GovernmentService"] if v("状態") in ("あり", "予定") else ["fsl:Record"],
         "identifier": v("id"),
         "areaServed": {
             "@id": SAC + v("市町村コード"),
