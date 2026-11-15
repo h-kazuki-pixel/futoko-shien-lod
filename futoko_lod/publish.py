@@ -284,7 +284,7 @@ def page(title: str, body: str, root: str, head: str = "") -> str:
 <link rel="stylesheet" href="{root}style.css">
 {head}</head>
 <body>
-<header><a href="{root}">{TITLE}</a></header>
+<header><a href="{root}">{TITLE}</a> ／ <a href="{root}about/" style="font-weight:400">この作品について</a></header>
 <main>
 {body}
 </main>
@@ -512,6 +512,70 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
     return page(f"{title} | {TITLE}", body, "../../", head)
 
 
+def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict) -> str:
+    """この作品について。数はすべてデータから数える(書いた時点の数を残さない)。"""
+    total = collections.Counter(r["状態"] for r in rows)
+    metro = {a["市町村コード"] for a in areas if a["福岡都市圏"] == "○"}
+    cells = {(r["市町村コード"], kind_slug(r)): r["状態"] for r in rows if r["市町村コード"] in metro and kind_slug(r) in MATRIX_KINDS}
+    cell_count = collections.Counter(cells.values())
+    area_codes = {r["市町村コード"] for r in rows}
+    judged = collections.Counter(r["判定"] for r in records["saikakunin"] if r["判定"])
+    pages = {r["URL"]: r for r in records["torinaoshi"]}
+    got = sum(r["取得"] == "取得" for r in pages.values())
+    answered_nashi = sum(r["状態"] == "なし" and r["確認方法"] == "問い合わせ" for r in rows)
+    listed_nashi = sum(list_based_none(r) for r in rows)
+    refetch = (f"いちばん新しい取り直しでは、{len(pages)}ページのうち {got} ページを取得できた。" if pages else "")
+    body = f"""<h1>この作品について</h1>
+<p class="lead">不登校の子どもと保護者が使える公的な支援は、市町村ごとに違う。このデータは、福岡県の市町村について、制度の有無と中身を同じ項目で並べ、1件ごとに公式の出典と確認日を付けたもの。</p>
+
+<h2>解こうとしている課題</h2>
+<p>市町村の公式サイトに制度の記載が無いとき、それが「制度が無い」のか「載っていないだけ」なのかは、ページからは分からない。一覧にまとめるときに、この2つは同じ空欄になりやすい。空欄を「無い」と読めば、使える制度を見逃す。</p>
+<p>このデータは、状態を4つに分ける。<strong>あり、予定、なし、確認できず。</strong>「なし」と書けるのは、市町村が無いと答えた記録か、公式の一覧に載っていないことを確かめた記録がある場合だけ。見つからなかっただけのものは「確認できず」とし、どのページを探したかを残す。</p>
+
+<h2>いまの中身</h2>
+<div class="scroll"><table>
+<thead><tr><th scope="col">数えたもの</th><th scope="col">数</th><th scope="col">数え方</th></tr></thead>
+<tbody>
+<tr><th scope="row">記録</th><td class="num">{len(rows)}</td><td>1件 = 1市町村の1種類。{len(area_codes)}の市町村・県</td></tr>
+<tr><th scope="row">あり・予定</th><td class="num">{total['あり'] + total['予定']}</td><td>出典のページに、根拠の語句と数字があることを照合した</td></tr>
+<tr><th scope="row">なし</th><td class="num">{total['なし']}</td><td>公式の一覧に載っていないことによるもの {listed_nashi}、市町村の回答によるもの {answered_nashi}</td></tr>
+<tr><th scope="row">確認できず</th><td class="num">{total['確認できず']}</td><td>探した場所を記録している</td></tr>
+<tr><th scope="row">福岡都市圏17市町×5種類</th><td class="num">{len(cells)} / {len(metro) * len(MATRIX_KINDS)}</td><td>状態が付いたマス(あり {cell_count['あり']}、予定 {cell_count['予定']}、なし {cell_count['なし']}、確認できず {cell_count['確認できず']})</td></tr>
+<tr><th scope="row">人が出典と見比べた項目</th><td class="num">{sum(judged.values())} / {len(records['saikakunin'])}</td><td>「あり」「予定」の行の項目。合っている {judged['合っている']}、違う {judged['違う']}、分からない {judged['分からない']}</td></tr>
+<tr><th scope="row">市町への問い合わせの記録</th><td class="num">{len(records['toiawase'])}</td><td></td></tr>
+</tbody></table></div>
+
+<h2>正しさを保つ仕組み</h2>
+<ul>
+<li><strong>読み込みの検査。</strong>「あり」「予定」は、出典の URL・根拠の語句・確認日がそろわないと保存できない。「確認できず」は、探した場所が無いと保存できない。出典は、市町村・県・国の公式サイトだけ。</li>
+<li><strong>出典との照合。</strong>金額・対象・時期に出てくる数字と単位が、出典のページに実際にあるかを、プログラムで確かめる。合わない行は公開しない。</li>
+<li><strong>別の目。</strong>読み取りとは別の呼び出し、別の種類の AI、人の3つで、出典と見比べる。人が見た数は上の表のとおり。</li>
+<li><strong>定期的な取り直し。</strong>週に1回、出典と探した場所のページを取り直し、前回から変わった所を記録する。出典と合わなくなった行は、知らせが出る。{refetch}</li>
+</ul>
+
+<h2>使い方</h2>
+<ul>
+<li><strong>人が読む。</strong><a href="../">市町×種類の表</a>から、1件のページへ。出典のページへのリンク、確認日、確かめ方が載っている。</li>
+<li><strong>プログラムで読む。</strong><a href="../seido.csv">CSV</a>、<a href="../seido.jsonld">JSON-LD</a>、<a href="../seido.ttl">Turtle</a>。1件ごとに URI があり、<code>.ttl</code> か <code>.jsonld</code> を付けるとその1件が取れる。ほかのサイトの上のプログラムからも読める。</li>
+<li><strong>つなぐ。</strong>市町村は、e-Stat 統計LOD の標準地域コードの URI で持つ。人口などの統計と、市町村の単位で組み合わせられる。出典は <code>dct:source</code> で公式ページにつながる。</li>
+<li><strong>数える。</strong>{len(rows)}件すべてが「確かめた記録」(<code>fsl:Record</code>)。制度があると確かめた記録だけが、schema.org の <code>GovernmentService</code> でもある。語彙の説明は <a href="../ns">ns</a>。</li>
+</ul>
+<p>データは CC BY 4.0、プログラムは MIT ライセンス。作り方と検査の決まりは、<a href="{REPO}">リポジトリ</a>にある。同じ手順で、ほかの県にも広げられる。</p>
+
+<h2>分かっていないこと、できていないこと</h2>
+<ul>
+<li>「確認できず」が {total['確認できず']} 件ある。市町に問い合わせて減らしている途中。</li>
+<li>「なし」のうち {listed_nashi} 件は、公式の一覧に載っていないという意味で、市町村が無いと答えたものではない。</li>
+<li>人が出典と見比べたのは、{len(records['saikakunin'])} 項目のうち {sum(judged.values())}。誤りの割合は、まだ言えない。</li>
+<li>照合で分かるのは「ページに無い数字を載せていない」ことまで。数字の意味の取り違えは、人の目で見るしかない。</li>
+<li>都市圏の外の市町村は、主に学びの多様化学校だけを調べている。</li>
+<li>GitHub Pages では、制度の URI とページを分ける転送(303)や、形式の出し分けはできない。</li>
+<li>制度は変わる。申請できるかどうかは、必ず市町村の窓口で確かめてほしい。</li>
+</ul>
+"""
+    return page(f"この作品について | {TITLE}", body, "../")
+
+
 def ns_html() -> str:
     props = "\n".join(
         f'<tr id="{name}"><td><code>fsl:{name}</code></td><td>{e(label)}</td><td>{e(comment)}</td></tr>'
@@ -624,6 +688,8 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
     records = load_records(Path(csv_path).parent)
     put("index.html", index_html(rows, areas, records))
     put("ichiran/index.html", ichiran_html(rows))
+    (out / "about").mkdir()
+    put("about/index.html", about_html(rows, areas, records))
     put("ns.html", ns_html())
     put("ns.ttl", vocab_turtle())
     put("dataset.ttl", dataset_turtle(rows))

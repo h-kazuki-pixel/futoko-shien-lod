@@ -140,7 +140,7 @@ def test_internal_links_resolve(site):
             if href.startswith(("http://", "https://")):
                 continue
             target = (p.parent / href).resolve()
-            if href == "ns":  # GitHub Pages は拡張子なしの URL に ns.html を返す
+            if href in ("ns", "../ns"):  # GitHub Pages は拡張子なしの URL に ns.html を返す
                 target = site / "ns.html"
             assert target.exists() or (target / "index.html").exists(), f"{p}: {href}"
 
@@ -250,3 +250,13 @@ def test_scope_note_counts_come_from_the_data(site, rows):
     for a in areas:
         if a["市町村コード"] != "40000" and a["市町村コード"] not in have:
             assert a["市町村"] in text.split("まだ行が無いのは")[1].split("。")[0]
+
+
+def test_about_page_numbers_come_from_the_data(site, rows):
+    text = re.sub(r"<[^>]+>", "", (site / "about" / "index.html").read_text(encoding="utf-8"))
+    c = {s: sum(r["状態"] == s for r in rows) for s in schema.STATUSES}
+    assert f"記録{len(rows)}" in text.replace("\n", "")
+    assert f"あり・予定{c['あり'] + c['予定']}" in text.replace("\n", "")
+    assert f"「確認できず」が {c['確認できず']} 件ある" in text
+    judged = sum(bool(r["判定"]) for r in schema.read_csv("data/saikakunin.csv"))
+    assert f"項目のうち {judged}。" in text
