@@ -1,0 +1,20 @@
+# 組み合わせの例(e-Stat 統計LOD と、標準地域コードで並べる)。手で起動する。
+name: kumiawase
+on:
+  workflow_dispatch:
+    inputs:
+      args:
+        description: "python -m futoko_lod.kumiawase に渡すもの"
+        default: "--probe 40219"
+permissions:
+  contents: read
+jobs:
+  kumiawase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m futoko_lod.kumiawase ${{ inputs.args }}
