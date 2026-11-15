@@ -86,59 +86,103 @@ PUPILS = {"E2501": "小学校児童数", "E3501": "中学校生徒数"}  # --ind
 
 MIN_YEAR = "2014"  # 行が多いと1000行で切られる(2026-11-16 に確かめた)ので、新しい年だけを引く
 CSV_PATH = "data/kumiawase/jidou_seito.csv"
-CSV_COLUMNS = ["市町村コード", "市町村", "小学校児童数", "小学校児童数の年", "中学校生徒数", "中学校生徒数の年",
+CSV_COLUMNS = ["標準地域コードのURI", "市町村コード", "市町村", "小学校児童数", "小学校児童数の年", "中学校生徒数", "中学校生徒数の年",
                "統計LODの地域コード", "備考", "取得日"]
 
 
-def pupils_query(codes: list[str]) -> str:
-    """標準地域コード(時期なし)から、時期つきのコードを辿って観測値を引く。
+def area_uris(jsonld_path: str = "data/seido.jsonld", codes: set[str] | None = None) -> dict[str, str]:
+    """公開している JSON-LD の schema:areaServed から、市町村の URI を集める。{URI: 名前}
 
-    市制などでコードが替わった所(那珂川市)は、最新のコードの1つ前(sacs:previousCode)も見る。
+    つなぐ手がかりは、この URI。市町村の台帳(CSV)のコードからは作らない。
     """
-    values = " ".join(f"<{SAC}{c}>" for c in codes)
+    with open(jsonld_path, encoding="utf-8") as f:
+        doc = json.load(f)
+    out: dict[str, str] = {}
+    for node in doc["@graph"]:
+        area = node["areaServed"]
+        if codes is None or area["identifier"] in codes:
+            out[area["@id"]] = area["name"]
+    return out
+
+
+def _observations(inds: str) -> str:
+    return (f"?s <{REF_AREA}> ?area ; <{DATASET}> <{SSDS}d00200502em> ; <{INDICATOR}> ?ind ; <{TIME}> ?t ; <{OBS}> ?v .\n"
+            f'  filter(?ind in ({inds}) && str(?t) >= "{MIN_YEAR}")')
+
+
+def pupils_query(uris: list[str]) -> str:
+    """時期なしの URI から、同じコードの時期つきのコード(最新と過去)を辿って、観測値を引く。"""
+    values = " ".join(f"<{u}>" for u in uris)
     inds = ", ".join(f"<{CODE}{k}>" for k in PUPILS)
     return f"""select ?plain ?area ?ind ?t ?v where {{
   values ?plain {{ {values} }}
   {{ ?plain <{SACS}latestCode> ?area }} union {{ ?plain <{SACS}pastCode> ?area }}
-  union {{ ?plain <{SACS}latestCode> ?now . ?now <{SACS}previousCode> ?area }}
-  ?s <{REF_AREA}> ?area ; <{DATASET}> <{SSDS}d00200502em> ; <{INDICATOR}> ?ind ; <{TIME}> ?t ; <{OBS}> ?v .
-  filter(?ind in ({inds}) && str(?t) >= "{MIN_YEAR}")
+  {_observations(inds)}
 }}"""
 
 
-def latest_pupils(rows: list[dict[str, str]]) -> dict[str, dict[str, tuple[str, int, str]]]:
-    """市町村コードごと・指標ごとに、いちばん新しい年の値を選ぶ。{コード: {指標: (年, 人数, 時期つきのコード)}}
+def predecessor_query(uris: list[str]) -> str:
+    """いまのコードに観測値が無い市町村について、その市町村になる前の地域の観測値を引く。
 
-    同じ年なら、いまのコードと同じ番号の地域を先に取る(前のコードの値は、いまのコードに値が無いときだけ使う)。
+    那珂川市(C40231-20181001)は、観測値が1つも無く、sacs:succeedingMunicipality で前の地域から指されていた
+    (2026-11-16 に確かめた)。合併で前の地域が複数あるときは、ここで引けても使わない(latest_pupils の側で止める)。
     """
-    out: dict[str, dict[str, tuple[str, int, str]]] = {}
-    for r in rows:
-        code = r["plain"].rsplit("/C", 1)[1]
+    values = " ".join(f"<{u}>" for u in uris)
+    inds = ", ".join(f"<{CODE}{k}>" for k in PUPILS)
+    return f"""select ?plain ?area ?ind ?t ?v where {{
+  values ?plain {{ {values} }}
+  ?plain <{SACS}latestCode> ?now . ?area <{SACS}succeedingMunicipality> ?now .
+  {_observations(inds)}
+}}"""
+
+
+def latest_pupils(rows: list[dict[str, str]], predecessor_rows: list[dict[str, str]] | None = None) -> dict[str, dict]:
+    """URI ごと・指標ごとに、いちばん新しい年の値を選ぶ。{URI: {指標: (年, 人数, 時期つきのコード), "備考": 文}}
+
+    同じ年に時期つきのコードが複数あれば、新しいコード(日付の大きいほう)を取る。
+    いまのコードに値が無いときだけ、前の地域の値を使う。前の地域が2つ以上あれば、足さずに空のままにする。
+    """
+    out: dict[str, dict] = {}
+
+    def pick(target: dict, r: dict[str, str]) -> None:
         ind = r["ind"].rsplit("-", 1)[1]
         area = r["area"].rsplit("/", 1)[1]
         if ind not in PUPILS:
+            return
+        key = (r["t"][:4], area)
+        if ind not in target or key > (target[ind][0], target[ind][2]):
+            target[ind] = (r["t"][:4], int(float(r["v"])), area)
+
+    for r in rows:
+        pick(out.setdefault(r["plain"], {}), r)
+    by_plain: dict[str, list[dict[str, str]]] = {}
+    for r in predecessor_rows or []:
+        if r["plain"] not in out:
+            by_plain.setdefault(r["plain"], []).append(r)
+    for plain, rs in by_plain.items():
+        codes = sorted({r["area"].rsplit("/", 1)[1].split("-")[0] for r in rs})
+        if len(codes) > 1:
+            out[plain] = {"備考": "前の地域が複数ある(" + " ".join(codes) + ")。足していない"}
             continue
-        same = area.startswith("C" + code)
-        key = (same, r["t"][:4])
-        cur = out.setdefault(code, {}).get(ind)
-        if cur is None or key > (cur[2].startswith("C" + code), cur[0]):
-            out[code][ind] = (r["t"][:4], int(float(r["v"])), area)
+        target: dict = {}
+        for r in rs:
+            pick(target, r)
+        target["備考"] = f"いまのコードには値が無い。その前の地域({codes[0]})の値"
+        out[plain] = target
     return out
 
 
-def table(areas: list[dict[str, str]], got: dict, date: str) -> list[dict[str, str]]:
+def table(uris: dict[str, str], got: dict, date: str) -> list[dict[str, str]]:
     out = []
-    for a in areas:
-        code = a["市町村コード"]
-        g = got.get(code, {})
-        used = sorted({v[2] for v in g.values()})
-        other = [u for u in used if not u.startswith("C" + code)]
+    for uri, name in uris.items():
+        g = got.get(uri, {})
+        used = sorted({v[2] for k, v in g.items() if k in PUPILS})
         out.append({
-            "市町村コード": code, "市町村": a["市町村"],
+            "標準地域コードのURI": uri, "市町村コード": uri.rsplit("/C", 1)[1], "市町村": name,
             "小学校児童数": str(g["E2501"][1]) if "E2501" in g else "", "小学校児童数の年": g["E2501"][0] if "E2501" in g else "",
             "中学校生徒数": str(g["E3501"][1]) if "E3501" in g else "", "中学校生徒数の年": g["E3501"][0] if "E3501" in g else "",
             "統計LODの地域コード": " ".join(used),
-            "備考": ("コードが替わる前の地域の値(" + " ".join(other) + ")") if other else ("" if g else "統計LOD に値が無い"),
+            "備考": g.get("備考", "" if used else "この問い合わせでは返らなかった(統計LOD に無いとは確かめていない)"),
             "取得日": date,
         })
     return out
@@ -157,14 +201,18 @@ def main() -> int:
         import datetime as dt
         from pathlib import Path
         from . import schema
-        metro = [a for a in schema.read_csv("data/shichoson.csv") if a["福岡都市圏"] == "○"]
-        rows = show("17市町の児童数・生徒数", pupils_query([a["市町村コード"] for a in metro]))
+        metro = {a["市町村コード"] for a in schema.read_csv("data/shichoson.csv") if a["福岡都市圏"] == "○"}
+        uris = area_uris(codes=metro)
+        rows = show("17市町の児童数・生徒数(公開データの areaServed の URI から)", pupils_query(list(uris)))
         if not rows or len(rows) >= 1000:
             print(f"行の数が {len(rows)}。届かなかったか、切られた恐れがある。書き出さない")
             return 1
-        out = table(metro, latest_pupils(rows), dt.datetime.now(dt.timezone.utc).date().isoformat())
+        missing = [u for u in uris if u not in {r["plain"] for r in rows}]
+        before = show("値が返らなかった市町村の、前の地域", predecessor_query(missing)) if missing else []
+        today = dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).date().isoformat()  # 日本時間
+        out = table(uris, latest_pupils(rows, before), today)
         for r in out:
-            print("| " + " | ".join(r[c] for c in CSV_COLUMNS) + " |")
+            print("| " + " | ".join(r[c] for c in CSV_COLUMNS[1:]) + " |")
         if args.pupils == "write":
             Path(CSV_PATH).parent.mkdir(parents=True, exist_ok=True)
             with open(CSV_PATH, "w", encoding="utf-8", newline="") as f:
