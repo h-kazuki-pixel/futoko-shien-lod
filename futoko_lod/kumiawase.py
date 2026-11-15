@@ -42,7 +42,7 @@ def show(title: str, query: str) -> list[dict[str, str]]:
         print(f"失敗: {type(e).__name__}: {str(e)[:200]}")
         return []
     print(f"{len(rows)} 行")
-    for r in rows[:60]:
+    for r in rows[:12]:
         print("  " + " | ".join(f"{k}={v[:110]}" for k, v in r.items()))
     return rows
 
@@ -78,13 +78,53 @@ def indicators(code: str, part: str) -> None:
     show(f"分野 {part} の指標(最新のコードの分)", q)
 
 
+OBS = "http://purl.org/linked-data/sdmx/2009/measure#obsValue"
+SACS = "http://data.e-stat.go.jp/lod/terms/sacs#"
+CODE = "http://data.e-stat.go.jp/lod/ontology/g00200502/code/indicator-"
+PUPILS = {"E2501": "小学校児童数", "E3501": "中学校生徒数"}  # --indicators で、名前と年(2011〜2015)を確かめた
+
+
+def pupils_query(codes: list[str]) -> str:
+    values = " ".join(f"<{SAC}{c}>" for c in codes)
+    inds = ", ".join(f"<{CODE}{k}>" for k in PUPILS)
+    return f"""select ?plain ?area ?ind ?t ?v where {{
+  values ?plain {{ {values} }}
+  {{ ?plain <{SACS}latestCode> ?area }} union {{ ?plain <{SACS}pastCode> ?area }}
+  ?s <{REF_AREA}> ?area ; <{DATASET}> <{SSDS}d00200502em> ; <{INDICATOR}> ?ind ; <{TIME}> ?t ; <{OBS}> ?v .
+  filter(?ind in ({inds}))
+}}"""
+
+
+def latest_pupils(rows: list[dict[str, str]]) -> dict[str, dict[str, tuple[str, int]]]:
+    """市町村コードごと・指標ごとに、いちばん新しい年の値を選ぶ。{コード: {指標: (年, 人数)}}"""
+    out: dict[str, dict[str, tuple[str, int]]] = {}
+    for r in rows:
+        code = r["plain"].rsplit("/C", 1)[1]
+        ind = r["ind"].rsplit("-", 1)[1]
+        year, value = r["t"][:4], int(float(r["v"]))
+        if ind in PUPILS and (ind not in out.setdefault(code, {}) or year > out[code][ind][0]):
+            out[code][ind] = (year, value)
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--probe", nargs="?", const="40219")
     ap.add_argument("--indicators", nargs="+", metavar="コード 分野...")
+    ap.add_argument("--pupils", action="store_true")
     args = ap.parse_args()
     if args.probe:
         probe(args.probe)
+    if args.pupils:
+        from . import schema
+        metro = [a for a in schema.read_csv("data/shichoson.csv") if a["福岡都市圏"] == "○"]
+        rows = show("17市町の児童数・生徒数", pupils_query([a["市町村コード"] for a in metro]))
+        got = latest_pupils(rows)
+        print("\n| コード | 市町 | " + " | ".join(PUPILS.values()) + " |\n|---|---|---|---|")
+        for a in metro:
+            cells = [f"{got[a['市町村コード']][k][1]}({got[a['市町村コード']][k][0]}年)" if k in got.get(a["市町村コード"], {}) else "無い" for k in PUPILS]
+            print(f"| {a['市町村コード']} | {a['市町村']} | " + " | ".join(cells) + " |")
+        print("使われた時期つきのコード: " + ", ".join(sorted({r["area"].rsplit("/", 1)[1] for r in rows})))
     if args.indicators:
         for part in args.indicators[1:]:
             indicators(args.indicators[0], part)
