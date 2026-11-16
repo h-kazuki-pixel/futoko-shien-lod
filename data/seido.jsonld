@@ -982,7 +982,8 @@
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-online",
    "@type": [
-    "fsl:Record"
+    "fsl:Record",
+    "schema:GovernmentService"
    ],
    "identifier": "40219-online",
    "areaServed": {
@@ -993,18 +994,21 @@
     "sameAs": "http://ja.dbpedia.org/resource/大野城市"
    },
    "kind": "fsl:kind-online",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-16",
    "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
-   "searchedAt": [
-    "https://www.city.onojo.fukuoka.jp/kosodate/kiji0037070/index.html"
-   ]
+   "name": "オンライン学習支援事業(オンラインCOMPASS)",
+   "eligibility": "市立中学校に在籍し、欠席が長く続いている1年生から3年生の希望者",
+   "source": "https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html",
+   "sourceName": "大野城市「学校に通いにくい状況にある児童生徒への支援」",
+   "basisPhrase": "オンライン配信による学習支援",
+   "note": "申し込みは在籍する中学校を通じて市教育委員会へ。カリキュラムと配信予定は市の別ページにある"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-shien-center",
    "@type": [
-    "fsl:Record"
+    "fsl:Record",
+    "schema:GovernmentService"
    ],
    "identifier": "40219-shien-center",
    "areaServed": {
@@ -1015,13 +1019,16 @@
     "sameAs": "http://ja.dbpedia.org/resource/大野城市"
    },
    "kind": "fsl:kind-shien-center",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-16",
    "checkMethod": "fsl:method-kikai",
-   "note": "「大野城市教育サポートセンター」は相談窓口として案内されている。通う教室(教育支援センター)の記載は見つからなかった。無いことは確認していない",
-   "searchedAt": [
-    "https://www.city.onojo.fukuoka.jp/kosodate/kiji0037070/index.html"
-   ]
+   "name": "未来教室コンパス(適応指導教室)",
+   "eligibility": "市立小中学校に在籍し、不登校の状況にある児童生徒",
+   "amountText": "授業料は無料。活動費が月1,000円",
+   "source": "https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html",
+   "sourceName": "大野城市「学校に通いにくい状況にある児童生徒への支援」",
+   "basisPhrase": "未来教室コンパス(適応指導教室)",
+   "note": "北コミュニティセンター内。学校の授業日のうち月曜から金曜。申し込みは担任を通じて"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-shusseki",
