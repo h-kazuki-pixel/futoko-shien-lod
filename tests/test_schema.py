@@ -241,3 +241,16 @@ def test_area_master_code_and_name():
 
 def test_candidates_load():
     schema.load("data/kouho.csv")
+
+
+@pytest.mark.parametrize("place", ["市のトップページ", "www.city.mihon.lg.jp/kyoiku/", "httpx://www.city.mihon.lg.jp/"])
+def test_place_must_be_url(place):
+    # 点3: 探した場所は URL だけ。文字で書いたものや、スキームの無いものは通さない
+    assert "探した場所" in rules(kakunin_dekizu(探した場所=place))
+
+
+def test_place_several_urls():
+    row = kakunin_dekizu(探した場所="https://www.city.mihon.lg.jp/kyoiku/ | https://www.city.mihon.lg.jp/kosodate/")
+    assert "探した場所" not in rules(row)
+    row = kakunin_dekizu(探した場所="https://www.city.mihon.lg.jp/kyoiku/ | 電話で聞いた")
+    assert "探した場所" in rules(row)

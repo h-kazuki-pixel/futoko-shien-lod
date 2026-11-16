@@ -201,7 +201,9 @@ def check_row(row: dict[str, str], extra_domains: frozenset[str] = frozenset()) 
         if v(key) and not is_official_url(v(key), extra_domains):
             bad("公式サイト", f"{key} が公式サイトのドメインではない: {v(key)}")
     for place in filter(None, (p.strip() for p in v("探した場所").split(SEP.strip()))):
-        if place.startswith("http") and not is_official_url(place, extra_domains):
+        if not place.startswith(("http://", "https://")):
+            bad("探した場所", f"探した場所は URL で書く(区切りは「{SEP.strip()}」): {place}")
+        elif not is_official_url(place, extra_domains):
             bad("公式サイト", f"探した場所が公式サイトのドメインではない: {place}")
 
     # --- 要綱 ---
