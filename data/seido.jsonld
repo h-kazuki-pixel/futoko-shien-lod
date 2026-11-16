@@ -367,11 +367,10 @@
    "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
    "name": "大牟田市立宅峰中学校 ほしぞら分校",
-   "startText": "令和6年4月から",
    "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
    "basisPhrase": "大牟田市立宅峰中学校",
-   "note": "文部科学省の一覧による。分校は夜間中学で、不登校の生徒が夜間中学の生徒と一緒に学ぶ形と一覧に説明がある。一覧での指定年は令和6年。対象は市の資料でまだ確かめていない"
+   "note": "文部科学省の一覧による。分校は夜間中学で、一覧の説明では夜間中学の生徒と一緒に学ぶ。夜間中学としての開始は令和6年4月(一覧の説明)。一覧での指定年は令和6年。対象と、学びの多様化学校としての開始は、市の資料でまだ確かめていない"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40203-fs-hojo",
@@ -2109,7 +2108,7 @@
     "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-tayouka#source2",
     "@type": "fsl:AdditionalSource",
     "source": "https://www.pref.fukuoka.lg.jp/uploaded/attachment/271157.pdf",
-    "sourceName": "福岡県のサイトにある学校の概要の資料(宇美町立学びの多様化学校ハピネス分校)",
+    "sourceName": "福岡県のサイトにある学校の概要の資料(見出しは「宇美町立学びの多様化学校」「原田小学校・宇美南中学校ハピネス分校」。作成者の記載なし)",
     "basisPhrase": "令和7年4月18日開校",
     "supports": [
      "fsl:startText"
