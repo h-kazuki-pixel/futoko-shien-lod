@@ -13,19 +13,19 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40100-tayouka,北九州市,対象,不登校・不登校傾向の中学生(各学年15名程度),https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
 40100-tayouka,北九州市,開始,令和9年4月開校予定,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
 40100-tayouka,北九州市,備考,設置場所(市立教育センター内)と学校名は、市の詳細ページ(/kyouiku/03000056.html)による。学校名は、同じページにある生徒募集の資料で人が確かめた(2026-11-16),https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,値を直したので見直しが要る。直す前の値は、人が「合っている」と判定(2026-11-16),
-40130-online,福岡市,種類と状態,オンラインでの公的な支援 / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf,,,
-40130-online,福岡市,制度名,オンラインルーム,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf,,,
-40130-online,福岡市,対象,引きこもりがちで集団への関わりが苦手な不登校の児童生徒,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf,,,
-40130-online,福岡市,備考,端末を使い、他の児童生徒やスクールカウンセラーと交流する場。自宅から参加できることは、案内の PDF による,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf,,,
+40130-online,福岡市,種類と状態,オンラインでの公的な支援 / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17
+40130-online,福岡市,制度名,オンラインルーム,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17
+40130-online,福岡市,対象,引きこもりがちで集団への関わりが苦手な不登校の児童生徒,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17
+40130-online,福岡市,備考,端末を使い、他の児童生徒やスクールカウンセラーと交流する場。参加の方法を書いた案内の PDF は、2026-11-17 に人も機械も開けなかった(HTTP 404),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
 40130-shien-center,福岡市,種類と状態,教育支援センター(校外) / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
 40130-shien-center,福岡市,制度名,教育支援センター(まつ風学級・はまかぜ学級・すまいる学級),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
 40130-shien-center,福岡市,対象,市内在住の小中学生。小学生は保護者の送迎が条件,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
 40130-shien-center,福岡市,備考,すまいる学級の各教室は小学校の建物の中にある,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
-40130-tayouka,福岡市,種類と状態,学びの多様化学校 / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,,,
-40130-tayouka,福岡市,制度名,福岡市立百道松原中学校,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,,,
-40130-tayouka,福岡市,対象,不登校または不登校傾向の中学生。転入学には面談が必須,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,,,
-40130-tayouka,福岡市,開始,令和7年4月開校,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,,,
-40130-tayouka,福岡市,備考,対象と条件は生徒募集案内(令和8年度版)による。市内に住民登録があること、面談と約1か月の授業体験が必須,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf,,,
+40130-tayouka,福岡市,種類と状態,学びの多様化学校 / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。生徒募集案内の PDF は 404,2026-11-17
+40130-tayouka,福岡市,制度名,福岡市立百道松原中学校,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。生徒募集案内の PDF は 404,2026-11-17
+40130-tayouka,福岡市,対象,不登校または不登校傾向の中学生,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
+40130-tayouka,福岡市,開始,令和7年4月開校,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。生徒募集案内の PDF は 404,2026-11-17
+40130-tayouka,福岡市,備考,入学の条件を書いた生徒募集案内の PDF は、2026-11-17 に人も機械も開けなかった(HTTP 404),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
 40202-tayouka,大牟田市,種類と状態,学びの多様化学校 / あり,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
 40202-tayouka,大牟田市,制度名,大牟田市立宅峰中学校 ほしぞら分校,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
 40202-tayouka,大牟田市,備考,文部科学省の一覧による。一覧での指定年は令和6年。対象や開校の時期は、市の資料でまだ確かめていない,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
@@ -49,6 +49,10 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40218-shien-center,春日市,制度名,春日市教育支援センター(マイスクール),https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,,合っている,,2026-11-16
 40218-shien-center,春日市,対象,不登校の状態や兆候にある児童生徒,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,,合っている,,2026-11-16
 40218-shien-center,春日市,備考,学習活動は指導要録上の出席扱いにできると書かれている,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,,合っている,,2026-11-16
+40218-shusseki,春日市,種類と状態,出席扱いの要綱・施設一覧の公表 / あり,https://www1.g-reiki.net/city.kasuga.fukuoka/reiki_honbun/q020RG00000369.html,,合っている,例規集のサイトの robots.txt で機械では取得しないため、人がブラウザで見比べた,2026-11-17
+40218-shusseki,春日市,制度名,春日市立学校に在籍する不登校児童生徒の指導要録上の出席の取扱いに関する要綱,https://www1.g-reiki.net/city.kasuga.fukuoka/reiki_honbun/q020RG00000369.html,,合っている,,2026-11-17
+40218-shusseki,春日市,対象,市立学校に在籍する不登校の児童生徒,https://www1.g-reiki.net/city.kasuga.fukuoka/reiki_honbun/q020RG00000369.html,,合っている,,2026-11-17
+40218-shusseki,春日市,備考,令和3年12月23日教育委員会告示第13号、令和4年1月8日施行。公的施設、民間施設、インターネット等による学習を出席扱いの対象とする。施設の一覧の公表は見つかっていない,https://www1.g-reiki.net/city.kasuga.fukuoka/reiki_honbun/q020RG00000369.html,,合っている,施設の一覧は例規のページで確認できなかった(データの備考と同じ),2026-11-17
 40219-fs-hojo,大野城市,種類と状態,フリースクール等の利用料の補助(保護者向け) / あり,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,,合っている,,2026-11-16
 40219-fs-hojo,大野城市,制度名,フリースクール利用児童生徒支援補助事業,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,,合っている,,2026-11-16
 40219-fs-hojo,大野城市,対象,市内在住で市立小中学校に在籍する児童生徒の保護者。申請日の前1年以内におおむね30日以上登校していないこと、在籍校長が出席扱いを認めた施設であること等,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,,合っている,,2026-11-16
@@ -56,15 +60,15 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40219-fs-hojo,大野城市,開始,令和6年度,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,,合っている,,2026-11-16
 40219-fs-hojo,大野城市,補助の形,毎月,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,,合っている,,2026-11-16
 40219-fs-hojo,大野城市,備考,放課後等デイサービスは対象外,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,,合っている,,2026-11-16
-40219-online,大野城市,種類と状態,オンラインでの公的な支援 / あり,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-online,大野城市,制度名,オンライン学習支援事業(オンラインCOMPASS),https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-online,大野城市,対象,市立中学校に在籍し、欠席が長く続いている1年生から3年生の希望者,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-online,大野城市,備考,申し込みは在籍する中学校を通じて市教育委員会へ。カリキュラムと配信予定は市の別ページにある,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-shien-center,大野城市,種類と状態,教育支援センター(校外) / あり,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-shien-center,大野城市,制度名,未来教室コンパス(適応指導教室),https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-shien-center,大野城市,対象,市立小中学校に在籍し、不登校の状況にある児童生徒,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-shien-center,大野城市,金額,"授業料は無料。活動費が月1,000円",https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
-40219-shien-center,大野城市,備考,北コミュニティセンター内。学校の授業日のうち月曜から金曜。申し込みは担任を通じて,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,,,
+40219-online,大野城市,種類と状態,オンラインでの公的な支援 / あり,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-online,大野城市,制度名,オンライン学習支援事業(オンラインCOMPASS),https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-online,大野城市,対象,市立中学校に在籍し、欠席が長く続いている1年生から3年生の希望者,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-online,大野城市,備考,申し込みは在籍する中学校を通じて市教育委員会へ。カリキュラムと配信予定は市の別ページにある,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-shien-center,大野城市,種類と状態,教育支援センター(校外) / あり,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-shien-center,大野城市,制度名,未来教室コンパス(適応指導教室),https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-shien-center,大野城市,対象,市立小中学校に在籍し、不登校の状況にある児童生徒,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-shien-center,大野城市,金額,"授業料は無料。活動費が月1,000円",https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
+40219-shien-center,大野城市,備考,北コミュニティセンター内。学校の授業日のうち月曜から金曜。申し込みは担任を通じて,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-17
 40219-shusseki,大野城市,種類と状態,出席扱いの要綱・施設一覧の公表 / あり,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,橋本がページを開き、一覧(令和8年1月末現在)があることを確かめた,2026-11-15
 40219-shusseki,大野城市,制度名,出席扱いしているフリースクール等一覧,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,橋本がページを開き、一覧(令和8年1月末現在)があることを確かめた,2026-11-15
 40219-shusseki,大野城市,対象,大野城市立小中学校の児童生徒,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-16
@@ -91,7 +95,7 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40223-fs-hojo,古賀市,対象,市内に住所を有する不登校児童生徒の保護者。申請日の前1年におおむね30日以上登校していないこと、他の補助を受けていないこと,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_honbun/q025RG00001608.html | https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf,合っている,,2026-11-16
 40223-fs-hojo,古賀市,金額,"月ごとの上限5,000円",https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_honbun/q025RG00001608.html | https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf,合っている,,2026-11-16
 40223-fs-hojo,古賀市,補助の形,毎月,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_honbun/q025RG00001608.html | https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf,合っている,,2026-11-16
-40223-fs-hojo,古賀市,備考,要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請の締め切りは10月末と3月末。制定は令和7年3月31日、教育委員会告示第2号,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_honbun/q025RG00001608.html | https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf,,,
+40223-fs-hojo,古賀市,備考,要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請の締め切りは10月末と3月末。制定は令和7年3月31日、教育委員会告示第2号,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_honbun/q025RG00001608.html | https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf,合っている,,2026-11-17
 40223-shien-center,古賀市,種類と状態,教育支援センター(校外) / あり,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php,合っている,,2026-11-16
 40223-shien-center,古賀市,制度名,古賀市教育支援センター「あすなろ教室」,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php,合っている,,2026-11-16
 40223-shien-center,古賀市,対象,学校に行くのが難しい古賀市在住の小・中学校児童生徒,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php,合っている,,2026-11-16
@@ -109,21 +113,25 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40231-shien-center,那珂川市,種類と状態,教育支援センター(校外) / あり,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,,合っている,,2026-11-16
 40231-shien-center,那珂川市,制度名,適応指導教室「わかば」,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,,合っている,,2026-11-16
 40231-shien-center,那珂川市,備考,教育サポートセンターの中にある。対象と利用料の記載は見つからなかった,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,,合っている,,2026-11-16
-40231-shusseki,那珂川市,種類と状態,出席扱いの要綱・施設一覧の公表 / あり,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,,,
-40231-shusseki,那珂川市,制度名,那珂川市不登校児童生徒が民間施設において相談・指導を受けている場合等における指導要録上の出欠の取扱いに関する要綱,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,,,
-40231-shusseki,那珂川市,対象,不登校の児童生徒(民間施設で相談・指導を受けている場合など),https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,,,
-40231-shusseki,那珂川市,備考,平成25年5月15日教委要綱第3号。最終改正は令和3年7月13日。第4条に出席扱いの要件。施設の一覧の公表は見つかっていない,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,,,
-40341-shien-center,宇美町,種類と状態,教育支援センター(校外) / あり,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,,,
-40341-shien-center,宇美町,制度名,くすのき教室(宇美町教育支援センター),https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,,,
-40341-shien-center,宇美町,対象,対人関係や心理的・情緒的な理由で登校できない児童生徒,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,,,
-40341-shien-center,宇美町,備考,平成12年6月20日教育委員会要綱第1号の2。最終改正は令和7年3月25日。しーず・うみ内。生活支援、学習支援、教育相談を行う。費用の定めは要綱に無い,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,,,
+40231-shusseki,那珂川市,種類と状態,出席扱いの要綱・施設一覧の公表 / あり,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,合っている,,2026-11-17
+40231-shusseki,那珂川市,制度名,那珂川市不登校児童生徒が民間施設において相談・指導を受けている場合等における指導要録上の出欠の取扱いに関する要綱,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,合っている,,2026-11-17
+40231-shusseki,那珂川市,対象,不登校の児童生徒(民間施設で相談・指導を受けている場合など),https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,合っている,,2026-11-17
+40231-shusseki,那珂川市,備考,平成25年5月15日教委要綱第3号。最終改正は令和3年7月13日。第4条に出席扱いの要件。施設の一覧の公表は見つかっていない,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,合っている,施設の一覧は例規のページで確認できなかった(データの備考と同じ),2026-11-17
+40341-shien-center,宇美町,種類と状態,教育支援センター(校外) / あり,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,合っている,,2026-11-17
+40341-shien-center,宇美町,制度名,くすのき教室(宇美町教育支援センター),https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,合っている,,2026-11-17
+40341-shien-center,宇美町,対象,対人関係や心理的・情緒的な理由で登校できない児童生徒,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,合っている,,2026-11-17
+40341-shien-center,宇美町,備考,平成12年6月20日教育委員会要綱第1号の2。最終改正は令和7年3月25日。しーず・うみ内。生活支援、学習支援、教育相談を行う。費用の定めは要綱に無い,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,合っている,,2026-11-17
 40341-tayouka,宇美町,種類と状態,学びの多様化学校 / あり,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
 40341-tayouka,宇美町,制度名,宇美町立原田小学校ハピネス分校・宇美南中学校ハピネス分校,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
 40341-tayouka,宇美町,備考,文部科学省の一覧では、どちらの分校も指定年は令和7年。入学等の手続きは町の取扱要綱にある,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
-40343-shien-center,志免町,種類と状態,教育支援センター(校外) / あり,https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,,,
-40343-shien-center,志免町,制度名,さくらのみち(志免町教育支援センター),https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,,,
-40343-shien-center,志免町,対象,町立小中学校に在籍する不登校等の児童生徒と保護者,https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,,,
-40343-shien-center,志免町,備考,令和8年7月21日教育委員会告示第6号、令和8年4月1日から適用。生涯学習1号館内。学習支援、体験活動、居場所の提供、相談を行う。費用の定めは要綱に無い,https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,,,
+40342-shien-center,篠栗町,種類と状態,教育支援センター(校外) / あり,https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,,合っている,例規集のサイトの robots.txt で機械では取得しないため、人がブラウザで見比べた,2026-11-17
+40342-shien-center,篠栗町,制度名,篠栗町教育支援センター(適応指導教室),https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,,合っている,,2026-11-17
+40342-shien-center,篠栗町,対象,登校できない状態の児童生徒など,https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,,合っている,,2026-11-17
+40342-shien-center,篠栗町,備考,令和5年2月20日教育委員会要綱第1号。最終改正は令和7年2月18日。センターの中に適応指導教室を置く。費用の定めは要綱に無い,https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,,合っている,,2026-11-17
+40343-shien-center,志免町,種類と状態,教育支援センター(校外) / あり,https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,合っている,,2026-11-17
+40343-shien-center,志免町,制度名,さくらのみち(志免町教育支援センター),https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,合っている,,2026-11-17
+40343-shien-center,志免町,対象,町立小中学校に在籍する不登校等の児童生徒と保護者,https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,合っている,,2026-11-17
+40343-shien-center,志免町,備考,令和8年7月21日教育委員会告示第6号、令和8年4月1日から適用。生涯学習1号館内。学習支援、体験活動、居場所の提供、相談を行う。費用の定めは要綱に無い,https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,,合っている,,2026-11-17
 40344-shien-center,須恵町,種類と状態,教育支援センター(校外) / あり,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf,合っている,,2026-11-16
 40344-shien-center,須恵町,制度名,須恵町適応指導教室「やまももルーム」,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf,合っている,,2026-11-16
 40344-shien-center,須恵町,対象,心理的・情緒的な理由で、登校したくてもできない状態にある児童生徒,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf,合っている,,2026-11-16

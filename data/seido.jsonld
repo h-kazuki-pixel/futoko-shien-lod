@@ -273,17 +273,7 @@
    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
    "sourceName": "福岡市教育委員会「不登校に関する支援」",
    "basisPhrase": "オンラインルームを開設しています",
-   "note": "端末を使い、他の児童生徒やスクールカウンセラーと交流する場。自宅から参加できることは、案内の PDF による",
-   "additionalSource": {
-    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-online#source2",
-    "@type": "fsl:AdditionalSource",
-    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf",
-    "sourceName": "福岡市「オンラインルーム」のご案内(PDF)",
-    "basisPhrase": "オンラインルーム",
-    "supports": [
-     "fsl:note"
-    ]
-   }
+   "note": "端末を使い、他の児童生徒やスクールカウンセラーと交流する場。参加の方法を書いた案内の PDF は、2026-11-17 に人も機械も開けなかった(HTTP 404)"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-shien-center",
@@ -351,23 +341,12 @@
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
    "name": "福岡市立百道松原中学校",
-   "eligibility": "不登校または不登校傾向の中学生。転入学には面談が必須",
+   "eligibility": "不登校または不登校傾向の中学生",
    "startText": "令和7年4月開校",
    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
    "sourceName": "福岡市教育委員会「不登校に関する支援」",
    "basisPhrase": "学びの多様化学校「福岡市立百道松原中学校」",
-   "note": "対象と条件は生徒募集案内(令和8年度版)による。市内に住民登録があること、面談と約1か月の授業体験が必須",
-   "additionalSource": {
-    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-tayouka#source2",
-    "@type": "fsl:AdditionalSource",
-    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf",
-    "sourceName": "福岡市「令和8年度 百道松原中学校 生徒募集案内」(PDF)",
-    "basisPhrase": "生徒募集案内",
-    "supports": [
-     "fsl:eligibility",
-     "fsl:note"
-    ]
-   }
+   "note": "入学の条件を書いた生徒募集案内の PDF は、2026-11-17 に人も機械も開けなかった(HTTP 404)"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40202-tayouka",
@@ -926,7 +905,8 @@
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40218-shusseki",
    "@type": [
-    "fsl:Record"
+    "fsl:Record",
+    "schema:GovernmentService"
    ],
    "identifier": "40218-shusseki",
    "areaServed": {
@@ -937,10 +917,15 @@
     "sameAs": "http://ja.dbpedia.org/resource/春日市"
    },
    "kind": "fsl:kind-shusseki",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
-   "checkMethod": "fsl:method-kikai",
-   "note": "サポートマップに市内の民間フリースクールの紹介はある。出席扱いの要綱や施設一覧の公表は見つからなかった。無いことは確認していない",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-17",
+   "checkMethod": "fsl:method-hito",
+   "name": "春日市立学校に在籍する不登校児童生徒の指導要録上の出席の取扱いに関する要綱",
+   "eligibility": "市立学校に在籍する不登校の児童生徒",
+   "source": "https://www1.g-reiki.net/city.kasuga.fukuoka/reiki_honbun/q020RG00000369.html",
+   "sourceName": "春日市例規集",
+   "basisPhrase": "指導要録上の出席の取扱いに関する要綱",
+   "note": "令和3年12月23日教育委員会告示第13号、令和4年1月8日施行。公的施設、民間施設、インターネット等による学習を出席扱いの対象とする。施設の一覧の公表は見つかっていない",
    "searchedAt": [
     "https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html",
     "https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf"
@@ -1016,8 +1001,8 @@
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-ari",
-   "dateChecked": "2026-11-16",
-   "checkMethod": "fsl:method-kikai",
+   "dateChecked": "2026-11-17",
+   "checkMethod": "fsl:method-hito",
    "name": "オンライン学習支援事業(オンラインCOMPASS)",
    "eligibility": "市立中学校に在籍し、欠席が長く続いている1年生から3年生の希望者",
    "source": "https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html",
@@ -1041,8 +1026,8 @@
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
-   "dateChecked": "2026-11-16",
-   "checkMethod": "fsl:method-kikai",
+   "dateChecked": "2026-11-17",
+   "checkMethod": "fsl:method-hito",
    "name": "未来教室コンパス(適応指導教室)",
    "eligibility": "市立小中学校に在籍し、不登校の状況にある児童生徒",
    "amountText": "授業料は無料。活動費が月1,000円",
@@ -1958,8 +1943,8 @@
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-ari",
-   "dateChecked": "2026-11-16",
-   "checkMethod": "fsl:method-kikai",
+   "dateChecked": "2026-11-17",
+   "checkMethod": "fsl:method-hito",
    "name": "那珂川市不登校児童生徒が民間施設において相談・指導を受けている場合等における指導要録上の出欠の取扱いに関する要綱",
    "eligibility": "不登校の児童生徒(民間施設で相談・指導を受けている場合など)",
    "source": "https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm",
@@ -2055,7 +2040,7 @@
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
    "dateChecked": "2026-11-17",
-   "checkMethod": "fsl:method-kikai",
+   "checkMethod": "fsl:method-hito",
    "name": "くすのき教室(宇美町教育支援センター)",
    "eligibility": "対人関係や心理的・情緒的な理由で登校できない児童生徒",
    "source": "https://public1.legalcrud.com/umi_town/reiki/act/110000280.html",
@@ -2176,7 +2161,8 @@
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-shien-center",
    "@type": [
-    "fsl:Record"
+    "fsl:Record",
+    "schema:GovernmentService"
    ],
    "identifier": "40342-shien-center",
    "areaServed": {
@@ -2187,10 +2173,15 @@
     "sameAs": "http://ja.dbpedia.org/resource/篠栗町"
    },
    "kind": "fsl:kind-shien-center",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
-   "checkMethod": "fsl:method-kikai",
-   "note": "相談窓口の一覧に「篠栗町教育支援センター」の名前と電話番号がある。通う教室かは読み取れなかった。一覧は古い可能性がある。無いことは確認していない。町議会の会議録(令和6年12月)に、教育支援センターをオアシスに広げるという答弁がある。通う教室かどうかは書かれていない",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-17",
+   "checkMethod": "fsl:method-hito",
+   "name": "篠栗町教育支援センター(適応指導教室)",
+   "eligibility": "登校できない状態の児童生徒など",
+   "source": "https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html",
+   "sourceName": "篠栗町例規集「篠栗町教育支援センター設置要綱」",
+   "basisPhrase": "篠栗町教育支援センター設置要綱",
+   "note": "令和5年2月20日教育委員会要綱第1号。最終改正は令和7年2月18日。センターの中に適応指導教室を置く。費用の定めは要綱に無い",
    "searchedAt": [
     "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
     "https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html",
@@ -2304,7 +2295,7 @@
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
    "dateChecked": "2026-11-17",
-   "checkMethod": "fsl:method-kikai",
+   "checkMethod": "fsl:method-hito",
    "name": "さくらのみち(志免町教育支援センター)",
    "eligibility": "町立小中学校に在籍する不登校等の児童生徒と保護者",
    "source": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117",
