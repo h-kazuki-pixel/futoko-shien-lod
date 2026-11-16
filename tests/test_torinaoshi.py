@@ -66,7 +66,7 @@ def test_amount_changed_on_the_page_is_heavy():
     changed = ALL | {"https://example.lg.jp/a": "補助します。2分の1、20,000円を上限とします。"}
     d = t.diff(run(ALL), run(changed), "2026-11-23")
     assert [(c["重さ"], c["変わった所"], c["id"], c["前"], c["後"]) for c in d] == [
-        ("要確認", "照合の結果が変わった", "40999-fs-hojo", "一致", "不一致")]
+        ("要確認", "照合の結果が変わった", "40999-fs-hojo", "一致", "不一致(合わない: 根拠の箇所 | 10000円)")]
 
 
 def test_page_gone_is_heavy_and_coming_back_is_light():
@@ -80,7 +80,8 @@ def test_page_gone_is_heavy_and_coming_back_is_light():
 def test_text_change_with_same_collation_is_light():
     changed = ALL | {"https://example.lg.jp/a": PAGE_OK + "申請の期限を延ばしました。"}
     d = t.diff(run(ALL), run(changed), "2026-11-23")
-    assert [(c["重さ"], c["変わった所"]) for c in d] == [("記録のみ", "ページの文字が変わった(照合は一致のまま)")]
+    assert [(c["重さ"], c["変わった所"]) for c in d] == [
+        ("記録のみ", "ページの文字が変わった(照合に使う語句と数字は、すべてまだある)")]
 
 
 def test_searched_place_change_is_recorded_once_per_page():
@@ -88,7 +89,7 @@ def test_searched_place_change_is_recorded_once_per_page():
     changed = ALL | {"https://example.lg.jp/b": "相談の窓口。新しい事業を始めます"}
     d = t.diff(run(ALL, rows=[KAKUNIN, other]), run(changed, rows=[KAKUNIN, other]), "2026-11-23")
     assert len(d) == 1
-    assert d[0]["変わった所"] == "探した場所のページの文字が変わった" and d[0]["重さ"] == "記録のみ"
+    assert d[0]["変わった所"] == "探した場所のページの文字が変わった(種類の語の数は同じ)" and d[0]["重さ"] == "記録のみ"
     assert d[0]["id"] == "40999-online 40999-shusseki"
 
 
@@ -138,3 +139,75 @@ def test_second_source_is_fetched_and_collated_separately():
     assert roles == {"出典": "一致", "出典2": "一致"}
     cur = run(ALL | {"https://example.lg.jp/d": "別のページ"}, rows=(row,))
     assert {c["役割"]: c["判定"] for c in cur}["出典2"] == "不一致"
+
+
+# ---------- 何が変わったか(弱い所 取2) ----------
+
+def test_each_collation_item_is_recorded_without_page_text():
+    c = run(ALL)[0]
+    assert t.split_list(c["照合で見たもの"]) == ["根拠の箇所", "1/2", "10000円"]
+    assert c["合わなかったもの"] == "" and c["種類の語の数"] == ""
+    # 見たものは、データの側の語句・数字の名前だけ。ページの文は入らない
+    assert "補助します" not in "".join(run(ALL)[0].values())
+
+
+def test_missing_items_change_while_still_mismatched_is_recorded():
+    one = ALL | {"https://example.lg.jp/a": "補助します。10,000円を上限とします。"}       # 1/2 が消えた
+    two = ALL | {"https://example.lg.jp/a": "補助します。2分の1、上限は別に定めます。"}  # 1/2 は戻り、根拠と金額が消えた
+    first, second = run(one), run(two)
+    assert first[0]["合わなかったもの"] == "1/2"
+    d = t.diff(first, second, "2026-11-30")
+    assert [(c["重さ"], c["変わった所"], c["前"], c["後"]) for c in d] == [
+        ("記録のみ", "合わない語句・数字が変わった(照合は不一致のまま)", "1/2", "根拠の箇所 | 10000円")]
+
+
+def test_coming_back_to_match_says_what_was_missing():
+    bad = ALL | {"https://example.lg.jp/a": "補助します。10,000円を上限とします。"}
+    d = t.diff(run(bad), run(ALL), "2026-11-30")
+    assert [(c["重さ"], c["前"], c["後"]) for c in d] == [("記録のみ", "不一致(合わない: 1/2)", "一致")]
+
+
+def test_kind_word_appearing_on_a_searched_place_is_heavy_only_for_its_own_kind():
+    # KAKUNIN は online(確認できず)。探した場所 b に「オンライン」が新しく出た
+    changed = ALL | {"https://example.lg.jp/b": "相談の窓口。オンラインの学習支援を始めます"}
+    d = t.diff(run(ALL), run(changed), "2026-11-30", {"40999-online": "確認できず"})
+    assert [(c["重さ"], c["変わった所"], c["前"], c["後"]) for c in d] == [
+        ("要確認", "探した場所に、その行の種類の語が新しく出た", "オンライン:0", "オンライン:1")]
+    # 「あり」の行の探した場所なら、記録のみ
+    d = t.diff(run(ALL), run(changed), "2026-11-30", {"40999-online": "あり"})
+    assert [c["重さ"] for c in d] == ["記録のみ"]
+    # ほかの種類の語なら、記録のみ
+    other = ALL | {"https://example.lg.jp/b": "相談の窓口。出席扱いの案内"}
+    d = t.diff(run(ALL), run(other), "2026-11-30", {"40999-online": "確認できず"})
+    assert [(c["重さ"], c["変わった所"]) for c in d] == [("記録のみ", "探した場所のページで、種類の語の数が変わった")]
+    assert "要確認が 1 件" in t.issue_markdown(t.diff(run(ALL), run(changed), "2026-11-30"), "2026-11-30")
+
+
+def test_absence_rows_record_what_was_checked():
+    nashi = {c: "" for c in schema.COLUMNS} | {
+        "id": "40999-tayouka", "市町村": "見本町", "状態": "なし", "出典URL": "https://example.lg.jp/l", "根拠の箇所": "設置者の一覧"}
+    ok = {"https://example.lg.jp/l": "設置者の一覧。福岡県見本市 見本市立A中学校"}
+    cur = run(ok, rows=(nashi,))
+    assert cur[0]["判定"] == "一致" and cur[0]["合わなかったもの"] == ""
+    assert t.split_list(cur[0]["照合で見たもの"]) == list(t.ABSENCE_ITEMS)
+    listed = {"https://example.lg.jp/l": "設置者の一覧。福岡県見本町 見本町立B中学校"}
+    d = t.diff(cur, run(listed, rows=(nashi,)), "2026-11-30")
+    assert d[0]["重さ"] == "要確認"
+    assert d[0]["後"] == "不一致(合わない: 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い)"
+
+
+def test_old_records_without_the_new_columns_give_no_false_changes():
+    old = [{k: v for k, v in c.items() if k in ("id", "役割", "URL", "取得日時", "取得", "判定", "本文の印")} for c in run(ALL)]
+    assert t.diff(old, run(ALL), "2026-11-23") == []
+
+
+def test_summary_counts_collation_items():
+    md = t.summary_markdown(run(ALL), [], first_run=True, date="2026-11-16")
+    assert "| 照合に使った語句と数字 | 3 |" in md and "ページに無かった 0" in md
+
+
+def test_place_change_after_old_records_does_not_claim_word_counts_were_compared():
+    old = [{k: v for k, v in c.items() if k != "種類の語の数"} for c in run(ALL)]
+    changed = ALL | {"https://example.lg.jp/b": "相談の窓口。時間を変えました"}
+    d = t.diff(old, run(changed), "2026-11-23")
+    assert [c["変わった所"] for c in d] == ["探した場所のページの文字が変わった"]
