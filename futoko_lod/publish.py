@@ -33,6 +33,7 @@ BASE = build.BASE
 NS = BASE + "ns#"
 DATASET = BASE + "#dataset"
 REPO = "https://github.com/h-kazuki-pixel/futoko-shien-lod"
+DOI = "10.5281/zenodo.24292050"  # Zenodo の記録(v2026-11-17)
 LICENSE = "https://creativecommons.org/licenses/by/4.0/"
 AUTHOR = "https://github.com/h-kazuki-pixel"
 ISSUED = "2026-11-15"  # はじめて公開した日
@@ -664,6 +665,7 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <li><strong>隣と並べる。</strong>1件ごとのページに、隣の市町村の同じ種類の状態を出している。隣接は DBpedia Japanese の「隣接自治体」から取った(この部分だけ CC BY-SA 3.0。<a href="../kumiawase/#rinsetsu">組み合わせの例</a>)。</li>
 <li><strong>数える。</strong>{len(rows)}件すべてが「確かめた記録」(<code>fsl:Record</code>)。制度があると確かめた記録だけが、schema.org の <code>GovernmentService</code> でもある。語彙の説明は <a href="../ns">ns</a>。</li>
 </ul>
+<p>版ごとの中身は Zenodo に保管している(DOI <a href="https://doi.org/{DOI}">{DOI}</a>)。引用するときは、この DOI を使ってほしい。</p>
 <p>データは CC BY 4.0、プログラムは MIT ライセンス。作り方と検査の決まりは、<a href="{REPO}">リポジトリ</a>にある。同じ手順で、ほかの県にも広げられる。</p>
 
 <h2>分かっていないこと、できていないこと</h2>
