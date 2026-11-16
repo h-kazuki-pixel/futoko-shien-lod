@@ -2030,10 +2030,11 @@
    "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "note": "ひきこもり相談室の案内はある。教育支援センターの記載は見つからなかった。無いことは確認していない",
+   "note": "ひきこもり相談室の案内はある。教育支援センターの記載は見つからなかった。無いことは確認していない。町の第7次総合計画(素案、令和5年1月)に適応指導教室(くすのき教室)の名がある。学校の外の教室か、いまもあるかは書かれていない",
    "searchedAt": [
     "https://www.town.umi.lg.jp/soshiki/39/70131.html",
-    "https://www.town.umi.lg.jp/site/manabinotayouka/"
+    "https://www.town.umi.lg.jp/site/manabinotayouka/",
+    "https://www.town.umi.lg.jp/uploaded/attachment/14753.pdf"
    ]
   },
   {
@@ -2158,10 +2159,11 @@
    "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "note": "相談窓口の一覧に「篠栗町教育支援センター」の名前と電話番号がある。通う教室かは読み取れなかった。一覧は古い可能性がある。無いことは確認していない",
+   "note": "相談窓口の一覧に「篠栗町教育支援センター」の名前と電話番号がある。通う教室かは読み取れなかった。一覧は古い可能性がある。無いことは確認していない。町議会の会議録(令和6年12月)に、教育支援センターをオアシスに広げるという答弁がある。通う教室かどうかは書かれていない",
    "searchedAt": [
     "https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf",
-    "https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html"
+    "https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html",
+    "https://www.town.sasaguri.fukuoka.jp/material/files/group/41/2024_12_all.pdf"
    ]
   },
   {
@@ -2713,10 +2715,11 @@
    "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "note": "教育相談室「ぽると」の案内に、学校に行けない児童生徒のためのサポートルームがあると書かれている。教育支援センターに当たるかは読み取れなかった。無いことは確認していない",
+   "note": "教育相談室「ぽると」の案内に、学校に行けない児童生徒のためのサポートルームがあると書かれている。教育支援センターに当たるかは読み取れなかった。無いことは確認していない。町議会の会議録(令和5年12月)に、ぽるとに不登校の子が通っているという議員の発言がある",
    "searchedAt": [
     "https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf",
-    "https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html"
+    "https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html",
+    "https://www.town.kasuya.fukuoka.jp/s043/010/030/130/R5-12.pdf"
    ]
   },
   {
