@@ -3,7 +3,9 @@ message: "このデータを使うときは、次のように出典を示して�
 title: "不登校支援制度LOD"
 type: dataset
 authors:
-  - name: "h-kazuki-pixel"
+  - family-names: "Hashimoto"
+    given-names: "Kazuki"
+    affiliation: "StudySite"
 license: CC-BY-4.0
 repository-code: "https://github.com/h-kazuki-pixel/futoko-shien-lod"
 url: "https://h-kazuki-pixel.github.io/futoko-shien-lod/"
