@@ -39,3 +39,13 @@ def test_redirects_are_ignored():
 def test_query_asks_by_code_not_by_name():
     q = d.verify_query(["40219"])
     assert d.CODE_PROP in q and '"40219"' in q and "大野城市" not in q
+
+
+def test_neighbor_names_are_matched_to_codes():
+    names = {"40130": "福岡市", "40216": "小郡市", "40341": "宇美町", "40605": "川崎町"}
+    assert d.split_names("福岡市、春日市、糟屋郡宇美町") == ["福岡市", "春日市", "糟屋郡宇美町"]
+    assert d.match_name("糟屋郡宇美町", names) == ("40341", "宇美町", "県内")
+    assert d.match_name("小郡市", names) == ("40216", "小郡市", "県内")  # 「郡」を外さない
+    assert d.match_name("福岡県田川郡川崎町", names) == ("40605", "川崎町", "県内")
+    assert d.match_name("佐賀県鳥栖市", names)[2] == "県外"
+    assert d.match_name("春日市", names)[2] == "照合できず"

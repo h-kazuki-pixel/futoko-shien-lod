@@ -65,6 +65,98 @@ def props(name: str) -> None:
   filter(!contains(str(?p), "wikiPageWikiLink")) }} limit 400""", limit=400)
 
 
+# ---- 隣接する市町村(点7・8) ----
+# DBpedia Japanese の「隣接自治体」(Wikipedia の基礎情報から取ったもの)。2022.12.01 のダンプが元(ja.dbpedia.org の版の表示)。
+# DBpedia Japanese は CC BY-SA 3.0。このデータ本体(CC BY 4.0)には混ぜず、data/rinsetsu.csv に分けて置く。
+NEIGHBOR_PROP = "http://ja.dbpedia.org/property/隣接自治体"
+DERIVED = "http://www.w3.org/ns/prov#wasDerivedFrom"
+RINSETSU_PATH = "data/rinsetsu.csv"
+RINSETSU_COLUMNS = ["市町村コード", "市町村", "隣接する市町村コード", "隣接する市町村", "判定", "元の語", "DBpediaのURI", "Wikipediaの版", "確かめた日"]
+PREF = "福岡県"
+
+
+def neighbors_query(uris: list[str]) -> str:
+    values = " ".join(f"<{u}>" for u in uris)
+    return f"""select ?s ?o ?olabel ?rev where {{ values ?s {{ {values} }}
+  ?s <{NEIGHBOR_PROP}> ?o .
+  optional {{ ?o <{LABEL}> ?olabel }}
+  optional {{ ?s <{DERIVED}> ?rev }}
+}}"""
+
+
+def split_names(text: str) -> list[str]:
+    """「福岡市、春日市、糟屋郡宇美町」のような文字列を、1つずつの名前にする。"""
+    import re
+    return [t for t in (x.strip() for x in re.split(r"[、,，・/／\s]+", text)) if t]
+
+
+def match_name(token: str, names: dict[str, str]) -> tuple[str, str, str]:
+    """名前1つを、台帳のコードに直す。返すのは (コード, 台帳の名前, 判定)。判定は 県内 / 県外 / 照合できず。
+
+    「糟屋郡宇美町」の郡は外す(郡の後ろが町か村のときだけ。「小郡市」は外さない)。
+    「佐賀県鳥栖市」のように福岡県でない県名が付いていれば県外。
+    """
+    import re
+    t = token
+    m = re.match(r"^(.+?[都道府県])(.+)$", t)
+    if m and m.group(1) != PREF and m.group(2):
+        return "", t, "県外"
+    if m and m.group(1) == PREF:
+        t = m.group(2)
+    m = re.match(r"^(.+?郡)(.+[町村])$", t)
+    if m:
+        t = m.group(2)
+    t = re.sub(r"\s*[(（].*[)）]$", "", t)
+    by_name = {v: k for k, v in names.items()}
+    if t in by_name:
+        return by_name[t], t, "県内"
+    return "", token, "照合できず"
+
+
+def neighbors(write: bool) -> int:
+    import csv
+    import datetime as dt
+    from pathlib import Path
+    from . import schema
+    areas = {a["市町村コード"]: a["市町村"] for a in schema.read_csv("data/shichoson.csv") if a["市町村コード"] != "40000"}
+    uris = {r["DBpediaのURI"]: r["市町村コード"] for r in schema.read_csv(CSV_PATH) if r["判定"] == "一致" and r["市町村コード"] in areas}
+    rows = show("隣接自治体", neighbors_query(list(uris)), limit=5)
+    if not rows:
+        print("1行も返らなかった。書き出さない")
+        return 1
+    date = dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).date().isoformat()
+    out, seen = [], set()
+    for r in rows:
+        code = uris[r["s"]]
+        raw = r.get("olabel") or r["o"].rsplit("/", 1)[-1] if r["o"].startswith("http") else r["o"]
+        for tok in split_names(raw):
+            ncode, nname, verdict = match_name(tok, areas)
+            key = (code, ncode or nname)
+            if key in seen or ncode == code:
+                continue
+            seen.add(key)
+            out.append({"市町村コード": code, "市町村": areas[code], "隣接する市町村コード": ncode, "隣接する市町村": nname,
+                        "判定": verdict, "元の語": tok, "DBpediaのURI": r["s"], "Wikipediaの版": r.get("rev", ""), "確かめた日": date})
+    out.sort(key=lambda x: (x["市町村コード"], x["隣接する市町村コード"] or "9", x["隣接する市町村"]))
+    inner = {(x["市町村コード"], x["隣接する市町村コード"]) for x in out if x["判定"] == "県内"}
+    asym = sorted((a, b) for a, b in inner if (b, a) not in inner)
+    missing = sorted(set(areas) - {x["市町村コード"] for x in out})
+    print(f"\n県内の組 {len(inner)}、県外 {sum(x['判定'] == '県外' for x in out)}、照合できず {sum(x['判定'] == '照合できず' for x in out)}")
+    print(f"隣接自治体が返らなかった市町村 {len(missing)}: {' '.join(areas[c] for c in missing)}")
+    print(f"片方にしか無い組(A の隣に B があるが、B の隣に A が無い) {len(asym)}: " + " ".join(f"{areas[a]}→{areas[b]}" for a, b in asym))
+    for x in out:
+        if x["判定"] == "照合できず":
+            print(f"  照合できず: {x['市町村']} の「{x['元の語']}」")
+    if write:
+        Path(RINSETSU_PATH).parent.mkdir(parents=True, exist_ok=True)
+        with open(RINSETSU_PATH, "w", encoding="utf-8", newline="") as f:
+            w = csv.DictWriter(f, fieldnames=RINSETSU_COLUMNS, lineterminator="\n")
+            w.writeheader()
+            w.writerows(out)
+        print(f"{RINSETSU_PATH} を書いた")
+    return 0
+
+
 def verify_query(codes: list[str]) -> str:
     """地方公共団体コードがこちらのコードと合う資源を引く。名前からは URI を作らない。"""
     inlist = ", ".join(f'"{c}"' for c in codes)
@@ -110,11 +202,14 @@ def main() -> int:
     ap.add_argument("--probe", nargs=2, metavar=("名前", "コード"))
     ap.add_argument("--verify", nargs="?", const="show", choices=["show", "write"])
     ap.add_argument("--props", metavar="名前")
+    ap.add_argument("--neighbors", nargs="?", const="show", choices=["show", "write"])
     args = ap.parse_args()
     if args.probe:
         probe(*args.probe)
     if args.props:
         props(args.props)
+    if args.neighbors:
+        return neighbors(args.neighbors == "write")
     if args.verify:
         import csv
         import datetime as dt
