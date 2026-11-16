@@ -74,9 +74,9 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40219-shusseki,大野城市,制度名,出席扱いしているフリースクール等一覧,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,橋本がページを開き、一覧(令和8年1月末現在)があることを確かめた,2026-11-15
 40219-shusseki,大野城市,対象,大野城市立小中学校の児童生徒,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-16
 40219-shusseki,大野城市,備考,令和8年1月末現在の一覧; 施設名・種別・所在地を公表,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-16
-40219-tayouka,大野城市,種類と状態,学びの多様化学校 / あり,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,,2026-11-16
-40219-tayouka,大野城市,制度名,大野城市立みずほ中学校,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,,2026-11-16
-40219-tayouka,大野城市,対象,市内在住の中学1年生〜中学3年生,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,,2026-11-16
+40219-tayouka,大野城市,種類と状態,学びの多様化学校 / あり,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,判定したときの補助の資料は文部科学省の一覧(11/17 に県の設置廃止等一覧へ替えた。主の出典は同じ),2026-11-16
+40219-tayouka,大野城市,制度名,大野城市立みずほ中学校,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,判定したときの補助の資料は文部科学省の一覧(11/17 に県の設置廃止等一覧へ替えた。主の出典は同じ),2026-11-16
+40219-tayouka,大野城市,対象,市内在住の中学1年生〜中学3年生,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,判定したときの補助の資料は文部科学省の一覧(11/17 に県の設置廃止等一覧へ替えた。主の出典は同じ),2026-11-16
 40219-tayouka,大野城市,開始,令和8年4月1日設置,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,,,
 40219-tayouka,大野城市,備考,大野中学校の分校として設置(県の設置廃止等一覧)。定員は各学年10名程度(市のページ),https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,,値を直したので見直しが要る。直す前の値は、人が「合っている」と判定(2026-11-16),
 40220-shien-center,宗像市,種類と状態,教育支援センター(校外) / あり,https://www.city.munakata.lg.jp/kiji0033002/index.html,,,,
