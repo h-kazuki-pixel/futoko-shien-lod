@@ -42,21 +42,37 @@ def _list(items: list[str]) -> str:
     return "( " + " ".join(items) + " )"
 
 
+_XPATH_META = set("\\.?*+()[]{}|^$-")
+
+
+def xpath_escape(text: str) -> str:
+    """SHACL の sh:pattern(XPath の正規表現)で通る逃がし方。Python の re.escape は & ~ # などにも \\ を付け、
+    それは XPath では誤りになる(ほかの道具で形を読めなくなる)ので使わない。"""
+    return "".join("\\" + ch if ch in _XPATH_META else ch for ch in text)
+
+
 def official_pattern(extra_domains: frozenset[str] | None = None) -> str:
-    """公式サイトの URL の正規表現(schema.is_official_url と同じ決まり)。大文字小文字は区別しない(flags "i")。"""
+    """公式サイトの URL の正規表現(schema.is_official_url と同じ決まり)。大文字小文字は区別しない(flags "i")。
+    URL の中の「..」の区切りは、ここでは見ない(UNSAFE_URL_PATTERN を sh:not で使う)。"""
     if extra_domains is None:
         extra_domains = schema.load_extra_domains()
-    host_end = r"(:[0-9]+)?([/?#]|$)"
+    port = r"(:[0-9]+)?"
+    host_end = port + r"([/?#]|$)"
     alts = [
         r"([a-z0-9-]+\.)*[a-z0-9-]+\.(lg|go)\.jp" + host_end,
         r"([a-z0-9-]+\.)*(pref|city|town|vill)\.([a-z0-9-]+\.)?fukuoka\.jp" + host_end,
     ]
     for d in sorted(extra_domains):
-        if "/" in d:  # 業者のサイトの例規集など。その市町村の場所(ホスト+パス)の前方一致だけ
-            alts.append(re.escape(d))
+        dhost, drest = schema._split_extra(d)
+        if drest:  # 業者のサイトの例規集など。その市町村の場所(ホスト+パス)の前方一致だけ
+            alts.append(xpath_escape(dhost) + port + xpath_escape(drest) + ("(&|#|$)" if "?" in drest else ""))
         else:
-            alts.append(r"([a-z0-9-]+\.)*" + re.escape(d) + host_end)
+            alts.append(r"([a-z0-9-]+\.)*" + xpath_escape(d) + host_end)
     return "^https?://(" + "|".join(alts) + ")"
+
+
+# 公式の場所の外を指しうる書き方(空白、バックスラッシュ、@、「..」の区切り)。schema.is_official_url も落とす
+UNSAFE_URL_PATTERN = r"[\s\\@]|/\.\.?(/|\?|#|$)"
 
 
 def shapes_turtle(extra_domains: frozenset[str] | None = None) -> str:
@@ -72,7 +88,10 @@ def shapes_turtle(extra_domains: frozenset[str] | None = None) -> str:
     for key in schema.SOURCE2_FIELDS.values():
         term = build.CONTEXT[key]
         supports.append(term["@id"] if isinstance(term, dict) else term)
-    url = _str(official_pattern(extra_domains))
+    supports_and = "\n        ".join(
+        f'[ sh:or ( [ sh:not [ sh:path ( fsl:additionalSource fsl:supports ) ; sh:hasValue {p} ] ] [ sh:path {p} ; sh:minCount 1 ] ) ]'
+        for p in supports if p != "fsl:kind")
+    url = _str(official_pattern(extra_domains)) + f" ; sh:flags \"i\" ; sh:not [ sh:pattern {_str(UNSAFE_URL_PATTERN)} ]"
     id_pattern = _str("^40[0-9]{3}-(" + "|".join(re.escape(s) for s in schema.KINDS) + ")(-[0-9]+)?$")
     st = lambda *labels: _list([statuses[x] for x in labels])  # noqa: E731
     no_content = ["schema:name", "fsl:amountText", "fsl:amountMaxYen", "fsl:subsidyRate", "fsl:startText"]
@@ -142,11 +161,11 @@ fslsh:RecordShape a sh:NodeShape ;
         [ sh:path fsl:basisPhrase ; sh:name {_ja("根拠の箇所")} ; sh:maxCount 1 ; sh:datatype rdf:langString ;
           sh:maxLength {schema.MAX_BASIS} ; sh:message {_ja(f"根拠の箇所は {schema.MAX_BASIS}字まで(公式ページの文章を写さない)")} ] ,
         [ sh:path dct:source ; sh:name {_ja("出典URL")} ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
-          sh:pattern {url} ; sh:flags "i" ; sh:message {_ja("出典は市町村・県・国の公式サイトだけ")} ] ,
+          sh:pattern {url} ; sh:message {_ja("出典は市町村・県・国の公式サイトだけ")} ] ,
         [ sh:path fsl:guideline ; sh:name {_ja("要綱URL")} ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
-          sh:pattern {url} ; sh:flags "i" ; sh:message {_ja("要綱は市町村・県・国の公式サイトだけ")} ] ,
+          sh:pattern {url} ; sh:message {_ja("要綱は市町村・県・国の公式サイトだけ")} ] ,
         [ sh:path fsl:searchedAt ; sh:name {_ja("探した場所")} ; sh:nodeKind sh:IRI ;
-          sh:pattern {url} ; sh:flags "i" ; sh:message {_ja("探した場所は公式サイトの URL")} ] ,
+          sh:pattern {url} ; sh:message {_ja("探した場所は公式サイトの URL")} ] ,
         [ sh:path fsl:guidelineState ; sh:name {_ja("要綱の状況")} ; sh:maxCount 1 ; sh:in {_list([_ja(s) for s in sorted(guideline_states)])} ] ,
         [ sh:path fsl:additionalSource ; sh:name {_ja("第2の出典")} ; sh:maxCount 1 ; sh:node fslsh:AdditionalSourceShape ] ,
         [ sh:path fsl:checkActivity ; sh:name {_ja("確かめた記録")} ; sh:class prov:Activity ] .
@@ -224,6 +243,18 @@ fslsh:GuidelineRule a sh:NodeShape ;
                       [ sh:path fsl:guideline ; sh:maxCount 0 ] ]
     ) .
 
+fslsh:AdditionalSourceRule a sh:NodeShape ;
+    sh:targetClass fsl:Record ;
+    rdfs:label {_ja("第2の出典と記録の項目")} ;
+    rdfs:comment {_ja("第2の出典は、出典と同じ URL にしない。第2の出典で裏付けるとした項目は、記録の側で空にしない。")} ;
+    sh:message {_ja("第2の出典で裏付けるとした項目が、記録の側で空になっている")} ;
+    sh:property
+        [ sh:path ( fsl:additionalSource dct:source ) ; sh:disjoint dct:source ;
+          sh:message {_ja("第2の出典が、出典と同じ URL になっている")} ] ;
+    sh:and (
+        {supports_and}
+    ) .
+
 # ---------- 市町村 ----------
 
 fslsh:AreaShape a sh:NodeShape ;
@@ -246,7 +277,7 @@ fslsh:AdditionalSourceShape a sh:NodeShape ;
     sh:pattern {_str("^" + re.escape(BASE) + "id/[0-9a-z-]+#source2$")} ;
     sh:class fsl:AdditionalSource ;
     sh:property
-        [ sh:path dct:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:pattern {url} ; sh:flags "i" ;
+        [ sh:path dct:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:pattern {url} ;
           sh:message {_ja("第2の出典も公式サイトだけ")} ] ,
         [ sh:path fsl:sourceName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ] ,
         [ sh:path fsl:basisPhrase ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ; sh:maxLength {schema.MAX_BASIS} ] ,
@@ -259,13 +290,18 @@ fslsh:RefetchShape a sh:NodeShape ;
     rdfs:label {_ja("取り直し")} ;
     rdfs:comment {_ja("どのページを、どの役割で取りに行き、取得できたか。照合の結果は、取得できたときだけ持つ。")} ;
     sh:class prov:Activity ;
-    sh:message {_ja("取り直しで、取得できなかったのに照合の結果がある")} ;
     sh:property
         [ sh:path fsl:role ; sh:minCount 1 ; sh:maxCount 1 ; sh:in {_list([_ja(r) for r in REFETCH_ROLES])} ] ,
         [ sh:path prov:used ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ,
         [ sh:path fsl:fetchResult ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ] ,
         [ sh:path prov:endedAtTime ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ,
-        [ sh:path fsl:collationResult ; sh:maxCount 1 ; sh:in {_list([_ja(r) for r in COLLATION_RESULTS])} ] ;
+        [ sh:path fsl:collationResult ; sh:maxCount 1 ; sh:in {_list([_ja(r) for r in COLLATION_RESULTS])} ] .
+
+fslsh:RefetchCollationRule a sh:NodeShape ;
+    sh:targetClass fsl:Refetch ;
+    rdfs:label {_ja("照合の結果は取得できたときだけ")} ;
+    rdfs:comment {_ja("取り直しで取得できなかったページには、照合の結果を付けない。")} ;
+    sh:message {_ja("取り直しで、取得できなかったのに照合の結果がある")} ;
     sh:or (
         [ sh:path fsl:collationResult ; sh:maxCount 0 ]
         [ sh:path fsl:fetchResult ; sh:hasValue {_ja("取得")} ]
@@ -274,18 +310,18 @@ fslsh:RefetchShape a sh:NodeShape ;
 fslsh:HumanReviewShape a sh:NodeShape ;
     sh:targetClass fsl:HumanReview ;
     rdfs:label {_ja("人の再確認")} ;
-    rdfs:comment {_ja("見比べる項目の数と、見比べた・合っている・違う・分からないの数。見比べた数は見比べる数を超えない。")} ;
+    rdfs:comment {_ja("見比べる項目の数と、見比べた・合っている・違う・分からないの数。見比べた数は見比べる数を超えない。合っている・違う・分からないは、それぞれが見比べた数を超えない(足した数が合うかは、形では見ない)。")} ;
     sh:class prov:Activity ;
     sh:property
         [ sh:path fsl:itemsTotal ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 1 ] ,
         [ sh:path fsl:itemsChecked ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
           sh:lessThanOrEquals fsl:itemsTotal ; sh:message {_ja("見比べた項目の数が、見比べる項目の数を超えている")} ] ,
         [ sh:path fsl:itemsMatched ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
-          sh:lessThanOrEquals fsl:itemsChecked ; sh:message {_ja("合っている・違う・分からないの数が、見比べた数を超えている")} ] ,
+          sh:lessThanOrEquals fsl:itemsChecked ; sh:message {_ja("合っている・違う・分からないの数のどれかが、それだけで見比べた数を超えている")} ] ,
         [ sh:path fsl:itemsWrong ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
-          sh:lessThanOrEquals fsl:itemsChecked ; sh:message {_ja("合っている・違う・分からないの数が、見比べた数を超えている")} ] ,
+          sh:lessThanOrEquals fsl:itemsChecked ; sh:message {_ja("合っている・違う・分からないの数のどれかが、それだけで見比べた数を超えている")} ] ,
         [ sh:path fsl:itemsUnsure ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
-          sh:lessThanOrEquals fsl:itemsChecked ; sh:message {_ja("合っている・違う・分からないの数が、見比べた数を超えている")} ] ,
+          sh:lessThanOrEquals fsl:itemsChecked ; sh:message {_ja("合っている・違う・分からないの数のどれかが、それだけで見比べた数を超えている")} ] ,
         [ sh:path fsl:activityDate ; sh:maxCount 1 ; sh:datatype xsd:date ] .
 
 fslsh:InquiryShape a sh:NodeShape ;

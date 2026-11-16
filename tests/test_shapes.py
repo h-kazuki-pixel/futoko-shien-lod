@@ -143,7 +143,7 @@ def test_two_statuses_fail(site, tmp_path):
     assert "状態は" in out
 
 
-def test_review_counts_must_add_up(site, tmp_path):
+def test_review_checked_must_not_exceed_total(site, tmp_path):
     out = broken(site, tmp_path, lambda t: re.sub(r'fsl:itemsChecked "\d+"', 'fsl:itemsChecked "999"', t, count=1))
     assert "見比べた項目の数" in out
 
@@ -175,6 +175,86 @@ def test_official_pattern_agrees_with_schema():
         "https://www.city.fukuoka.lg.jp:443/a", "http://www.pref.fukuoka.lg.jp", "https://www.town.umi.lg.jp/x",
         "https://www.city.kasuga.fukuoka.jp/", "https://kasuga.fukuoka.jp/", "https://www1.g-reiki.net/city.kasuga.fukuoka/x",
         "https://www1.g-reiki.net/city.other.fukuoka/x", "https://www.mext.go.jp/a", "ftp://www.mext.go.jp/a",
+        # 点検で食い違いが見つかった書き方(11/17)。どれも落とす
+        "https://evil.com\\@www.city.fukuoka.lg.jp/a", "https://user@www.city.fukuoka.lg.jp/a",
+        "https://my_host.city.fukuoka.lg.jp/", "https://www.city.fukuoka.lg.jp:/a",
+        "https://user@www1.g-reiki.net/city.kasuga.fukuoka/x", "https://www.city.fukuoka.lg.jp\t/a",
+        "https://www1.g-reiki.net/city.kasuga.fukuoka/../city.other.fukuoka/x",
+        "https://ops-jg.d1-law.com/opensearch/srjbf01/init?jctcd=8a9160eadb9",
+        # 通すもの
+        "https://www1.g-reiki.net:443/city.kasuga.fukuoka/x",
+        "https://ops-jg.d1-law.com/opensearch/srjbf01/init?jctcd=8A9160EADB&houcd=H1",
     }
+    unsafe = re.compile(shapes.UNSAFE_URL_PATTERN.replace("\\s", "\\s"))
     for u in sorted(urls):
-        assert bool(pat.search(u)) == schema.is_official_url(u, extra), u
+        by_shape = bool(pat.search(u)) and not unsafe.search(u)
+        assert by_shape == schema.is_official_url(u, extra), u
+    for u in ("https://evil.com\\@www.city.fukuoka.lg.jp/a", "https://www1.g-reiki.net/city.kasuga.fukuoka/../city.other.fukuoka/x",
+              "https://ops-jg.d1-law.com/opensearch/srjbf01/init?jctcd=8a9160eadb9"):
+        assert not schema.is_official_url(u, extra), u
+
+
+def test_patterns_use_only_xpath_escapes():
+    # XPath の正規表現で使える逃がし文字だけを使う(ほかの SHACL の道具でも形を読めるように)
+    g = rdflib.Graph().parse(data=shapes.shapes_turtle(), format="turtle")
+    SH = rdflib.Namespace("http://www.w3.org/ns/shacl#")
+    allowed = set("\\.?*+()[]{}|^$-sdwSDWnrt")
+    for pat in g.objects(None, SH.pattern):
+        for m in re.finditer(r"\\(.)", str(pat)):
+            assert m.group(1) in allowed, (str(pat), m.group(0))
+    assert shapes.xpath_escape("a&b~c#d.e") == "a&b~c#d\\.e"
+
+
+# ---------- 点検で、壊すテストが無いと言われた形(11/17) ----------
+
+def test_guideline_url_without_state_fails(site, tmp_path):
+    r = next(r for r in schema.load("data/seido.csv") if r["状態"] == "あり" and not r["要綱の状況"])
+    out = broken(site, tmp_path, replace_in(r["id"], "    fsl:checkMethod",
+                                            "    fsl:guideline <https://www.pref.fukuoka.lg.jp/y> ;\n    fsl:checkMethod"))
+    assert "要綱の状況" in out
+
+
+def test_second_source_must_be_official_and_differ_from_source(site, tmp_path):
+    rid = next(r["id"] for r in schema.load("data/seido.csv") if r["出典URL_2"])
+    out = broken(site, tmp_path, lambda t: re.sub(
+        r"(<" + re.escape(BASE) + "id/" + re.escape(rid) + r"#source2>\n(?:    [^\n]*\n)*?    dct:source )<[^>]*>",
+        r"\1<https://example.com/b>", t, count=1))
+    assert "第2の出典も公式サイトだけ" in out
+    src = next(r["出典URL"] for r in schema.load("data/seido.csv") if r["id"] == rid)
+    out = broken(site, tmp_path, lambda t: re.sub(
+        r"(<" + re.escape(BASE) + "id/" + re.escape(rid) + r"#source2>\n(?:    [^\n]*\n)*?    dct:source )<[^>]*>",
+        lambda m: m.group(1) + publish.iri(src), t, count=1))
+    assert "出典と同じ URL" in out
+
+
+def test_second_source_supporting_an_empty_field_fails(site, tmp_path):
+    r = next(r for r in schema.load("data/seido.csv") if r["出典URL_2"] and not r["開始"])
+    out = broken(site, tmp_path, lambda t: re.sub(
+        r"(<" + re.escape(BASE) + "id/" + re.escape(r["id"]) + r"#source2>\n(?:    [^\n]*\n)*?    fsl:supports )",
+        r"\1fsl:startText, ", t, count=1))
+    assert "記録の側で空" in out
+
+
+def test_area_outside_fukuoka_fails(site, tmp_path):
+    out = broken(site, tmp_path, lambda t: t.replace("<http://data.e-stat.go.jp/lod/sac/C40219>", "<http://data.e-stat.go.jp/lod/sac/C13101>"))
+    assert "C13101" in out
+
+
+def test_machine_read_nashi_needs_a_source(site, tmp_path):
+    r = next(r for r in schema.load("data/seido.csv") if r["状態"] == "なし" and r["確認方法"] == "機械の読み取り")
+    out = broken(site, tmp_path, lambda t: t.replace(block(t, r["id"]),
+                                                     re.sub(r"    dct:source <[^>]*> ;\n", "", block(t, r["id"]), count=1)))
+    assert "「なし」の決まり" in out
+
+
+def test_kakunin_dekizu_must_not_be_a_government_service(site, tmp_path):
+    r = first_row("確認できず")
+    out = broken(site, tmp_path, replace_in(r["id"], "a fsl:Record ;", "a fsl:Record, schema:GovernmentService ;"))
+    assert "「確認できず」の決まり" in out
+
+
+def test_dot_dot_in_a_url_fails(site, tmp_path):
+    r = first_row("確認できず")
+    out = broken(site, tmp_path, lambda t: t.replace(block(t, r["id"]), re.sub(
+        r"fsl:searchedAt <(https?://[^/>]+)/", r"fsl:searchedAt <\1/../", block(t, r["id"]), count=1)))
+    assert "公式サイトの URL" in out

@@ -81,7 +81,7 @@ def test_text_change_with_same_collation_is_light():
     changed = ALL | {"https://example.lg.jp/a": PAGE_OK + "申請の期限を延ばしました。"}
     d = t.diff(run(ALL), run(changed), "2026-11-23")
     assert [(c["重さ"], c["変わった所"]) for c in d] == [
-        ("記録のみ", "ページの文字が変わった(照合に使う語句と数字は、すべてまだある)")]
+        ("記録のみ", "ページの文字が変わった(照合で見た語句と数字は、すべてまだある)")]
 
 
 def test_searched_place_change_is_recorded_once_per_page():
@@ -172,7 +172,7 @@ def test_kind_word_appearing_on_a_searched_place_is_heavy_only_for_its_own_kind(
     changed = ALL | {"https://example.lg.jp/b": "相談の窓口。オンラインの学習支援を始めます"}
     d = t.diff(run(ALL), run(changed), "2026-11-30", {"40999-online": "確認できず"})
     assert [(c["重さ"], c["変わった所"], c["前"], c["後"]) for c in d] == [
-        ("要確認", "探した場所に、その行の種類の語が新しく出た", "オンライン:0", "オンライン:1")]
+        ("要確認", "探した場所で、その行の種類の語が増えた", "オンライン:0", "オンライン:1")]
     # 「あり」の行の探した場所なら、記録のみ
     d = t.diff(run(ALL), run(changed), "2026-11-30", {"40999-online": "あり"})
     assert [c["重さ"] for c in d] == ["記録のみ"]
@@ -227,8 +227,41 @@ def test_note_numbers_are_checked_across_both_sources():
 
 
 def test_note_numbers_are_not_judged_when_a_source_is_missing():
-    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "一覧の語句", "出典2の項目": "備考",
-                 "備考": "一覧での指定年は令和8年"}
-    cur = run(ALL, rows=(row,))  # 第2の出典が取得できない
+    # 備考を裏付けるのが出典(出典2の項目に備考が無い)。第2の出典が取れない回は、備考の数字を見ない
+    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "一覧の語句", "出典2の項目": "制度名",
+                 "制度名": "見本の補助", "備考": "指定年は令和8年"}
+    cur = run(ALL, rows=(row,))  # d が取れない。a には令和8年が無い
     src = [c for c in cur if c["役割"] == "出典"][0]
     assert "備考の" not in src["照合で見たもの"] and src["判定"] == "一致"
+    # 両方取れた回は見る(a にも d にも令和8年が無いので不一致)
+    both = run(ALL | {"https://example.lg.jp/d": "一覧の語句"}, rows=(row,))
+    src = [c for c in both if c["役割"] == "出典"][0]
+    assert src["合わなかったもの"] == "備考の2026年" and src["判定"] == "不一致"
+
+
+def test_judgement_does_not_flap_when_the_second_source_comes_and_goes():
+    # 点検の指摘(11/17): 第2の出典が取れたり取れなかったりしても、要確認が繰り返し出ない
+    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "一覧の語句", "出典2の項目": "制度名",
+                 "制度名": "見本の補助", "備考": "指定年は令和8年"}
+    with_d = ALL | {"https://example.lg.jp/d": "一覧の語句"}
+    first, second, third = run(with_d, rows=(row,)), run(ALL, rows=(row,)), run(with_d, rows=(row,))
+    assert [c for c in t.diff(first, second, "2026-11-23") if c["役割"] == "出典"] == []
+    d = [c for c in t.diff(second, third, "2026-11-30") if c["役割"] == "出典"]
+    assert [(c["重さ"], c["変わった所"]) for c in d] == [("記録のみ", "前回は見なかった語句・数字が、今回は合わない")]
+
+
+def test_kind_word_increasing_from_already_present_is_heavy_and_new_words_are_not_compared():
+    before = ALL | {"https://example.lg.jp/b": "オンラインの相談"}
+    after = ALL | {"https://example.lg.jp/b": "オンラインの相談。オンラインの学習支援を始めます"}
+    d = t.diff(run(before), run(after), "2026-11-30", {"40999-online": "確認できず"})
+    assert [(c["重さ"], c["前"], c["後"]) for c in d] == [("要確認", "オンライン:1", "オンライン:2")]
+    # 減ったときは記録のみ
+    d = t.diff(run(after), run(before), "2026-11-30", {"40999-online": "確認できず"})
+    assert [c["重さ"] for c in d] == ["記録のみ"]
+    # 数える語を足した回(前回の記録にその語が無い)は、「増えた」と言わない
+    prev = run(ALL)
+    for c in prev:
+        if c["種類の語の数"]:
+            c["種類の語の数"] = " | ".join(x for x in c["種類の語の数"].split(" | ") if not x.startswith("オンライン:"))
+    d = t.diff(prev, run(after), "2026-11-30", {"40999-online": "確認できず"})
+    assert [c["重さ"] for c in d] == ["記録のみ"]

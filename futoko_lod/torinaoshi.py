@@ -15,7 +15,7 @@ GitHub Actions の `torinaoshi` で週1回まわす。やることは3つ。
 種類の語が増えたか・減ったかまで。
 
 変わった所は2つの重さに分ける。
-  要確認    照合が一致でなくなった / 取得できなくなった(2回試して2回とも) / 探した場所に、その行の種類の語が新しく出た
+  要確認    照合が一致でなくなった / 取得できなくなった(2回試して2回とも) / 「確認できず」の行の探した場所で、その行の種類の語が増えた
   記録のみ  ページの文字が変わった(照合は一致のまま) / 合わない語句・数字が変わった / 探した場所のページの文字や種類の語の数が変わった / 元に戻った
 公開データ(data/seido.csv)は、ここでは書き換えない。直すかどうかは、人が出典を見て決める。
 
@@ -198,15 +198,17 @@ def _add_note_items(rows: list[dict[str, str]], results: list[dict[str, str]], p
             entry["判定"] = "不一致"
 
 
-def _missing_change(p: dict[str, str], c: dict[str, str]) -> tuple[list[str], list[str]] | None:
-    """前回と今回で、合わなかったものが変わったか。前回の記録に項目が無い(古い形の記録)ときは None。
-    データの側を直して見るものが変わったときは、両方で見たものだけを比べる。"""
+def _compare_items(p: dict[str, str], c: dict[str, str]) -> tuple[list[str], list[str], list[str]] | None:
+    """前回と今回の「合わなかったもの」を、両方の回で見たものだけに絞って返す(前, 後, 今回だけ見て合わなかったもの)。
+    前回の記録に項目が無い(古い形の記録)ときは None。データの側を直したり、第2の出典が取れずに備考の数字を
+    見なかったりして、見るものが回ごとに違うことがある。両方で見たものだけを比べれば、取得の成否で結果が揺れない。"""
     if not p.get("照合で見たもの") or not c.get("照合で見たもの"):
         return None
     common = set(split_list(p["照合で見たもの"])) & set(split_list(c["照合で見たもの"]))
     before = [x for x in split_list(p.get("合わなかったもの", "")) if x in common]
     after = [x for x in split_list(c.get("合わなかったもの", "")) if x in common]
-    return (before, after) if before != after else None
+    only_now = [x for x in split_list(c.get("合わなかったもの", "")) if x not in common]
+    return before, after, only_now
 
 
 def _with_missing(judge: str, missing: str) -> str:
@@ -242,15 +244,24 @@ def diff(prev: list[dict[str, str]], cur: list[dict[str, str]], date: str,
             add(LIGHT, "取得できない理由が変わった", c, p["取得"], c["取得"])
         if not (got_before and got_now):
             continue
-        moved = _missing_change(p, c)
-        if p["判定"] != c["判定"]:
-            # 何が合わなくなったか(戻ったか)を、前と後に添える
+        cmp = _compare_items(p, c)
+        if cmp is not None and cmp[0] != cmp[1]:
+            before_m, after_m = cmp[0], cmp[1]
+            if not before_m:
+                add(HEAVY, "照合の結果が変わった", c, "一致", _with_missing("不一致", LIST_SEP.join(after_m)))
+            elif not after_m:
+                add(LIGHT, "照合の結果が変わった", c, _with_missing("不一致", LIST_SEP.join(before_m)), "一致")
+            else:
+                add(LIGHT, "合わない語句・数字が変わった(照合は不一致のまま)", c,
+                    LIST_SEP.join(before_m), LIST_SEP.join(after_m))
+        elif cmp is not None and cmp[2]:
+            # 前回は見なかったもの(データを直した、前回は第2の出典が取れなかった など)が、今回は合わない
+            add(LIGHT, "前回は見なかった語句・数字が、今回は合わない", c, "見ていない", LIST_SEP.join(cmp[2]))
+        elif cmp is None and p["判定"] != c["判定"]:
+            # 古い形の記録との比べ合い。何が合わなくなったかは、今回の分だけ添える
             add(HEAVY if c["判定"] == "不一致" else LIGHT, "照合の結果が変わった", c,
-                _with_missing(p["判定"], p.get("合わなかったもの", "")), _with_missing(c["判定"], c.get("合わなかったもの", "")))
-        elif moved is not None:
-            add(LIGHT, "合わない語句・数字が変わった(照合は不一致のまま)", c,
-                LIST_SEP.join(moved[0]) or "無し", LIST_SEP.join(moved[1]) or "無し")
-        elif c["役割"] == PLACE and p.get("種類の語の数") and c.get("種類の語の数") and p["種類の語の数"] != c["種類の語の数"]:
+                p["判定"], _with_missing(c["判定"], c.get("合わなかったもの", "")))
+        elif cmp is None and c["役割"] == PLACE and p.get("種類の語の数") and c.get("種類の語の数") and p["種類の語の数"] != c["種類の語の数"]:
             words_changed.setdefault(c["URL"], []).append((p, c))
         elif p["本文の印"] != c["本文の印"]:
             # 同じページを出典にする行が多い(文部科学省の一覧など)。ページごとに1行にまとめる
@@ -261,7 +272,7 @@ def diff(prev: list[dict[str, str]], cur: list[dict[str, str]], date: str,
         first = group[0]
         if role in (SOURCE, SOURCE2):
             judged = {g["判定"] for g in group}
-            what = ("ページの文字が変わった(照合に使う語句と数字は、すべてまだある)" if judged == {"一致"}
+            what = ("ページの文字が変わった(照合で見た語句と数字は、すべてまだある)" if judged == {"一致"}
                     else "ページの文字が変わった(合わない語句・数字は前と同じ)")
         else:
             what = "探した場所のページの文字が変わった(種類の語の数は同じ)" if first.get("_語を比べた") else "探した場所のページの文字が変わった"
@@ -270,15 +281,21 @@ def diff(prev: list[dict[str, str]], cur: list[dict[str, str]], date: str,
     for url, pairs in words_changed.items():
         p, c = pairs[0]
         old, new = parse_counts(p["種類の語の数"]), parse_counts(c["種類の語の数"])
-        appeared = {w for w, n in new.items() if n > 0 and old.get(w, 0) == 0}
-        # その行の種類の語が新しく出たら、制度が載ったかもしれない(要確認)。ほかの種類の語なら記録のみ
+        both = set(old) & set(new)  # 数える語を足したり減らしたりした回に、誤って「増えた」と言わない
+        moved = sorted(w for w in both if old[w] != new[w])
+        if not moved:
+            if p["本文の印"] != c["本文の印"]:
+                add(LIGHT, "探した場所のページの文字が変わった", c, p["本文の印"], c["本文の印"],
+                    " ".join(cc["id"] for _, cc in pairs))
+            continue
+        # 「確認できず」の行の種類の語が増えたら(0回から出たときも、もともと出ていて増えたときも)、
+        # 制度が載ったかもしれない(要確認)。減ったとき、ほかの種類の語のときは記録のみ
         own = {w for _, cc in pairs if (statuses or {}).get(cc["id"], "確認できず") == "確認できず"
                for w in KIND_WORDS.get(_kind_of(cc["id"]), ())}
-        heavy = bool(appeared & own)
-        moved = sorted(w for w in set(old) | set(new) if old.get(w, 0) != new.get(w, 0))
-        what = "探した場所に、その行の種類の語が新しく出た" if heavy else "探した場所のページで、種類の語の数が変わった"
+        heavy = any(new[w] > old[w] for w in moved if w in own)
+        what = "探した場所で、その行の種類の語が増えた" if heavy else "探した場所のページで、種類の語の数が変わった"
         add(HEAVY if heavy else LIGHT, what, c,
-            LIST_SEP.join(f"{w}:{old.get(w, 0)}" for w in moved), LIST_SEP.join(f"{w}:{new.get(w, 0)}" for w in moved),
+            LIST_SEP.join(f"{w}:{old[w]}" for w in moved), LIST_SEP.join(f"{w}:{new[w]}" for w in moved),
             " ".join(cc["id"] for _, cc in pairs))
     return changes
 
@@ -348,9 +365,10 @@ def issue_markdown(changes: list[dict[str, str]], date: str) -> str:
         return ""
     lines = [
         f"定期的な取り直し({date})で、要確認が {len(heavy)} 件ある"
-        "(出典のページとデータが合わなくなった、出典を取得できなくなった、「確認できず」の行の探した場所に種類の語が新しく出た)。",
+        "(出典のページとデータが合わなくなった、出典を取得できなくなった、「確認できず」の行の探した場所で種類の語が増えた)。",
         "", "公開データは書き換えていない。出典のページを人が見て、直すかどうかを決める。"
-        "「前」「後」の「合わない:」は、データの側の語句・数字のうち、ページに見つからなかったもの。", "",
+        "「前」「後」の「合わない:」は、データの側の語句・数字のうち、ページに見つからなかったもの(前回と今回の両方で見たものだけを比べる)。"
+        "「備考の」が付く数字は、出典か第2の出典のどちらかのページにあればよいので、両方のページを見てほしい。", "",
         "| 変わった所 | id | URL | 前 | 後 |", "|---|---|---|---|---|",
     ]
     lines += [f"| {c['変わった所']} | {c['id']} | {c['URL']} | {c['前']} | {c['後']} |" for c in heavy]

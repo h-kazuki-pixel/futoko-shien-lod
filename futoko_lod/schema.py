@@ -128,22 +128,53 @@ class DataError(Exception):
         super().__init__("\n".join(str(p) for p in problems))
 
 
+_HOST_CHARS = re.compile(r"[a-z0-9.-]+")
+_BAD_URL_CHARS = re.compile(r"[\s\\@]")  # 空白、バックスラッシュ、@(ユーザー名つきの URL)は、別のサイトを指す書き方に使われうる
+
+
+def _split_extra(d: str) -> tuple[str, str]:
+    """足した公式の場所を、ホストと、その後ろ(パスと問い合わせ)に分ける。"""
+    host, _, rest = d.partition("/")
+    return host, ("/" + rest) if rest else ""
+
+
 def is_official_url(url: str, extra_domains: frozenset[str] = frozenset()) -> bool:
+    if _BAD_URL_CHARS.search(url):
+        return False
     try:
         parsed = urlparse(url)
+        parsed.port  # 数字でないポートは ValueError
     except ValueError:
         return False
     if parsed.scheme not in ("http", "https") or not parsed.hostname:
         return False
+    if parsed.netloc.endswith(":"):  # 空のポート
+        return False
     host = parsed.hostname.lower()
+    if not _HOST_CHARS.fullmatch(host):
+        return False
+    if any(seg in ("..", ".") for seg in parsed.path.split("/")):
+        return False
     if host.endswith(_OFFICIAL_SUFFIX):
         return True
     if _REGIONAL.search(host):
         return True
     # 足した公式の場所。「/」を含むものは、業者のサイトに置かれた例規集など、その市町村の場所だけを
-    # 公式とみなす(ホスト+パス+問い合わせの前方一致)。含まないものはドメインごと
-    where = (host + parsed.path + ("?" + parsed.query if parsed.query else "")).lower()
-    return any(where.startswith(d) if "/" in d else (host == d or host.endswith("." + d)) for d in extra_domains)
+    # 公式とみなす(ホストが同じで、パス+問い合わせが前方一致)。問い合わせ(?)まで決めたものは、
+    # その後ろが「&」か終わりのときだけ(jctcd=…a と jctcd=…ab を取り違えない)。「/」を含まないものはドメインごと
+    where = (parsed.path + ("?" + parsed.query if parsed.query else "")).lower()
+    for d in extra_domains:
+        dhost, drest = _split_extra(d)
+        if not drest:
+            if host == d or host.endswith("." + d):
+                return True
+            continue
+        if host != dhost or not where.startswith(drest):
+            continue
+        if "?" in drest and where[len(drest):len(drest) + 1] not in ("", "&"):
+            continue
+        return True
+    return False
 
 
 def _valid_date(value: str) -> bool:

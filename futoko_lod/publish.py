@@ -880,7 +880,7 @@ def shapes_html() -> str:
                    f'<td><code>{e(target_txt)}</code></td><td>{e(str(g.value(s, RDFS.comment) or ""))}</td></tr>')
     body = f"""<h1>形(SHACL)</h1>
 <p>公開する RDF(<a href="seido.ttl">seido.ttl</a> と <a href="dataset.ttl">dataset.ttl</a>)が守る決まりを、SHACL で書いたもの。Turtle は <a href="shapes.ttl">shapes.ttl</a>。名前空間は <code>{e(shapes.SH_NS)}</code>。</p>
-<p>公開のたびに、この形で検査し、1つでも外れれば公開しない。SHACL Core だけで書いているので、ほかの SHACL の道具でも同じように確かめられる。たとえば pySHACL では <code>pyshacl -s shapes.ttl seido.ttl</code>。</p>
+<p>公開のたびに、この形で検査し、1つでも外れれば公開しない。SHACL Core だけで書いた(SPARQL を使う決まりは無い)。確かめた道具は pySHACL だけ: <code>pyshacl -s shapes.ttl seido.ttl</code>。</p>
 <p>形で書けない決まり(id の前半と市町村コードが合うこと、市町村の名前が台帳と合うこと、金額などが出典のページにあること)は、CSV の検査と出典との照合で見ている。<a href="ns">語彙</a>も見てほしい。</p>
 <div class="scroll"><table>
 <thead><tr><th scope="col">形</th><th scope="col">名前</th><th scope="col">対象</th><th scope="col">決まり</th></tr></thead>
