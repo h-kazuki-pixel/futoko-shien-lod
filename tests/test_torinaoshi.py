@@ -265,3 +265,29 @@ def test_kind_word_increasing_from_already_present_is_heavy_and_new_words_are_no
             c["種類の語の数"] = " | ".join(x for x in c["種類の語の数"].split(" | ") if not x.startswith("オンライン:"))
     d = t.diff(prev, run(after), "2026-11-30", {"40999-online": "確認できず"})
     assert [c["重さ"] for c in d] == ["記録のみ"]
+
+
+def test_note_disappearing_after_a_missed_fetch_is_still_heavy():
+    # 点検の指摘(11/17): 見た → 第2の出典が取れず見なかった → 年が消えていた、の順でも要確認にする
+    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "一覧の語句", "出典2の項目": "制度名",
+                 "制度名": "見本の補助", "備考": "指定年は令和8年"}
+    ok = ALL | {"https://example.lg.jp/d": "一覧の語句。令和8年"}
+    gone = ALL | {"https://example.lg.jp/d": "一覧の語句"}
+    r1 = run(ok, rows=(row,))
+    r2 = run(ALL, rows=(row,))
+    t.carry_note_items(r1, r2)
+    assert "備考の2026年" in r2[0]["照合で見たもの"] and "_備考を見ていない" not in r2[0]
+    r3 = run(gone, rows=(row,))
+    t.carry_note_items(r2, r3)
+    d = [c for c in t.diff(r2, r3, "2026-11-30") if c["役割"] == "出典"]
+    assert [(c["重さ"], c["前"], c["後"]) for c in d] == [("要確認", "一致", "不一致(合わない: 備考の2026年)")]
+
+
+def test_before_says_only_the_compared_part_matched():
+    # 前回は、今回見なかった備考の数字で不一致だった。両方で見た分は一致 → 今回は根拠の箇所が消えた
+    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "一覧の語句", "出典2の項目": "制度名",
+                 "制度名": "見本の補助", "備考": "指定年は令和8年"}
+    r1 = run(ALL | {"https://example.lg.jp/d": "一覧の語句"}, rows=(row,))  # 備考の年が無く不一致
+    r2 = run({"https://example.lg.jp/a": "補助します。2分の1、上限は別"}, rows=(row,))  # d が取れず、根拠も消えた
+    d = [c for c in t.diff(r1, r2, "2026-11-30") if c["役割"] == "出典"]
+    assert d[0]["前"] == "一致(両方の回で見た分)" and d[0]["重さ"] == "要確認"

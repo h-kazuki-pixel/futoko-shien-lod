@@ -129,7 +129,10 @@ class DataError(Exception):
 
 
 _HOST_CHARS = re.compile(r"[a-z0-9.-]+")
-_BAD_URL_CHARS = re.compile(r"[\s\\@]")  # 空白、バックスラッシュ、@(ユーザー名つきの URL)は、別のサイトを指す書き方に使われうる
+# 公式の場所の外を指しうる書き方: 空白、バックスラッシュ、@(ユーザー名つきの URL)、「.」「..」の区切り、%2e で書いた「.」。
+# 形(shapes.py)も同じ正規表現を使う(XPath でも通る書き方にしてある。大文字小文字は区別しない)
+UNSAFE_URL_PATTERN = r"[\s\\@]|/\.\.?(/|\?|#|$)|%2[eE]"
+_BAD_URL = re.compile(UNSAFE_URL_PATTERN, re.I)
 
 
 def _split_extra(d: str) -> tuple[str, str]:
@@ -139,7 +142,7 @@ def _split_extra(d: str) -> tuple[str, str]:
 
 
 def is_official_url(url: str, extra_domains: frozenset[str] = frozenset()) -> bool:
-    if _BAD_URL_CHARS.search(url):
+    if _BAD_URL.search(url):
         return False
     try:
         parsed = urlparse(url)
@@ -148,12 +151,10 @@ def is_official_url(url: str, extra_domains: frozenset[str] = frozenset()) -> bo
         return False
     if parsed.scheme not in ("http", "https") or not parsed.hostname:
         return False
-    if parsed.netloc.endswith(":"):  # 空のポート
+    if ":" in parsed.netloc:  # ポートを書いた URL は通さない(公式のページで使う所は無い。空のポートや範囲外の数も含めて落とす)
         return False
     host = parsed.hostname.lower()
     if not _HOST_CHARS.fullmatch(host):
-        return False
-    if any(seg in ("..", ".") for seg in parsed.path.split("/")):
         return False
     if host.endswith(_OFFICIAL_SUFFIX):
         return True

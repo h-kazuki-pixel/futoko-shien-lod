@@ -181,11 +181,13 @@ def test_official_pattern_agrees_with_schema():
         "https://user@www1.g-reiki.net/city.kasuga.fukuoka/x", "https://www.city.fukuoka.lg.jp\t/a",
         "https://www1.g-reiki.net/city.kasuga.fukuoka/../city.other.fukuoka/x",
         "https://ops-jg.d1-law.com/opensearch/srjbf01/init?jctcd=8a9160eadb9",
+        "https://www1.g-reiki.net:443/city.kasuga.fukuoka/x", "https://www.city.x.lg.jp:99999/a",
+        "https://www.city.x.lg.jp/a?next=/./b", "https://www.city.x.lg.jp/a#/../x",
+        "https://www1.g-reiki.net/city.kasuga.fukuoka/%2e%2e/city.other/x", "https://www1.g-reiki.net/city.kasuga.fukuoka/%2E%2E/x",
         # 通すもの
-        "https://www1.g-reiki.net:443/city.kasuga.fukuoka/x",
         "https://ops-jg.d1-law.com/opensearch/srjbf01/init?jctcd=8A9160EADB&houcd=H1",
     }
-    unsafe = re.compile(shapes.UNSAFE_URL_PATTERN.replace("\\s", "\\s"))
+    unsafe = re.compile(shapes.UNSAFE_URL_PATTERN, re.I)
     for u in sorted(urls):
         by_shape = bool(pat.search(u)) and not unsafe.search(u)
         assert by_shape == schema.is_official_url(u, extra), u

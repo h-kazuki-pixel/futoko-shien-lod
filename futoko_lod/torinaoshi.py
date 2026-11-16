@@ -97,6 +97,23 @@ def collation_items(row: dict[str, str], role: str, page_text: str) -> tuple[lis
     return items, missing
 
 
+def carry_note_items(prev: list[dict[str, str]], cur: list[dict[str, str]]) -> None:
+    """今回は片方の出典が取れず備考の数字を見なかった行に、前回の備考の数字の結果を引き継ぐ。
+    引き継がないと「見た → 見なかった → 消えていた」の順のとき、消えたことを要確認にできない(別の目での点検、11/17)。
+    引き継いだ結果は、最後に見たときのもの。判定は今回見た分だけで決める。"""
+    before = {(p["id"], p["役割"], p["URL"]): p for p in prev}
+    for c in cur:
+        if not c.pop("_備考を見ていない", None):
+            continue
+        p = before.get((c["id"], c["役割"], c["URL"]))
+        if p is None:
+            continue
+        items = [x for x in split_list(p.get("照合で見たもの", "")) if x.startswith(NOTE_PREFIX)]
+        missing = [x for x in split_list(p.get("合わなかったもの", "")) if x.startswith(NOTE_PREFIX)]
+        c["照合で見たもの"] = LIST_SEP.join(split_list(c["照合で見たもの"]) + items)
+        c["合わなかったもの"] = LIST_SEP.join(split_list(c["合わなかったもの"]) + missing)
+
+
 def kind_word_counts(page_text: str) -> str:
     norm = collate_mod.normalize(page_text)
     return LIST_SEP.join(f"{w}:{norm.count(collate_mod.normalize(w))}" for w in ALL_KIND_WORDS)
@@ -184,11 +201,13 @@ def _add_note_items(rows: list[dict[str, str]], results: list[dict[str, str]], p
             continue
         urls = [u for u in (row["出典URL"], (row.get("出典URL_2") or "").strip()) if u]
         texts = [pages[u]["text"] for u in urls if u in pages]
-        if not urls or len(texts) != len(urls) or any(t is None for t in texts):
-            continue
         role = SOURCE2 if "備考" in schema.source2_fields(row) and len(urls) == 2 else SOURCE
         entry = by_key.get((row["id"], role))
         if entry is None:
+            continue
+        if not urls or len(texts) != len(urls) or any(t is None for t in texts):
+            if entry["取得"] == "取得":
+                entry["_備考を見ていない"] = "1"  # 前回の結果を引き継ぐ(carry_note_items)
             continue
         items = [NOTE_PREFIX + token_label(x) for x in sorted(collate_mod.tokens(row["備考"]))]
         missing = [NOTE_PREFIX + token_label(x) for x in collate_mod.note_tokens_missing(row, *texts)]
@@ -247,10 +266,13 @@ def diff(prev: list[dict[str, str]], cur: list[dict[str, str]], date: str,
         cmp = _compare_items(p, c)
         if cmp is not None and cmp[0] != cmp[1]:
             before_m, after_m = cmp[0], cmp[1]
+            # 比べるのは両方の回で見た分だけ。その分では一致でも、前回の判定が不一致だったら、そう分かるように書く
+            ok_before = "一致" if p["判定"] == "一致" else "一致(両方の回で見た分)"
+            ok_now = "一致" if c["判定"] == "一致" else "一致(両方の回で見た分)"
             if not before_m:
-                add(HEAVY, "照合の結果が変わった", c, "一致", _with_missing("不一致", LIST_SEP.join(after_m)))
+                add(HEAVY, "照合の結果が変わった", c, ok_before, _with_missing("不一致", LIST_SEP.join(after_m)))
             elif not after_m:
-                add(LIGHT, "照合の結果が変わった", c, _with_missing("不一致", LIST_SEP.join(before_m)), "一致")
+                add(LIGHT, "照合の結果が変わった", c, _with_missing("不一致", LIST_SEP.join(before_m)), ok_now)
             else:
                 add(LIGHT, "合わない語句・数字が変わった(照合は不一致のまま)", c,
                     LIST_SEP.join(before_m), LIST_SEP.join(after_m))
@@ -390,6 +412,7 @@ def main() -> int:
     prev = read(SAISHIN)
     rows = schema.load(args.path)
     cur = collect(rows, interval=args.interval)
+    carry_note_items(prev, cur)
     changes = diff(prev, cur, date, {r["id"]: r["状態"] for r in rows})
     write(SAISHIN, cur, SAISHIN_COLUMNS)
     write(SABUN, read(SABUN) + changes, SABUN_COLUMNS)

@@ -56,8 +56,8 @@ def official_pattern(extra_domains: frozenset[str] | None = None) -> str:
     URL の中の「..」の区切りは、ここでは見ない(UNSAFE_URL_PATTERN を sh:not で使う)。"""
     if extra_domains is None:
         extra_domains = schema.load_extra_domains()
-    port = r"(:[0-9]+)?"
-    host_end = port + r"([/?#]|$)"
+    port = ""  # ポートを書いた URL は通さない(schema.is_official_url と同じ)
+    host_end = r"([/?#]|$)"
     alts = [
         r"([a-z0-9-]+\.)*[a-z0-9-]+\.(lg|go)\.jp" + host_end,
         r"([a-z0-9-]+\.)*(pref|city|town|vill)\.([a-z0-9-]+\.)?fukuoka\.jp" + host_end,
@@ -71,8 +71,8 @@ def official_pattern(extra_domains: frozenset[str] | None = None) -> str:
     return "^https?://(" + "|".join(alts) + ")"
 
 
-# 公式の場所の外を指しうる書き方(空白、バックスラッシュ、@、「..」の区切り)。schema.is_official_url も落とす
-UNSAFE_URL_PATTERN = r"[\s\\@]|/\.\.?(/|\?|#|$)"
+# 公式の場所の外を指しうる書き方。schema.is_official_url と同じもの
+UNSAFE_URL_PATTERN = schema.UNSAFE_URL_PATTERN
 
 
 def shapes_turtle(extra_domains: frozenset[str] | None = None) -> str:
@@ -91,7 +91,7 @@ def shapes_turtle(extra_domains: frozenset[str] | None = None) -> str:
     supports_and = "\n        ".join(
         f'[ sh:or ( [ sh:not [ sh:path ( fsl:additionalSource fsl:supports ) ; sh:hasValue {p} ] ] [ sh:path {p} ; sh:minCount 1 ] ) ]'
         for p in supports if p != "fsl:kind")
-    url = _str(official_pattern(extra_domains)) + f" ; sh:flags \"i\" ; sh:not [ sh:pattern {_str(UNSAFE_URL_PATTERN)} ]"
+    url = _str(official_pattern(extra_domains)) + f" ; sh:flags \"i\" ; sh:not [ sh:pattern {_str(UNSAFE_URL_PATTERN)} ; sh:flags \"i\" ]"
     id_pattern = _str("^40[0-9]{3}-(" + "|".join(re.escape(s) for s in schema.KINDS) + ")(-[0-9]+)?$")
     st = lambda *labels: _list([statuses[x] for x in labels])  # noqa: E731
     no_content = ["schema:name", "fsl:amountText", "fsl:amountMaxYen", "fsl:subsidyRate", "fsl:startText"]
