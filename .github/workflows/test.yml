@@ -19,4 +19,6 @@ jobs:
         run: python -m futoko_lod.schema data/kouho.csv
       - name: JSON-LD が CSV と合っているか
         run: python -m futoko_lod.build --check
+      - name: 形(SHACL)のファイルが最新か
+        run: python -m futoko_lod.shapes --check
       - run: python -m pytest -q

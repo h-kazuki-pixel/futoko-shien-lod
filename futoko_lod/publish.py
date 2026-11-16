@@ -7,6 +7,7 @@
   id/{id}.ttl, .jsonld  1件ごとのデータ
   seido.csv, seido.jsonld, seido.ttl   全件
   ns.html, ns.ttl       語彙(fsl:)の説明
+  shapes.html, shapes.ttl  形(SHACL)。公開する RDF が守る決まり。公開の前に、この形で検査する(shapes.py)
   dataset.ttl           データセットの説明(DCAT)
 
 中身は build.py が作る JSON-LD の節(to_node)だけを元にする。ここで項目を足したり直したりしない。
@@ -27,7 +28,7 @@ import re
 import shutil
 from pathlib import Path
 
-from . import build, schema
+from . import build, schema, shapes
 
 BASE = build.BASE
 NS = BASE + "ns#"
@@ -288,7 +289,7 @@ def dataset_turtle(rows: list[dict[str, str]]) -> str:
         ("dcat:keyword", [lit(k) + "@ja" for k in ("不登校", "教育支援センター", "フリースクール", "学びの多様化学校", "福岡県")]),
         ("dcat:contactPoint", [iri(REPO + "/issues")]),
         ("dct:spatial", [iri(build.SAC + "40000")]),
-        ("dct:conformsTo", [iri(NS)]),
+        ("dct:conformsTo", [iri(NS), iri(shapes.SHAPES_IRI)]),
         ("dcat:landingPage", [iri(BASE)]),
         ("dcat:distribution", [iri(BASE + f) for f, _ in dists]),
     ])]
@@ -481,6 +482,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <tr><td><a href="seido.jsonld">seido.jsonld</a></td><td>JSON-LD</td></tr>
 <tr><td><a href="seido.ttl">seido.ttl</a></td><td>Turtle</td></tr>
 <tr><td><a href="ns">ns</a> / <a href="ns.ttl">ns.ttl</a></td><td>語彙(項目と、種類・状態などの値)の説明</td></tr>
+<tr><td><a href="shapes">shapes</a> / <a href="shapes.ttl">shapes.ttl</a></td><td>形(SHACL)。公開する RDF が守る決まり。公開のたびに、この形で検査してから公開している</td></tr>
 <tr><td><a href="dataset.ttl">dataset.ttl</a></td><td>このデータセットの説明(DCAT)</td></tr>
 <tr><td><a href="kumiawase/">組み合わせの例</a> / <a href="kumiawase.csv">kumiawase.csv</a></td><td>e-Stat 統計LOD の児童数・生徒数と、標準地域コードの URI で並べた例。数字は e-Stat 統計LOD によるもの</td></tr>
 </tbody></table></div>
@@ -861,6 +863,35 @@ def ns_html() -> str:
                 '<link rel="alternate" type="text/turtle" href="ns.ttl">\n')
 
 
+def shapes_html() -> str:
+    """形(SHACL)の説明のページ。中身は shapes.ttl を読んで作る(二重に書かない)。"""
+    from rdflib import Graph, Namespace, RDF, RDFS
+
+    SH = Namespace("http://www.w3.org/ns/shacl#")
+    g = Graph().parse(data=shapes.shapes_turtle(), format="turtle")
+    trs = []
+    for s in sorted(g.subjects(RDF.type, SH.NodeShape), key=str):
+        if not str(s).startswith(shapes.SH_NS):
+            continue
+        name = str(s)[len(shapes.SH_NS):]
+        target = g.value(s, SH.targetClass) or g.value(s, SH.targetObjectsOf)
+        target_txt = g.namespace_manager.normalizeUri(target) if target else "ほかの形から使う"
+        trs.append(f'<tr id="{e(name)}"><td><code>fslsh:{e(name)}</code></td><td>{e(str(g.value(s, RDFS.label) or ""))}</td>'
+                   f'<td><code>{e(target_txt)}</code></td><td>{e(str(g.value(s, RDFS.comment) or ""))}</td></tr>')
+    body = f"""<h1>形(SHACL)</h1>
+<p>公開する RDF(<a href="seido.ttl">seido.ttl</a> と <a href="dataset.ttl">dataset.ttl</a>)が守る決まりを、SHACL で書いたもの。Turtle は <a href="shapes.ttl">shapes.ttl</a>。名前空間は <code>{e(shapes.SH_NS)}</code>。</p>
+<p>公開のたびに、この形で検査し、1つでも外れれば公開しない。SHACL Core だけで書いているので、ほかの SHACL の道具でも同じように確かめられる。たとえば pySHACL では <code>pyshacl -s shapes.ttl seido.ttl</code>。</p>
+<p>形で書けない決まり(id の前半と市町村コードが合うこと、市町村の名前が台帳と合うこと、金額などが出典のページにあること)は、CSV の検査と出典との照合で見ている。<a href="ns">語彙</a>も見てほしい。</p>
+<div class="scroll"><table>
+<thead><tr><th scope="col">形</th><th scope="col">名前</th><th scope="col">対象</th><th scope="col">決まり</th></tr></thead>
+<tbody>
+{chr(10).join(trs)}
+</tbody></table></div>
+"""
+    return page(f"形(SHACL) | {TITLE}", body, "",
+                '<link rel="alternate" type="text/turtle" href="shapes.ttl">\n')
+
+
 # ---------- 確かめた記録(取り直し、人の再確認、問い合わせ) ----------
 
 def load_records(base: str | Path = "data") -> dict[str, list[dict[str, str]]]:
@@ -1014,6 +1045,8 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
         shutil.copyfile(pupils_path, out / "kumiawase.csv")
     put("ns.html", ns_html())
     put("ns.ttl", vocab_turtle())
+    put("shapes.html", shapes_html())
+    put("shapes.ttl", shapes.shapes_turtle())
     for f in (TAIOU_PATH, TAIOU_SHURUI_PATH, str(Path(csv_path).parent / "rinsetsu.csv")):
         if Path(f).exists():
             shutil.copyfile(f, out / Path(f).name)

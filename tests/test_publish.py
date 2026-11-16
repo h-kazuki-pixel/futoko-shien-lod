@@ -140,8 +140,8 @@ def test_internal_links_resolve(site):
             if href.startswith(("http://", "https://")):
                 continue
             target = (p.parent / href).resolve()
-            if href in ("ns", "../ns"):  # GitHub Pages は拡張子なしの URL に ns.html を返す
-                target = site / "ns.html"
+            if href in ("ns", "../ns", "shapes", "../shapes"):  # GitHub Pages は拡張子なしの URL に .html を返す
+                target = site / (href.split("/")[-1] + ".html")
             assert target.exists() or (target / "index.html").exists(), f"{p}: {href}"
 
 

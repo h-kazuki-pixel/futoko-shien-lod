@@ -94,6 +94,7 @@
 | `docs/問い合わせ.md` | 問い合わせの文面と、市町ごとの質問。データから作る |
 | `data/torinaoshi/` | 定期的な取り直しの記録。いちばん新しい結果(`saishin.csv`)と、変わった所(`sabun.csv`)。`docs/定期的な取り直し.md` |
 | `docs/公開の形.md` | 公開の場所、URI の決まり、公開してから確かめたこと |
+| `data/shapes.ttl` | 形(SHACL)。公開する RDF が守る決まり。公開のたびに、この形で検査してから公開する(`shapes.py` が作る。公開の場所は `shapes.ttl`) |
 | `data/pilot/` | 最初の試し読みの見本(元のまま) |
 | `docs/データの項目.md` | 項目の意味と、検査の決まり |
 | `futoko_lod/` | 検査、照合、取得、JSON-LD の生成 |
@@ -104,6 +105,8 @@
 pip install -r requirements-dev.txt
 python -m futoko_lod.schema data/seido.csv   # 検査
 python -m futoko_lod.build                   # JSON-LD を作り直す
+python -m futoko_lod.shapes                  # 形(SHACL)を作り直す
+python -m futoko_lod.publish && python -m futoko_lod.shapes --validate _site   # 公開の一式を書き出して、形で検査
 python -m pytest -q                          # テスト
 python -m futoko_lod.fetch data/seido.csv    # 出典を取りに行って照合(間隔をあけて取得する)
 ```

@@ -1,0 +1,235 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix schema: <https://schema.org/> .
+@prefix fsl: <https://h-kazuki-pixel.github.io/futoko-shien-lod/ns#> .
+@prefix fslsh: <https://h-kazuki-pixel.github.io/futoko-shien-lod/shapes#> .
+
+# このファイルは futoko_lod/shapes.py が作る。手で直さない。
+
+<https://h-kazuki-pixel.github.io/futoko-shien-lod/shapes> a owl:Ontology ;
+    rdfs:label "不登校支援制度LOD の形(SHACL)"@ja ;
+    rdfs:comment "公開する RDF(seido.ttl、dataset.ttl)が守る決まり。SHACL Core だけで書いている。公開のたびに、この形で検査してから公開する。"@ja ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    rdfs:seeAlso <https://h-kazuki-pixel.github.io/futoko-shien-lod/ns> .
+
+# ---------- 確かめた記録(すべての状態に共通) ----------
+
+fslsh:RecordShape a sh:NodeShape ;
+    sh:targetClass fsl:Record ;
+    rdfs:label "確かめた記録"@ja ;
+    rdfs:comment "どの状態の記録にも要る項目と、値の形。"@ja ;
+    sh:nodeKind sh:IRI ;
+    sh:pattern "^https://h\\-kazuki\\-pixel\\.github\\.io/futoko\\-shien\\-lod/id/[0-9a-z-]+$" ;
+    sh:property
+        [ sh:path schema:identifier ; sh:name "id"@ja ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ;
+          sh:pattern "^40[0-9]{3}-(fs\\-hojo|shien\\-center|tayouka|online|shusseki|fs\\-unei)(-[0-9]+)?$" ;
+          sh:message "id は「市町村コード-種類」(同じ種類が複数あれば -2 など)"@ja ] ,
+        [ sh:path schema:areaServed ; sh:name "市町村"@ja ; sh:minCount 1 ; sh:maxCount 1 ; sh:node fslsh:AreaShape ] ,
+        [ sh:path fsl:kind ; sh:name "制度の種類"@ja ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( fsl:kind-fs-hojo fsl:kind-shien-center fsl:kind-tayouka fsl:kind-online fsl:kind-shusseki fsl:kind-fs-unei ) ] ,
+        [ sh:path fsl:status ; sh:name "状態"@ja ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( fsl:status-ari fsl:status-yotei fsl:status-nashi fsl:status-kakunin-dekizu ) ;
+          sh:message "状態は あり / 予定 / なし / 確認できず の1つ"@ja ] ,
+        [ sh:path fsl:dateChecked ; sh:name "確認日"@ja ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:date ] ,
+        [ sh:path fsl:checkMethod ; sh:name "確認方法"@ja ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( fsl:method-kikai fsl:method-hito-yomitori fsl:method-hito fsl:method-toiawase ) ] ,
+        [ sh:path fsl:paymentForm ; sh:name "補助の形"@ja ; sh:maxCount 1 ; sh:in ( fsl:form-maitsuki fsl:form-kaishiji-1kai fsl:form-nendo-goto fsl:form-sonota ) ] ,
+        [ sh:path schema:name ; sh:name "制度名"@ja ; sh:maxCount 1 ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ] ,
+        [ sh:path fsl:eligibility ; sh:name "対象"@ja ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ; sh:maxCount 1 ; sh:maxLength 140 ] ,
+        [ sh:path fsl:amountText ; sh:name "金額"@ja ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ; sh:maxCount 1 ; sh:maxLength 140 ] ,
+        [ sh:path fsl:startText ; sh:name "開始"@ja ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ; sh:maxCount 1 ; sh:maxLength 140 ] ,
+        [ sh:path fsl:note ; sh:name "備考"@ja ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ; sh:maxCount 1 ; sh:maxLength 140 ] ,
+        [ sh:path fsl:sourceName ; sh:name "出典名"@ja ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ; sh:maxCount 1 ] ,
+        [ sh:path fsl:noneBasis ; sh:name "なしの根拠"@ja ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ; sh:maxCount 1 ] ,
+        [ sh:path fsl:amountMaxYen ; sh:name "上限額_円"@ja ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 1 ] ,
+        [ sh:path fsl:subsidyRate ; sh:name "補助率"@ja ; sh:maxCount 1 ; sh:datatype xsd:string ;
+          sh:pattern "^[1-9][0-9]*/[1-9][0-9]*$" ; sh:message "補助率は 1/2 の形"@ja ] ,
+        [ sh:path fsl:basisPhrase ; sh:name "根拠の箇所"@ja ; sh:maxCount 1 ; sh:datatype rdf:langString ;
+          sh:maxLength 40 ; sh:message "根拠の箇所は 40字まで(公式ページの文章を写さない)"@ja ] ,
+        [ sh:path dct:source ; sh:name "出典URL"@ja ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
+          sh:pattern "^https?://(([a-z0-9-]+\\.)*[a-z0-9-]+\\.(lg|go)\\.jp(:[0-9]+)?([/?#]|$)|([a-z0-9-]+\\.)*(pref|city|town|vill)\\.([a-z0-9-]+\\.)?fukuoka\\.jp(:[0-9]+)?([/?#]|$)|ops\\-jg\\.d1\\-law\\.com/opensearch/srjbf01/init\\?jctcd=8a9160eadb|public1\\.legalcrud\\.com/umi_town/|www1\\.g\\-reiki\\.net/city\\.kasuga\\.fukuoka/|www1\\.g\\-reiki\\.net/town\\.sasaguri/)" ; sh:flags "i" ; sh:message "出典は市町村・県・国の公式サイトだけ"@ja ] ,
+        [ sh:path fsl:guideline ; sh:name "要綱URL"@ja ; sh:maxCount 1 ; sh:nodeKind sh:IRI ;
+          sh:pattern "^https?://(([a-z0-9-]+\\.)*[a-z0-9-]+\\.(lg|go)\\.jp(:[0-9]+)?([/?#]|$)|([a-z0-9-]+\\.)*(pref|city|town|vill)\\.([a-z0-9-]+\\.)?fukuoka\\.jp(:[0-9]+)?([/?#]|$)|ops\\-jg\\.d1\\-law\\.com/opensearch/srjbf01/init\\?jctcd=8a9160eadb|public1\\.legalcrud\\.com/umi_town/|www1\\.g\\-reiki\\.net/city\\.kasuga\\.fukuoka/|www1\\.g\\-reiki\\.net/town\\.sasaguri/)" ; sh:flags "i" ; sh:message "要綱は市町村・県・国の公式サイトだけ"@ja ] ,
+        [ sh:path fsl:searchedAt ; sh:name "探した場所"@ja ; sh:nodeKind sh:IRI ;
+          sh:pattern "^https?://(([a-z0-9-]+\\.)*[a-z0-9-]+\\.(lg|go)\\.jp(:[0-9]+)?([/?#]|$)|([a-z0-9-]+\\.)*(pref|city|town|vill)\\.([a-z0-9-]+\\.)?fukuoka\\.jp(:[0-9]+)?([/?#]|$)|ops\\-jg\\.d1\\-law\\.com/opensearch/srjbf01/init\\?jctcd=8a9160eadb|public1\\.legalcrud\\.com/umi_town/|www1\\.g\\-reiki\\.net/city\\.kasuga\\.fukuoka/|www1\\.g\\-reiki\\.net/town\\.sasaguri/)" ; sh:flags "i" ; sh:message "探した場所は公式サイトの URL"@ja ] ,
+        [ sh:path fsl:guidelineState ; sh:name "要綱の状況"@ja ; sh:maxCount 1 ; sh:in ( "ページにリンクなし"@ja "リンクあり・URL未取得"@ja "取得済み"@ja ) ] ,
+        [ sh:path fsl:additionalSource ; sh:name "第2の出典"@ja ; sh:maxCount 1 ; sh:node fslsh:AdditionalSourceShape ] ,
+        [ sh:path fsl:checkActivity ; sh:name "確かめた記録"@ja ; sh:class prov:Activity ] .
+
+# ---------- 状態ごとの決まり(この作品の核。「なし」と「確認できず」を混ぜない) ----------
+
+fslsh:AriYoteiRule a sh:NodeShape ;
+    sh:targetClass fsl:Record ;
+    rdfs:label "あり・予定の決まり"@ja ;
+    rdfs:comment "「あり」「予定」は、出典・根拠の箇所・制度名がそろい、schema:GovernmentService でもある。利用料の補助は、補助の形(毎月か1回きりか)を必ず持つ。"@ja ;
+    sh:message "「あり」「予定」なのに、出典・根拠の箇所・制度名・型・補助の形のどれかが足りない"@ja ;
+    sh:or (
+        [ sh:path fsl:status ; sh:in ( fsl:status-nashi fsl:status-kakunin-dekizu ) ]
+        [ sh:class schema:GovernmentService ;
+          sh:property
+            [ sh:path dct:source ; sh:minCount 1 ] ,
+            [ sh:path fsl:basisPhrase ; sh:minCount 1 ] ,
+            [ sh:path schema:name ; sh:minCount 1 ] ;
+          sh:or (
+            [ sh:path fsl:kind ; sh:in ( fsl:kind-shien-center fsl:kind-tayouka fsl:kind-online fsl:kind-shusseki fsl:kind-fs-unei ) ]
+            [ sh:path fsl:paymentForm ; sh:minCount 1 ]
+          ) ]
+    ) .
+
+fslsh:NashiRule a sh:NodeShape ;
+    sh:targetClass fsl:Record ;
+    rdfs:label "なしの決まり"@ja ;
+    rdfs:comment "「なし」は、なしの根拠を持つ。制度の中身(制度名・金額・開始など)と第2の出典は持たない。制度ではないので GovernmentService ではない。機械の読み取りで「なし」とするなら、無いと分かる公式の資料(出典)と根拠の箇所が要る。"@ja ;
+    sh:message "「なし」の決まりに合わない(なしの根拠が無い、制度の中身がある、など)"@ja ;
+    sh:or (
+        [ sh:path fsl:status ; sh:in ( fsl:status-ari fsl:status-yotei fsl:status-kakunin-dekizu ) ]
+        [ sh:not [ sh:class schema:GovernmentService ] ;
+          sh:property
+            [ sh:path fsl:noneBasis ; sh:minCount 1 ] ,
+            [ sh:path fsl:additionalSource ; sh:maxCount 0 ] ,
+        [ sh:path schema:name ; sh:maxCount 0 ; sh:message "「なし」なのに制度の中身がある"@ja ] ,
+        [ sh:path fsl:amountText ; sh:maxCount 0 ; sh:message "「なし」なのに制度の中身がある"@ja ] ,
+        [ sh:path fsl:amountMaxYen ; sh:maxCount 0 ; sh:message "「なし」なのに制度の中身がある"@ja ] ,
+        [ sh:path fsl:subsidyRate ; sh:maxCount 0 ; sh:message "「なし」なのに制度の中身がある"@ja ] ,
+        [ sh:path fsl:startText ; sh:maxCount 0 ; sh:message "「なし」なのに制度の中身がある"@ja ] ;
+          sh:or (
+            [ sh:path fsl:checkMethod ; sh:in ( fsl:method-hito-yomitori fsl:method-hito fsl:method-toiawase ) ]
+            [ sh:property [ sh:path dct:source ; sh:minCount 1 ] , [ sh:path fsl:basisPhrase ; sh:minCount 1 ] ]
+          ) ]
+    ) .
+
+fslsh:KakuninDekizuRule a sh:NodeShape ;
+    sh:targetClass fsl:Record ;
+    rdfs:label "確認できずの決まり"@ja ;
+    rdfs:comment "「確認できず」は、探した場所を1つ以上持つ。出典・根拠の箇所・制度の中身・第2の出典は持たない(見つかっていないので)。GovernmentService ではない。"@ja ;
+    sh:message "「確認できず」の決まりに合わない(探した場所が無い、出典や制度の中身がある、など)"@ja ;
+    sh:or (
+        [ sh:path fsl:status ; sh:in ( fsl:status-ari fsl:status-yotei fsl:status-nashi ) ]
+        [ sh:not [ sh:class schema:GovernmentService ] ;
+          sh:property
+            [ sh:path fsl:searchedAt ; sh:minCount 1 ] ,
+            [ sh:path fsl:additionalSource ; sh:maxCount 0 ] ,
+        [ sh:path schema:name ; sh:maxCount 0 ; sh:message "「確認できず」なのに出典や制度の中身がある"@ja ] ,
+        [ sh:path fsl:amountText ; sh:maxCount 0 ; sh:message "「確認できず」なのに出典や制度の中身がある"@ja ] ,
+        [ sh:path fsl:amountMaxYen ; sh:maxCount 0 ; sh:message "「確認できず」なのに出典や制度の中身がある"@ja ] ,
+        [ sh:path fsl:subsidyRate ; sh:maxCount 0 ; sh:message "「確認できず」なのに出典や制度の中身がある"@ja ] ,
+        [ sh:path fsl:startText ; sh:maxCount 0 ; sh:message "「確認できず」なのに出典や制度の中身がある"@ja ] ,
+        [ sh:path dct:source ; sh:maxCount 0 ; sh:message "「確認できず」なのに出典や制度の中身がある"@ja ] ,
+        [ sh:path fsl:basisPhrase ; sh:maxCount 0 ; sh:message "「確認できず」なのに出典や制度の中身がある"@ja ] ]
+    ) .
+
+fslsh:PrefOnlyKindRule a sh:NodeShape ;
+    sh:targetClass fsl:Record ;
+    rdfs:label "設置者向けの補助は県の行だけ"@ja ;
+    rdfs:comment "施設の設置者向けの補助を、保護者向けの制度と混ぜない。この種類は県(40000)の記録にだけ使う。"@ja ;
+    sh:message "設置者向けの補助が、県でない記録に付いている"@ja ;
+    sh:or (
+        [ sh:path fsl:kind ; sh:in ( fsl:kind-fs-hojo fsl:kind-shien-center fsl:kind-tayouka fsl:kind-online fsl:kind-shusseki ) ]
+        [ sh:path schema:areaServed ; sh:hasValue <http://data.e-stat.go.jp/lod/sac/C40000> ]
+    ) .
+
+fslsh:GuidelineRule a sh:NodeShape ;
+    sh:targetClass fsl:Record ;
+    rdfs:label "要綱の状況と要綱URL"@ja ;
+    rdfs:comment "要綱の状況が「取得済み」のときだけ、要綱URL を持つ。"@ja ;
+    sh:message "要綱の状況が「取得済み」なのに要綱URL が無い、または「取得済み」でないのに要綱URL がある"@ja ;
+    sh:xone (
+        [ sh:property [ sh:path fsl:guidelineState ; sh:hasValue "取得済み"@ja ] , [ sh:path fsl:guideline ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path fsl:guidelineState ; sh:in ( "ページにリンクなし"@ja "リンクあり・URL未取得"@ja ) ] ,
+                      [ sh:path fsl:guideline ; sh:maxCount 0 ] ]
+    ) .
+
+# ---------- 市町村 ----------
+
+fslsh:AreaShape a sh:NodeShape ;
+    rdfs:label "市町村"@ja ;
+    rdfs:comment "e-Stat 統計LOD の標準地域コード(福岡県)。名前とコードを持つ。DBpedia Japanese の資源につなぐのは、コードが合うと確かめたものだけ。"@ja ;
+    sh:nodeKind sh:IRI ;
+    sh:pattern "^http://data\\.e\\-stat\\.go\\.jp/lod/sac/C40[0-9]{3}$" ;
+    sh:class schema:AdministrativeArea ;
+    sh:property
+        [ sh:path schema:name ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ; sh:languageIn ( "ja" ) ] ,
+        [ sh:path schema:identifier ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:string ; sh:pattern "^40[0-9]{3}$" ] ,
+        [ sh:path schema:sameAs ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:pattern "^http://ja\\.dbpedia\\.org/resource/" ] .
+
+# ---------- 第2の出典 ----------
+
+fslsh:AdditionalSourceShape a sh:NodeShape ;
+    rdfs:label "第2の出典"@ja ;
+    rdfs:comment "項目の根拠が別の資料にあるときの、その資料。URL・呼び名・資料にある短い語句・裏付ける項目がそろう。"@ja ;
+    sh:nodeKind sh:IRI ;
+    sh:pattern "^https://h\\-kazuki\\-pixel\\.github\\.io/futoko\\-shien\\-lod/id/[0-9a-z-]+#source2$" ;
+    sh:class fsl:AdditionalSource ;
+    sh:property
+        [ sh:path dct:source ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:pattern "^https?://(([a-z0-9-]+\\.)*[a-z0-9-]+\\.(lg|go)\\.jp(:[0-9]+)?([/?#]|$)|([a-z0-9-]+\\.)*(pref|city|town|vill)\\.([a-z0-9-]+\\.)?fukuoka\\.jp(:[0-9]+)?([/?#]|$)|ops\\-jg\\.d1\\-law\\.com/opensearch/srjbf01/init\\?jctcd=8a9160eadb|public1\\.legalcrud\\.com/umi_town/|www1\\.g\\-reiki\\.net/city\\.kasuga\\.fukuoka/|www1\\.g\\-reiki\\.net/town\\.sasaguri/)" ; sh:flags "i" ;
+          sh:message "第2の出典も公式サイトだけ"@ja ] ,
+        [ sh:path fsl:sourceName ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ] ,
+        [ sh:path fsl:basisPhrase ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ; sh:maxLength 40 ] ,
+        [ sh:path fsl:supports ; sh:minCount 1 ; sh:in ( schema:name fsl:kind fsl:eligibility fsl:amountText fsl:amountMaxYen fsl:subsidyRate fsl:startText fsl:note ) ] .
+
+# ---------- 確かめた記録(取り直し・人の再確認・問い合わせ) ----------
+
+fslsh:RefetchShape a sh:NodeShape ;
+    sh:targetClass fsl:Refetch ;
+    rdfs:label "取り直し"@ja ;
+    rdfs:comment "どのページを、どの役割で取りに行き、取得できたか。照合の結果は、取得できたときだけ持つ。"@ja ;
+    sh:class prov:Activity ;
+    sh:message "取り直しで、取得できなかったのに照合の結果がある"@ja ;
+    sh:property
+        [ sh:path fsl:role ; sh:minCount 1 ; sh:maxCount 1 ; sh:in ( "出典"@ja "出典2"@ja "探した場所"@ja ) ] ,
+        [ sh:path prov:used ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ,
+        [ sh:path fsl:fetchResult ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ] ,
+        [ sh:path prov:endedAtTime ; sh:maxCount 1 ; sh:datatype xsd:dateTime ] ,
+        [ sh:path fsl:collationResult ; sh:maxCount 1 ; sh:in ( "一致"@ja "不一致"@ja ) ] ;
+    sh:or (
+        [ sh:path fsl:collationResult ; sh:maxCount 0 ]
+        [ sh:path fsl:fetchResult ; sh:hasValue "取得"@ja ]
+    ) .
+
+fslsh:HumanReviewShape a sh:NodeShape ;
+    sh:targetClass fsl:HumanReview ;
+    rdfs:label "人の再確認"@ja ;
+    rdfs:comment "見比べる項目の数と、見比べた・合っている・違う・分からないの数。見比べた数は見比べる数を超えない。"@ja ;
+    sh:class prov:Activity ;
+    sh:property
+        [ sh:path fsl:itemsTotal ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 1 ] ,
+        [ sh:path fsl:itemsChecked ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
+          sh:lessThanOrEquals fsl:itemsTotal ; sh:message "見比べた項目の数が、見比べる項目の数を超えている"@ja ] ,
+        [ sh:path fsl:itemsMatched ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
+          sh:lessThanOrEquals fsl:itemsChecked ; sh:message "合っている・違う・分からないの数が、見比べた数を超えている"@ja ] ,
+        [ sh:path fsl:itemsWrong ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
+          sh:lessThanOrEquals fsl:itemsChecked ; sh:message "合っている・違う・分からないの数が、見比べた数を超えている"@ja ] ,
+        [ sh:path fsl:itemsUnsure ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:integer ; sh:minInclusive 0 ;
+          sh:lessThanOrEquals fsl:itemsChecked ; sh:message "合っている・違う・分からないの数が、見比べた数を超えている"@ja ] ,
+        [ sh:path fsl:activityDate ; sh:maxCount 1 ; sh:datatype xsd:date ] .
+
+fslsh:InquiryShape a sh:NodeShape ;
+    sh:targetClass fsl:Inquiry ;
+    rdfs:label "問い合わせ"@ja ;
+    rdfs:comment "いつ、どの担当課に、どの方法で聞き、回答があったか。回答の文面は持たない。"@ja ;
+    sh:class prov:Activity ;
+    sh:property
+        [ sh:path fsl:activityDate ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:date ] ,
+        [ sh:path fsl:inquiryTo ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ] ,
+        [ sh:path fsl:inquiryMethod ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ] ,
+        [ sh:path fsl:answerState ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype rdf:langString ] .
+
+# ---------- データセットの説明(dataset.ttl) ----------
+
+fslsh:DatasetShape a sh:NodeShape ;
+    sh:targetClass dcat:Dataset ;
+    rdfs:label "データセットの説明"@ja ;
+    rdfs:comment "題名・説明・ライセンス・公開日・更新日・配布の形・従う語彙と形を持つ。"@ja ;
+    sh:property
+        [ sh:path dct:title ; sh:minCount 1 ] ,
+        [ sh:path dct:description ; sh:minCount 1 ] ,
+        [ sh:path dct:license ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ,
+        [ sh:path dct:issued ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:date ] ,
+        [ sh:path dct:modified ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:date ] ,
+        [ sh:path dct:issued ; sh:lessThanOrEquals dct:modified ; sh:message "更新日が公開日より前になっている"@ja ] ,
+        [ sh:path dct:conformsTo ; sh:hasValue <https://h-kazuki-pixel.github.io/futoko-shien-lod/ns#> ; sh:message "語彙(ns#)への dct:conformsTo が無い"@ja ] ,
+        [ sh:path dct:conformsTo ; sh:hasValue <https://h-kazuki-pixel.github.io/futoko-shien-lod/shapes> ; sh:message "形(shapes)への dct:conformsTo が無い"@ja ] ,
+        [ sh:path dcat:distribution ; sh:minCount 1 ; sh:class dcat:Distribution ] .

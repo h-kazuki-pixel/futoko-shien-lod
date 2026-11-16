@@ -20,6 +20,8 @@ on:
       - futoko_lod/publish.py
       - futoko_lod/build.py
       - futoko_lod/schema.py
+      - futoko_lod/shapes.py
+      - data/koushiki_domain.csv
       - .github/workflows/pages.yml
 permissions:
   contents: read
@@ -42,6 +44,9 @@ jobs:
       - name: 公開の形のテスト(Turtle と JSON-LD が同じトリプルか、など)
         run: python -m pytest -q tests/test_publish.py tests/test_build.py
       - run: python -m futoko_lod.publish --out _site
+      - name: 形(SHACL)で、公開する RDF を検査する(1つでも外れれば公開しない)
+        shell: bash  # pipefail を付けるため(tee で失敗が隠れないように)
+        run: python -m futoko_lod.shapes --validate _site | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
@@ -70,7 +75,7 @@ jobs:
             echo "|---|---|---|---|---|---|"
           } >> "$GITHUB_STEP_SUMMARY"
           fail=0
-          for path in "" "about/" "kumiawase/" "kumiawase.csv" "ichiran/" "ns" "ns.ttl" "dataset.ttl" "seido.csv" "seido.jsonld" "seido.ttl" \
+          for path in "" "about/" "kumiawase/" "kumiawase.csv" "ichiran/" "ns" "ns.ttl" "shapes" "shapes.ttl" "dataset.ttl" "seido.csv" "seido.jsonld" "seido.ttl" \
                       "id/40219-fs-hojo" "id/40219-fs-hojo/" "id/40219-fs-hojo.ttl" "id/40219-fs-hojo.jsonld"; do
             out=$(curl -sSL -o /dev/null -D headers.txt -w "%{http_code}|%{num_redirects}|%{content_type}" "$base$path" || echo "失敗||")
             cors=$(grep -i "^access-control-allow-origin:" headers.txt | tail -1 | tr -d '\r' | cut -d' ' -f2)
