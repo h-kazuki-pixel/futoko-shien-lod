@@ -26,9 +26,9 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40130-tayouka,福岡市,対象,不登校または不登校傾向の中学生,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
 40130-tayouka,福岡市,開始,令和7年4月開校,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。生徒募集案内の PDF は 404,2026-11-17
 40130-tayouka,福岡市,備考,入学の条件を書いた生徒募集案内の PDF は、2026-11-17 に人も機械も開けなかった(HTTP 404),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
-40202-tayouka,大牟田市,種類と状態,学びの多様化学校 / あり,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
-40202-tayouka,大牟田市,制度名,大牟田市立宅峰中学校 ほしぞら分校,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
-40202-tayouka,大牟田市,備考,文部科学省の一覧による。分校は夜間中学で、一覧の説明では夜間中学の生徒と一緒に学ぶ。夜間中学としての開始は令和6年4月(一覧の説明)。一覧での指定年は令和6年。対象と、学びの多様化学校としての開始は、市の資料でまだ確かめていない,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
+40202-tayouka,大牟田市,種類と状態,学びの多様化学校 / あり,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,https://www.city.omuta.lg.jp/kiji00318528/3_18528_95992_up_5brrxs0l.pdf,,,
+40202-tayouka,大牟田市,制度名,大牟田市立宅峰中学校 ほしぞら分校,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,https://www.city.omuta.lg.jp/kiji00318528/3_18528_95992_up_5brrxs0l.pdf,,,
+40202-tayouka,大牟田市,備考,文部科学省の一覧による。分校は夜間中学で、一覧の説明では夜間中学の生徒と一緒に学ぶ。夜間中学としての開始は令和6年4月。指定年は令和6年。市の令和5年の基本方針では、指定後に学齢の不登校の生徒も受け入れるとしていた。いまの受け入れ方は確かめていない,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,https://www.city.omuta.lg.jp/kiji00318528/3_18528_95992_up_5brrxs0l.pdf,,,
 40203-fs-hojo,久留米市,種類と状態,フリースクール等の利用料の補助(保護者向け) / あり,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,,合っている,,2026-11-16
 40203-fs-hojo,久留米市,制度名,フリースクール等利用児童生徒支援事業,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,,合っている,,2026-11-16
 40203-fs-hojo,久留米市,対象,保護者等と児童生徒が市内に住所を有すること。申請日の前1年におおむね30日以上登校していないこと等,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,,合っている,,2026-11-16
