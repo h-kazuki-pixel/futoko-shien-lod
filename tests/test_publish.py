@@ -316,3 +316,45 @@ def test_second_source_node_is_the_same_in_turtle_and_jsonld():
     fsl = rdflib.Namespace(build.BASE + "ns#")
     assert (s2, fsl.supports, rdflib.URIRef("https://schema.org/name")) in jld
     assert (s2, rdflib.URIRef("http://purl.org/dc/terms/source"), rdflib.URIRef("https://www.town.mihon.lg.jp/b.pdf")) in jld
+
+
+# ---- ほかの語彙との対応(点5) ----
+
+AIKATA = {"同じ", "同じ(下位の性質)", "近い", "対応なし"}
+
+
+def test_taiou_covers_every_column_and_property():
+    rows = schema.read_csv(publish.TAIOU_PATH)
+    assert {r["合い方"] for r in rows} <= AIKATA
+    items = {r["このデータの項目"] for r in rows}
+    # 語彙で決めた性質は、全部どこかの行にある(対応なしでも書く)
+    assert {f"fsl:{name}" for name in publish.PROPERTIES} - {"fsl:supports"} <= items
+    for r in rows:
+        if r["合い方"] == "対応なし":
+            assert not r["相手の項目"] and not r["相手のIRI"], r
+        else:
+            assert r["相手の語彙"] and r["相手の項目"], r
+
+
+def test_subproperties_match_the_table():
+    rows = schema.read_csv(publish.TAIOU_PATH)
+    sub = {(r["このデータの項目"], r["相手のIRI"]) for r in rows if r["合い方"] == "同じ(下位の性質)"}
+    want = {(f"fsl:{k}", publish.PREFIXES[v.split(":")[0]] + v.split(":")[1]) for k, v in publish.SUBPROPERTY_OF.items()}
+    assert sub == want
+
+
+def test_vocab_turtle_has_subproperties():
+    g = graph(publish.vocab_turtle(), "turtle")
+    RDFS = rdflib.RDFS
+    fsl = rdflib.Namespace(build.BASE + "ns#")
+    assert (fsl.note, RDFS.subPropertyOf, rdflib.URIRef("http://www.w3.org/2004/02/skos/core#note")) in g
+    assert (fsl.kind, RDFS.subPropertyOf, rdflib.URIRef("https://schema.org/category")) in g
+    assert (fsl.dateChecked, RDFS.subPropertyOf, rdflib.URIRef("http://purl.org/dc/terms/date")) in g
+
+
+def test_kind_catalog_covers_all_kinds(site):
+    kinds = schema.read_csv(publish.TAIOU_SHURUI_PATH)
+    assert {k["種類"] for k in kinds} == set(schema.KINDS.values())
+    assert {k["このデータの値"] for k in kinds} == {f"fsl:kind-{s}" for s in schema.KINDS}
+    assert (site / "goi_taiou.csv").exists() and (site / "goi_taiou_shurui.csv").exists()
+    assert "ほかの語彙との対応" in (site / "ns.html").read_text(encoding="utf-8")

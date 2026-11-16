@@ -14,6 +14,8 @@ on:
       - data/torinaoshi/saishin.csv
       - data/kumiawase/jidou_seito.csv
       - data/dbpedia.csv
+      - data/goi_taiou.csv
+      - data/goi_taiou_shurui.csv
       - futoko_lod/publish.py
       - futoko_lod/build.py
       - futoko_lod/schema.py

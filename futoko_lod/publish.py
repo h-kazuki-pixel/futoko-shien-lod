@@ -97,6 +97,20 @@ PROPERTIES = {
     "dateChecked": ("確認日", "確かめた日。", "xsd:date"),
     "checkMethod": ("確認方法", "だれが、どう確かめたか。", "skos:Concept"),
 }
+# ほかの語彙の下位の性質にしたもの。意味がはっきり合うものだけ(対応の全体は data/goi_taiou.csv)
+SUBPROPERTY_OF = {"kind": "schema:category", "note": "skos:note", "dateChecked": "dct:date"}
+
+TAIOU_PATH = "data/goi_taiou.csv"
+TAIOU_SHURUI_PATH = "data/goi_taiou_shurui.csv"
+TAIOU_SOURCES = [
+    ("GIF 行政サービス・制度(実装データモデル、2026-10-06 改定、CC0)",
+     "https://github.com/digital-go-jp/GIF/blob/main/451_%E5%AE%9F%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AB_%E8%A1%8C%E6%94%BF/docx/451-4_%E5%AE%9F%E8%A3%85%E3%83%87%E3%83%BC%E3%82%BF%E3%83%A2%E3%83%87%E3%83%AB_%E8%A1%8C%E6%94%BF%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%83%BB%E5%88%B6%E5%BA%A6.docx"),
+    ("GIF サービスカタログ(コード)",
+     "https://github.com/digital-go-jp/GIF/blob/main/490_%E3%81%9D%E3%81%AE%E4%BB%96/docx/491-1_%E3%82%B3%E3%83%BC%E3%83%89_%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E3%82%AB%E3%82%BF%E3%83%AD%E3%82%B0.docx"),
+    ("CPSV-AP 3.2.0(SEMIC)", "https://semiceu.github.io/CPSV-AP/releases/3.2.0"),
+    ("schema.org GovernmentService", "https://schema.org/GovernmentService"),
+]
+
 # rdfs:domain が fsl:Record でない性質。None は domain を書かない(記録と第2の出典の節の両方で使うため)
 DOMAINS = {"sourceName": None, "basisPhrase": None, "supports": "fsl:AdditionalSource"}
 
@@ -209,6 +223,8 @@ def vocab_turtle() -> str:
         ]
         if domain:
             pos.append(("rdfs:domain", [domain]))
+        if name in SUBPROPERTY_OF:
+            pos.append(("rdfs:subPropertyOf", [SUBPROPERTY_OF[name]]))
         pos += [("rdfs:range", [rng]), ("rdfs:isDefinedBy", [iri(BASE + "ns")])]
         blocks.append((f"fsl:{name}", pos))
     for scheme, title, prefix, concepts in SCHEMES:
@@ -676,6 +692,42 @@ def kumiawase_html(rows: list[dict[str, str]], areas: list[dict[str, str]], pupi
     return page(f"組み合わせの例 | {TITLE}", body, "../")
 
 
+def taiou_html() -> str:
+    """ほかの語彙との対応(data/goi_taiou.csv と data/goi_taiou_shurui.csv)。"""
+    rows = schema.read_csv(TAIOU_PATH) if Path(TAIOU_PATH).exists() else []
+    kinds = schema.read_csv(TAIOU_SHURUI_PATH) if Path(TAIOU_SHURUI_PATH).exists() else []
+    if not rows:
+        return ""
+    trs = "\n".join(
+        f'<tr><td>{e(r["CSVの列"])}</td><td><code>{e(r["このデータの項目"])}</code></td><td>{e(r["相手の語彙"]) or "—"}</td>'
+        f'<td>{e(r["相手の項目"]) or "—"}{"<br><code>" + e(r["相手のIRI"]) + "</code>" if r["相手のIRI"] else ""}</td>'
+        f'<td>{e(r["合い方"])}</td><td>{e(r["説明"])}</td></tr>' for r in rows)
+    ktrs = "\n".join(
+        f'<tr><td>{e(k["種類"])}</td><td>{e(k["ステージとアクション"]) or "—"}</td><td>{e(k["お困りごと"]) or "—"}</td>'
+        f'<td>{e(k["サービス種別"]) or "—"}</td><td>{e(k["受益者種別"]) or "—"}</td><td>{e(k["説明"])}</td></tr>' for k in kinds)
+    srcs = "".join(f'<li>{e(t)}: {link(u)}</li>' for t, u in TAIOU_SOURCES)
+    n = collections.Counter(r["合い方"] for r in rows)
+    counts = "、".join(f"{k} {n[k]}" for k in ("同じ", "同じ(下位の性質)", "近い", "対応なし") if n[k])
+    return f"""<h2 id="taiou">ほかの語彙との対応</h2>
+<p>このデータの項目を、デジタル庁の政府相互運用性フレームワーク(GIF)の「行政サービス・制度」、欧州の CPSV-AP、schema.org などと見比べた。表の中身は <a href="goi_taiou.csv">goi_taiou.csv</a> と同じ(行の数: {counts})。</p>
+<p>RDF の上で結んだのは、意味がはっきり合う3つだけ(<code>fsl:kind</code> → <code>schema:category</code>、<code>fsl:note</code> → <code>skos:note</code>、<code>fsl:dateChecked</code> → <code>dct:date</code>。どれも下位の性質)。GIF は項目ごとの IRI を持たないので、名前で対応を示す。「近い」は、意味は重なるが、持ち方(文字列か節か、単位)か範囲が違うもの。状態・探した場所・なしの根拠・確認方法など、確かめた記録に関する項目は、どの語彙にも対応が無い。</p>
+<div class="scroll"><table>
+<thead><tr><th scope="col">CSV の列</th><th scope="col">このデータ</th><th scope="col">相手の語彙</th><th scope="col">相手の項目</th><th scope="col">合い方</th><th scope="col">説明</th></tr></thead>
+<tbody>
+{trs}
+</tbody></table></div>
+<h3>制度の種類と、GIF のサービスカタログ</h3>
+<p>GIF のサービスカタログ(個人向け)の分類を、このデータの6種類に当てた。当てたのはこのデータの作者で、GIF が決めたものではない。表の中身は <a href="goi_taiou_shurui.csv">goi_taiou_shurui.csv</a> と同じ。</p>
+<div class="scroll"><table>
+<thead><tr><th scope="col">種類</th><th scope="col">ステージとアクション</th><th scope="col">お困りごと</th><th scope="col">サービス種別</th><th scope="col">受益者種別</th><th scope="col">説明</th></tr></thead>
+<tbody>
+{ktrs}
+</tbody></table></div>
+<p>見比べた資料(2026-11-16 に読んだ):</p>
+<ul>{srcs}</ul>
+"""
+
+
 def ns_html() -> str:
     props = "\n".join(
         f'<tr id="{name}"><td><code>fsl:{name}</code></td><td>{e(label)}</td><td>{e(comment)}</td></tr>'
@@ -696,6 +748,7 @@ def ns_html() -> str:
 {props}
 </tbody></table></div>
 {chr(10).join(parts)}
+{taiou_html()}
 """
     return page(f"語彙 | {TITLE}", body, "",
                 '<link rel="alternate" type="text/turtle" href="ns.ttl">\n')
@@ -807,6 +860,9 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
         shutil.copyfile(pupils_path, out / "kumiawase.csv")
     put("ns.html", ns_html())
     put("ns.ttl", vocab_turtle())
+    for f in (TAIOU_PATH, TAIOU_SHURUI_PATH):
+        if Path(f).exists():
+            shutil.copyfile(f, out / Path(f).name)
     put("dataset.ttl", dataset_turtle(rows))
     shutil.copyfile(csv_path, out / "seido.csv")
     put("seido.jsonld", build.build(csv_path))
