@@ -340,6 +340,9 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
                 tds.append("<td>" + " ".join(
                     f'<a href="id/{e(r["id"])}/" aria-label="{e(a["市町村"])} {e(KIND_SHORT[k])}: {e(r["状態"])}">'
                     f'{badge(r["状態"])}</a>' + ("※" if list_based_none(r) else "") for r in found) + "</td>")
+            elif any(q["市町村コード"] == a["市町村コード"] and q["種類"].strip() == k for q in (records or {}).get("toiawase", [])):
+                # 読んでいないが、市町に問い合わせてある(須恵町の出席扱いなど)
+                tds.append(f"<td>{badge('未着手')}<br><small>問い合わせ中</small></td>")
             else:
                 tds.append(f"<td>{badge('未着手')}</td>")
         lines.append(f'<tr><th scope="row">{e(a["市町村"])}</th>{"".join(tds)}</tr>')
