@@ -215,7 +215,7 @@
    "source": "https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html",
    "sourceName": "北九州市教育委員会の支援一覧ページ",
    "basisPhrase": "令和9年4月の開校を予定",
-   "note": "設置場所(市立教育センター内)と学校名は、市の詳細ページ(/kyouiku/03000056.html)による。学校名は、同じページにある生徒募集の資料で人が確かめた(2026-11-16)",
+   "note": "設置場所(市立教育センター内)と学校名は、第2の出典(市の詳細ページ)による。学校名は、同じページにある生徒募集の資料で人が確かめた(2026-11-16)",
    "additionalSource": {
     "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-tayouka#source2",
     "@type": "fsl:AdditionalSource",

@@ -12,7 +12,7 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40100-tayouka,北九州市,制度名,北九州市立あいおい中学校,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
 40100-tayouka,北九州市,対象,不登校・不登校傾向の中学生(各学年15名程度),https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
 40100-tayouka,北九州市,開始,令和9年4月開校予定,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
-40100-tayouka,北九州市,備考,設置場所(市立教育センター内)と学校名は、市の詳細ページ(/kyouiku/03000056.html)による。学校名は、同じページにある生徒募集の資料で人が確かめた(2026-11-16),https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,値を直したので見直しが要る。直す前の値は、人が「合っている」と判定(2026-11-16),
+40100-tayouka,北九州市,備考,設置場所(市立教育センター内)と学校名は、第2の出典(市の詳細ページ)による。学校名は、同じページにある生徒募集の資料で人が確かめた(2026-11-16),https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,値を直したので見直しが要る(11/17 は、出典の URL の書き方を「第2の出典」に替えただけ)。11/16 に直す前の値は、人が「合っている」と判定,
 40130-online,福岡市,種類と状態,オンラインでの公的な支援 / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17
 40130-online,福岡市,制度名,オンラインルーム,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17
 40130-online,福岡市,対象,引きこもりがちで集団への関わりが苦手な不登校の児童生徒,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17

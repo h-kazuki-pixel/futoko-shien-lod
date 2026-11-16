@@ -118,7 +118,7 @@ def note_tokens_missing(row: dict[str, str], *page_texts: str) -> list[str]:
     """備考の「数字と単位」のうち、どのページにも無いもの(弱い所5)。
 
     shougou(fetch.run)では、ここに挙がる数字があれば不一致にする。第2の出典があれば、両方のページを合わせて見る。
-    定期的な取り直し(torinaoshi)は出典ごとに照合するので、備考の数字は見ない(ページの文字の変化で気づく)。
+    定期的な取り直し(torinaoshi)でも、出典と第2の出典の両方を取得できたときに同じように見る(11/17 から)。
     """
     have: set[str] = set()
     for t in page_texts:

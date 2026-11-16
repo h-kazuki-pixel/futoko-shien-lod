@@ -9,7 +9,7 @@ GitHub Actions の `torinaoshi` で週1回まわす。やることは3つ。
   data/torinaoshi/saishin.csv  いちばん新しい取り直しの結果。行(id)とページ(URL)の組ごとに1行
   data/torinaoshi/sabun.csv    変わった所。足していくだけで、消さない
 
-何が変わったか(弱い所 取2): 出典では、照合に使う語句と数字(根拠の箇所、金額・対象・開始の数字)の一つ一つが
+何が変わったか(弱い所 取2): 出典では、照合に使う語句と数字(根拠の箇所、金額・対象・開始・備考の数字)の一つ一つが
 ページにまだあるかを毎回残す。探した場所では、種類の語(「教育支援センター」「出席扱い」など)がページに何回出るかを残す。
 本文は残さないので、ページのどの文が変わったかまでは分からない。分かるのは、データの側の語句・数字が消えたか・戻ったかと、
 種類の語が増えたか・減ったかまで。
@@ -167,7 +167,35 @@ def collect(
             else:
                 entry["種類の語の数"] = kind_word_counts(page["text"])
         results.append(entry)
+    _add_note_items(rows, results, pages)
     return results
+
+
+NOTE_PREFIX = "備考の"
+
+
+def _add_note_items(rows: list[dict[str, str]], results: list[dict[str, str]], pages: dict[str, dict]) -> None:
+    """備考の数字(指定年など)も、照合で見たものに足す(弱い所5・29)。shougou と同じく、出典と第2の出典の
+    どちらかのページにあればよい。両方とも取得できたときだけ見る(片方しか無いと、無いと言えない)。
+    数字は、備考を裏付ける出典(「出典2の項目」に備考があれば第2の出典、無ければ出典)の行に付け、無ければ不一致にする。"""
+    by_key = {(r["id"], r["役割"]): r for r in results}
+    for row in rows:
+        if row["状態"] == "なし" or not collate_mod.tokens(row.get("備考", "") or ""):
+            continue
+        urls = [u for u in (row["出典URL"], (row.get("出典URL_2") or "").strip()) if u]
+        texts = [pages[u]["text"] for u in urls if u in pages]
+        if not urls or len(texts) != len(urls) or any(t is None for t in texts):
+            continue
+        role = SOURCE2 if "備考" in schema.source2_fields(row) and len(urls) == 2 else SOURCE
+        entry = by_key.get((row["id"], role))
+        if entry is None:
+            continue
+        items = [NOTE_PREFIX + token_label(x) for x in sorted(collate_mod.tokens(row["備考"]))]
+        missing = [NOTE_PREFIX + token_label(x) for x in collate_mod.note_tokens_missing(row, *texts)]
+        entry["照合で見たもの"] = LIST_SEP.join(split_list(entry["照合で見たもの"]) + items)
+        entry["合わなかったもの"] = LIST_SEP.join(split_list(entry["合わなかったもの"]) + missing)
+        if missing:
+            entry["判定"] = "不一致"
 
 
 def _missing_change(p: dict[str, str], c: dict[str, str]) -> tuple[list[str], list[str]] | None:

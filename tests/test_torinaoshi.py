@@ -211,3 +211,24 @@ def test_place_change_after_old_records_does_not_claim_word_counts_were_compared
     changed = ALL | {"https://example.lg.jp/b": "相談の窓口。時間を変えました"}
     d = t.diff(old, run(changed), "2026-11-23")
     assert [c["変わった所"] for c in d] == ["探した場所のページの文字が変わった"]
+
+
+def test_note_numbers_are_checked_across_both_sources():
+    # 指定年などの備考の数字(弱い所29)。備考を裏付けるのが第2の出典なら、その行に付く
+    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "一覧の語句", "出典2の項目": "備考",
+                 "備考": "一覧での指定年は令和8年"}
+    ok = ALL | {"https://example.lg.jp/d": "一覧の語句。令和8年指定"}
+    cur = run(ok, rows=(row,))
+    src2 = [c for c in cur if c["役割"] == "出典2"][0]
+    assert "備考の2026年" in t.split_list(src2["照合で見たもの"]) and src2["判定"] == "一致"
+    gone = ALL | {"https://example.lg.jp/d": "一覧の語句。指定の年は別に示す"}
+    d = t.diff(cur, run(gone, rows=(row,)), "2026-11-30")
+    assert [(c["重さ"], c["役割"], c["後"]) for c in d] == [("要確認", "出典2", "不一致(合わない: 備考の2026年)")]
+
+
+def test_note_numbers_are_not_judged_when_a_source_is_missing():
+    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "一覧の語句", "出典2の項目": "備考",
+                 "備考": "一覧での指定年は令和8年"}
+    cur = run(ALL, rows=(row,))  # 第2の出典が取得できない
+    src = [c for c in cur if c["役割"] == "出典"][0]
+    assert "備考の" not in src["照合で見たもの"] and src["判定"] == "一致"
