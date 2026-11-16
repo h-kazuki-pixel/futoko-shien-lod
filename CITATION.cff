@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: "このデータを使うときは、次のように出典を示してください。"
+title: "不登校支援制度LOD"
+type: dataset
+authors:
+  - name: "h-kazuki-pixel"
+license: CC-BY-4.0
+repository-code: "https://github.com/h-kazuki-pixel/futoko-shien-lod"
+url: "https://h-kazuki-pixel.github.io/futoko-shien-lod/"
+abstract: "福岡県の市町村の不登校支援制度を、公式の出典と確認日つきで記録した Linked Open Data。「制度なし」と「確認できず」を分ける。data/rinsetsu.csv だけ CC BY-SA 3.0、プログラムは MIT。"
+keywords:
+  - 不登校
+  - Linked Open Data
+  - 福岡県

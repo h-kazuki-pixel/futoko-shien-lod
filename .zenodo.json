@@ -1,0 +1,23 @@
+{
+  "title": "不登校支援制度LOD: 福岡県の市町村の不登校支援制度(「制度なし」と「確認できず」を分けた記録)",
+  "upload_type": "dataset",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "language": "jpn",
+  "creators": [
+    {
+      "name": "h-kazuki-pixel"
+    }
+  ],
+  "description": "福岡県の市町村について、不登校の子どもと保護者が使える公的な支援(フリースクール等の利用料の補助、教育支援センター、学びの多様化学校、オンラインの支援、出席扱いの要綱)を、公式の出典と確認日つきで記録した Linked Open Data。状態は「あり・予定・なし・確認できず」の4つで、公式サイトで見つからなかっただけのものは「なし」にしない。CSV、JSON-LD、Turtle。データは CC BY 4.0(data/rinsetsu.csv だけ CC BY-SA 3.0。DBpedia Japanese による)、プログラムは MIT。公開: https://h-kazuki-pixel.github.io/futoko-shien-lod/ 。制度は変わるので、使う前に必ず市町村の窓口で確かめること。",
+  "keywords": [
+    "不登校",
+    "Linked Open Data",
+    "福岡県",
+    "市町村",
+    "教育支援センター",
+    "学びの多様化学校",
+    "フリースクール",
+    "LODチャレンジ2026"
+  ]
+}
