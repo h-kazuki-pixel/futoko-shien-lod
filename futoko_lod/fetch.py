@@ -189,6 +189,11 @@ def run(path: str, interval: float = INTERVAL_SEC) -> list[dict]:
                 matched = matched and c2["一致"]
             entry["出典2"] = sub
         entry["判定"] = ("一致" if matched else "不一致") if got_all else "取得できず"
+        if not absence:
+            texts = [p["text"] for p in (page, pages.get(url2) if url2 else None) if p and p["text"] is not None]
+            if texts:
+                # 合否には使わない(弱い所5)。取得できたページだけで見る
+                entry["備考の数字でページに無いもの"] = collate_mod.note_tokens_missing(row, *texts)
         results.append(entry)
     return results
 
@@ -227,6 +232,13 @@ def summary_markdown(results: list[dict], title: str = "出典との照合") -> 
             lines.append(f"| {r['id']}(出典2) | ↑ | {s2.get('結果', '')} | {s2.get('robots', '')} | {basis2} | {missing2} | {names2} |")
     matched = [r["id"] for r in results if r["判定"] == "一致"]
     lines += ["", "一致した id: " + ",".join(matched)]
+    notes = [(r["id"], r["備考の数字でページに無いもの"]) for r in results if r.get("備考の数字でページに無いもの")]
+    checked = sum("備考の数字でページに無いもの" in r for r in results)
+    lines += ["", f"### 備考の数字(合否には使わない。弱い所5)", "",
+              f"備考の数字を見た行 {checked}。ページに無い数字がある行 {len(notes)}。"]
+    if notes:
+        lines += ["", "| id | 備考の数字でページに無いもの |", "|---|---|"]
+        lines += [f"| {i} | {', '.join(m)} |" for i, m in notes]
     return "\n".join(lines) + "\n"
 
 

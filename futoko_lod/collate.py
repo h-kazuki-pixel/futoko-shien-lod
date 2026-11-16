@@ -114,6 +114,17 @@ def record_tokens(row: dict[str, str], part: int = 1) -> set[str]:
     return want
 
 
+def note_tokens_missing(row: dict[str, str], *page_texts: str) -> list[str]:
+    """備考の「数字と単位」のうち、どのページにも無いもの(弱い所5)。
+
+    いまは合否に使わず、人が見る手がかりとして結果に出す。第2の出典があれば、両方のページを合わせて見る。
+    """
+    have: set[str] = set()
+    for t in page_texts:
+        have |= tokens(t)
+    return sorted(tokens(row.get("備考", "") or "") - have)
+
+
 def name_parts_missing(name: str, page_norm: str) -> list[str]:
     """制度名を括弧や中点で区切り、ページに無い部分を返す。
 

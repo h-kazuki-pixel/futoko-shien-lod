@@ -248,3 +248,10 @@ def test_blocked_second_source_checked_by_human(tmp_path, monkeypatch):
     # 機械の読み取りの行なら、取得できずのまま
     schema.write_csv(p, [r | {"確認方法": "機械の読み取り"}])
     assert fetch.run(str(p), interval=0)[0]["判定"] == "取得できず"
+
+
+def test_note_numbers_are_reported_not_judged():
+    # 弱い所5: 備考の数字は、どのページにも無ければ挙げる。合否には使わない
+    r = row(備考="定員は各学年10名程度。指定年は令和8年")
+    assert collate.note_tokens_missing(r, "定員は10名") == ["year:2026"]
+    assert collate.note_tokens_missing(r, "定員は10名", "令和8年に指定") == []
