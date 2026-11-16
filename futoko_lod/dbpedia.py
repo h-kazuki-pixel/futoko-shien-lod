@@ -58,6 +58,13 @@ CSV_PATH = "data/dbpedia.csv"
 CSV_COLUMNS = ["市町村コード", "市町村", "DBpediaのURI", "DBpediaでの名前", "判定", "確かめた日"]
 
 
+def props(name: str) -> None:
+    """資源が持つ性質と値を、全部並べる(使う値を決める前に、何があるかを見る)。"""
+    uri = RESOURCE + name
+    show(f"{name} が持つ性質と値", f"""select ?p ?o where {{ <{uri}> ?p ?o . filter(!isLiteral(?o) || lang(?o) = "" || lang(?o) = "ja")
+  filter(!contains(str(?p), "wikiPageWikiLink")) }} limit 400""", limit=400)
+
+
 def verify_query(codes: list[str]) -> str:
     """地方公共団体コードがこちらのコードと合う資源を引く。名前からは URI を作らない。"""
     inlist = ", ".join(f'"{c}"' for c in codes)
@@ -102,9 +109,12 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--probe", nargs=2, metavar=("名前", "コード"))
     ap.add_argument("--verify", nargs="?", const="show", choices=["show", "write"])
+    ap.add_argument("--props", metavar="名前")
     args = ap.parse_args()
     if args.probe:
         probe(*args.probe)
+    if args.props:
+        props(args.props)
     if args.verify:
         import csv
         import datetime as dt
