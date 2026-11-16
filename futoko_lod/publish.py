@@ -727,7 +727,10 @@ def refetch_lines(row: dict[str, str], records: dict) -> list[str]:
         day = jst_day(r["取得日時"])
         if r["取得"] != "取得":
             why = r["取得"].removeprefix("取得できず(").removesuffix(")")
-            lines.append(f"第2の出典: {day} に取り直したが、取得できなかった({why})")
+            if r["取得"].startswith("robots.txt により") and row.get("確認方法") in ("人の再確認", "人の読み取り"):
+                lines.append(f"第2の出典: robots.txt の指定で、機械では取り直さない。人が資料を開いて確かめた行")
+            else:
+                lines.append(f"第2の出典: {day} に取り直したが、取得できなかった({why})")
         else:
             lines.append(f"第2の出典: {day} に取り直し、照合は{r['判定']}")
     places = [r for r in mine if r["役割"] == "探した場所"]

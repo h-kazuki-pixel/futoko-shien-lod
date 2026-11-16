@@ -37,7 +37,6 @@ HOJO = {
     "40000-online": "https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf",
     "40130-online": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf",
     "40130-tayouka": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf",
-    "40344-shien-center": "https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf",
 }
 
 

@@ -225,3 +225,26 @@ def test_fetch_run_needs_both_sources(tmp_path, monkeypatch):
     del pages["https://www.city.mihon.lg.jp/b.pdf"]
     assert fetch.run(str(p), interval=0)[0]["判定"] == "取得できず"
     assert "(出典2)" in fetch.summary_markdown(fetch.run(str(p), interval=0))
+
+
+def test_blocked_second_source_checked_by_human(tmp_path, monkeypatch):
+    # 第2の出典が robots.txt で取得しない資料で、人が確かめた行は、出典の照合で判定する
+    r = {c: "" for c in schema.COLUMNS} | {
+        "id": "40999-shien-center", "市町村コード": "40999", "市町村": "みほん町", "制度の種類": schema.KINDS["shien-center"],
+        "状態": "あり", "制度名": "みほん教室", "出典URL": "https://www.town.mihon.lg.jp/a.html", "根拠の箇所": "みほん教室",
+        "出典URL_2": "https://www.town.mihon.lg.jp/b.pdf", "出典名_2": "案内", "根拠の箇所_2": "みほん教室",
+        "出典2の項目": "備考", "備考": "補足", "確認日": "2026-11-16", "確認方法": "人の再確認"}
+    p = tmp_path / "s.csv"
+    schema.write_csv(p, [r])
+
+    def fake(u):
+        if u.endswith(".pdf"):
+            return {"url": u, "結果": "robots.txt により取得しない", "text": None}
+        return {"url": u, "結果": "取得", "text": "みほん教室"}
+    monkeypatch.setattr(fetch, "fetch", fake)
+    out = fetch.run(str(p), interval=0)[0]
+    assert out["判定"] == "一致" and out["出典2"]["人が確かめた"]
+    assert "人が確かめた" in fetch.summary_markdown([out])
+    # 機械の読み取りの行なら、取得できずのまま
+    schema.write_csv(p, [r | {"確認方法": "機械の読み取り"}])
+    assert fetch.run(str(p), interval=0)[0]["判定"] == "取得できず"

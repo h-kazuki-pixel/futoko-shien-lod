@@ -177,7 +177,11 @@ def run(path: str, interval: float = INTERVAL_SEC) -> list[dict]:
             # 第2の出典。両方のページがそろって、両方とも一致したときだけ「一致」
             page2 = get(url2)
             sub = {k: v for k, v in page2.items() if k != "text"}
-            if page2["text"] is None:
+            if page2["text"] is None and human_checked_blocked(row, page2):
+                # robots.txt で取得しない資料を、人が開いて確かめた行。機械では照合できないので、
+                # 行の判定は出典の照合だけで決め、第2の出典は「人が確かめた」と記録する(一致とは言わない)
+                sub["人が確かめた"] = True
+            elif page2["text"] is None:
                 got_all = False
             else:
                 c2 = collate_mod.collate(row, page2["text"], part=2)
@@ -187,6 +191,14 @@ def run(path: str, interval: float = INTERVAL_SEC) -> list[dict]:
         entry["判定"] = ("一致" if matched else "不一致") if got_all else "取得できず"
         results.append(entry)
     return results
+
+
+HUMAN_METHODS = ("人の再確認", "人の読み取り")
+
+
+def human_checked_blocked(row: dict[str, str], page: dict) -> bool:
+    """robots.txt で取得しない資料で、行の確認方法が人によるものか。"""
+    return (page.get("結果") or "").startswith("robots.txt により") and (row.get("確認方法") or "") in HUMAN_METHODS
 
 
 def summary_markdown(results: list[dict], title: str = "出典との照合") -> str:
@@ -208,6 +220,8 @@ def summary_markdown(results: list[dict], title: str = "出典との照合") -> 
         s2 = r.get("出典2")
         if s2:
             basis2 = {True: "ある", False: "無い"}.get(s2.get("根拠の箇所がページにある"), "—")
+            if s2.get("人が確かめた"):
+                basis2 = "機械では開けない(人が確かめた)"
             missing2 = ", ".join(s2.get("ページに無い数字", [])) or "—"
             names2 = ", ".join(s2.get("ページに無い名前の部分", [])) or "—"
             lines.append(f"| {r['id']}(出典2) | ↑ | {s2.get('結果', '')} | {s2.get('robots', '')} | {basis2} | {missing2} | {names2} |")
