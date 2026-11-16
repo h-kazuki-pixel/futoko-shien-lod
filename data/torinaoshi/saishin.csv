@@ -1,172 +1,214 @@
-id,役割,URL,取得日時,取得,判定,本文の印
-40000-fs-unei,出典,https://www.pref.fukuoka.lg.jp/contents/free3.html,2026-11-16T08:20:39+00:00,取得,一致,186f607875173797
-40000-online,出典,https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,2026-11-16T08:20:46+00:00,取得,一致,c3e687c79f497c23
-40100-fs-hojo,探した場所,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,2026-11-16T08:20:52+00:00,取得,,04b45c1f8357109a
-40100-tayouka,出典,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,2026-11-16T08:20:52+00:00,取得,一致,04b45c1f8357109a
-40130-fs-hojo,探した場所,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T08:21:33+00:00,取得できず(HTTP 404),,
-40130-online,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T08:21:33+00:00,取得できず(HTTP 404),,
-40130-shien-center,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,2026-11-16T08:22:10+00:00,取得できず(HTTP 404),,
-40130-shusseki,探した場所,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T08:21:33+00:00,取得できず(HTTP 404),,
-40130-tayouka,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T08:21:33+00:00,取得できず(HTTP 404),,
-40202-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40203-fs-hojo,出典,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,2026-11-16T08:22:27+00:00,取得,一致,f2d1adcd6acb2d42
-40203-shien-center,出典,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2026largo.html,2026-11-16T08:22:34+00:00,取得,一致,5394253f82d3392e
-40203-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40204-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40205-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40206-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40207-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40210-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40211-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40212-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40213-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40214-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40215-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40217-fs-hojo,探した場所,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T08:22:40+00:00,取得,,8bf2c3ef29377b4c
-40217-fs-hojo,探した場所,https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf,2026-11-16T08:22:47+00:00,取得,,4c71d4341309c5b6
-40217-online,探した場所,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T08:22:40+00:00,取得,,8bf2c3ef29377b4c
-40217-online,探した場所,https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf,2026-11-16T08:22:47+00:00,取得,,4c71d4341309c5b6
-40217-shien-center,出典,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T08:22:40+00:00,取得,一致,8bf2c3ef29377b4c
-40217-shusseki,探した場所,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T08:22:40+00:00,取得,,8bf2c3ef29377b4c
-40217-shusseki,探した場所,https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf,2026-11-16T08:22:47+00:00,取得,,4c71d4341309c5b6
-40217-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40218-fs-hojo,探した場所,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T08:22:54+00:00,取得,,4da799c677c4518b
-40218-fs-hojo,探した場所,https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf,2026-11-16T08:23:02+00:00,取得,,827ffbf41bdcc0f3
-40218-online,探した場所,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T08:22:54+00:00,取得,,4da799c677c4518b
-40218-online,探した場所,https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf,2026-11-16T08:23:02+00:00,取得,,827ffbf41bdcc0f3
-40218-shien-center,出典,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T08:22:54+00:00,取得,一致,4da799c677c4518b
-40218-shusseki,探した場所,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T08:22:54+00:00,取得,,4da799c677c4518b
-40218-shusseki,探した場所,https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf,2026-11-16T08:23:02+00:00,取得,,827ffbf41bdcc0f3
-40218-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40219-fs-hojo,出典,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,2026-11-16T08:23:09+00:00,取得,一致,6ee726b6fb2fa31f
-40219-online,探した場所,https://www.city.onojo.fukuoka.jp/kosodate/kiji0037070/index.html,2026-11-16T08:23:19+00:00,取得,,d9bcf599b981ca47
-40219-shien-center,探した場所,https://www.city.onojo.fukuoka.jp/kosodate/kiji0037070/index.html,2026-11-16T08:23:19+00:00,取得,,d9bcf599b981ca47
-40219-shusseki,出典,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,2026-11-16T08:23:25+00:00,取得,一致,7127f7b1e457f254
-40219-tayouka,出典,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,2026-11-16T08:23:37+00:00,取得,一致,6e5d47fdd62a425e
-40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0033003/index.html,2026-11-16T08:23:43+00:00,取得,,f77621cf9cf9712e
-40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T08:23:52+00:00,取得,,fa9e3425ddff9ac8
-40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0033001/index.html,2026-11-16T08:23:58+00:00,取得,,9fdd0e6fdc87dc00
-40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0038920/index.html,2026-11-16T08:24:04+00:00,取得,,b3f677beef98452b
-40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf,2026-11-16T08:24:11+00:00,取得,,b3592ac93e2c57f8
-40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0033003/index.html,2026-11-16T08:23:43+00:00,取得,,f77621cf9cf9712e
-40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T08:23:52+00:00,取得,,fa9e3425ddff9ac8
-40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0033001/index.html,2026-11-16T08:23:58+00:00,取得,,9fdd0e6fdc87dc00
-40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0038920/index.html,2026-11-16T08:24:04+00:00,取得,,b3f677beef98452b
-40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf,2026-11-16T08:24:11+00:00,取得,,b3592ac93e2c57f8
-40220-shien-center,出典,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T08:23:52+00:00,取得,一致,fa9e3425ddff9ac8
-40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0033003/index.html,2026-11-16T08:23:43+00:00,取得,,f77621cf9cf9712e
-40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T08:23:52+00:00,取得,,fa9e3425ddff9ac8
-40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0033001/index.html,2026-11-16T08:23:58+00:00,取得,,9fdd0e6fdc87dc00
-40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0038920/index.html,2026-11-16T08:24:04+00:00,取得,,b3f677beef98452b
-40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf,2026-11-16T08:24:11+00:00,取得,,b3592ac93e2c57f8
-40220-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40221-fs-hojo,探した場所,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T08:24:18+00:00,取得,,7be093b76bbeb138
-40221-online,出典,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T08:24:18+00:00,取得,一致,7be093b76bbeb138
-40221-shien-center,出典,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T08:24:18+00:00,取得,一致,7be093b76bbeb138
-40221-shusseki,探した場所,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T08:24:18+00:00,取得,,7be093b76bbeb138
-40221-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40223-fs-hojo,出典,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,2026-11-16T08:24:26+00:00,取得,一致,5a7013989f3a3e38
-40223-online,探した場所,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,2026-11-16T08:24:35+00:00,取得,,12fa85f8d90c25fa
-40223-shien-center,出典,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,2026-11-16T08:24:35+00:00,取得,一致,12fa85f8d90c25fa
-40223-shusseki,探した場所,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,2026-11-16T08:24:35+00:00,取得,,12fa85f8d90c25fa
-40223-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40224-fs-hojo,探した場所,https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html,2026-11-16T08:24:41+00:00,取得,,9cde1ac325d326d0
-40224-fs-hojo,探した場所,https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf,2026-11-16T08:24:49+00:00,取得,,86e562314a327529
-40224-online,探した場所,https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html,2026-11-16T08:24:41+00:00,取得,,9cde1ac325d326d0
-40224-online,探した場所,https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf,2026-11-16T08:24:49+00:00,取得,,86e562314a327529
-40224-shien-center,出典,https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf,2026-11-16T08:24:49+00:00,取得,一致,86e562314a327529
-40224-shusseki,出典,https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html,2026-11-16T08:24:41+00:00,取得,一致,9cde1ac325d326d0
-40224-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40225-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40226-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40227-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40228-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40229-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40230-fs-hojo,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T08:25:02+00:00,取得,,f6bf3be277e2bdc1
-40230-fs-hojo,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf,2026-11-16T08:25:09+00:00,取得,,9590cf4aa4b63853
-40230-online,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T08:25:02+00:00,取得,,f6bf3be277e2bdc1
-40230-online,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf,2026-11-16T08:25:09+00:00,取得,,9590cf4aa4b63853
-40230-shien-center,出典,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T08:25:02+00:00,取得,一致,f6bf3be277e2bdc1
-40230-shusseki,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T08:25:02+00:00,取得,,f6bf3be277e2bdc1
-40230-shusseki,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf,2026-11-16T08:25:09+00:00,取得,,9590cf4aa4b63853
-40230-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40231-fs-hojo,探した場所,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,2026-11-16T08:25:15+00:00,取得,,ec4db811b9b861ba
-40231-online,探した場所,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,2026-11-16T08:25:15+00:00,取得,,ec4db811b9b861ba
-40231-shien-center,出典,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,2026-11-16T08:25:15+00:00,取得,一致,ec4db811b9b861ba
-40231-shusseki,探した場所,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,2026-11-16T08:25:15+00:00,取得,,ec4db811b9b861ba
-40231-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40341-fs-hojo,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T08:25:23+00:00,取得,,1d40d190f8afca6a
-40341-fs-hojo,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T08:25:31+00:00,取得,,9a22e059beecb880
-40341-online,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T08:25:23+00:00,取得,,1d40d190f8afca6a
-40341-online,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T08:25:31+00:00,取得,,9a22e059beecb880
-40341-shien-center,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T08:25:23+00:00,取得,,1d40d190f8afca6a
-40341-shien-center,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T08:25:31+00:00,取得,,9a22e059beecb880
-40341-shusseki,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T08:25:23+00:00,取得,,1d40d190f8afca6a
-40341-shusseki,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T08:25:31+00:00,取得,,9a22e059beecb880
-40341-tayouka,出典,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T08:25:31+00:00,取得,一致,9a22e059beecb880
-40342-fs-hojo,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T08:25:37+00:00,取得,,b884075df8d87e47
-40342-fs-hojo,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T08:25:52+00:00,取得,,3d9a220a7681fba9
-40342-online,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T08:25:37+00:00,取得,,b884075df8d87e47
-40342-online,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T08:25:52+00:00,取得,,3d9a220a7681fba9
-40342-shien-center,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T08:25:37+00:00,取得,,b884075df8d87e47
-40342-shien-center,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T08:25:52+00:00,取得,,3d9a220a7681fba9
-40342-shusseki,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T08:25:37+00:00,取得,,b884075df8d87e47
-40342-shusseki,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T08:25:52+00:00,取得,,3d9a220a7681fba9
-40342-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40343-fs-hojo,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T08:25:59+00:00,取得,,cb2fd175683c32d5
-40343-online,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T08:25:59+00:00,取得,,cb2fd175683c32d5
-40343-shien-center,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T08:25:59+00:00,取得,,cb2fd175683c32d5
-40343-shusseki,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T08:25:59+00:00,取得,,cb2fd175683c32d5
-40343-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40344-fs-hojo,探した場所,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,2026-11-16T08:26:06+00:00,取得,,49686bbb9d24917a
-40344-online,探した場所,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,2026-11-16T08:26:06+00:00,取得,,49686bbb9d24917a
-40344-shien-center,出典,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,2026-11-16T08:26:06+00:00,取得,一致,49686bbb9d24917a
-40344-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40345-fs-hojo,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T08:26:14+00:00,取得,,674c477ac8f8734c
-40345-online,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T08:26:14+00:00,取得,,674c477ac8f8734c
-40345-shien-center,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T08:26:14+00:00,取得,,674c477ac8f8734c
-40345-shusseki,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T08:26:14+00:00,取得,,674c477ac8f8734c
-40345-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40348-fs-hojo,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T08:26:22+00:00,取得,,15d13512a4b7422c
-40348-fs-hojo,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T08:26:32+00:00,取得,,e59eaeded4b0ce3c
-40348-online,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T08:26:22+00:00,取得,,15d13512a4b7422c
-40348-online,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T08:26:32+00:00,取得,,e59eaeded4b0ce3c
-40348-shien-center,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T08:26:22+00:00,取得,,15d13512a4b7422c
-40348-shien-center,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T08:26:32+00:00,取得,,e59eaeded4b0ce3c
-40348-shusseki,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T08:26:22+00:00,取得,,15d13512a4b7422c
-40348-shusseki,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T08:26:32+00:00,取得,,e59eaeded4b0ce3c
-40348-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40349-fs-hojo,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T08:26:38+00:00,取得,,5e6bbeb705b55757
-40349-fs-hojo,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T08:26:46+00:00,取得,,4cf8692004253c73
-40349-online,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T08:26:38+00:00,取得,,5e6bbeb705b55757
-40349-online,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T08:26:46+00:00,取得,,4cf8692004253c73
-40349-shien-center,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T08:26:46+00:00,取得,,4cf8692004253c73
-40349-shien-center,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T08:26:38+00:00,取得,,5e6bbeb705b55757
-40349-shusseki,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T08:26:38+00:00,取得,,5e6bbeb705b55757
-40349-shusseki,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T08:26:46+00:00,取得,,4cf8692004253c73
-40349-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40381-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40382-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40383-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40384-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40401-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40402-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40421-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40447-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40448-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40503-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40522-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40544-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40601-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40602-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40604-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40605-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40608-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40609-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40610-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40621-fs-hojo,出典,https://www.town.kanda.lg.jp/page/16801.html,2026-11-16T08:26:52+00:00,取得,一致,b898445b93515192
-40621-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40625-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40642-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40646-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
-40647-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T08:22:16+00:00,取得,一致,5fe7bfc658613acc
+id,役割,URL,取得日時,取得,判定,本文の印,照合で見たもの,合わなかったもの,種類の語の数
+40000-fs-unei,出典,https://www.pref.fukuoka.lg.jp/contents/free3.html,2026-11-16T22:28:14+00:00,取得,一致,186f607875173797,根拠の箇所 | 1/2 | 2000000円,,
+40000-online,出典,https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,2026-11-16T22:28:22+00:00,取得,一致,c3e687c79f497c23,根拠の箇所,,
+40100-fs-hojo,探した場所,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,2026-11-16T22:28:28+00:00,取得,,04b45c1f8357109a,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:2 | 不登校特例校:0 | オンライン:6 | メタバース:0 | 出席扱い:0
+40100-tayouka,出典,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,2026-11-16T22:28:28+00:00,取得,一致,04b45c1f8357109a,根拠の箇所 | 4月 | 15名 | 2027年,,
+40100-tayouka,出典2,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,2026-11-16T22:28:35+00:00,取得,一致,a7004dda8d050790,根拠の箇所,,
+40130-fs-hojo,探した場所,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T22:28:41+00:00,取得,,10fcb29e736a17d7,,,フリースクール:0 | 民間施設:0 | 教育支援センター:3 | 適応指導教室:1 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:4 | メタバース:0 | 出席扱い:0
+40130-online,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T22:28:41+00:00,取得,一致,10fcb29e736a17d7,根拠の箇所,,
+40130-shien-center,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,2026-11-16T22:29:20+00:00,取得できず(HTTP 404),,,,,
+40130-shusseki,探した場所,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T22:28:41+00:00,取得,,10fcb29e736a17d7,,,フリースクール:0 | 民間施設:0 | 教育支援センター:3 | 適応指導教室:1 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:4 | メタバース:0 | 出席扱い:0
+40130-tayouka,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,2026-11-16T22:28:41+00:00,取得,一致,10fcb29e736a17d7,根拠の箇所 | 4月 | 2025年,,
+40202-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 備考の2024年,,
+40203-fs-hojo,出典,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,2026-11-16T22:29:34+00:00,取得,一致,f2d1adcd6acb2d42,根拠の箇所 | 4月1日 | 1年 | 30日 | 2025年 | 30000円 | 備考の1回,,
+40203-shien-center,出典,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2026largo.html,2026-11-16T22:29:41+00:00,取得,一致,5394253f82d3392e,根拠の箇所 | 1500円,,
+40203-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40204-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40205-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40206-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40207-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40210-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40211-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40212-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40213-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40214-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40215-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40216-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40217-fs-hojo,探した場所,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T22:29:47+00:00,取得,,8bf2c3ef29377b4c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:3 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40217-fs-hojo,探した場所,https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf,2026-11-16T22:29:54+00:00,取得,,4c71d4341309c5b6,,,フリースクール:2 | 民間施設:1 | 教育支援センター:6 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40217-online,探した場所,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T22:29:47+00:00,取得,,8bf2c3ef29377b4c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:3 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40217-online,探した場所,https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf,2026-11-16T22:29:54+00:00,取得,,4c71d4341309c5b6,,,フリースクール:2 | 民間施設:1 | 教育支援センター:6 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40217-shien-center,出典,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T22:29:47+00:00,取得,一致,8bf2c3ef29377b4c,根拠の箇所,,
+40217-shien-center,出典2,https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32468.pdf,2026-11-16T22:30:01+00:00,取得,一致,5f8f667eefe152be,根拠の箇所,,
+40217-shusseki,探した場所,https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html,2026-11-16T22:29:47+00:00,取得,,8bf2c3ef29377b4c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:3 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40217-shusseki,探した場所,https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32467.pdf,2026-11-16T22:29:54+00:00,取得,,4c71d4341309c5b6,,,フリースクール:2 | 民間施設:1 | 教育支援センター:6 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40217-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40218-fs-hojo,探した場所,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T22:30:07+00:00,取得,,4da799c677c4518b,,,フリースクール:0 | 民間施設:0 | 教育支援センター:9 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40218-fs-hojo,探した場所,https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf,2026-11-16T22:30:18+00:00,取得,,827ffbf41bdcc0f3,,,フリースクール:2 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40218-online,探した場所,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T22:30:07+00:00,取得,,4da799c677c4518b,,,フリースクール:0 | 民間施設:0 | 教育支援センター:9 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40218-online,探した場所,https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf,2026-11-16T22:30:18+00:00,取得,,827ffbf41bdcc0f3,,,フリースクール:2 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40218-shien-center,出典,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T22:30:07+00:00,取得,一致,4da799c677c4518b,根拠の箇所,,
+40218-shusseki,出典,https://www1.g-reiki.net/city.kasuga.fukuoka/reiki_honbun/q020RG00000369.html,2026-11-16T22:30:25+00:00,robots.txt により取得しない,,,,,
+40218-shusseki,探した場所,https://www.city.kasuga.fukuoka.jp/kosodate/eschool/1001730/index.html,2026-11-16T22:30:07+00:00,取得,,4da799c677c4518b,,,フリースクール:0 | 民間施設:0 | 教育支援センター:9 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40218-shusseki,探した場所,https://www.city.kasuga.fukuoka.jp/_res/projects/default_project/_page_/001/001/730/kasugasupportmap.pdf,2026-11-16T22:30:18+00:00,取得,,827ffbf41bdcc0f3,,,フリースクール:2 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40218-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40219-fs-hojo,出典,https://www.city.onojo.fukuoka.jp/s075/020/010/080/freeschool.html,2026-11-16T22:30:32+00:00,取得,一致,6ee726b6fb2fa31f,根拠の箇所 | 1年 | 30日 | 1/2 | 2024年 | 10000円,,
+40219-online,出典,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,2026-11-16T22:30:42+00:00,取得,一致,7127f7b1e457f254,根拠の箇所 | 1年生 | 3年生,,
+40219-shien-center,出典,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,2026-11-16T22:30:42+00:00,取得,一致,7127f7b1e457f254,根拠の箇所 | 1000円,,
+40219-shusseki,出典,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,2026-11-16T22:30:42+00:00,取得,一致,7127f7b1e457f254,根拠の箇所 | 1月 | 2026年 | 備考の1月 | 備考の2026年,,
+40219-tayouka,出典,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,2026-11-16T22:30:50+00:00,取得,一致,6e5d47fdd62a425e,根拠の箇所 | 1年生 | 3年生,,
+40219-tayouka,出典2,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 備考の10名 | 備考の2026年,,
+40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0033003/index.html,2026-11-16T22:30:56+00:00,取得,,f77621cf9cf9712e,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T22:31:04+00:00,取得,,fa9e3425ddff9ac8,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0033001/index.html,2026-11-16T22:31:11+00:00,取得,,9fdd0e6fdc87dc00,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0038920/index.html,2026-11-16T22:31:17+00:00,取得,,b3f677beef98452b,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40220-fs-hojo,探した場所,https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf,2026-11-16T22:31:23+00:00,取得,,b3592ac93e2c57f8,,,フリースクール:1 | 民間施設:1 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:3 | メタバース:0 | 出席扱い:1
+40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0033003/index.html,2026-11-16T22:30:56+00:00,取得,,f77621cf9cf9712e,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T22:31:04+00:00,取得,,fa9e3425ddff9ac8,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0033001/index.html,2026-11-16T22:31:11+00:00,取得,,9fdd0e6fdc87dc00,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0038920/index.html,2026-11-16T22:31:17+00:00,取得,,b3f677beef98452b,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40220-online,探した場所,https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf,2026-11-16T22:31:23+00:00,取得,,b3592ac93e2c57f8,,,フリースクール:1 | 民間施設:1 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:3 | メタバース:0 | 出席扱い:1
+40220-shien-center,出典,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T22:31:04+00:00,取得,一致,fa9e3425ddff9ac8,根拠の箇所,,
+40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0033003/index.html,2026-11-16T22:30:56+00:00,取得,,f77621cf9cf9712e,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0033002/index.html,2026-11-16T22:31:04+00:00,取得,,fa9e3425ddff9ac8,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0033001/index.html,2026-11-16T22:31:11+00:00,取得,,9fdd0e6fdc87dc00,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0038920/index.html,2026-11-16T22:31:17+00:00,取得,,b3f677beef98452b,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf,2026-11-16T22:31:23+00:00,取得,,b3592ac93e2c57f8,,,フリースクール:1 | 民間施設:1 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:3 | メタバース:0 | 出席扱い:1
+40220-shusseki,探した場所,https://www.city.munakata.lg.jp/kiji0033906/index.html,2026-11-16T22:31:30+00:00,取得,,d9dd3f05eef2e55f,,,フリースクール:1 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40220-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40221-fs-hojo,探した場所,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T22:31:36+00:00,取得,,7be093b76bbeb138,,,フリースクール:0 | 民間施設:0 | 教育支援センター:8 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:1 | 出席扱い:0
+40221-online,出典,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T22:31:36+00:00,取得,一致,7be093b76bbeb138,根拠の箇所 | 2025年,,
+40221-online,出典2,https://www.city.dazaifu.lg.jp/uploaded/attachment/29244.pdf,2026-11-16T22:31:44+00:00,取得,一致,0d6ca7cffbc9b0aa,根拠の箇所,,
+40221-shien-center,出典,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T22:31:36+00:00,取得,一致,7be093b76bbeb138,根拠の箇所 | 100円,,
+40221-shusseki,探した場所,https://www.city.dazaifu.lg.jp/soshiki/28/2085.html,2026-11-16T22:31:36+00:00,取得,,7be093b76bbeb138,,,フリースクール:0 | 民間施設:0 | 教育支援センター:8 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:1 | 出席扱い:0
+40221-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40223-fs-hojo,出典,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/061.php,2026-11-16T22:31:50+00:00,取得,一致,5a7013989f3a3e38,根拠の箇所 | 1年 | 30日 | 5000円,,
+40223-fs-hojo,出典2,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_honbun/q025RG00001608.html,2026-11-16T22:31:58+00:00,取得,一致,1f4f40a3d3db4a06,根拠の箇所 | 備考の3月31日 | 備考の4月1日 | 備考の10月 | 備考の3月 | 備考の2025年 | 備考の2029年,,
+40223-online,探した場所,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,2026-11-16T22:32:04+00:00,取得,,12fa85f8d90c25fa,,,フリースクール:4 | 民間施設:0 | 教育支援センター:5 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:1 | メタバース:0 | 出席扱い:2
+40223-online,探した場所,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_01.html,2026-11-16T22:32:10+00:00,取得,,4141a4814550502c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40223-online,探した場所,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_02.html,2026-11-16T22:32:16+00:00,取得,,1b5548f85be9dc5f,,,フリースクール:1 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40223-shien-center,出典,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,2026-11-16T22:32:04+00:00,取得,一致,12fa85f8d90c25fa,根拠の箇所,,
+40223-shien-center,出典2,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php,2026-11-16T22:32:22+00:00,取得,一致,4b06077af397147b,根拠の箇所,,
+40223-shusseki,探した場所,https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php,2026-11-16T22:32:04+00:00,取得,,12fa85f8d90c25fa,,,フリースクール:4 | 民間施設:0 | 教育支援センター:5 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:1 | メタバース:0 | 出席扱い:2
+40223-shusseki,探した場所,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_01.html,2026-11-16T22:32:10+00:00,取得,,4141a4814550502c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40223-shusseki,探した場所,https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_02.html,2026-11-16T22:32:16+00:00,取得,,1b5548f85be9dc5f,,,フリースクール:1 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40223-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40224-fs-hojo,探した場所,https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html,2026-11-16T22:32:28+00:00,取得,,9cde1ac325d326d0,,,フリースクール:2 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:4
+40224-fs-hojo,探した場所,https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf,2026-11-16T22:32:36+00:00,取得,,86e562314a327529,,,フリースクール:3 | 民間施設:0 | 教育支援センター:2 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40224-online,探した場所,https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html,2026-11-16T22:32:28+00:00,取得,,9cde1ac325d326d0,,,フリースクール:2 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:4
+40224-online,探した場所,https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf,2026-11-16T22:32:36+00:00,取得,,86e562314a327529,,,フリースクール:3 | 民間施設:0 | 教育支援センター:2 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:1
+40224-shien-center,出典,https://www.city.fukutsu.lg.jp/material/files/group/27/futoukouri-furetto.pdf,2026-11-16T22:32:36+00:00,取得,一致,86e562314a327529,根拠の箇所,,
+40224-shusseki,出典,https://www.city.fukutsu.lg.jp/soshiki/gakko/kyouikushido/14465.html,2026-11-16T22:32:28+00:00,取得,一致,9cde1ac325d326d0,根拠の箇所,,
+40224-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40225-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40226-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40227-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40228-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40229-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40230-fs-hojo,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T22:32:43+00:00,取得,,f6bf3be277e2bdc1,,,フリースクール:0 | 民間施設:0 | 教育支援センター:4 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40230-fs-hojo,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf,2026-11-16T22:32:51+00:00,取得,,9590cf4aa4b63853,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40230-online,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T22:32:43+00:00,取得,,f6bf3be277e2bdc1,,,フリースクール:0 | 民間施設:0 | 教育支援センター:4 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40230-online,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf,2026-11-16T22:32:51+00:00,取得,,9590cf4aa4b63853,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40230-shien-center,出典,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T22:32:43+00:00,取得,一致,f6bf3be277e2bdc1,根拠の箇所,,
+40230-shien-center,出典2,https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf,2026-11-16T22:32:51+00:00,取得,一致,9590cf4aa4b63853,根拠の箇所,,
+40230-shusseki,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html,2026-11-16T22:32:43+00:00,取得,,f6bf3be277e2bdc1,,,フリースクール:0 | 民間施設:0 | 教育支援センター:4 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40230-shusseki,探した場所,https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf,2026-11-16T22:32:51+00:00,取得,,9590cf4aa4b63853,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40230-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40231-fs-hojo,探した場所,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,2026-11-16T22:32:57+00:00,取得,,ec4db811b9b861ba,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:3 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40231-online,探した場所,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,2026-11-16T22:32:57+00:00,取得,,ec4db811b9b861ba,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:3 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40231-shien-center,出典,https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html,2026-11-16T22:32:57+00:00,取得,一致,ec4db811b9b861ba,根拠の箇所,,
+40231-shusseki,出典,https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm,2026-11-16T22:33:05+00:00,取得,一致,a3ed0674aedc9234,根拠の箇所 | 備考の5月15日 | 備考の7月13日 | 備考の2013年 | 備考の2021年,,
+40231-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40341-fs-hojo,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T22:33:10+00:00,取得,,1d40d190f8afca6a,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-fs-hojo,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T22:33:18+00:00,取得,,a62bb9323dabbf0e,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:7 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-online,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T22:33:10+00:00,取得,,1d40d190f8afca6a,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-online,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T22:33:18+00:00,取得,,a62bb9323dabbf0e,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:7 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-shien-center,出典,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,2026-11-16T22:33:23+00:00,取得,一致,acd0216f71d80602,根拠の箇所 | 備考の3月25日 | 備考の6月20日 | 備考の2000年 | 備考の2025年,,
+40341-shien-center,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T22:33:10+00:00,取得,,1d40d190f8afca6a,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-shien-center,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T22:33:18+00:00,取得,,a62bb9323dabbf0e,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:7 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-shien-center,探した場所,https://www.town.umi.lg.jp/uploaded/attachment/14753.pdf,2026-11-16T22:33:30+00:00,取得,,353db7cd45ef512c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:1 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:8 | メタバース:0 | 出席扱い:0
+40341-shusseki,探した場所,https://www.town.umi.lg.jp/soshiki/39/70131.html,2026-11-16T22:33:10+00:00,取得,,1d40d190f8afca6a,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:1 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-shusseki,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T22:33:18+00:00,取得,,a62bb9323dabbf0e,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:7 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40341-tayouka,出典,https://www.town.umi.lg.jp/site/manabinotayouka/,2026-11-16T22:33:18+00:00,取得,一致,a62bb9323dabbf0e,根拠の箇所,,
+40341-tayouka,出典2,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 備考の2025年,,
+40342-fs-hojo,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T22:33:40+00:00,取得,,b884075df8d87e47,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-fs-hojo,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T22:33:50+00:00,取得,,3d9a220a7681fba9,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-online,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T22:33:40+00:00,取得,,b884075df8d87e47,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-online,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T22:33:50+00:00,取得,,3d9a220a7681fba9,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-shien-center,出典,https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,2026-11-16T22:33:56+00:00,robots.txt により取得しない,,,,,
+40342-shien-center,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T22:33:40+00:00,取得,,b884075df8d87e47,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-shien-center,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T22:33:50+00:00,取得,,3d9a220a7681fba9,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-shien-center,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/41/2024_12_all.pdf,2026-11-16T22:34:01+00:00,取得,,d62233ce5f78c4b5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-shusseki,探した場所,https://www.town.sasaguri.fukuoka.jp/material/files/group/2/soudanfull.pdf,2026-11-16T22:33:40+00:00,取得,,b884075df8d87e47,,,フリースクール:0 | 民間施設:0 | 教育支援センター:1 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-shusseki,探した場所,https://www.town.sasaguri.fukuoka.jp/soshiki/gakko_kyoiku/index.html,2026-11-16T22:33:50+00:00,取得,,3d9a220a7681fba9,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40342-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40343-fs-hojo,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T22:34:09+00:00,取得,,cb2fd175683c32d5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40343-online,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T22:34:09+00:00,取得,,cb2fd175683c32d5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40343-shien-center,出典,https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117,2026-11-16T22:34:16+00:00,取得,一致,5af7ede2aabe9ceb,根拠の箇所 | 備考の4月1日 | 備考の7月21日 | 備考の2026年,,
+40343-shien-center,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T22:34:09+00:00,取得,,cb2fd175683c32d5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40343-shusseki,探した場所,https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html,2026-11-16T22:34:09+00:00,取得,,cb2fd175683c32d5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40343-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40344-fs-hojo,探した場所,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,2026-11-16T22:34:24+00:00,取得,,49686bbb9d24917a,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:1 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40344-online,探した場所,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,2026-11-16T22:34:24+00:00,取得,,49686bbb9d24917a,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:1 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40344-shien-center,出典,https://www.town.sue.fukuoka.jp/soshiki/gakkoukyouikuka/syou_tyuugakkou/10565.html,2026-11-16T22:34:24+00:00,取得,一致,49686bbb9d24917a,根拠の箇所,,
+40344-shien-center,出典2,https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf,2026-11-16T22:34:32+00:00,取得,一致,966a1e7e37019d27,根拠の箇所 | 備考の6年生,,
+40344-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40345-fs-hojo,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T22:34:40+00:00,取得,,674c477ac8f8734c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-fs-hojo,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html,2026-11-16T22:34:48+00:00,取得,,b2a30d8e7a96e7b4,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-fs-hojo,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html,2026-11-16T22:34:53+00:00,取得,,c1fc9babfea13777,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-fs-hojo,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html,2026-11-16T22:34:59+00:00,取得,,cea2696d72767d36,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-fs-hojo,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html,2026-11-16T22:35:05+00:00,取得,,12c918d07a690cb1,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-fs-hojo,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html,2026-11-16T22:35:10+00:00,取得,,0d5bc38a989006b5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-online,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T22:34:40+00:00,取得,,674c477ac8f8734c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-online,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html,2026-11-16T22:34:48+00:00,取得,,b2a30d8e7a96e7b4,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-online,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html,2026-11-16T22:34:53+00:00,取得,,c1fc9babfea13777,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-online,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html,2026-11-16T22:34:59+00:00,取得,,cea2696d72767d36,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-online,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html,2026-11-16T22:35:05+00:00,取得,,12c918d07a690cb1,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-online,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html,2026-11-16T22:35:10+00:00,取得,,0d5bc38a989006b5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shien-center,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T22:34:40+00:00,取得,,674c477ac8f8734c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shien-center,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html,2026-11-16T22:34:48+00:00,取得,,b2a30d8e7a96e7b4,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shien-center,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html,2026-11-16T22:34:53+00:00,取得,,c1fc9babfea13777,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shien-center,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html,2026-11-16T22:34:59+00:00,取得,,cea2696d72767d36,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shien-center,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html,2026-11-16T22:35:05+00:00,取得,,12c918d07a690cb1,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shien-center,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html,2026-11-16T22:35:10+00:00,取得,,0d5bc38a989006b5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shusseki,探した場所,https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html,2026-11-16T22:34:40+00:00,取得,,674c477ac8f8734c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shusseki,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html,2026-11-16T22:34:48+00:00,取得,,b2a30d8e7a96e7b4,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shusseki,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html,2026-11-16T22:34:53+00:00,取得,,c1fc9babfea13777,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shusseki,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html,2026-11-16T22:34:59+00:00,取得,,cea2696d72767d36,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shusseki,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html,2026-11-16T22:35:05+00:00,取得,,12c918d07a690cb1,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-shusseki,探した場所,https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html,2026-11-16T22:35:10+00:00,取得,,0d5bc38a989006b5,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40345-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40348-fs-hojo,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T22:35:16+00:00,取得,,15d13512a4b7422c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-fs-hojo,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T22:35:25+00:00,取得,,e59eaeded4b0ce3c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-online,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T22:35:16+00:00,取得,,15d13512a4b7422c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-online,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T22:35:25+00:00,取得,,e59eaeded4b0ce3c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-shien-center,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T22:35:16+00:00,取得,,15d13512a4b7422c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-shien-center,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T22:35:25+00:00,取得,,e59eaeded4b0ce3c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-shusseki,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/index.html,2026-11-16T22:35:16+00:00,取得,,15d13512a4b7422c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-shusseki,探した場所,https://www.town.hisayama.fukuoka.jp/gyosei/kosodate_kyoiku/kyoiku_iinkai/index.html,2026-11-16T22:35:25+00:00,取得,,e59eaeded4b0ce3c,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40348-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40349-fs-hojo,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T22:35:30+00:00,取得,,5e6bbeb705b55757,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-fs-hojo,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T22:35:38+00:00,取得,,4cf8692004253c73,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-online,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T22:35:30+00:00,取得,,5e6bbeb705b55757,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-online,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T22:35:38+00:00,取得,,4cf8692004253c73,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-shien-center,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T22:35:38+00:00,取得,,4cf8692004253c73,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-shien-center,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T22:35:30+00:00,取得,,5e6bbeb705b55757,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-shien-center,探した場所,https://www.town.kasuya.fukuoka.jp/s043/010/030/130/R5-12.pdf,2026-11-16T22:35:44+00:00,取得,,961a7f962decdd54,,,フリースクール:2 | 民間施設:1 | 教育支援センター:0 | 適応指導教室:3 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:11 | メタバース:1 | 出席扱い:8
+40349-shusseki,探した場所,https://www.town.kasuya.fukuoka.jp/s022/040/010/020/040/20260708111059.html,2026-11-16T22:35:30+00:00,取得,,5e6bbeb705b55757,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-shusseki,探した場所,https://www.town.kasuya.fukuoka.jp/s036/010/010/050/porutotirasi.pdf,2026-11-16T22:35:38+00:00,取得,,4cf8692004253c73,,,フリースクール:0 | 民間施設:0 | 教育支援センター:0 | 適応指導教室:0 | 学びの多様化学校:0 | 不登校特例校:0 | オンライン:0 | メタバース:0 | 出席扱い:0
+40349-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40381-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40382-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40383-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40384-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40401-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40402-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40421-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40447-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40448-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40503-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40522-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40544-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40601-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40602-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40604-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40605-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40608-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40609-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40610-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40621-fs-hojo,出典,https://www.town.kanda.lg.jp/page/16801.html,2026-11-16T22:35:56+00:00,取得,一致,b898445b93515192,根拠の箇所 | 1年 | 30日 | 2026年 | 5000円 | 備考の8月,,
+40621-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40625-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40642-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40646-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,
+40647-tayouka,出典,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,2026-11-16T22:29:26+00:00,取得,一致,5fe7bfc658613acc,根拠の箇所 | 一覧に市町村が管理する学校の印が無い | 一覧に県名+市町村名が無い,,

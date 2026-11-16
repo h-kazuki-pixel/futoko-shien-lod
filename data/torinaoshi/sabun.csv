@@ -1,1 +1,7 @@
 日付,重さ,変わった所,id,役割,URL,前,後
+2026-11-16,記録のみ,取得できるようになった,40130-fs-hojo,探した場所,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,取得できず(HTTP 404),取得
+2026-11-16,記録のみ,取得できるようになった,40130-online,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,取得できず(HTTP 404),取得
+2026-11-16,記録のみ,取得できるようになった,40130-shusseki,探した場所,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,取得できず(HTTP 404),取得
+2026-11-16,記録のみ,取得できるようになった,40130-tayouka,出典,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,取得できず(HTTP 404),取得
+2026-11-16,記録のみ,探した場所のページの文字が変わった,40341-fs-hojo 40341-online 40341-shien-center 40341-shusseki,探した場所,https://www.town.umi.lg.jp/site/manabinotayouka/,9a22e059beecb880,a62bb9323dabbf0e
+2026-11-16,記録のみ,ページの文字が変わった(照合で見た語句と数字は、すべてまだある),40341-tayouka,出典,https://www.town.umi.lg.jp/site/manabinotayouka/,9a22e059beecb880,a62bb9323dabbf0e
