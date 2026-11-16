@@ -35,8 +35,6 @@ FIELDS = ["制度名", "対象", "金額", "開始", "補助の形", "備考"]
 # (福岡市のサイトが止まっていて、照合で確かめられない行など)。列に値があれば、そちらを優先する。
 HOJO = {
     "40000-online": "https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf",
-    "40130-online": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf",
-    "40130-tayouka": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf",
 }
 
 

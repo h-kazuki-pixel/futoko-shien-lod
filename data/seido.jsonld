@@ -273,7 +273,17 @@
    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
    "sourceName": "福岡市教育委員会「不登校に関する支援」",
    "basisPhrase": "オンラインルームを開設しています",
-   "note": "端末を使い、他の児童生徒やスクールカウンセラーと交流する場。自宅から参加できることは、同じページから張られた案内(onlineroom-annai.pdf)による"
+   "note": "端末を使い、他の児童生徒やスクールカウンセラーと交流する場。自宅から参加できることは、案内の PDF による",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-online#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf",
+    "sourceName": "福岡市「オンラインルーム」のご案内(PDF)",
+    "basisPhrase": "オンラインルーム",
+    "supports": [
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-shien-center",
@@ -346,7 +356,18 @@
    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
    "sourceName": "福岡市教育委員会「不登校に関する支援」",
    "basisPhrase": "学びの多様化学校「福岡市立百道松原中学校」",
-   "note": "対象と条件は生徒募集案内(令和8年度版、同じページから張られたPDF)による。市内に住民登録があること、面談と約1か月の授業体験が必須"
+   "note": "対象と条件は生徒募集案内(令和8年度版)による。市内に住民登録があること、面談と約1か月の授業体験が必須",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-tayouka#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf",
+    "sourceName": "福岡市「令和8年度 百道松原中学校 生徒募集案内」(PDF)",
+    "basisPhrase": "生徒募集案内",
+    "supports": [
+     "fsl:eligibility",
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40202-tayouka",
@@ -2020,7 +2041,8 @@
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-shien-center",
    "@type": [
-    "fsl:Record"
+    "fsl:Record",
+    "schema:GovernmentService"
    ],
    "identifier": "40341-shien-center",
    "areaServed": {
@@ -2031,10 +2053,15 @@
     "sameAs": "http://ja.dbpedia.org/resource/宇美町"
    },
    "kind": "fsl:kind-shien-center",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "ひきこもり相談室の案内はある。教育支援センターの記載は見つからなかった。無いことは確認していない。町の第7次総合計画(素案、令和5年1月)に適応指導教室(くすのき教室)の名がある。学校の外の教室か、いまもあるかは書かれていない",
+   "name": "くすのき教室(宇美町教育支援センター)",
+   "eligibility": "対人関係や心理的・情緒的な理由で登校できない児童生徒",
+   "source": "https://public1.legalcrud.com/umi_town/reiki/act/110000280.html",
+   "sourceName": "宇美町例規集「宇美町教育支援センター設置要綱」",
+   "basisPhrase": "宇美町教育支援センター設置要綱",
+   "note": "平成12年6月20日教育委員会要綱第1号の2。最終改正は令和7年3月25日。しーず・うみ内。生活支援、学習支援、教育相談を行う。費用の定めは要綱に無い",
    "searchedAt": [
     "https://www.town.umi.lg.jp/soshiki/39/70131.html",
     "https://www.town.umi.lg.jp/site/manabinotayouka/",
@@ -2263,7 +2290,8 @@
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40343-shien-center",
    "@type": [
-    "fsl:Record"
+    "fsl:Record",
+    "schema:GovernmentService"
    ],
    "identifier": "40343-shien-center",
    "areaServed": {
@@ -2274,10 +2302,15 @@
     "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-shien-center",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "不登校・ひきこもりの個別相談の案内はある。教育支援センターの記載は見つからなかった。無いことは確認していない",
+   "name": "さくらのみち(志免町教育支援センター)",
+   "eligibility": "町立小中学校に在籍する不登校等の児童生徒と保護者",
+   "source": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117",
+   "sourceName": "志免町例規集「志免町教育支援センター設置要綱」",
+   "basisPhrase": "志免町教育支援センター設置要綱",
+   "note": "令和8年7月21日教育委員会告示第6号、令和8年4月1日から適用。生涯学習1号館内。学習支援、体験活動、居場所の提供、相談を行う。費用の定めは要綱に無い",
    "searchedAt": [
     "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
    ]
