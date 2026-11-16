@@ -48,8 +48,12 @@ HOJO = {
 
 
 def make(seido: list[dict[str, str]], old: list[dict[str, str]]) -> list[dict[str, str]]:
-    """一覧を作る。前の一覧と id・項目・値が同じ行は、判定・メモ・確認日を引き継ぐ。"""
+    """一覧を作る。前の一覧と id・項目・値が同じ行は、判定・メモ・確認日を引き継ぐ。
+
+    値が変わった行は判定を空にし、前の判定をメモに残す。
+    """
     kept = {(r["id"], r["項目"], r["値"]): r for r in old}
+    before = {(r["id"], r["項目"]): r for r in old if r["判定"]}
     out = []
     for r in seido:
         if r["状態"] not in ("あり", "予定"):
@@ -59,6 +63,10 @@ def make(seido: list[dict[str, str]], old: list[dict[str, str]]) -> list[dict[st
         items += [(f, r[f]) for f in FIELDS if r[f]]
         for name, value in items:
             prev = kept.get((r["id"], name, value), {})
+            if not prev and (r["id"], name) in before:
+                # 値が変わった項目は、判定を引き継がない。前に何と判定されたかだけ、メモに残す
+                b = before[(r["id"], name)]
+                prev = {"メモ": f"値を直したので見直しが要る。直す前の値は、人が「{b['判定']}」と判定({b['確認日']})"}
             out.append(
                 {
                     "id": r["id"],

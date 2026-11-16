@@ -32,6 +32,8 @@ def test_atai_ga_onaji_nara_hantei_wo_hikitsugu():
     judge = {r["項目"]: r["判定"] for r in again}
     assert judge["制度名"] == "合っている"
     assert judge["対象"] == ""  # 値が変わった項目は、見直しになる
+    memo = {r["項目"]: r["メモ"] for r in again}
+    assert "直す前の値は、人が「合っている」と判定" in memo["対象"]  # 前の判定は、メモにだけ残す
 
 
 def test_ayamari_ritsu_no_kazoekata():

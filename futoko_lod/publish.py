@@ -568,7 +568,7 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <ul>
 <li>「確認できず」が {total['確認できず']} 件ある。市町に問い合わせて減らしている途中。</li>
 <li>「なし」のうち {listed_nashi} 件は、公式の一覧に載っていないという意味で、市町村が無いと答えたものではない。</li>
-<li>人が出典と見比べたのは、{len(records['saikakunin'])} 項目のうち {sum(judged.values())}。誤りの割合は、まだ言えない。</li>
+<li>人が出典と見比べたのは、{len(records['saikakunin'])} 項目のうち {sum(judged.values())}。そのうち「違う」は {judged['違う']}。全部の項目は見ていないので、全体の誤りの割合としては言えない。</li>
 <li>照合で分かるのは「ページに無い数字を載せていない」ことまで。数字の意味の取り違えは、人の目で見るしかない。</li>
 <li>都市圏の外の市町村は、主に学びの多様化学校だけを調べている。</li>
 <li>GitHub Pages では、制度の URI とページを分ける転送(303)や、形式の出し分けはできない。</li>
