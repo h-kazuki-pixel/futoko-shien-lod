@@ -48,6 +48,7 @@ PREFIXES = {
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "dcat": "http://www.w3.org/ns/dcat#",
     "owl": "http://www.w3.org/2002/07/owl#",
+    "prov": "http://www.w3.org/ns/prov#",
     "fsl": NS,
 }
 
@@ -89,6 +90,19 @@ PROPERTIES = {
     "basisPhrase": ("根拠の箇所", "出典のページにある短い語句(40字まで)。照合に使う。第2の出典の節でも使う。", "rdf:langString"),
     "additionalSource": ("第2の出典", "項目の根拠が、出典のページでなく別のページや資料にあるときの、その資料。", "fsl:AdditionalSource"),
     "supports": ("出典2の項目", "第2の出典で裏付ける項目(この語彙や schema.org の性質)。", "rdf:Property"),
+    "checkActivity": ("確かめた記録", "この記録について行った、取り直し・人の再確認・問い合わせ(prov:Activity)。公開するファイルにだけ出す。", "prov:Activity"),
+    "activityDate": ("日付", "人の再確認・問い合わせをした日。", "xsd:date"),
+    "role": ("役割", "取り直したページの役割(出典 / 出典2 / 探した場所)。", "rdf:langString"),
+    "fetchResult": ("取得", "取り直しで取得できたか。できなければ理由。", "rdf:langString"),
+    "collationResult": ("照合", "取り直したページとの照合の結果(一致 / 不一致)。", "rdf:langString"),
+    "itemsTotal": ("見比べる項目", "人の再確認で見比べる項目の数。", "xsd:integer"),
+    "itemsChecked": ("見比べた項目", "人が出典と見比べた項目の数。", "xsd:integer"),
+    "itemsMatched": ("合っている", "見比べて合っていた項目の数。", "xsd:integer"),
+    "itemsWrong": ("違う", "見比べて違っていた項目の数。", "xsd:integer"),
+    "itemsUnsure": ("分からない", "見比べて分からなかった項目の数。", "xsd:integer"),
+    "inquiryTo": ("問い合わせ先", "問い合わせた担当課(課の名前だけ。人の名前は書かない)。", "rdf:langString"),
+    "inquiryMethod": ("問い合わせの方法", "メール、フォーム、電話など。", "rdf:langString"),
+    "answerState": ("回答", "回答があったか。回答の文面は載せない。", "rdf:langString"),
     "guidelineState": ("要綱の状況", "要綱を取得できたか。", "rdf:langString"),
     "guideline": ("要綱URL", "要綱の URL。", "rdfs:Resource"),
     "searchedAt": ("探した場所", "探したページの URL。「確認できず」のときに必ず入る。", "rdfs:Resource"),
@@ -112,7 +126,16 @@ TAIOU_SOURCES = [
 ]
 
 # rdfs:domain が fsl:Record でない性質。None は domain を書かない(記録と第2の出典の節の両方で使うため)
-DOMAINS = {"sourceName": None, "basisPhrase": None, "supports": "fsl:AdditionalSource"}
+DOMAINS = {"sourceName": None, "basisPhrase": None, "supports": "fsl:AdditionalSource",
+           "activityDate": "prov:Activity", "role": "fsl:Refetch", "fetchResult": "fsl:Refetch", "collationResult": "fsl:Refetch",
+           "itemsTotal": "fsl:HumanReview", "itemsChecked": "fsl:HumanReview", "itemsMatched": "fsl:HumanReview",
+           "itemsWrong": "fsl:HumanReview", "itemsUnsure": "fsl:HumanReview",
+           "inquiryTo": "fsl:Inquiry", "inquiryMethod": "fsl:Inquiry", "answerState": "fsl:Inquiry"}
+ACTIVITY_CLASSES = [
+    ("Refetch", "取り直し", "出典・第2の出典・探した場所のページを取りに行き、照合した活動。毎週の定期的な取り直しの、いちばん新しいもの。"),
+    ("HumanReview", "人の再確認", "人が出典のページを開き、項目と見比べた活動。"),
+    ("Inquiry", "問い合わせ", "市町村に、制度の有無や中身を問い合わせた活動。回答の文面は載せない。"),
+]
 
 SCHEMES = [
     ("kinds", "制度の種類", "kind", {slug: (label, "") for slug, label in schema.KINDS.items()}),
@@ -214,6 +237,14 @@ def vocab_turtle() -> str:
             "URL(dct:source)、呼び名、資料にある短い語句、裏付ける項目を持つ。照合は出典ごとに分けて行う。") + "@ja"]),
         ("rdfs:isDefinedBy", [iri(BASE + "ns")]),
     ]))
+    for cls, label, comment in ACTIVITY_CLASSES:
+        blocks.append((f"fsl:{cls}", [
+            ("a", ["rdfs:Class"]),
+            ("rdfs:subClassOf", ["prov:Activity"]),
+            ("rdfs:label", [lit(label) + "@ja"]),
+            ("rdfs:comment", [lit(comment) + "@ja"]),
+            ("rdfs:isDefinedBy", [iri(BASE + "ns")]),
+        ]))
     for name, (label, comment, rng) in PROPERTIES.items():
         domain = DOMAINS.get(name, "fsl:Record")
         pos = [
@@ -812,8 +843,13 @@ def inquiry_lines(row: dict[str, str], records: dict) -> list[str]:
     回答の文面は載せない(自由に書いた文で、人の名前が入るかもしれない)。回答の中身は、反映した行の項目と「なしの根拠」に出る。
     突き合わせ: 「反映したid」があればそれだけを見る。無ければ、同じ市町村・同じ種類の行すべてに出す。
     """
+    return [f"{r['日付']} {r['担当課']}に{r['方法']}で問い合わせた。" + answer_state(r, row) for r in inquiries_for(row, records)]
+
+
+def inquiries_for(row: dict[str, str], records: dict) -> list[dict[str, str]]:
+    """この1件に当たる問い合わせ。「反映したid」があればそれだけ、無ければ同じ市町村・同じ種類。"""
     slug = kind_slug(row)
-    lines = []
+    out = []
     for r in records["toiawase"]:
         reflected = r.get("反映したid", "").replace(",", " ").replace("|", " ").split()
         if reflected:
@@ -821,14 +857,52 @@ def inquiry_lines(row: dict[str, str], records: dict) -> list[str]:
                 continue
         elif not (r["市町村コード"] == row["市町村コード"] and r["種類"].strip() in (row["制度の種類"], slug, KIND_SHORT[slug])):
             continue
-        head = f"{r['日付']} {r['担当課']}に{r['方法']}で問い合わせた。"
-        if r.get("公開の可否", "").strip().startswith("差し支えあり"):
-            lines.append(head + "回答は、データに使っていない(載せることに差し支えがあるとのこと)")
-        elif r["回答"].strip():
-            lines.append(head + ("回答があり、この1件に反映した" if reflected else "回答があった"))
-        else:
-            lines.append(head + "回答はまだ無い")
-    return lines
+        out.append(r)
+    return out
+
+
+def answer_state(r: dict[str, str], row: dict[str, str]) -> str:
+    """回答があったかどうかだけ。回答の文面は返さない。"""
+    reflected = r.get("反映したid", "").replace(",", " ").replace("|", " ").split()
+    if r.get("公開の可否", "").strip().startswith("差し支えあり"):
+        return "回答は、データに使っていない(載せることに差し支えがあるとのこと)"
+    if r["回答"].strip():
+        return "回答があり、この1件に反映した" if reflected else "回答があった"
+    return "回答はまだ無い"
+
+
+def activities(row: dict[str, str], records: dict) -> list[dict]:
+    """確かめた記録を、prov:Activity の節にする(公5)。公開するファイルにだけ出す。"""
+    base = f"{BASE}id/{row['id']}#"
+    out: list[dict] = []
+    for i, r in enumerate((r for r in records["torinaoshi"] if r["id"] == row["id"]), 1):
+        node = {"@id": f"{base}refetch-{i}", "@type": ["prov:Activity", "fsl:Refetch"],
+                "role": r["役割"], "used": r["URL"], "fetchResult": r["取得"]}
+        if r["取得日時"]:
+            node["endedAtTime"] = r["取得日時"]
+        if r["判定"]:
+            node["collationResult"] = r["判定"]
+        out.append(node)
+    mine = [r for r in records["saikakunin"] if r["id"] == row["id"]]
+    if mine:
+        c = collections.Counter(r["判定"] for r in mine if r["判定"])
+        node = {"@id": f"{base}review", "@type": ["prov:Activity", "fsl:HumanReview"],
+                "itemsTotal": str(len(mine)), "itemsChecked": str(sum(c.values())),
+                "itemsMatched": str(c["合っている"]), "itemsWrong": str(c["違う"]), "itemsUnsure": str(c["分からない"])}
+        days = [r["確認日"] for r in mine if r["判定"] and r["確認日"]]
+        if days:
+            node["activityDate"] = max(days)
+        out.append(node)
+    for i, r in enumerate(inquiries_for(row, records), 1):
+        out.append({"@id": f"{base}inquiry-{i}", "@type": ["prov:Activity", "fsl:Inquiry"],
+                    "activityDate": r["日付"], "inquiryTo": r["担当課"], "inquiryMethod": r["方法"],
+                    "answerState": answer_state(r, row)})
+    return out
+
+
+def with_activities(node: dict, row: dict[str, str], records: dict) -> dict:
+    acts = activities(row, records)
+    return {**node, "checkActivity": acts} if acts else node
 
 
 # ---------- 書き出し ----------
@@ -837,7 +911,9 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
     out = Path(out)
     rows = schema.load(csv_path)
     areas = schema.read_csv("data/shichoson.csv")
-    nodes = [build.to_node(r) for r in rows]
+    records = load_records(Path(csv_path).parent)
+    # 公開するファイルには、確かめた記録(取り直し・人の再確認・問い合わせ)も入れる。data/seido.jsonld には入れない
+    nodes = [with_activities(build.to_node(r), r, records) for r in rows]
     if out.exists():
         shutil.rmtree(out)
     (out / "id").mkdir(parents=True)
@@ -848,7 +924,6 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
 
     put(".nojekyll", "")
     put("style.css", CSS)
-    records = load_records(Path(csv_path).parent)
     put("index.html", index_html(rows, areas, records))
     put("ichiran/index.html", ichiran_html(rows))
     (out / "about").mkdir()
@@ -865,7 +940,7 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
             shutil.copyfile(f, out / Path(f).name)
     put("dataset.ttl", dataset_turtle(rows))
     shutil.copyfile(csv_path, out / "seido.csv")
-    put("seido.jsonld", build.build(csv_path))
+    put("seido.jsonld", json.dumps({"@context": build.CONTEXT, "@graph": nodes}, ensure_ascii=False, indent=1) + "\n")
     put("seido.ttl", nodes_turtle(nodes))
     by_area: dict[str, list[dict[str, str]]] = collections.defaultdict(list)
     for r in rows:

@@ -358,3 +358,35 @@ def test_kind_catalog_covers_all_kinds(site):
     assert {k["このデータの値"] for k in kinds} == {f"fsl:kind-{s}" for s in schema.KINDS}
     assert (site / "goi_taiou.csv").exists() and (site / "goi_taiou_shurui.csv").exists()
     assert "ほかの語彙との対応" in (site / "ns.html").read_text(encoding="utf-8")
+
+
+# ---- 確かめた記録を RDF に(公5) ----
+
+def test_activities_never_carry_the_answer_text():
+    toi = {"日付": "2026-11-20", "市町村コード": "40999", "市町村": "見本町", "担当課": "学校教育課", "方法": "メール",
+           "種類": "fs-hojo", "回答": "担当の見本さんによると制度は無い", "公開の可否": "", "反映したid": ""}
+    sai = [{"id": "40999-fs-hojo", "判定": "合っている", "確認日": "2026-11-16"}, {"id": "40999-fs-hojo", "判定": "", "確認日": ""}]
+    tor = [{"id": "40999-fs-hojo", "役割": "探した場所", "URL": "https://www.town.mihon.lg.jp/a.html",
+            "取得日時": "2026-11-16T08:00:00+00:00", "取得": "取得", "判定": "", "本文の印": "x"}]
+    acts = publish.activities(REC, recs(toiawase=[toi], saikakunin=sai, torinaoshi=tor))
+    text = json.dumps(acts, ensure_ascii=False)
+    assert "見本さん" not in text and "制度は無い" not in text
+    kinds = {a["@type"][1]: a for a in acts}
+    assert kinds["fsl:Inquiry"]["answerState"] == "回答があった"
+    assert kinds["fsl:HumanReview"]["itemsChecked"] == "1" and kinds["fsl:HumanReview"]["itemsTotal"] == "2"
+    assert kinds["fsl:Refetch"]["used"] == "https://www.town.mihon.lg.jp/a.html"
+    node = publish.with_activities(build.to_node(REC | {"確認日": "2026-11-16", "確認方法": "機械の読み取り",
+                                                       "探した場所": "https://www.town.mihon.lg.jp/a.html"}),
+                                   REC, recs(toiawase=[toi], saikakunin=sai, torinaoshi=tor))
+    ttl = graph(publish.nodes_turtle([node]), "turtle")
+    jld = graph(json.dumps({"@context": build.CONTEXT, "@graph": [node]}, ensure_ascii=False), "json-ld")
+    assert to_isomorphic(ttl) == to_isomorphic(jld)
+    PROV = rdflib.Namespace("http://www.w3.org/ns/prov#")
+    assert len(list(jld.subjects(rdflib.RDF.type, PROV.Activity))) == 3
+
+
+def test_published_files_have_activities_but_repo_jsonld_does_not(site):
+    pub = json.loads((site / "seido.jsonld").read_text(encoding="utf-8"))
+    assert any("checkActivity" in n for n in pub["@graph"])
+    repo = json.loads(open("data/seido.jsonld", encoding="utf-8").read())
+    assert not any("checkActivity" in n for n in repo["@graph"])

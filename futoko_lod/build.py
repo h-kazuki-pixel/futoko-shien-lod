@@ -26,6 +26,7 @@ CONTEXT = {
     "dct": "http://purl.org/dc/terms/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "fsl": BASE + "ns#",
+    "prov": "http://www.w3.org/ns/prov#",
     "@language": "ja",
     "identifier": {"@id": "schema:identifier", "@language": None},
     "name": "schema:name",
@@ -51,6 +52,22 @@ CONTEXT = {
     "note": "fsl:note",
     "dateChecked": {"@id": "fsl:dateChecked", "@type": "xsd:date"},
     "checkMethod": {"@id": "fsl:checkMethod", "@type": "@id"},
+    # 確かめた記録(公開するファイルにだけ出す。publish.activities)
+    "checkActivity": {"@id": "fsl:checkActivity"},
+    "used": {"@id": "prov:used", "@type": "@id"},
+    "endedAtTime": {"@id": "prov:endedAtTime", "@type": "xsd:dateTime"},
+    "activityDate": {"@id": "fsl:activityDate", "@type": "xsd:date"},
+    "role": "fsl:role",
+    "fetchResult": "fsl:fetchResult",
+    "collationResult": "fsl:collationResult",
+    "itemsTotal": {"@id": "fsl:itemsTotal", "@type": "xsd:integer"},
+    "itemsChecked": {"@id": "fsl:itemsChecked", "@type": "xsd:integer"},
+    "itemsMatched": {"@id": "fsl:itemsMatched", "@type": "xsd:integer"},
+    "itemsWrong": {"@id": "fsl:itemsWrong", "@type": "xsd:integer"},
+    "itemsUnsure": {"@id": "fsl:itemsUnsure", "@type": "xsd:integer"},
+    "inquiryTo": "fsl:inquiryTo",
+    "inquiryMethod": "fsl:inquiryMethod",
+    "answerState": "fsl:answerState",
 }
 
 

@@ -30,3 +30,16 @@ id,schema:identifier,GIF 行政サービス・制度,制度番号,,近い,GIF �
 確認日,fsl:dateChecked,GIF 行政サービス・制度,最終更新日,,近い,GIF は制度の情報を最後に更新した日。このデータは公式ページで確かめた日
 確認方法,fsl:checkMethod,,,,対応なし,機械の読み取り・人の再確認・問い合わせなど、だれがどう確かめたか
 (1件の型),fsl:Record,CPSV-AP 3.2.0,Public Service,http://purl.org/vocab/cpsv#PublicService,近い,あり・予定の行は schema:GovernmentService にしている。CPSV-AP の公開サービスは説明(dct:description)と所管の組織が必須で、このデータは持たないので、その型は付けない
+(確かめた記録),fsl:checkActivity,PROV-O,was influenced by,http://www.w3.org/ns/prov#wasInfluencedBy,近い,記録と、その記録を確かめた活動(prov:Activity)をつなぐ。取りに行った URL は prov:used、取得した日時は prov:endedAtTime で持つ
+(人の再確認・問い合わせの日),fsl:activityDate,PROV-O,started at time,http://www.w3.org/ns/prov#startedAtTime,近い,PROV-O は日時(xsd:dateTime)。このデータは日付だけ(xsd:date)
+(取り直し),fsl:role,,,,対応なし,取り直したページの役割(出典 / 出典2 / 探した場所)
+(取り直し),fsl:fetchResult,,,,対応なし,取得できたか、できなければ理由
+(取り直し),fsl:collationResult,,,,対応なし,取り直したページとの照合の結果
+(人の再確認),fsl:itemsTotal,,,,対応なし,見比べる項目の数
+(人の再確認),fsl:itemsChecked,,,,対応なし,人が見比べた項目の数
+(人の再確認),fsl:itemsMatched,,,,対応なし,合っていた項目の数
+(人の再確認),fsl:itemsWrong,,,,対応なし,違っていた項目の数
+(人の再確認),fsl:itemsUnsure,,,,対応なし,分からなかった項目の数
+(問い合わせ),fsl:inquiryTo,,,,対応なし,問い合わせた担当課(課の名前だけ)
+(問い合わせ),fsl:inquiryMethod,,,,対応なし,メール・フォーム・電話など
+(問い合わせ),fsl:answerState,,,,対応なし,回答があったか(回答の文面は載せない)
