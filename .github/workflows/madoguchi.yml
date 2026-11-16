@@ -1,0 +1,21 @@
+# 市町の問い合わせの窓口(担当課、メールフォーム)を、公式ページの「お問い合わせ」欄から拾う。
+# 手で起動したときだけ回る。結果は実行の記録に出すだけで、何も書き換えない。
+# robots.txt に従い、1ページごとに間隔をあける。ページの本文は保存しない。
+name: madoguchi
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: shougou  # ほかの取得と同時に取りに行かない
+  cancel-in-progress: false
+jobs:
+  madoguchi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python scripts/madoguchi.py
