@@ -1373,7 +1373,17 @@
    "basisPhrase": "月ごとの上限額5,000円",
    "guidelineState": "取得済み",
    "guideline": "https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf",
-   "note": "要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請は年2回(10月末・3月末)。制定日と告示番号は確かめられていない"
+   "note": "要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請は年2回(10月末・3月末)。制定日と告示番号は確かめられていない",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-fs-hojo#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf",
+    "sourceName": "古賀市フリースクール等利用児童生徒支援補助金交付要綱(PDF)",
+    "basisPhrase": "フリースクール等利用児童生徒支援補助金",
+    "supports": [
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-online",
@@ -2068,7 +2078,7 @@
    "basisPhrase": "原田小学校ハピネス分校",
    "guidelineState": "取得済み",
    "guideline": "https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html",
-   "note": "文部科学省の一覧では、2校とも指定年は令和7年。入学等の手続きは町の取扱要綱にある(一覧: mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm)",
+   "note": "文部科学省の一覧では、どちらの分校も指定年は令和7年。入学等の手続きは町の取扱要綱にある",
    "additionalSource": {
     "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-tayouka#source2",
     "@type": "fsl:AdditionalSource",
