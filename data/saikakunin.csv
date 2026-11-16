@@ -28,7 +28,8 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40130-tayouka,福岡市,備考,入学の条件を書いた生徒募集案内の PDF は、2026-11-17 に人も機械も開けなかった(HTTP 404),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
 40202-tayouka,大牟田市,種類と状態,学びの多様化学校 / あり,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
 40202-tayouka,大牟田市,制度名,大牟田市立宅峰中学校 ほしぞら分校,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
-40202-tayouka,大牟田市,備考,文部科学省の一覧による。一覧での指定年は令和6年。対象や開校の時期は、市の資料でまだ確かめていない,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
+40202-tayouka,大牟田市,開始,令和6年4月から,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
+40202-tayouka,大牟田市,備考,文部科学省の一覧による。分校は夜間中学で、不登校の生徒が夜間中学の生徒と一緒に学ぶ形と一覧に説明がある。一覧での指定年は令和6年。対象は市の資料でまだ確かめていない,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,,,,
 40203-fs-hojo,久留米市,種類と状態,フリースクール等の利用料の補助(保護者向け) / あり,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,,合っている,,2026-11-16
 40203-fs-hojo,久留米市,制度名,フリースクール等利用児童生徒支援事業,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,,合っている,,2026-11-16
 40203-fs-hojo,久留米市,対象,保護者等と児童生徒が市内に住所を有すること。申請日の前1年におおむね30日以上登校していないこと等,https://www.city.kurume.fukuoka.jp/1060manabi/2020kyouiku/3170futoukou/2025-0630-1713-166.html,,合っている,,2026-11-16
@@ -73,10 +74,11 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40219-shusseki,大野城市,制度名,出席扱いしているフリースクール等一覧,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,橋本がページを開き、一覧(令和8年1月末現在)があることを確かめた,2026-11-15
 40219-shusseki,大野城市,対象,大野城市立小中学校の児童生徒,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-16
 40219-shusseki,大野城市,備考,令和8年1月末現在の一覧; 施設名・種別・所在地を公表,https://www.city.onojo.fukuoka.jp/s075/020/010/080/hutoukou.html,,合っている,,2026-11-16
-40219-tayouka,大野城市,種類と状態,学びの多様化学校 / あり,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,合っている,,2026-11-16
-40219-tayouka,大野城市,制度名,大野城市立みずほ中学校,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,合っている,,2026-11-16
-40219-tayouka,大野城市,対象,市内在住の中学1年生〜中学3年生,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,合っている,,2026-11-16
-40219-tayouka,大野城市,備考,大野中学校の分校。定員は各学年10名程度。文部科学省の設置者一覧での指定年は令和8年。開校の時期は出典のページに無い,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm,合っている,,2026-11-16
+40219-tayouka,大野城市,種類と状態,学びの多様化学校 / あり,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,,2026-11-16
+40219-tayouka,大野城市,制度名,大野城市立みずほ中学校,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,,2026-11-16
+40219-tayouka,大野城市,対象,市内在住の中学1年生〜中学3年生,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,合っている,,2026-11-16
+40219-tayouka,大野城市,開始,令和8年4月1日設置,https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,,,
+40219-tayouka,大野城市,備考,大野中学校の分校として設置(県の設置廃止等一覧)。定員は各学年10名程度(市のページ),https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html,https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf,,値を直したので見直しが要る。直す前の値は、人が「合っている」と判定(2026-11-16),
 40220-shien-center,宗像市,種類と状態,教育支援センター(校外) / あり,https://www.city.munakata.lg.jp/kiji0033002/index.html,,,,
 40220-shien-center,宗像市,制度名,教育サポート室エール,https://www.city.munakata.lg.jp/kiji0033002/index.html,,,,
 40220-shien-center,宗像市,対象,何らかの理由で登校できない小・中・義務教育学校の児童生徒,https://www.city.munakata.lg.jp/kiji0033002/index.html,,,,
@@ -121,9 +123,10 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40341-shien-center,宇美町,制度名,くすのき教室(宇美町教育支援センター),https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,合っている,,2026-11-17
 40341-shien-center,宇美町,対象,対人関係や心理的・情緒的な理由で登校できない児童生徒,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,合っている,,2026-11-17
 40341-shien-center,宇美町,備考,平成12年6月20日教育委員会要綱第1号の2。最終改正は令和7年3月25日。しーず・うみ内。生活支援、学習支援、教育相談を行う。費用の定めは要綱に無い,https://public1.legalcrud.com/umi_town/reiki/act/110000280.html,,合っている,,2026-11-17
-40341-tayouka,宇美町,種類と状態,学びの多様化学校 / あり,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
-40341-tayouka,宇美町,制度名,宇美町立原田小学校ハピネス分校・宇美南中学校ハピネス分校,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
-40341-tayouka,宇美町,備考,文部科学省の一覧では、どちらの分校も指定年は令和7年。入学等の手続きは町の取扱要綱にある,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
+40341-tayouka,宇美町,種類と状態,学びの多様化学校 / あり,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.pref.fukuoka.lg.jp/uploaded/attachment/271157.pdf | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
+40341-tayouka,宇美町,制度名,宇美町立原田小学校ハピネス分校・宇美南中学校ハピネス分校,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.pref.fukuoka.lg.jp/uploaded/attachment/271157.pdf | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
+40341-tayouka,宇美町,開始,令和7年4月18日開校,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.pref.fukuoka.lg.jp/uploaded/attachment/271157.pdf | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
+40341-tayouka,宇美町,備考,入学等の手続きは町の取扱要綱にある。開校日は、県のサイトにある学校の概要の資料による,https://www.town.umi.lg.jp/site/manabinotayouka/,https://www.pref.fukuoka.lg.jp/uploaded/attachment/271157.pdf | https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html,,,
 40342-shien-center,篠栗町,種類と状態,教育支援センター(校外) / あり,https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,,合っている,例規集のサイトの robots.txt で機械では取得しないため、人がブラウザで見比べた,2026-11-17
 40342-shien-center,篠栗町,制度名,篠栗町教育支援センター(適応指導教室),https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,,合っている,,2026-11-17
 40342-shien-center,篠栗町,対象,登校できない状態の児童生徒など,https://www1.g-reiki.net/town.sasaguri/reiki_honbun/q028RG00000857.html,,合っている,,2026-11-17

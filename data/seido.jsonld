@@ -364,13 +364,14 @@
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-ari",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
    "name": "大牟田市立宅峰中学校 ほしぞら分校",
+   "startText": "令和6年4月から",
    "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
    "basisPhrase": "大牟田市立宅峰中学校",
-   "note": "文部科学省の一覧による。一覧での指定年は令和6年。対象や開校の時期は、市の資料でまだ確かめていない"
+   "note": "文部科学省の一覧による。分校は夜間中学で、不登校の生徒が夜間中学の生徒と一緒に学ぶ形と一覧に説明がある。一覧での指定年は令和6年。対象は市の資料でまだ確かめていない"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40203-fs-hojo",
@@ -1077,21 +1078,23 @@
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-ari",
-   "dateChecked": "2026-11-16",
-   "checkMethod": "fsl:method-hito",
+   "dateChecked": "2026-11-17",
+   "checkMethod": "fsl:method-kikai",
    "name": "大野城市立みずほ中学校",
    "eligibility": "市内在住の中学1年生〜中学3年生",
+   "startText": "令和8年4月1日設置",
    "source": "https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html",
    "sourceName": "大野城市「大野城市立みずほ中学校 転入学者希望者説明会・見学会」",
    "basisPhrase": "大野城市立みずほ中学校(学びの多様化学校)",
-   "note": "大野中学校の分校。定員は各学年10名程度。文部科学省の設置者一覧での指定年は令和8年。開校の時期は出典のページに無い",
+   "note": "大野中学校の分校として設置(県の設置廃止等一覧)。定員は各学年10名程度(市のページ)",
    "additionalSource": {
     "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-tayouka#source2",
     "@type": "fsl:AdditionalSource",
-    "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
-    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
-    "basisPhrase": "大野城市立みずほ中学校",
+    "source": "https://www.pref.fukuoka.lg.jp/uploaded/life/812181_62851169_misc.pdf",
+    "sourceName": "福岡県「幼稚園・小・中・高等学校等設置廃止等一覧(令和8年4月)」",
+    "basisPhrase": "大野中学校分校として設置",
     "supports": [
+     "fsl:startText",
      "fsl:note"
     ]
    }
@@ -2092,23 +2095,24 @@
    },
    "kind": "fsl:kind-tayouka",
    "status": "fsl:status-ari",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
    "name": "宇美町立原田小学校ハピネス分校・宇美南中学校ハピネス分校",
+   "startText": "令和7年4月18日開校",
    "source": "https://www.town.umi.lg.jp/site/manabinotayouka/",
    "sourceName": "宇美町「学びの多様化学校」",
    "basisPhrase": "原田小学校ハピネス分校",
    "guidelineState": "取得済み",
    "guideline": "https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html",
-   "note": "文部科学省の一覧では、どちらの分校も指定年は令和7年。入学等の手続きは町の取扱要綱にある",
+   "note": "入学等の手続きは町の取扱要綱にある。開校日は、県のサイトにある学校の概要の資料による",
    "additionalSource": {
     "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-tayouka#source2",
     "@type": "fsl:AdditionalSource",
-    "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
-    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
-    "basisPhrase": "宇美町立原田小学校",
+    "source": "https://www.pref.fukuoka.lg.jp/uploaded/attachment/271157.pdf",
+    "sourceName": "福岡県のサイトにある学校の概要の資料(宇美町立学びの多様化学校ハピネス分校)",
+    "basisPhrase": "令和7年4月18日開校",
     "supports": [
-     "fsl:note"
+     "fsl:startText"
     ]
    }
   },
