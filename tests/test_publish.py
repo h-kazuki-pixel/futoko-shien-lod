@@ -390,3 +390,31 @@ def test_published_files_have_activities_but_repo_jsonld_does_not(site):
     assert any("checkActivity" in n for n in pub["@graph"])
     repo = json.loads(open("data/seido.jsonld", encoding="utf-8").read())
     assert not any("checkActivity" in n for n in repo["@graph"])
+
+
+# ---- 隣接(DBpedia Japanese、点7) ----
+
+def test_neighbors_use_only_pairs_written_on_both_sides():
+    rows = schema.read_csv("data/rinsetsu.csv")
+    both = {(r["市町村コード"], r["隣接する市町村コード"]) for r in rows if r["判定"] == "県内(両方にある)"}
+    assert both and all((b, a) in both for a, b in both)
+    recs_ = publish.load_records("data")
+    assert {r["判定"] for r in recs_["rinsetsu"]} == {"県内(両方にある)"}
+    # 大野城市の隣に太宰府市がある(「府」を県名と取り違えない)
+    assert "40221" in publish.neighbors_of("40219", recs_)
+
+
+def test_neighbor_gaps_only_unknown_cells_with_ari_next_door(site, rows):
+    recs_ = publish.load_records("data")
+    areas = schema.read_csv("data/shichoson.csv")
+    for r, found in publish.neighbor_gaps(rows, areas, recs_):
+        assert r["状態"] == "確認できず"
+        assert found and all(o["状態"] in ("あり", "予定") and publish.kind_slug(o) == publish.kind_slug(r) for o in found)
+        assert all(o["市町村コード"] in publish.neighbors_of(r["市町村コード"], recs_) for o in found)
+    assert (site / "rinsetsu.csv").exists()
+    assert "隣り合う市町と並べる" in (site / "kumiawase" / "index.html").read_text(encoding="utf-8")
+
+
+def test_rinsetsu_is_not_mixed_into_the_rdf(site):
+    # DBpedia Japanese の値(CC BY-SA)は、このデータの RDF(CC BY)に入れない
+    assert "隣接" not in (site / "seido.ttl").read_text(encoding="utf-8")

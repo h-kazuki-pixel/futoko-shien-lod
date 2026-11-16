@@ -15,6 +15,7 @@ on:
       - data/kumiawase/jidou_seito.csv
       - data/dbpedia.csv
       - data/goi_taiou.csv
+      - data/rinsetsu.csv
       - data/goi_taiou_shurui.csv
       - futoko_lod/publish.py
       - futoko_lod/build.py

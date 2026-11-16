@@ -506,7 +506,31 @@ def ichiran_html(rows: list[dict[str, str]]) -> str:
     return page(f"全件の一覧 | {TITLE}", body, "../")
 
 
-def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]], records: dict | None = None) -> str:
+RINSETSU_NOTE = ("隣り合う市町村は、DBpedia Japanese(CC BY-SA 3.0。元は2022年12月の Wikipedia 日本語版)の「隣接自治体」から取った。"
+                 "両方の市町村が互いを隣と書いている組だけを使っている。隣の市町村の制度を、その住民でない人も使えるという意味ではない。")
+
+
+def neighbors_of(code: str, records: dict) -> list[str]:
+    """隣り合う市町村のコード(両方にある組だけ)。"""
+    return sorted({r["隣接する市町村コード"] for r in records.get("rinsetsu", []) if r["市町村コード"] == code})
+
+
+def neighbor_lines(row: dict[str, str], records: dict, by_id: dict[str, dict[str, str]]) -> list[str]:
+    """隣の市町村の、同じ種類の行。データに無ければ「範囲外」。"""
+    slug = kind_slug(row)
+    names = {r["隣接する市町村コード"]: r["隣接する市町村"] for r in records.get("rinsetsu", [])}
+    out = []
+    for c in neighbors_of(row["市町村コード"], records):
+        other = by_id.get(f"{c}-{slug}")
+        if other:
+            out.append(f'<li><a href="../{e(other["id"])}/">{e(other["市町村"])}</a> {badge(other["状態"])}</li>')
+        else:
+            out.append(f'<li>{e(names.get(c, c))} <span style="color:var(--sub)">(この種類は、このデータの範囲外)</span></li>')
+    return out
+
+
+def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]], records: dict | None = None,
+                by_id: dict[str, dict[str, str]] | None = None) -> str:
     def v(key: str) -> str:
         return (row.get(key) or "").strip()
 
@@ -570,6 +594,10 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
         f'<li><a href="../{e(s["id"])}/">{e(KIND_SHORT[kind_slug(s)])}</a> {badge(s["状態"])}</li>'
         for s in sorted(siblings, key=lambda s: list(schema.KINDS).index(kind_slug(s))) if s["id"] != row["id"])
     sib_html = f'<h2>{e(v("市町村"))}のほかの種類</h2>\n<ul>{sib}</ul>\n' if sib else ""
+    nb = neighbor_lines(row, records or {}, by_id or {})
+    if nb:
+        sib_html += (f'<h2>隣の市町村の「{e(KIND_SHORT[kind_slug(row)])}」</h2>\n<ul>{"".join(nb)}</ul>\n'
+                     f'<p style="color:var(--sub)">{e(RINSETSU_NOTE)}</p>\n')
     uri = node["@id"]
     jsonld = json.dumps({"@context": build.CONTEXT, **node}, ensure_ascii=False, indent=1).replace("</", "<\\/")
     head = (f'<link rel="alternate" type="text/turtle" href="../{e(row["id"])}.ttl">\n'
@@ -633,6 +661,7 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <li><strong>人が読む。</strong><a href="../">市町×種類の表</a>から、1件のページへ。出典のページへのリンク、確認日、確かめ方が載っている。</li>
 <li><strong>プログラムで読む。</strong><a href="../seido.csv">CSV</a>、<a href="../seido.jsonld">JSON-LD</a>、<a href="../seido.ttl">Turtle</a>。1件ごとに URI があり、<code>.ttl</code> か <code>.jsonld</code> を付けるとその1件が取れる。ほかのサイトの上のプログラムからも読める。</li>
 <li><strong>つなぐ。</strong>市町村は、e-Stat 統計LOD の標準地域コードの URI で持つ。統計LOD の児童数・生徒数と実際に並べた例が<a href="../kumiawase/">組み合わせの例</a>にある。DBpedia Japanese の市町村の資源にも、<code>schema:sameAs</code> でつないでいる(地方公共団体コードが合うことを、1件ずつ引いて確かめたものだけ)。出典は <code>dct:source</code> で公式ページにつながる。</li>
+<li><strong>隣と並べる。</strong>1件ごとのページに、隣の市町村の同じ種類の状態を出している。隣接は DBpedia Japanese の「隣接自治体」から取った(この部分だけ CC BY-SA 3.0。<a href="../kumiawase/#rinsetsu">組み合わせの例</a>)。</li>
 <li><strong>数える。</strong>{len(rows)}件すべてが「確かめた記録」(<code>fsl:Record</code>)。制度があると確かめた記録だけが、schema.org の <code>GovernmentService</code> でもある。語彙の説明は <a href="../ns">ns</a>。</li>
 </ul>
 <p>データは CC BY 4.0、プログラムは MIT ライセンス。作り方と検査の決まりは、<a href="{REPO}">リポジトリ</a>にある。同じ手順で、ほかの県にも広げられる。</p>
@@ -651,7 +680,23 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
     return page(f"この作品について | {TITLE}", body, "../")
 
 
-def kumiawase_html(rows: list[dict[str, str]], areas: list[dict[str, str]], pupils: list[dict[str, str]]) -> str:
+def neighbor_gaps(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict) -> list[tuple[dict[str, str], list[dict[str, str]]]]:
+    """都市圏の17市町で「確認できず」のマスのうち、隣の市町村で同じ種類が「あり・予定」のもの。"""
+    by_id = {r["id"]: r for r in rows}
+    metro = {a["市町村コード"] for a in areas if a["福岡都市圏"] == "○"}
+    out = []
+    for r in rows:
+        if r["市町村コード"] not in metro or r["状態"] != "確認できず" or kind_slug(r) not in MATRIX_KINDS:
+            continue
+        found = [by_id[i] for c in neighbors_of(r["市町村コード"], records)
+                 if (i := f"{c}-{kind_slug(r)}") in by_id and by_id[i]["状態"] in ("あり", "予定")]
+        if found:
+            out.append((r, found))
+    return out
+
+
+def kumiawase_html(rows: list[dict[str, str]], areas: list[dict[str, str]], pupils: list[dict[str, str]],
+                   records: dict | None = None) -> str:
     """組み合わせの例。このデータと、e-Stat 統計LOD の児童数・生徒数を、標準地域コードの URI で並べる。"""
     from . import kumiawase as km
 
@@ -700,6 +745,7 @@ def kumiawase_html(rows: list[dict[str, str]], areas: list[dict[str, str]], pupi
 {f"<ul>{notes_html}</ul>" if notes else ""}
 <p>児童数・生徒数の出典: <a href="https://data.e-stat.go.jp/lodw/" rel="noopener">e-Stat 統計LOD</a>(総務省統計局・独立行政法人統計センター)の「社会・人口統計体系」を、{e(fetched)} に引いて、表に直したもの。統計LOD のサイトは、内容を CC BY 4.0 で提供するとしている。引いた結果は <a href="../kumiawase.csv">CSV</a> にある。</p>
 
+{neighbor_section(rows, areas, records or {})}
 <h2>つなぎ方</h2>
 <ol>
 <li>このデータの1件は、<code>schema:areaServed</code> で <code>{e(sample)}</code> のような URI を指す(時期を持たないコード)。問い合わせは、公開している JSON-LD からこの URI を集めて始める。</li>
@@ -721,6 +767,34 @@ def kumiawase_html(rows: list[dict[str, str]], areas: list[dict[str, str]], pupi
 </ul>
 """
     return page(f"組み合わせの例 | {TITLE}", body, "../")
+
+
+def neighbor_section(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict) -> str:
+    """組み合わせの例の2つめ: DBpedia Japanese の隣接と並べる(点7)。"""
+    if not records.get("rinsetsu"):
+        return ""
+    gaps = neighbor_gaps(rows, areas, records)
+    metro = {a["市町村コード"] for a in areas if a["福岡都市圏"] == "○"}
+    unknown = sum(r["市町村コード"] in metro and r["状態"] == "確認できず" and kind_slug(r) in MATRIX_KINDS for r in rows)
+    pairs = len({tuple(sorted((r["市町村コード"], r["隣接する市町村コード"]))) for r in records["rinsetsu"]})
+    trs = "\n".join(
+        f'<tr><th scope="row"><a href="../id/{e(r["id"])}/">{e(r["市町村"])}</a></th><td>{e(KIND_SHORT[kind_slug(r)])}</td>'
+        f'<td>{"、".join(f"<a href=\"../id/{e(o["id"])}/\">{e(o["市町村"])}</a>" for o in found)}</td></tr>' for r, found in gaps)
+    return f"""<h2 id="rinsetsu">隣り合う市町と並べる(DBpedia Japanese)</h2>
+<p>DBpedia Japanese の市町村の資源が持つ「隣接自治体」を、このデータの市町村コードに直して、隣の市町村の同じ種類の制度と並べた。福岡県内で、両方の市町村が互いを隣と書いている組は {pairs} 組。</p>
+<p>都市圏の17市町で「確認できず」の {unknown} マスのうち、<strong>隣の市町村では同じ種類が「あり」か「予定」のマスは {len(gaps)}</strong>。隣で同じ種類の制度が公表されているマスから先に、市町のサイトを探し直し、問い合わせの返事を確かめる。その順番の目安に使う。</p>
+<div class="scroll"><table>
+<thead><tr><th scope="col">市町(確認できず)</th><th scope="col">種類</th><th scope="col">隣で「あり・予定」の市町村</th></tr></thead>
+<tbody>
+{trs}
+</tbody></table></div>
+<p style="color:var(--sub)">{e(RINSETSU_NOTE)} 引いた結果は <a href="../rinsetsu.csv">rinsetsu.csv</a>(この表だけ CC BY-SA 3.0)。</p>
+<ul>
+<li>隣接の値は、2022年12月の Wikipedia が元。宗像市や飯塚市などで、合併前の町の名前(福間町、穂波町など)が残っていた。こうした名前は台帳と合わないので使っていない(合わなかった語は rinsetsu.csv に「照合できず」として残している)。</li>
+<li>はじめは、片方の市町村にしか書かれていない組が9つあった。原因は、こちらのプログラムが「太宰府市」の「府」を県名と取り違えていたことだった。直した後は0。</li>
+<li>隣で「あり」だからといって、こちらにもあるとは言えない。この表は、探す順番の目安にとどめる。</li>
+</ul>
+"""
 
 
 def taiou_html() -> str:
@@ -794,6 +868,9 @@ def load_records(base: str | Path = "data") -> dict[str, list[dict[str, str]]]:
         "torinaoshi": schema.read_csv(base / "torinaoshi" / "saishin.csv") if (base / "torinaoshi" / "saishin.csv").exists() else [],
         "saikakunin": schema.read_csv(base / "saikakunin.csv") if (base / "saikakunin.csv").exists() else [],
         "toiawase": schema.read_csv(base / "toiawase.csv") if (base / "toiawase.csv").exists() else [],
+        # 隣接は DBpedia Japanese(CC BY-SA 3.0)から。両方の市町村が互いを書いている組だけを使う(点7・8)
+        "rinsetsu": [r for r in schema.read_csv(base / "rinsetsu.csv") if r["判定"] == "県内(両方にある)"]
+        if (base / "rinsetsu.csv").exists() else [],
     }
 
 
@@ -931,24 +1008,25 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
     pupils_path = Path(csv_path).parent / "kumiawase" / "jidou_seito.csv"
     if pupils_path.exists():
         (out / "kumiawase").mkdir()
-        put("kumiawase/index.html", kumiawase_html(rows, areas, schema.read_csv(pupils_path)))
+        put("kumiawase/index.html", kumiawase_html(rows, areas, schema.read_csv(pupils_path), records))
         shutil.copyfile(pupils_path, out / "kumiawase.csv")
     put("ns.html", ns_html())
     put("ns.ttl", vocab_turtle())
-    for f in (TAIOU_PATH, TAIOU_SHURUI_PATH):
+    for f in (TAIOU_PATH, TAIOU_SHURUI_PATH, str(Path(csv_path).parent / "rinsetsu.csv")):
         if Path(f).exists():
             shutil.copyfile(f, out / Path(f).name)
     put("dataset.ttl", dataset_turtle(rows))
     shutil.copyfile(csv_path, out / "seido.csv")
     put("seido.jsonld", json.dumps({"@context": build.CONTEXT, "@graph": nodes}, ensure_ascii=False, indent=1) + "\n")
     put("seido.ttl", nodes_turtle(nodes))
+    by_id = {r["id"]: r for r in rows}
     by_area: dict[str, list[dict[str, str]]] = collections.defaultdict(list)
     for r in rows:
         by_area[r["市町村コード"]].append(r)
     for row, node in zip(rows, nodes):
         rid = row["id"]
         (out / "id" / rid).mkdir()
-        put(f"id/{rid}/index.html", record_html(row, node, by_area[row["市町村コード"]], records))
+        put(f"id/{rid}/index.html", record_html(row, node, by_area[row["市町村コード"]], records, by_id))
         put(f"id/{rid}.ttl", nodes_turtle([node]))
         put(f"id/{rid}.jsonld", json.dumps({"@context": build.CONTEXT, **node}, ensure_ascii=False, indent=1) + "\n")
     return {"件数": len(rows), "ファイル": sum(1 for p in out.rglob("*") if p.is_file())}
