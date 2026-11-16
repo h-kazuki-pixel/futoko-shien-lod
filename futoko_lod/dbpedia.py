@@ -140,8 +140,14 @@ def neighbors(write: bool) -> int:
     out.sort(key=lambda x: (x["市町村コード"], x["隣接する市町村コード"] or "9", x["隣接する市町村"]))
     inner = {(x["市町村コード"], x["隣接する市町村コード"]) for x in out if x["判定"] == "県内"}
     asym = sorted((a, b) for a, b in inner if (b, a) not in inner)
+    # 使うのは、両方の市町村が互いを隣と書いている組だけ。片方だけの組は、記録には残すが使わない
+    for x in out:
+        if x["判定"] == "県内":
+            pair = (x["市町村コード"], x["隣接する市町村コード"])
+            x["判定"] = "県内(両方にある)" if pair[::-1] in inner else "県内(片方だけ)"
     missing = sorted(set(areas) - {x["市町村コード"] for x in out})
-    print(f"\n県内の組 {len(inner)}、県外 {sum(x['判定'] == '県外' for x in out)}、照合できず {sum(x['判定'] == '照合できず' for x in out)}")
+    both = sum(x["判定"] == "県内(両方にある)" for x in out)
+    print(f"\n県内の組 {len(inner)}(両方にある {both}、使う組は {both // 2})、県外 {sum(x['判定'] == '県外' for x in out)}、照合できず {sum(x['判定'] == '照合できず' for x in out)}")
     print(f"隣接自治体が返らなかった市町村 {len(missing)}: {' '.join(areas[c] for c in missing)}")
     print(f"片方にしか無い組(A の隣に B があるが、B の隣に A が無い) {len(asym)}: " + " ".join(f"{areas[a]}→{areas[b]}" for a, b in asym))
     for x in out:
