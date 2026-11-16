@@ -1,0 +1,42 @@
+name: 訂正・情報の提供
+description: データの誤り、制度が変わった所、まだ載っていない制度を知らせる
+title: "[訂正] "
+labels: ["訂正"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        知らせてくれてありがとう。直すときは、市町村・県・国の公式サイトにある出典で確かめてから直す。
+        個人の体験、施設の評価、お子さんや保護者の個人の情報は書かないでほしい(載せられない)。
+  - type: input
+    id: shichoson
+    attributes:
+      label: 市町村
+      placeholder: 例: 春日市
+    validations:
+      required: true
+  - type: dropdown
+    id: shurui
+    attributes:
+      label: 制度の種類
+      options:
+        - フリースクール等の利用料の補助(保護者向け)
+        - 教育支援センター(校外)
+        - 学びの多様化学校
+        - オンラインでの公的な支援
+        - 出席扱いの要綱・施設一覧の公表
+        - そのほか・分からない
+    validations:
+      required: true
+  - type: textarea
+    id: naiyou
+    attributes:
+      label: 何が違うか、何を足すとよいか
+      description: 1件ごとのページの URL があれば、それも
+    validations:
+      required: true
+  - type: input
+    id: shutten
+    attributes:
+      label: 出典の URL(公式サイト)
+      description: 分かれば。無くてもかまわない(こちらで探す)

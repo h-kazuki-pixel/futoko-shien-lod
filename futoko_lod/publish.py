@@ -354,7 +354,7 @@ def page(title: str, body: str, root: str, head: str = "") -> str:
 </main>
 <footer>
 <p>データは <a href="{LICENSE}">CC BY 4.0</a>。制度は変わる。使う前に、各行の出典と確認日を確かめてほしい。申請できるかどうかは、市町村の窓口で確かめてほしい。</p>
-<p>誤りや、制度が変わった所を見つけたら、<a href="{REPO}/issues">GitHub の Issue</a> で知らせてほしい。<a href="{REPO}">リポジトリ</a></p>
+<p>誤りや、制度が変わった所を見つけたら、<a href="{REPO}/issues/new?template=teisei.yml">訂正の Issue</a> で知らせてほしい。使ったときは、<a href="{REPO}/issues/new?template=tsukaimashita.yml">「使いました」の Issue</a> で教えてもらえると、どこを深く調べるかを決められる。<a href="{REPO}">リポジトリ</a></p>
 </footer>
 </body>
 </html>

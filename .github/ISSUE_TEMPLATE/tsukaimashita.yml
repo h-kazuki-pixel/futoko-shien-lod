@@ -1,0 +1,36 @@
+name: 使いました
+description: このデータを使ったことを知らせる(調べもの、記事、授業、作品、相談の場など)
+title: "[使いました] "
+labels: ["使いました"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        使ってくれてありがとう。どう使われたかが分かると、どこを深く調べるかを決められる。
+        知らせてもらった使い方は、許してもらえる範囲で、作品のページの「使われた例」に載せることがある。
+        お子さんや保護者の個人の情報、施設の評価は書かないでほしい。
+  - type: textarea
+    id: tsukaikata
+    attributes:
+      label: 何に使ったか
+      placeholder: 例: 隣の市と制度を見比べる資料に使った / 作品のデータとして読み込んだ
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: 使った先の URL(公開しているものがあれば)
+  - type: textarea
+    id: tarinai
+    attributes:
+      label: 足りなかったこと、使いにくかったこと
+  - type: dropdown
+    id: keisai
+    attributes:
+      label: 作品のページの「使われた例」に載せてよいか
+      options:
+        - 載せてよい(URL も)
+        - 載せてよい(URL は載せない)
+        - 載せないでほしい
+    validations:
+      required: true
