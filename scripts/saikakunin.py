@@ -52,7 +52,7 @@ def make(seido: list[dict[str, str]], old: list[dict[str, str]]) -> list[dict[st
         if r["状態"] not in ("あり", "予定"):
             continue
         second = r.get("出典URL_2", "") or HOJO.get(r["id"], "")
-        hojo = " | ".join(x for x in (second, r["要綱URL"]) if x)
+        hojo = " | ".join(dict.fromkeys(x for x in (second, r["要綱URL"]) if x))  # 同じ URL は1回だけ
         items = [("種類と状態", f"{r['制度の種類']} / {r['状態']}")]
         items += [(f, r[f]) for f in FIELDS if r[f]]
         for name, value in items:
