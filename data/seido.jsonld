@@ -1373,12 +1373,12 @@
    "basisPhrase": "月ごとの上限額5,000円",
    "guidelineState": "取得済み",
    "guideline": "https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf",
-   "note": "要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請の締め切りは10月末と3月末。制定日と告示番号は確かめられていない",
+   "note": "要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請の締め切りは10月末と3月末。制定は令和7年3月31日、教育委員会告示第2号",
    "additionalSource": {
     "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-fs-hojo#source2",
     "@type": "fsl:AdditionalSource",
-    "source": "https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf",
-    "sourceName": "古賀市フリースクール等利用児童生徒支援補助金交付要綱(PDF)",
+    "source": "https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_honbun/q025RG00001608.html",
+    "sourceName": "古賀市例規集「古賀市フリースクール等利用児童生徒支援補助金交付要綱」",
     "basisPhrase": "フリースクール等利用児童生徒支援補助金",
     "supports": [
      "fsl:note"
@@ -1400,11 +1400,13 @@
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "校内教育支援センターでオンライン指導を受けられるとの記載はある。自宅などから参加するオンラインの支援の記載は見つからなかった。無いことは確認していない",
+   "note": "校内教育支援センターでオンライン指導を受けられるとの記載はある。自宅などから参加するオンラインの支援の記載は見つからなかった。例規集の教育の分類(2026-11-17)にも該当する例規の名前は無かった。無いことは確認していない",
    "searchedAt": [
-    "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php"
+    "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php",
+    "https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_01.html",
+    "https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_02.html"
    ]
   },
   {
@@ -1456,11 +1458,13 @@
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "民間のフリースクール、自宅でのICT学習、児童センター、隣保館での学習を出席扱いにする仕組みがあるとの記載はある。要件は各学校に問い合わせる形で、要綱や施設一覧の公表は見つからなかった。無いことは確認していない",
+   "note": "民間のフリースクール、自宅でのICT学習、児童センター、隣保館での学習を出席扱いにする仕組みがあるとの記載はある。要件は各学校に問い合わせる形で、要綱や施設一覧の公表は見つからなかった。例規集の教育の分類にも無かった。無いことは確認していない",
    "searchedAt": [
-    "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php"
+    "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php",
+    "https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_01.html",
+    "https://www.city.koga.fukuoka.jp/cityhall/reiki/reiki_taikei/r_taikei_13_02.html"
    ]
   },
   {
@@ -2441,11 +2445,16 @@
    },
    "kind": "fsl:kind-fs-hojo",
    "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "note": "公式ページに記載が見つからなかった。例規集の教育の分類(2026-11-17)にも該当する例規の名前は無かった。無いことは確認していない",
    "searchedAt": [
-    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html"
+    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html"
    ]
   },
   {
@@ -2463,11 +2472,16 @@
    },
    "kind": "fsl:kind-online",
    "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "note": "公式ページに記載が見つからなかった。例規集の教育の分類(2026-11-17)にも該当する例規の名前は無かった。無いことは確認していない",
    "searchedAt": [
-    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html"
+    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html"
    ]
   },
   {
@@ -2485,11 +2499,16 @@
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "町の居場所支援事業「まつかぜ+ぷらす」の記載はあるが、教育支援センターとしての記載は見つからなかった。無いことは確認していない",
+   "note": "町の居場所支援事業「まつかぜ+ぷらす」の記載はあるが、教育支援センターとしての記載は見つからなかった。例規集の教育の分類(2026-11-17)にも該当する例規の名前は無かった。無いことは確認していない",
    "searchedAt": [
-    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html"
+    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html"
    ]
   },
   {
@@ -2507,11 +2526,16 @@
    },
    "kind": "fsl:kind-shusseki",
    "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "note": "公式ページに記載が見つからなかった。例規集の教育の分類(2026-11-17)にも該当する例規の名前は無かった。無いことは確認していない",
    "searchedAt": [
-    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html"
+    "https://www.town.shingu.fukuoka.jp/soshiki/kosodate/4/3_1/7016.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_02.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_10_03.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_01.html",
+    "https://www.town.shingu.fukuoka.jp/section/reiki_int/reiki_taikei/r_taikei_15_07_02.html"
    ]
   },
   {
