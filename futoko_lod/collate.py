@@ -132,18 +132,29 @@ def collate_absence(row: dict[str, str], page_text: str) -> dict:
     """「なし」の照合。出典が、設置校などを並べた公式の一覧であるときに使う。
 
     1. 根拠の箇所がページにある(狙った一覧のページであることの確認)
-    2. 「県名+市町村名」がページに出てこない
-    の両方がそろえば一致。一覧に載っていないことしか分からない点に注意する。
+    2. 市町村が管理する学校の印(「市町村名+立」「市町村名+教育委員会」)がページに無い
+    3. 「県名+市町村名」(設置場所)がページに出てこない。
+       ただし、根拠の箇所に市町村以外が設置する学校の名前(「県立」を含む)を挙げたときは、
+       その学校の分の1回だけ出てよい(例: 小郡市には県立高校のコースがある)
+    の3つがそろえば一致。一覧に載っていないことしか分からない点に注意する。
     """
     page_norm = normalize(page_text)
     basis = normalize(row.get("根拠の箇所", "") or "")
     literal_ok = bool(basis) and basis in page_norm
-    name = normalize(PREFECTURE + (row.get("市町村", "") or ""))
-    listed = name in page_norm
+    town = normalize(row.get("市町村", "") or "")
+    own = bool(town) and any(normalize(town + mark) in page_norm for mark in ("立", "教育委員会"))
+    place = normalize(PREFECTURE) + town
+    allowed = 1 if (literal_ok and "県立" in basis) else 0
+    place_count = page_norm.count(place)
+    problems = []
+    if own:
+        problems.append("一覧に市町村が管理する学校の印がある")
+    if place_count > allowed:
+        problems.append("一覧に市町村名がある")
     return {
         "id": row.get("id", ""),
         "根拠の箇所がページにある": literal_ok,
-        "ページに無い数字": ["一覧に市町村名がある"] if listed else [],
+        "ページに無い数字": problems,
         "ページに無い名前の部分": [],
-        "一致": literal_ok and not listed,
+        "一致": literal_ok and not problems,
     }

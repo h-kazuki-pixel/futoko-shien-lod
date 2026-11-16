@@ -152,3 +152,36 @@ def test_absence_fails_when_name_is_listed():
 def test_absence_fails_on_wrong_page():
     r = collate.collate_absence(row(市町村="べつの町", 根拠の箇所="設置者一覧"), "お探しのページは見つかりません")
     assert not r["一致"]
+
+
+LIST_PAGE2 = (
+    "<h1>みほん学校の設置者一覧</h1><table>"
+    "<tr><td>1</td><td>みほん市立あおぞら中学校</td><td>みほん市教育委員会</td><td>福岡県べつの市</td></tr>"
+    "<tr><td>2</td><td>福岡県立となり高等学校</td><td>福岡県教育委員会</td><td>福岡県となり市</td></tr>"
+    "</table>"
+)
+
+
+def test_absence_fails_on_own_school_even_without_place():
+    # 設置場所が別の市でも、学校名や管理機関に市町村名があれば「なし」にしない
+    text = fetch.html_to_text(LIST_PAGE2)
+    r = collate.collate_absence(row(市町村="みほん市", 根拠の箇所="設置者一覧"), text)
+    assert not r["一致"]
+    assert "一覧に市町村が管理する学校の印がある" in r["ページに無い数字"]
+
+
+def test_absence_with_prefectural_school_named_in_basis():
+    # 設置場所に名前が出ても、根拠の箇所に挙げた県立の学校の1回分だけなら通す
+    text = fetch.html_to_text(LIST_PAGE2)
+    assert not collate.collate_absence(row(市町村="となり市", 根拠の箇所="設置者一覧"), text)["一致"]
+    assert collate.collate_absence(row(市町村="となり市", 根拠の箇所="福岡県立となり高等学校"), text)["一致"]
+
+
+def test_absence_prefectural_basis_allows_only_one_place():
+    text = fetch.html_to_text(LIST_PAGE2 + "<p>福岡県となり市</p>")
+    assert not collate.collate_absence(row(市町村="となり市", 根拠の箇所="福岡県立となり高等学校"), text)["一致"]
+
+
+def test_absence_basis_without_prefectural_school_allows_none():
+    text = fetch.html_to_text(LIST_PAGE2)
+    assert not collate.collate_absence(row(市町村="となり市", 根拠の箇所="福岡県教育委員会"), text)["一致"]

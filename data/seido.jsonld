@@ -621,6 +621,29 @@
    "note": "一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
   },
   {
+   "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40216-tayouka",
+   "@type": [
+    "fsl:Record"
+   ],
+   "identifier": "40216-tayouka",
+   "areaServed": {
+    "@id": "http://data.e-stat.go.jp/lod/sac/C40216",
+    "@type": "schema:AdministrativeArea",
+    "name": "小郡市",
+    "identifier": "40216",
+    "sameAs": "http://ja.dbpedia.org/resource/小郡市"
+   },
+   "kind": "fsl:kind-tayouka",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-16",
+   "checkMethod": "fsl:method-kikai",
+   "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+   "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+   "basisPhrase": "福岡県立小郡高等学校",
+   "noneBasis": "文部科学省の設置者一覧に、小郡市が管理する学校(学校名の「小郡市立」、管理機関の「小郡市教育委員会」)が載っていない。設置場所が福岡県小郡市の学校は、県立の高校1校だけ(確認日の時点)",
+   "note": "一覧で設置場所が小郡市なのは、福岡県立小郡高等学校のコース(県の教育委員会が管理する高校)。このデータの対象(義務教育の段階、市町村の制度)の外なので数えない。一覧に載るのは指定された学校。設置の検討や予定は、この一覧からは分からない"
+  },
+  {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-fs-hojo",
    "@type": [
     "fsl:Record"
