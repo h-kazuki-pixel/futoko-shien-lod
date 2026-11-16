@@ -255,3 +255,19 @@ def test_note_numbers_are_reported_not_judged():
     r = row(備考="定員は各学年10名程度。指定年は令和8年")
     assert collate.note_tokens_missing(r, "定員は10名") == ["year:2026"]
     assert collate.note_tokens_missing(r, "定員は10名", "令和8年に指定") == []
+
+
+def test_fetch_run_fails_on_note_numbers_not_on_any_page(tmp_path, monkeypatch):
+    # 弱い所5: 備考の数字も、どのページにも無ければ不一致
+    r = {c: "" for c in schema.COLUMNS} | {
+        "id": "40999-shien-center", "市町村コード": "40999", "市町村": "みほん市", "制度の種類": schema.KINDS["shien-center"],
+        "状態": "あり", "制度名": "みほん教室", "出典URL": "https://www.city.mihon.lg.jp/a.html", "根拠の箇所": "みほん教室",
+        "備考": "定員は10名", "確認日": "2026-11-16", "確認方法": "機械の読み取り"}
+    p = tmp_path / "s.csv"
+    schema.write_csv(p, [r])
+    pages = {"https://www.city.mihon.lg.jp/a.html": "みほん教室 定員10名"}
+    monkeypatch.setattr(fetch, "fetch", lambda u: {"url": u, "結果": "取得", "text": pages[u]})
+    assert fetch.run(str(p), interval=0)[0]["判定"] == "一致"
+    pages["https://www.city.mihon.lg.jp/a.html"] = "みほん教室 定員20名"
+    out = fetch.run(str(p), interval=0)[0]
+    assert out["判定"] == "不一致" and out["備考の数字でページに無いもの"] == ["n:10名"]

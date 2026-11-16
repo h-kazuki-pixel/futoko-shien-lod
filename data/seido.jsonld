@@ -1373,7 +1373,7 @@
    "basisPhrase": "月ごとの上限額5,000円",
    "guidelineState": "取得済み",
    "guideline": "https://www.city.koga.fukuoka.jp/uploads/source/gakkokyoiku/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%AF%E3%83%BC%E3%83%AB%E7%AD%89%E5%88%A9%E7%94%A8%E5%85%90%E7%AB%A5%E7%94%9F%E5%BE%92%E6%94%AF%E6%8F%B4%E8%A3%9C%E5%8A%A9%E9%87%91%E4%BA%A4%E4%BB%98%E8%A6%81%E7%B6%B1%20(2).pdf",
-   "note": "要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請は年2回(10月末・3月末)。制定日と告示番号は確かめられていない",
+   "note": "要綱の附則では令和7年4月1日施行、令和11年3月31日限りで失効。上限は月額で、申請の締め切りは10月末と3月末。制定日と告示番号は確かめられていない",
    "additionalSource": {
     "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-fs-hojo#source2",
     "@type": "fsl:AdditionalSource",
@@ -1920,7 +1920,8 @@
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40231-shusseki",
    "@type": [
-    "fsl:Record"
+    "fsl:Record",
+    "schema:GovernmentService"
    ],
    "identifier": "40231-shusseki",
    "areaServed": {
@@ -1931,13 +1932,17 @@
     "sameAs": "http://ja.dbpedia.org/resource/那珂川市"
    },
    "kind": "fsl:kind-shusseki",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
+   "status": "fsl:status-ari",
+   "dateChecked": "2026-11-16",
    "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
-   "searchedAt": [
-    "https://www.city.nakagawa.lg.jp/site/nobinobi/hutoukou2024.html"
-   ]
+   "name": "那珂川市不登校児童生徒が民間施設において相談・指導を受けている場合等における指導要録上の出欠の取扱いに関する要綱",
+   "eligibility": "不登校の児童生徒(民間施設で相談・指導を受けている場合など)",
+   "source": "https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm",
+   "sourceName": "那珂川市例規集",
+   "basisPhrase": "指導要録上の出欠の取扱いに関する要綱",
+   "guidelineState": "取得済み",
+   "guideline": "https://www.city.nakagawa.lg.jp/reiki/act/content/content110000953.htm",
+   "note": "平成25年5月15日教委要綱第3号。最終改正は令和3年7月13日。第4条に出席扱いの要件。施設の一覧の公表は見つかっていない"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40231-tayouka",
