@@ -1185,13 +1185,14 @@
    "status": "fsl:status-kakunin-dekizu",
    "dateChecked": "2026-11-15",
    "checkMethod": "fsl:method-kikai",
-   "note": "市の不登校支援フローチャートに、民間施設等は一定の要件を満たせば出席扱いにでき学校が判断する、との記載はある。要綱や施設一覧の公表は見つからなかった。無いことは確認していない",
+   "note": "不登校支援フローチャートに、民間施設等は要件を満たせば学校の判断で出席扱いにできるとある。教育委員会の会議録(令和6年12月)に出席の取扱いの事務取扱要領の報告があるが、要領の本文の公表は見つからなかった。無いことは確認していない",
    "searchedAt": [
     "https://www.city.munakata.lg.jp/kiji0033003/index.html",
     "https://www.city.munakata.lg.jp/kiji0033002/index.html",
     "https://www.city.munakata.lg.jp/kiji0033001/index.html",
     "https://www.city.munakata.lg.jp/kiji0038920/index.html",
-    "https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf"
+    "https://www.city.munakata.lg.jp/kiji0038920/3_8920_17908_up_0o3blsal.pdf",
+    "https://www.city.munakata.lg.jp/kiji0033906/index.html"
    ]
   },
   {
