@@ -77,13 +77,13 @@ def pick(html: str, base: str) -> dict:
             item = (text[:40], href if href.startswith("mailto:") else urljoin(base, href))
             if item not in links:
                 links.append(item)
-    text = fetch.html_to_text(html)
-    lines = [x.strip() for x in text.splitlines() if x.strip()]
+    text = re.sub(r"\s+", " ", fetch.html_to_text(html))
     near = []
-    for i, line in enumerate(lines):
-        if re.search(r"問い?合わ?せ先?|問合せ", line) and len(line) < 40:
-            near += [x[:80] for x in lines[i:i + 8] if LINE.search(x) or x is line]
-    return {"links": links[:12], "near": list(dict.fromkeys(near))[:12]}
+    for m in re.finditer(r"問い?合わ?せ|問合せ", text):
+        snippet = text[m.start():m.start() + 160]
+        if LINE.search(snippet) and not any(snippet[:30] in x for x in near):
+            near.append(snippet)
+    return {"links": links[:12], "near": near[-3:]}
 
 
 def main() -> int:
