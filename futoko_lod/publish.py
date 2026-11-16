@@ -659,7 +659,7 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <h2>使い方</h2>
 <ul>
 <li><strong>人が読む。</strong><a href="../">市町×種類の表</a>から、1件のページへ。出典のページへのリンク、確認日、確かめ方が載っている。</li>
-<li><strong>プログラムで読む。</strong><a href="../seido.csv">CSV</a>、<a href="../seido.jsonld">JSON-LD</a>、<a href="../seido.ttl">Turtle</a>。1件ごとに URI があり、<code>.ttl</code> か <code>.jsonld</code> を付けるとその1件が取れる。ほかのサイトの上のプログラムからも読める。</li>
+<li><strong>プログラムで読む。</strong><a href="../seido.csv">CSV</a>、<a href="../seido.jsonld">JSON-LD</a>、<a href="../seido.ttl">Turtle</a>。1件ごとに URI があり、<code>.ttl</code> か <code>.jsonld</code> を付けるとその1件が取れる。ほかのサイトの上のプログラムからも読める。Python と SPARQL で読む例と、CSV だけで読む例を<a href="{REPO}/tree/main/examples">リポジトリの examples</a> に置いた(例が動くことはテストで確かめている)。</li>
 <li><strong>つなぐ。</strong>市町村は、e-Stat 統計LOD の標準地域コードの URI で持つ。統計LOD の児童数・生徒数と実際に並べた例が<a href="../kumiawase/">組み合わせの例</a>にある。DBpedia Japanese の市町村の資源にも、<code>schema:sameAs</code> でつないでいる(地方公共団体コードが合うことを、1件ずつ引いて確かめたものだけ)。出典は <code>dct:source</code> で公式ページにつながる。</li>
 <li><strong>隣と並べる。</strong>1件ごとのページに、隣の市町村の同じ種類の状態を出している。隣接は DBpedia Japanese の「隣接自治体」から取った(この部分だけ CC BY-SA 3.0。<a href="../kumiawase/#rinsetsu">組み合わせの例</a>)。</li>
 <li><strong>数える。</strong>{len(rows)}件すべてが「確かめた記録」(<code>fsl:Record</code>)。制度があると確かめた記録だけが、schema.org の <code>GovernmentService</code> でもある。語彙の説明は <a href="../ns">ns</a>。</li>

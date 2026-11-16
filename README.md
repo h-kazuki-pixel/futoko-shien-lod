@@ -106,6 +106,10 @@ python -m pytest -q                          # テスト
 python -m futoko_lod.fetch data/seido.csv    # 出典を取りに行って照合(間隔をあけて取得する)
 ```
 
+## 使い方の例
+
+Python と SPARQL で読む例(`examples/tsukaikata.py`)と、CSV だけで読む例は `examples/README.md` にある。例が動くことは `tests/test_examples.py` で確かめている。
+
 ## 分かっていないこと
 
 - **福岡市・北九州市に、保護者向けの利用料補助があるかどうか。** 公式ページに記載が見つからなかっただけで、無いことは確かめていない。
