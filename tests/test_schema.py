@@ -285,3 +285,20 @@ def test_source2_fields_known_and_filled():
     assert "出典2の項目" in rules(base(**(S2 | {"出典2の項目": "開始"})))  # 開始が空
     assert "出典2の項目" in rules(base(**(S2 | {"出典2の項目": "備考 | 備考"})))
     assert "根拠の箇所_2" in rules(base(**(S2 | {"根拠の箇所_2": "あ" * 41})))
+
+
+def test_extra_official_place_is_limited_to_the_path():
+    """業者のサイトの例規集は、その市町村の場所だけを公式とみなす。"""
+    extra = frozenset({"www1.g-reiki.net/city.kasuga.fukuoka/", "ops-jg.d1-law.com/opensearch/srjbf01/init?jctcd=8a9160eadb"})
+    assert schema.is_official_url("https://www1.g-reiki.net/city.kasuga.fukuoka/reiki_honbun/q020RG00000369.html", extra)
+    assert not schema.is_official_url("https://www1.g-reiki.net/city.munakata/reiki_menu.html", extra)
+    assert not schema.is_official_url("https://www1.g-reiki.net/", extra)
+    assert schema.is_official_url("https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006", extra)
+    assert not schema.is_official_url("https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160C246&houcd=H507920100004", extra)
+
+
+def test_koushiki_domain_rows_have_link_source():
+    rows = schema.read_csv("data/koushiki_domain.csv")
+    for r in rows:
+        assert r["リンク元"].startswith("https://") and schema.is_official_url(r["リンク元"])
+        assert r["確かめた日"]

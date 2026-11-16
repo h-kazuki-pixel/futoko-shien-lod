@@ -107,6 +107,7 @@ MAX_TEXT = 140  # 対象・金額・備考などの上限
 # 地方公共団体・国の公式サイトとみなすドメイン。
 # 1) lg.jp / go.jp  2) 福岡県内の地域型ドメイン(city.◯◯.fukuoka.jp など)
 # これに当てはまらない公式サイトは data/koushiki_domain.csv に、確かめた根拠つきで足す。
+# 業者のサイトに置かれた例規集は、市町村の公式サイトからリンクされていることを確かめ、その市町村の場所(パスまで)だけを足す。
 _OFFICIAL_SUFFIX = (".lg.jp", ".go.jp")
 _REGIONAL = re.compile(r"(^|\.)(pref|city|town|vill)\.([a-z0-9-]+\.)?fukuoka\.jp$")
 
@@ -139,7 +140,10 @@ def is_official_url(url: str, extra_domains: frozenset[str] = frozenset()) -> bo
         return True
     if _REGIONAL.search(host):
         return True
-    return any(host == d or host.endswith("." + d) for d in extra_domains)
+    # 足した公式の場所。「/」を含むものは、業者のサイトに置かれた例規集など、その市町村の場所だけを
+    # 公式とみなす(ホスト+パス+問い合わせの前方一致)。含まないものはドメインごと
+    where = (host + parsed.path + ("?" + parsed.query if parsed.query else "")).lower()
+    return any(where.startswith(d) if "/" in d else (host == d or host.endswith("." + d)) for d in extra_domains)
 
 
 def _valid_date(value: str) -> bool:

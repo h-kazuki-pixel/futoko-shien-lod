@@ -1,0 +1,5 @@
+ドメイン,市町村,リンク元,確かめた日,備考
+www1.g-reiki.net/city.kasuga.fukuoka/,春日市,https://www.city.kasuga.fukuoka.jp/,2026-11-17,市の公式サイトのトップの「春日市例規集」からリンク。業者(ぎょうせい)のサイトに置かれた市の例規集
+www1.g-reiki.net/town.sasaguri/,篠栗町,https://www.town.sasaguri.fukuoka.jp/chosei/jorei/2088.html,2026-11-17,町の公式サイトの「条例・規則」から「例規集検索システム」のページを経てリンク。業者(ぎょうせい)のサイトに置かれた町の例規集
+public1.legalcrud.com/umi_town/,宇美町,https://www.town.umi.lg.jp/soshiki/1/reiki.html,2026-11-17,町の公式サイトの「条例・例規集」のページからリンク。業者のサイトに置かれた町の例規集
+ops-jg.d1-law.com/opensearch/srjbf01/init?jctcd=8a9160eadb,志免町,https://www.town.shime.lg.jp/,2026-11-17,町の公式サイトのトップの例規集からリンク(jctcd=8A9160EADB が志免町)。業者(第一法規)のサイトに置かれた町の例規集。例規1件の URL の形に限る
