@@ -493,6 +493,10 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
     elif list_based_none(row):
         caution = ('<p class="note">この「なし」は、<strong>公式の一覧に載っていない</strong>という意味。市町村が「無い」と答えたものではない。'
                    '設置の検討や予定は、一覧からは分からない。</p>\n')
+    elif kind_slug(row) in ("fs-hojo", "fs-unei") and v("状態") in ("あり", "予定"):
+        # 申請の受付期間は年度ごとに変わるので、データには持たない(docs/弱い所.md の 33)
+        caution = ('<p class="note">「あり」は、制度があるという意味。<strong>いま申請を受け付けているかは、このデータには無い。</strong>'
+                   '申請の時期や受付の期間は、出典のページで確かめてほしい。</p>\n')
     sib = "".join(
         f'<li><a href="../{e(s["id"])}/">{e(KIND_SHORT[kind_slug(s)])}</a> {badge(s["状態"])}</li>'
         for s in sorted(siblings, key=lambda s: list(schema.KINDS).index(kind_slug(s))) if s["id"] != row["id"])

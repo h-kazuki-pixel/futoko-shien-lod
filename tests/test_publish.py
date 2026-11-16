@@ -287,3 +287,14 @@ def test_combination_page_matches_both_sources(site, rows):
         assert must in text
     assert "無かった。市に" not in text  # 「返らなかった」を「無い」と言い切らない
     assert (site / "kumiawase.csv").read_bytes() == open("data/kumiawase/jidou_seito.csv", "rb").read()
+
+
+def test_hojo_page_says_the_data_does_not_hold_the_application_period(site, rows):
+    """補助の「あり」は、いま申請できるという意味ではない(弱い所 33)。"""
+    hojo = [r for r in rows if publish.kind_slug(r) in ("fs-hojo", "fs-unei") and r["状態"] in ("あり", "予定")]
+    assert hojo
+    for r in hojo:
+        text = (site / "id" / r["id"] / "index.html").read_text(encoding="utf-8")
+        assert "いま申請を受け付けているかは、このデータには無い" in text
+    other = next(r for r in rows if publish.kind_slug(r) == "shien-center" and r["状態"] == "あり")
+    assert "いま申請を受け付けているか" not in (site / "id" / other["id"] / "index.html").read_text(encoding="utf-8")
