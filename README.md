@@ -1,6 +1,6 @@
 # 不登校支援制度LOD
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24292050.svg)](https://doi.org/10.5281/zenodo.24292050)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24292049.svg)](https://doi.org/10.5281/zenodo.24292049)
 
 市町村ごとに違う不登校支援の制度を、同じ項目で並べ、公式の出典と確認日を付けて公開するデータ。対象は福岡県の市町村。LODチャレンジ2026(データ作成部門)に出す。
 
@@ -134,7 +134,7 @@ Python と SPARQL で読む例(`examples/tsukaikata.py`)と、CSV だけで読�
 
 ## ライセンス
 
-- 引用: DOI [10.5281/zenodo.24292050](https://doi.org/10.5281/zenodo.24292050)(Zenodo。Hashimoto, Kazuki)
+- 引用: DOI [10.5281/zenodo.24292049](https://doi.org/10.5281/zenodo.24292049)(Zenodo。Hashimoto, Kazuki)
 - データ(`data/`): CC BY 4.0。ただし `data/rinsetsu.csv` だけ CC BY-SA 3.0(DBpedia Japanese から引いたため)。`LICENSE-DATA.md`
 - コード: MIT。`LICENSE`
 
