@@ -98,7 +98,8 @@ def match_name(token: str, names: dict[str, str]) -> tuple[str, str, str]:
     """
     import re
     t = token
-    m = re.match(r"^(.+?[都道府県])(.+)$", t)
+    # 県名は47都道府県の形だけ(「太宰府市」の「府」を県と取り違えない)
+    m = re.match(r"^(北海道|東京都|京都府|大阪府|[^\s都道府県]{2,3}県)(.+)$", t)
     if m and m.group(1) != PREF and m.group(2):
         return "", t, "県外"
     if m and m.group(1) == PREF:

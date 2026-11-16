@@ -48,4 +48,6 @@ def test_neighbor_names_are_matched_to_codes():
     assert d.match_name("小郡市", names) == ("40216", "小郡市", "県内")  # 「郡」を外さない
     assert d.match_name("福岡県田川郡川崎町", names) == ("40605", "川崎町", "県内")
     assert d.match_name("佐賀県鳥栖市", names)[2] == "県外"
+    assert d.match_name("太宰府市", names | {"40221": "太宰府市"}) == ("40221", "太宰府市", "県内")  # 「府」を県と取り違えない
+    assert d.match_name("大阪府堺市", names)[2] == "県外"
     assert d.match_name("春日市", names)[2] == "照合できず"
