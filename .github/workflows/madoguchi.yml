@@ -4,6 +4,11 @@
 name: madoguchi
 on:
   workflow_dispatch:
+    inputs:
+      fukaku:
+        description: "組織の一覧から、学校教育の課のページを探す"
+        type: boolean
+        default: false
 permissions:
   contents: read
 concurrency:
@@ -18,4 +23,4 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: python scripts/madoguchi.py
+      - run: python scripts/madoguchi.py ${{ inputs.fukaku && '--fukaku' || '' }}
