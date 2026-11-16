@@ -31,18 +31,12 @@ JUDGE = ("合っている", "違う", "分からない")
 FIELDS = ["制度名", "対象", "金額", "開始", "補助の形", "備考"]
 
 # 項目の根拠が、出典のページでなく別の資料にあるもの(docs/検証の結果.md)。
-# 出典を2つ持てる列ができたら、そちらへ移す。
+# 第2の出典の列(出典URL_2)に移したものは、列の値を使う。ここに残すのは、まだ移していないもの
+# (福岡市のサイトが止まっていて、照合で確かめられない行など)。列に値があれば、そちらを優先する。
 HOJO = {
     "40000-online": "https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf",
-    "40100-tayouka": "https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html",
     "40130-online": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/onlineroom-annai.pdf",
     "40130-tayouka": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/seitobosyuannai.pdf",
-    "40217-shien-center": "https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32468.pdf",
-    "40219-tayouka": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
-    "40221-online": "https://www.city.dazaifu.lg.jp/uploaded/attachment/29244.pdf",
-    "40223-shien-center": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php",
-    "40230-shien-center": "https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf",
-    "40341-tayouka": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
     "40344-shien-center": "https://www.town.sue.fukuoka.jp/material/files/group/72/20260602925.pdf",
 }
 
@@ -58,7 +52,8 @@ def make(seido: list[dict[str, str]], old: list[dict[str, str]]) -> list[dict[st
     for r in seido:
         if r["状態"] not in ("あり", "予定"):
             continue
-        hojo = " | ".join(x for x in (HOJO.get(r["id"], ""), r["要綱URL"]) if x)
+        second = r.get("出典URL_2", "") or HOJO.get(r["id"], "")
+        hojo = " | ".join(x for x in (second, r["要綱URL"]) if x)
         items = [("種類と状態", f"{r['制度の種類']} / {r['状態']}")]
         items += [(f, r[f]) for f in FIELDS if r[f]]
         for name, value in items:

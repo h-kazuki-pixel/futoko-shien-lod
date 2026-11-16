@@ -44,6 +44,13 @@
   },
   "sourceName": "fsl:sourceName",
   "basisPhrase": "fsl:basisPhrase",
+  "additionalSource": {
+   "@id": "fsl:additionalSource"
+  },
+  "supports": {
+   "@id": "fsl:supports",
+   "@type": "@id"
+  },
   "guidelineState": "fsl:guidelineState",
   "guideline": {
    "@id": "fsl:guideline",
@@ -166,7 +173,18 @@
    "source": "https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html",
    "sourceName": "北九州市教育委員会の支援一覧ページ",
    "basisPhrase": "令和9年4月の開校を予定",
-   "note": "設置場所(市立教育センター内)と学校名は、市の詳細ページ(/kyouiku/03000056.html)による。学校名は、同じページにある生徒募集の資料で人が確かめた(2026-11-16)"
+   "note": "設置場所(市立教育センター内)と学校名は、市の詳細ページ(/kyouiku/03000056.html)による。学校名は、同じページにある生徒募集の資料で人が確かめた(2026-11-16)",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-tayouka#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html",
+    "sourceName": "北九州市教育委員会 学びの多様化学校の詳細ページ",
+    "basisPhrase": "北九州市立あいおい中学校",
+    "supports": [
+     "schema:name",
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-fs-hojo",
@@ -713,7 +731,17 @@
    "source": "https://www.city.chikushino.fukuoka.jp/soshiki/34/1336.html",
    "sourceName": "筑紫野市「登校に不安のある児童生徒への支援」",
    "basisPhrase": "つくし学級",
-   "note": "場所は勤労青少年ホーム内。通級した日は学校長の判断で出席扱い(案内パンフレット)。学校教育課内の「教育支援センター」は相談窓口"
+   "note": "場所は勤労青少年ホーム内。通級した日は学校長の判断で出席扱い(案内パンフレット)。学校教育課内の「教育支援センター」は相談窓口",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-shien-center#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.chikushino.fukuoka.jp/uploaded/attachment/32468.pdf",
+    "sourceName": "筑紫野市 つくし学級の案内パンフレット(PDF)",
+    "basisPhrase": "出席扱いとなります",
+    "supports": [
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40217-shusseki",
@@ -1001,7 +1029,17 @@
    "source": "https://www.city.onojo.fukuoka.jp/kosodate/kiji0038903/index.html",
    "sourceName": "大野城市「大野城市立みずほ中学校 転入学者希望者説明会・見学会」",
    "basisPhrase": "大野城市立みずほ中学校(学びの多様化学校)",
-   "note": "大野中学校の分校。定員は各学年10名程度。文部科学省の設置者一覧での指定年は令和8年。開校の時期は出典のページに無い"
+   "note": "大野中学校の分校。定員は各学年10名程度。文部科学省の設置者一覧での指定年は令和8年。開校の時期は出典のページに無い",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40219-tayouka#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+    "basisPhrase": "大野城市立みずほ中学校",
+    "supports": [
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40220-fs-hojo",
@@ -1175,7 +1213,17 @@
    "source": "https://www.city.dazaifu.lg.jp/soshiki/28/2085.html",
    "sourceName": "太宰府市「太宰府市教育支援センター」",
    "basisPhrase": "メタバース(とびゆめキャンパス)",
-   "note": "リーフレットでは「ゆめキャン」と呼ばれ、参加が学校の出席になると書かれている"
+   "note": "リーフレットでは「ゆめキャン」と呼ばれ、参加が学校の出席になると書かれている",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40221-online#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.dazaifu.lg.jp/uploaded/attachment/29244.pdf",
+    "sourceName": "太宰府市 とびゆめキャンパスのリーフレット(PDF)",
+    "basisPhrase": "学校の出席になります",
+    "supports": [
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40221-shien-center",
@@ -1321,7 +1369,17 @@
    "eligibility": "学校に行くのが難しい古賀市在住の小・中学校児童生徒",
    "source": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/064.php",
    "sourceName": "古賀市公式ページ",
-   "basisPhrase": "古賀市教育支援センター あすなろ教室"
+   "basisPhrase": "古賀市教育支援センター あすなろ教室",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-shien-center#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.koga.fukuoka.jp/cityhall/work/gakkokyoiku/013.php",
+    "sourceName": "古賀市「古賀市教育支援センター あすなろ教室」",
+    "basisPhrase": "通級スタイルは自分で決めます",
+    "supports": [
+     "fsl:kind"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40223-shusseki",
@@ -1672,7 +1730,18 @@
    "source": "https://www.city.itoshima.lg.jp/s031/010/010/020/070/ito-kyouikusoudan.html",
    "sourceName": "糸島市「糸島市教育支援センターのご案内」",
    "basisPhrase": "糸島市教育支援センター",
-   "note": "通う教室「すばる教室」の説明は、同じページに添付の subaru.pdf にある。場所はページでは市立図書館の別館2階。対象の記載は見つからなかった"
+   "note": "通う教室「すばる教室」の説明は、同じページに添付の subaru.pdf にある。場所はページでは市立図書館の別館2階。対象の記載は見つからなかった",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-shien-center#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.city.itoshima.lg.jp/s031/010/010/020/070/subaru.pdf",
+    "sourceName": "糸島市 すばる教室の案内(PDF)",
+    "basisPhrase": "すばる教室",
+    "supports": [
+     "schema:name",
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40230-shusseki",
@@ -1949,7 +2018,17 @@
    "basisPhrase": "原田小学校ハピネス分校",
    "guidelineState": "取得済み",
    "guideline": "https://www.town.umi.lg.jp/site/manabinotayouka/list287-1223.html",
-   "note": "文部科学省の一覧では、2校とも指定年は令和7年。入学等の手続きは町の取扱要綱にある(一覧: mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm)"
+   "note": "文部科学省の一覧では、2校とも指定年は令和7年。入学等の手続きは町の取扱要綱にある(一覧: mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm)",
+   "additionalSource": {
+    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40341-tayouka#source2",
+    "@type": "fsl:AdditionalSource",
+    "source": "https://www.mext.go.jp/a_menu/shotou/seitoshidou/1387004.htm",
+    "sourceName": "文部科学省「学びの多様化学校(いわゆる不登校特例校)の設置者一覧」",
+    "basisPhrase": "宇美町立原田小学校",
+    "supports": [
+     "fsl:note"
+    ]
+   }
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40342-fs-hojo",

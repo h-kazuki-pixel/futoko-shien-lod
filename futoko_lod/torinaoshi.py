@@ -38,7 +38,7 @@ SAISHIN_COLUMNS = ["id", "役割", "URL", "取得日時", "取得", "判定", "�
 SABUN_COLUMNS = ["日付", "重さ", "変わった所", "id", "役割", "URL", "前", "後"]
 RETRY_WAIT_SEC = 30
 
-SOURCE, PLACE = "出典", "探した場所"
+SOURCE, SOURCE2, PLACE = "出典", "出典2", "探した場所"
 HEAVY, LIGHT = "要確認", "記録のみ"
 
 
@@ -53,6 +53,8 @@ def targets(rows: list[dict[str, str]]) -> list[tuple[dict[str, str], str, str]]
     for row in rows:
         if row["出典URL"]:
             out.append((row, SOURCE, row["出典URL"]))
+        if (row.get("出典URL_2") or "").strip():
+            out.append((row, SOURCE2, row["出典URL_2"].strip()))
         for place in (p.strip() for p in row["探した場所"].split(schema.SEP.strip())):
             if place:
                 out.append((row, PLACE, place))
@@ -89,6 +91,9 @@ def collect(
                 absence = row["状態"] == "なし"
                 c = (collate_mod.collate_absence if absence else collate_mod.collate)(row, page["text"])
                 entry["判定"] = "一致" if c["一致"] else "不一致"
+            elif role == SOURCE2:
+                c = collate_mod.collate(row, page["text"], part=2)
+                entry["判定"] = "一致" if c["一致"] else "不一致"
         results.append(entry)
     return results
 
@@ -124,7 +129,7 @@ def diff(prev: list[dict[str, str]], cur: list[dict[str, str]], date: str) -> li
             text_changed[(c["役割"], c["URL"])][0].setdefault("_前", p["本文の印"])
     for (role, _), group in text_changed.items():
         first = group[0]
-        what = "ページの文字が変わった(照合は一致のまま)" if role == SOURCE else "探した場所のページの文字が変わった"
+        what = "ページの文字が変わった(照合は一致のまま)" if role in (SOURCE, SOURCE2) else "探した場所のページの文字が変わった"
         add(LIGHT, what, first, first.pop("_前"), first["本文の印"], " ".join(g["id"] for g in group))
     return changes
 
@@ -148,6 +153,7 @@ def summary_markdown(cur: list[dict[str, str]], changes: list[dict[str, str]], f
     urls = {c["URL"]: c for c in cur}
     got = sum(c["取得"] == "取得" for c in urls.values())
     src = [c for c in cur if c["役割"] == SOURCE]
+    src2 = [c for c in cur if c["役割"] == SOURCE2]
     lines = [
         f"## 定期的な取り直し({date})", "",
         "| | 件数 | 数え方 |", "|---|---|---|",
@@ -156,6 +162,8 @@ def summary_markdown(cur: list[dict[str, str]], changes: list[dict[str, str]], f
         f"| うち 取得できなかった | {len(urls) - got} | robots.txt による禁止、接続できない、文字の無い PDF など |",
         f"| 出典と照合した行 | {len(src)} | 一致 {sum(c['判定'] == '一致' for c in src)}、"
         f"不一致 {sum(c['判定'] == '不一致' for c in src)}、取得できず {sum(c['判定'] == '' for c in src)} |",
+        f"| 第2の出典と照合した行 | {len(src2)} | 一致 {sum(c['判定'] == '一致' for c in src2)}、"
+        f"不一致 {sum(c['判定'] == '不一致' for c in src2)}、取得できず {sum(c['判定'] == '' for c in src2)} |",
         "",
     ]
     if first_run:

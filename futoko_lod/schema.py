@@ -29,6 +29,10 @@ COLUMNS = [
     "出典URL",
     "出典名",
     "根拠の箇所",
+    "出典URL_2",
+    "出典名_2",
+    "根拠の箇所_2",
+    "出典2の項目",
     "要綱の状況",
     "要綱URL",
     "探した場所",
@@ -77,6 +81,25 @@ METHODS = {
 GUIDELINE_STATES = {"", "取得済み", "リンクあり・URL未取得", "ページにリンクなし"}
 
 SEP = " | "  # 「探した場所」に URL を複数書くときの区切り
+
+# 第2の出典(出典URL_2)で裏付ける項目。値は JSON-LD の項目名(build.CONTEXT のキー)。
+# 「出典2の項目」には、この中から SEP で区切って書く。照合で数字を見るのは、金額・対象・開始・上限額_円・補助率だけ。
+SOURCE2_FIELDS = {
+    "制度名": "name",
+    "制度の種類": "kind",
+    "対象": "eligibility",
+    "金額": "amountText",
+    "上限額_円": "amountMaxYen",
+    "補助率": "subsidyRate",
+    "開始": "startText",
+    "備考": "note",
+}
+SOURCE2_COLUMNS = ("出典URL_2", "出典名_2", "根拠の箇所_2", "出典2の項目")
+
+
+def source2_fields(row: dict[str, str]) -> list[str]:
+    """「出典2の項目」を並びにする。"""
+    return [x.strip() for x in (row.get("出典2の項目") or "").split(SEP.strip()) if x.strip()]
 
 MAX_BASIS = 40  # 根拠の箇所は短い語句だけ(文章を写さない)
 MAX_TEXT = 140  # 対象・金額・備考などの上限
@@ -196,8 +219,29 @@ def check_row(row: dict[str, str], extra_domains: frozenset[str] = frozenset()) 
             if v(key):
                 bad("確認できず", f"「確認できず」なのに {key} に中身がある")
 
+    # --- 第2の出典(項目の根拠が、出典のページでなく別のページや資料にあるとき) ---
+    s2 = [k for k in SOURCE2_COLUMNS if v(k)]
+    if s2:
+        if len(s2) != len(SOURCE2_COLUMNS):
+            bad("第2の出典", f"{' / '.join(SOURCE2_COLUMNS)} は、全部そろえるか全部空にする")
+        if status not in ("あり", "予定"):
+            bad("第2の出典", "第2の出典は「あり」「予定」の行だけに使う")
+        if v("出典URL_2") and v("出典URL_2") == v("出典URL"):
+            bad("第2の出典", "出典URL と同じ URL は第2の出典にしない")
+        if len(v("根拠の箇所_2")) > MAX_BASIS:
+            bad("根拠の箇所_2", f"{MAX_BASIS}字まで。公式ページの文章を写さない")
+        fields = source2_fields(row)
+        unknown = [f for f in fields if f not in SOURCE2_FIELDS]
+        if unknown:
+            bad("出典2の項目", f"決めた項目にない: {unknown}。使えるのは {' / '.join(SOURCE2_FIELDS)}")
+        if len(set(fields)) != len(fields):
+            bad("出典2の項目", "同じ項目を2回書かない")
+        for f in fields:
+            if f in SOURCE2_FIELDS and f != "制度の種類" and not v(f):
+                bad("出典2の項目", f"{f} が空なのに、第2の出典で裏付ける項目に挙げている")
+
     # --- 出典は公式サイトだけ ---
-    for key in ("出典URL", "要綱URL"):
+    for key in ("出典URL", "出典URL_2", "要綱URL"):
         if v(key) and not is_official_url(v(key), extra_domains):
             bad("公式サイト", f"{key} が公式サイトのドメインではない: {v(key)}")
     for place in filter(None, (p.strip() for p in v("探した場所").split(SEP.strip()))):

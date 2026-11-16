@@ -254,3 +254,34 @@ def test_place_several_urls():
     assert "探した場所" not in rules(row)
     row = kakunin_dekizu(探した場所="https://www.city.mihon.lg.jp/kyoiku/ | 電話で聞いた")
     assert "探した場所" in rules(row)
+
+
+# ---- 第2の出典(弱い所18) ----
+
+S2 = {"出典URL_2": "https://www.city.mihon.lg.jp/b.pdf", "出典名_2": "みほん市の案内",
+      "根拠の箇所_2": "みほん教室", "出典2の項目": "制度名 | 備考", "備考": "場所は図書館"}
+
+
+def test_source2_ok():
+    assert rules(base(**S2)) == set()
+
+
+def test_source2_all_or_nothing():
+    assert "第2の出典" in rules(base(**(S2 | {"根拠の箇所_2": ""})))
+
+
+def test_source2_only_for_ari_yotei():
+    row = kakunin_dekizu(**{k: v for k, v in S2.items() if k != "備考"})
+    assert "第2の出典" in rules(row)
+
+
+def test_source2_must_differ_and_be_official():
+    assert "第2の出典" in rules(base(**(S2 | {"出典URL_2": "https://www.city.mihon.lg.jp/a.html"})))
+    assert "公式サイト" in rules(base(**(S2 | {"出典URL_2": "https://example.com/b.pdf"})))
+
+
+def test_source2_fields_known_and_filled():
+    assert "出典2の項目" in rules(base(**(S2 | {"出典2の項目": "制度名 | 場所"})))
+    assert "出典2の項目" in rules(base(**(S2 | {"出典2の項目": "開始"})))  # 開始が空
+    assert "出典2の項目" in rules(base(**(S2 | {"出典2の項目": "備考 | 備考"})))
+    assert "根拠の箇所_2" in rules(base(**(S2 | {"根拠の箇所_2": "あ" * 41})))

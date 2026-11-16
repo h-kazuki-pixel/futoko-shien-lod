@@ -86,7 +86,9 @@ PROPERTIES = {
     "subsidyRate": ("補助率", "補助の割合。1/2 の形。", "xsd:string"),
     "startText": ("開始", "いつから。", "rdf:langString"),
     "sourceName": ("出典名", "出典のページの呼び名。出典の URL は dct:source に入る。", "rdf:langString"),
-    "basisPhrase": ("根拠の箇所", "出典のページにある短い語句(40字まで)。照合に使う。", "rdf:langString"),
+    "basisPhrase": ("根拠の箇所", "出典のページにある短い語句(40字まで)。照合に使う。第2の出典の節でも使う。", "rdf:langString"),
+    "additionalSource": ("第2の出典", "項目の根拠が、出典のページでなく別のページや資料にあるときの、その資料。", "fsl:AdditionalSource"),
+    "supports": ("出典2の項目", "第2の出典で裏付ける項目(この語彙や schema.org の性質)。", "rdf:Property"),
     "guidelineState": ("要綱の状況", "要綱を取得できたか。", "rdf:langString"),
     "guideline": ("要綱URL", "要綱の URL。", "rdfs:Resource"),
     "searchedAt": ("探した場所", "探したページの URL。「確認できず」のときに必ず入る。", "rdfs:Resource"),
@@ -95,6 +97,9 @@ PROPERTIES = {
     "dateChecked": ("確認日", "確かめた日。", "xsd:date"),
     "checkMethod": ("確認方法", "だれが、どう確かめたか。", "skos:Concept"),
 }
+# rdfs:domain が fsl:Record でない性質。None は domain を書かない(記録と第2の出典の節の両方で使うため)
+DOMAINS = {"sourceName": None, "basisPhrase": None, "supports": "fsl:AdditionalSource"}
+
 SCHEMES = [
     ("kinds", "制度の種類", "kind", {slug: (label, "") for slug, label in schema.KINDS.items()}),
     ("statuses", "状態", "status", {slug: (label, STATUS_MEANING[label]) for label, slug in schema.STATUSES.items()}),
@@ -187,15 +192,25 @@ def vocab_turtle() -> str:
             ("rdfs:isDefinedBy", [iri(BASE + "ns")]),
         ]),
     ]
+    blocks.append(("fsl:AdditionalSource", [
+        ("a", ["rdfs:Class"]),
+        ("rdfs:label", [lit("第2の出典") + "@ja"]),
+        ("rdfs:comment", [lit(
+            "項目の根拠が、出典のページでなく別のページや資料にあるときの、その資料。"
+            "URL(dct:source)、呼び名、資料にある短い語句、裏付ける項目を持つ。照合は出典ごとに分けて行う。") + "@ja"]),
+        ("rdfs:isDefinedBy", [iri(BASE + "ns")]),
+    ]))
     for name, (label, comment, rng) in PROPERTIES.items():
-        blocks.append((f"fsl:{name}", [
+        domain = DOMAINS.get(name, "fsl:Record")
+        pos = [
             ("a", ["rdf:Property"]),
             ("rdfs:label", [lit(label) + "@ja"]),
             ("rdfs:comment", [lit(comment) + "@ja"]),
-            ("rdfs:domain", ["fsl:Record"]),
-            ("rdfs:range", [rng]),
-            ("rdfs:isDefinedBy", [iri(BASE + "ns")]),
-        ]))
+        ]
+        if domain:
+            pos.append(("rdfs:domain", [domain]))
+        pos += [("rdfs:range", [rng]), ("rdfs:isDefinedBy", [iri(BASE + "ns")])]
+        blocks.append((f"fsl:{name}", pos))
     for scheme, title, prefix, concepts in SCHEMES:
         blocks.append((f"fsl:{scheme}", [("a", ["skos:ConceptScheme"]), ("skos:prefLabel", [lit(title) + "@ja"])]))
         for slug, (label, definition) in concepts.items():
@@ -466,6 +481,10 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
         items.append(("出典", f'{e(v("出典名"))}<br>{link(v("出典URL"))}'))
     if v("根拠の箇所"):
         items.append(("根拠の箇所", f'「{e(v("根拠の箇所"))}」(出典のページにある語句)'))
+    if v("出典URL_2"):
+        fields = "、".join(schema.source2_fields(row))
+        items.append(("第2の出典", f'{e(v("出典名_2"))}<br>{link(v("出典URL_2"))}<br>'
+                      f'根拠の箇所「{e(v("根拠の箇所_2"))}」。この資料で裏付ける項目: {e(fields)}'))
     if v("要綱の状況"):
         items.append(("要綱", e(v("要綱の状況")) + (f'<br>{link(v("要綱URL"))}' if v("要綱URL") else "")))
     if v("なしの根拠"):
@@ -704,6 +723,13 @@ def refetch_lines(row: dict[str, str], records: dict) -> list[str]:
             lines.append(f"出典: {day} に取り直したが、取得できなかった({why})")
         else:
             lines.append(f"出典: {day} に取り直し、照合は{r['判定']}")
+    for r in (r for r in mine if r["役割"] == "出典2"):
+        day = jst_day(r["取得日時"])
+        if r["取得"] != "取得":
+            why = r["取得"].removeprefix("取得できず(").removesuffix(")")
+            lines.append(f"第2の出典: {day} に取り直したが、取得できなかった({why})")
+        else:
+            lines.append(f"第2の出典: {day} に取り直し、照合は{r['判定']}")
     places = [r for r in mine if r["役割"] == "探した場所"]
     if places:
         got = sum(r["取得"] == "取得" for r in places)

@@ -151,24 +151,40 @@ def run(path: str, interval: float = INTERVAL_SEC) -> list[dict]:
     rows = schema.load(path)
     pages: dict[str, dict] = {}
     results = []
+
+    def get(url: str) -> dict:
+        if url not in pages:
+            if pages:
+                time.sleep(interval)
+            pages[url] = fetch(url)
+        return pages[url]
+
     for row in rows:
         absence = row["状態"] == "なし" and bool(row["出典URL"])
         if row["状態"] not in ("あり", "予定") and not absence:
             results.append({"id": row["id"], "状態": row["状態"], "判定": "照合の対象外"})
             continue
-        url = row["出典URL"]
-        if url not in pages:
-            if pages:
-                time.sleep(interval)
-            pages[url] = fetch(url)
-        page = pages[url]
+        page = get(row["出典URL"])
         entry = {"id": row["id"], "状態": row["状態"], **{k: v for k, v in page.items() if k != "text"}}
-        if page["text"] is None:
-            entry["判定"] = "取得できず"
-        else:
+        got_all = page["text"] is not None
+        matched = False
+        if got_all:
             c = (collate_mod.collate_absence if absence else collate_mod.collate)(row, page["text"])
             entry.update({k: v for k, v in c.items() if k != "id"})
-            entry["判定"] = "一致" if c["一致"] else "不一致"
+            matched = c["一致"]
+        url2 = (row.get("出典URL_2") or "").strip()
+        if url2 and not absence:
+            # 第2の出典。両方のページがそろって、両方とも一致したときだけ「一致」
+            page2 = get(url2)
+            sub = {k: v for k, v in page2.items() if k != "text"}
+            if page2["text"] is None:
+                got_all = False
+            else:
+                c2 = collate_mod.collate(row, page2["text"], part=2)
+                sub.update({k: v for k, v in c2.items() if k != "id"})
+                matched = matched and c2["一致"]
+            entry["出典2"] = sub
+        entry["判定"] = ("一致" if matched else "不一致") if got_all else "取得できず"
         results.append(entry)
     return results
 
@@ -189,6 +205,12 @@ def summary_markdown(results: list[dict], title: str = "出典との照合") -> 
         lines.append(
             f"| {r['id']} | {r['判定']} | {r.get('結果', '')} | {r.get('robots', '')} | {basis} | {missing} | {names} |"
         )
+        s2 = r.get("出典2")
+        if s2:
+            basis2 = {True: "ある", False: "無い"}.get(s2.get("根拠の箇所がページにある"), "—")
+            missing2 = ", ".join(s2.get("ページに無い数字", [])) or "—"
+            names2 = ", ".join(s2.get("ページに無い名前の部分", [])) or "—"
+            lines.append(f"| {r['id']}(出典2) | ↑ | {s2.get('結果', '')} | {s2.get('robots', '')} | {basis2} | {missing2} | {names2} |")
     matched = [r["id"] for r in results if r["判定"] == "一致"]
     lines += ["", "一致した id: " + ",".join(matched)]
     return "\n".join(lines) + "\n"

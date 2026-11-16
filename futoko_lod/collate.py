@@ -89,13 +89,27 @@ def tokens(text: str) -> set[str]:
 CHECK_FIELDS = ("金額", "対象", "開始", "根拠の箇所")
 
 
-def record_tokens(row: dict[str, str]) -> set[str]:
+def _source2_fields(row: dict[str, str]) -> set[str]:
+    return {x.strip() for x in (row.get("出典2の項目") or "").split("|") if x.strip()}
+
+
+def record_tokens(row: dict[str, str], part: int = 1) -> set[str]:
+    """照合で見る数字の印。
+
+    第2の出典(出典URL_2)があるとき、「出典2の項目」に挙げた項目は第2の出典のページで、
+    それ以外の項目は出典のページで見る。part=1 は出典、part=2 は第2の出典。
+    """
+    in2 = _source2_fields(row)
+    basis_key = "根拠の箇所" if part == 1 else "根拠の箇所_2"
     want: set[str] = set()
     for key in CHECK_FIELDS:
-        want |= tokens(row.get(key, "") or "")
-    if (row.get("上限額_円") or "").strip():
+        if key == "根拠の箇所":
+            want |= tokens(row.get(basis_key, "") or "")
+        elif (key in in2) == (part == 2):
+            want |= tokens(row.get(key, "") or "")
+    if (row.get("上限額_円") or "").strip() and (("上限額_円" in in2) == (part == 2)):
         want.add(f"yen:{int(row['上限額_円'])}")
-    if (row.get("補助率") or "").strip():
+    if (row.get("補助率") or "").strip() and (("補助率" in in2) == (part == 2)):
         want.add(f"ratio:{row['補助率'].strip()}")
     return want
 
@@ -110,17 +124,22 @@ def name_parts_missing(name: str, page_norm: str) -> list[str]:
     return [x for x in parts if normalize(x) not in page_norm]
 
 
-def collate(row: dict[str, str], page_text: str) -> dict:
-    """1件を、出典のページの文字列と照合する。"""
+def collate(row: dict[str, str], page_text: str, part: int = 1) -> dict:
+    """1件を、出典のページの文字列と照合する。
+
+    part=2 は第2の出典(出典URL_2)のページとの照合。根拠の箇所_2 と、「出典2の項目」に挙げた項目の数字を見る。
+    制度名が「出典2の項目」にあれば、名前の部分(合否には使わない)も第2の出典のページで見る。
+    """
     page_norm = normalize(page_text)
-    basis = normalize(row.get("根拠の箇所", "") or "")
+    basis = normalize(row.get("根拠の箇所" if part == 1 else "根拠の箇所_2", "") or "")
     literal_ok = bool(basis) and basis in page_norm
-    missing = sorted(record_tokens(row) - tokens(page_text))
+    missing = sorted(record_tokens(row, part) - tokens(page_text))
+    name_here = ("制度名" in _source2_fields(row)) == (part == 2)
     return {
         "id": row.get("id", ""),
         "根拠の箇所がページにある": literal_ok,
         "ページに無い数字": missing,
-        "ページに無い名前の部分": name_parts_missing(row.get("制度名", "") or "", page_norm),
+        "ページに無い名前の部分": name_parts_missing(row.get("制度名", "") or "", page_norm) if name_here else [],
         "一致": literal_ok and not missing,
     }
 

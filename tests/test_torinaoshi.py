@@ -127,3 +127,14 @@ def test_records_round_trip(tmp_path):
 def test_summary_counts_pages_once():
     md = t.summary_markdown(run(ALL), [], first_run=True, date="2026-11-16")
     assert "| 取りに行ったページ | 3 |" in md and "初回" in md
+
+
+def test_second_source_is_fetched_and_collated_separately():
+    # 第2の出典(弱い所18)。見本は作りもの
+    row = ARI | {"出典URL_2": "https://example.lg.jp/d", "根拠の箇所_2": "案内の語句", "出典2の項目": "備考", "備考": "補足"}
+    pages = ALL | {"https://example.lg.jp/d": "案内の語句があります"}
+    cur = run(pages, rows=(row,))
+    roles = {c["役割"]: c["判定"] for c in cur}
+    assert roles == {"出典": "一致", "出典2": "一致"}
+    cur = run(ALL | {"https://example.lg.jp/d": "別のページ"}, rows=(row,))
+    assert {c["役割"]: c["判定"] for c in cur}["出典2"] == "不一致"

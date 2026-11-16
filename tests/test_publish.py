@@ -298,3 +298,21 @@ def test_hojo_page_says_the_data_does_not_hold_the_application_period(site, rows
         assert "いま申請を受け付けているかは、このデータには無い" in text
     other = next(r for r in rows if publish.kind_slug(r) == "shien-center" and r["状態"] == "あり")
     assert "いま申請を受け付けているか" not in (site / "id" / other["id"] / "index.html").read_text(encoding="utf-8")
+
+
+def test_second_source_node_is_the_same_in_turtle_and_jsonld():
+    # 第2の出典(弱い所18)。見本は作りもの
+    r = REC | {"状態": "あり", "制度名": "見本教室", "出典URL": "https://www.town.mihon.lg.jp/a.html", "出典名": "町のページ",
+               "根拠の箇所": "見本教室", "出典URL_2": "https://www.town.mihon.lg.jp/b.pdf", "出典名_2": "案内",
+               "根拠の箇所_2": "通う教室", "出典2の項目": "制度名 | 備考", "備考": "場所は図書館", "確認日": "2026-11-16",
+               "確認方法": "機械の読み取り", "制度の種類": schema.KINDS["shien-center"], "id": "40999-shien-center"}
+    node = build.to_node(r)
+    assert node["additionalSource"]["@id"].endswith("id/40999-shien-center#source2")
+    assert node["additionalSource"]["supports"] == ["schema:name", "fsl:note"]
+    ttl = graph(publish.nodes_turtle([node]), "turtle")
+    jld = graph(json.dumps({"@context": build.CONTEXT, "@graph": [node]}, ensure_ascii=False), "json-ld")
+    assert to_isomorphic(ttl) == to_isomorphic(jld)
+    s2 = rdflib.URIRef(node["additionalSource"]["@id"])
+    fsl = rdflib.Namespace(build.BASE + "ns#")
+    assert (s2, fsl.supports, rdflib.URIRef("https://schema.org/name")) in jld
+    assert (s2, rdflib.URIRef("http://purl.org/dc/terms/source"), rdflib.URIRef("https://www.town.mihon.lg.jp/b.pdf")) in jld

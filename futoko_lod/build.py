@@ -42,6 +42,8 @@ CONTEXT = {
     "source": {"@id": "dct:source", "@type": "@id"},
     "sourceName": "fsl:sourceName",
     "basisPhrase": "fsl:basisPhrase",
+    "additionalSource": {"@id": "fsl:additionalSource"},
+    "supports": {"@id": "fsl:supports", "@type": "@id"},
     "guidelineState": "fsl:guidelineState",
     "guideline": {"@id": "fsl:guideline", "@type": "@id"},
     "searchedAt": {"@id": "fsl:searchedAt", "@type": "@id"},
@@ -105,6 +107,21 @@ def to_node(row: dict[str, str]) -> dict:
         "note": v("備考"),
     }
     node.update({k: val for k, val in optional.items() if val})
+    if v("出典URL_2"):
+        # 第2の出典。記録の URI に #source2 を付けた節にする(名前の無い節は使わない)
+        term = CONTEXT
+        supports = []
+        for f in schema.source2_fields(row):
+            t = term[schema.SOURCE2_FIELDS[f]]
+            supports.append(t["@id"] if isinstance(t, dict) else t)
+        node["additionalSource"] = {
+            "@id": f"{BASE}id/{v('id')}#source2",
+            "@type": "fsl:AdditionalSource",
+            "source": v("出典URL_2"),
+            "sourceName": v("出典名_2"),
+            "basisPhrase": v("根拠の箇所_2"),
+            "supports": supports,
+        }
     places = [p.strip() for p in v("探した場所").split(schema.SEP.strip()) if p.strip()]
     if places:
         node["searchedAt"] = places

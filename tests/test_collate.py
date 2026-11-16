@@ -185,3 +185,43 @@ def test_absence_prefectural_basis_allows_only_one_place():
 def test_absence_basis_without_prefectural_school_allows_none():
     text = fetch.html_to_text(LIST_PAGE2)
     assert not collate.collate_absence(row(市町村="となり市", 根拠の箇所="福岡県教育委員会"), text)["一致"]
+
+
+# ---- 第2の出典(弱い所18)。見本は作りもの ----
+
+def test_collate_splits_fields_by_source():
+    r = row(状態="あり", 根拠の箇所="みほん教室を開いています", 対象="小学5年生から", 開始="令和7年度", 金額="", 上限額_円="", 補助率="",
+            出典URL_2="https://x.lg.jp/b.pdf", 根拠の箇所_2="みほん教室の案内", 出典2の項目="対象")
+    page1 = "みほん教室を開いています。令和7年度から。"
+    page2 = "みほん教室の案内 小学5年生から中学生まで"
+    # 出典では「対象」の数字を見ない。第2の出典では「開始」の数字を見ない
+    assert collate.collate(r, page1)["一致"]
+    assert collate.collate(r, page2, part=2)["一致"]
+    # 入れ替えると合わない
+    assert not collate.collate(r, page2)["一致"]
+    assert not collate.collate(r, page1, part=2)["一致"]
+
+
+def test_collate_part2_needs_basis2():
+    r = row(状態="あり", 根拠の箇所="a", 金額="", 上限額_円="", 補助率="", 出典URL_2="https://x.lg.jp/b.pdf", 根拠の箇所_2="みほん教室の案内", 出典2の項目="備考")
+    assert not collate.collate(r, "別の資料", part=2)["一致"]
+
+
+def test_fetch_run_needs_both_sources(tmp_path, monkeypatch):
+    import csv
+    r = {c: "" for c in schema.COLUMNS} | {
+        "id": "40999-shien-center", "市町村コード": "40999", "市町村": "みほん市", "制度の種類": schema.KINDS["shien-center"],
+        "状態": "あり", "制度名": "みほん教室", "出典URL": "https://www.city.mihon.lg.jp/a.html", "根拠の箇所": "みほん教室",
+        "出典URL_2": "https://www.city.mihon.lg.jp/b.pdf", "出典名_2": "案内", "根拠の箇所_2": "通う教室",
+        "出典2の項目": "制度名", "確認日": "2026-11-16", "確認方法": "機械の読み取り"}
+    p = tmp_path / "s.csv"
+    schema.write_csv(p, [r])
+    pages = {"https://www.city.mihon.lg.jp/a.html": "みほん教室", "https://www.city.mihon.lg.jp/b.pdf": "通う教室です"}
+    monkeypatch.setattr(fetch, "fetch", lambda u: {"url": u, "結果": "取得" if u in pages else "取得できず(HTTP 404)", "text": pages.get(u)})
+    out = fetch.run(str(p), interval=0)
+    assert out[0]["判定"] == "一致" and out[0]["出典2"]["一致"]
+    pages["https://www.city.mihon.lg.jp/b.pdf"] = "別の資料"
+    assert fetch.run(str(p), interval=0)[0]["判定"] == "不一致"
+    del pages["https://www.city.mihon.lg.jp/b.pdf"]
+    assert fetch.run(str(p), interval=0)[0]["判定"] == "取得できず"
+    assert "(出典2)" in fetch.summary_markdown(fetch.run(str(p), interval=0))
