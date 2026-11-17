@@ -352,6 +352,7 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
 .btn.main{background:var(--accent);color:#fff;font-weight:700}
 .btn.block{display:block;text-align:center;margin:.6rem 0}
 .rows{list-style:none;padding:0;margin:0;background:var(--card);border:1px solid var(--line);border-radius:.6rem}
+.focus td{text-align:center}
 .rows li{padding:.85rem 1.1rem;border-top:1px solid var(--line)}
 .rows li:first-child{border-top:0}
 .rows p{margin:.15rem 0 0;font-size:.9rem;color:var(--sub)}
@@ -446,6 +447,11 @@ KIND_PLAIN = {
                  "フリースクールなどで過ごした日を、在籍する学校の出席として扱うときの決まり(要綱やガイドライン)や、その施設の一覧を、市町村が公表しているかどうかです。"),
 }
 
+# 保護者向けのページでの並び順。お金(利用料の補助)と出席扱いを先にする(11/17 の決定。
+# 民間のポータルに無く、市町村ごとに違い、公式ページにも載っていないことが多い制度の情報なので)
+FOCUS_KINDS = ["fs-hojo", "shusseki"]
+PARENT_ORDER = FOCUS_KINDS + [k for k in MATRIX_KINDS if k not in FOCUS_KINDS]
+
 PLAIN_STATUS = {
     "あり": "あります",
     "予定": "始まる予定です",
@@ -497,9 +503,19 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
     have = {r["市町村コード"] for r in rows}
     metro_areas = [a for a in areas if a["福岡都市圏"] == "○"]
     other_areas = [a for a in areas if a["福岡都市圏"] != "○" and a["市町村コード"] != "40000" and a["市町村コード"] in have]
-    kinds_html = "".join(f"<dt>{e(KIND_PLAIN[k][0])}</dt><dd>{e(KIND_PLAIN[k][1])}</dd>" for k in MATRIX_KINDS)
+    kinds_html = "".join(f"<dt>{e(KIND_PLAIN[k][0])}</dt><dd>{e(KIND_PLAIN[k][1])}</dd>" for k in PARENT_ORDER)
+    cell = {(r["市町村コード"], kind_slug(r)): r for r in rows}
+    focus_rows = []
+    for a in metro_areas:
+        tds = ""
+        for k in FOCUS_KINDS:
+            r = cell.get((a["市町村コード"], k))
+            tds += (f'<td><a href="id/{e(r["id"])}/">{badge(r["状態"])}</a></td>' if r else f"<td>{badge('未着手')}</td>")
+        focus_rows.append(f'<tr><th scope="row"><a href="shi/{e(a["市町村コード"])}/">{e(a["市町村"])}</a></th>{tds}</tr>')
+    n_focus = collections.Counter(cell[(a["市町村コード"], k)]["状態"] for a in metro_areas for k in FOCUS_KINDS
+                                  if (a["市町村コード"], k) in cell)
     body = f"""<h1>福岡県の不登校支援を、市町村ごとに探す</h1>
-<p class="lead">学校に行きづらい子どものために市町村が用意している支援を、公式ページで確かめてまとめました。</p>
+<p class="lead">フリースクールの費用の補助はあるか。フリースクールで過ごした日は出席になるか。市町村ごとに違う不登校支援の制度を、公式ページと市町村への問い合わせで確かめています。</p>
 
 <h2>お住まいの市町村を選んでください</h2>
 <ul class="areas">{area_links(metro_areas)}</ul>
@@ -508,12 +524,21 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <p class="small">ここにある市町村は、いまは「学びの多様化学校」だけを調べています。</p>
 <ul class="areas minor">{area_links(other_areas)}</ul>
 </details>
-<p><a href="hikaku/">17市町を表で見比べる</a></p>
+
+<h2>費用の補助と、出席扱いの決まり</h2>
+<p>市町村ごとに違い、公式ページに載っていないことも多い2つです。福岡都市圏の17市町で、公式ページに書かれていたのは {n_focus["あり"] + n_focus["予定"]} か所、見つからなかったのは {n_focus["確認できず"]} か所でした。見つからなかった所は、市町村に問い合わせています。</p>
+<div class="scroll"><table class="focus">
+<thead><tr><th scope="col">市町</th><th scope="col">利用料の補助</th><th scope="col">出席扱いの決まり</th></tr></thead>
+<tbody>
+{chr(10).join(focus_rows)}
+</tbody></table></div>
+<p><a href="hikaku/">5つの支援をすべて、表で見比べる</a></p>
 
 <h2>この一覧の作り方</h2>
 <ul>
 <li><strong>公式ページだけを元にしています。</strong>どの支援にも、市町村・県・国の公式ページへのリンクと、確かめた日を付けています。体験談や口コミ、施設の評価は載せていません。</li>
 <li><strong>見つからなかったことも、そのまま書いています。</strong>公式ページに載っていない支援を「無い」とは書かず、「見つかりませんでした」と書いて、探したページを残しています。</li>
+<li><strong>載っていないことは、市町村に聞いています。</strong>回答をもらえたら、回答の日と担当の課を付けて載せます。</li>
 <li><strong>古くならないように、毎週確かめ直しています。</strong>公式ページの内容が変わったら、気づけるようにしています。</li>
 </ul>
 
@@ -522,6 +547,9 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 
 <h2>表示の意味</h2>
 {LEGEND_HTML}
+
+<h2>支援に関わる方、データを使いたい方へ</h2>
+<p>親の会、フリースクール、相談の仕事をしている方、サイトやアプリを作っている方へ。この一覧の元のデータは、出典を書けば自由に使えます(表のファイルでも取れます)。くわしくは<a href="about/">この一覧について・データ</a>へ。</p>
 """
     return page("福岡県の不登校支援を、市町村ごとに探す | " + TITLE, body, "", narrow=True)
 
@@ -651,7 +679,7 @@ def shi_html(area: dict[str, str], rows: list[dict[str, str]], pref_rows: list[d
     root = "../../"
     mine = {kind_slug(r): r for r in rows}
     metro = area["福岡都市圏"] == "○"
-    kinds = MATRIX_KINDS if metro else [k for k in MATRIX_KINDS if k in mine]
+    kinds = PARENT_ORDER if metro else [k for k in PARENT_ORDER if k in mine]
     by = lambda *st: [k for k in kinds if k in mine and mine[k]["状態"] in st]  # noqa: E731
     found, notfound, nashi = by("あり", "予定"), by("確認できず"), by("なし")
     todo = [k for k in kinds if k not in mine]
@@ -852,6 +880,17 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
     refetch = (f"いちばん新しい取り直しでは、{len(pages)}ページのうち {got} ページを取得できた。" if pages else "")
     body = f"""<h1>この一覧について</h1>
 <p class="note">お子さんの支援を探している方は、<a href="../">トップページ</a>からお住まいの市町村を選んでください。このページは、一覧の作り方と、データを使う方への説明です。</p>
+<h2>元のデータを使いたい方へ</h2>
+<p>保護者に情報を渡す立場の方(親の会、フリースクール、スクールソーシャルワーカー、相談窓口)や、サイト・アプリ・AI の仕組みを作っている方が、そのまま使えるようにしている。</p>
+<ul>
+<li><strong>表のファイル:</strong> <a href="../seido.csv">seido.csv</a>(Excel や Google スプレッドシートで開ける)。1行が、1市町村の1制度</li>
+<li><strong>使う条件:</strong> CC BY 4.0。出典として「不登校支援制度LOD(h-kazuki-pixel、CC BY 4.0)」と書けば、加工しても、仕事で使ってもよい</li>
+<li><strong>引用:</strong> DOI <a href="https://doi.org/{DOI}">{DOI}</a></li>
+<li><strong>とくに力を入れている所:</strong> 利用料の補助と、出席扱いの決まり。公式ページに載っていない所は市町村に問い合わせ、回答を日付と担当課つきで載せる</li>
+<li><strong>使ったら:</strong> <a href="{REPO}/issues/new?template=tsukaimashita.yml">「使いました」</a>で教えてほしい。足りない項目や市町村の希望も、ここで受ける</li>
+</ul>
+
+<h2>この一覧の考え方</h2>
 <p class="lead">不登校の子どもと保護者が使える公的な支援は、市町村ごとに違う。このデータは、福岡県の市町村について、制度の有無と中身を同じ項目で並べ、1件ごとに公式の出典と確認日を付けたもの。</p>
 
 <h2>解こうとしている課題</h2>

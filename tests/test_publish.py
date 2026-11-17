@@ -455,7 +455,7 @@ def test_top_page_speaks_to_parents_first(site):
     text = (site / "index.html").read_text(encoding="utf-8")
     main = text.split("<main")[1]
     assert main.index("お住まいの市町村を選んでください") < main.index("載せている5つの支援")
-    assert "<table" not in main  # 表は見比べるページに分けた
+    assert main.count("<table") == 1 and 'class="focus"' in main  # 5種類の表は見比べるページ。トップは主役の2つだけ
     for word in ("Turtle", "SHACL", "JSON-LD"):
         assert word not in main
 
@@ -495,3 +495,17 @@ def test_dates_on_parent_pages_are_written_in_japanese_style(site, rows):
     text = (site / "shi" / r["市町村コード"] / "index.html").read_text(encoding="utf-8")
     assert publish.jp_date(r["確認日"]) + "に公式ページで確認" in text
     assert not re.search(r"\d{4}-\d{2}-\d{2}", re.sub(r"<[^>]+>", "", text.split("<main")[1].split("</main>")[0]))
+
+
+def test_top_page_focus_table_matches_the_data(site, rows):
+    """主役の2つ(利用料の補助、出席扱い)の表と数が、データと合う(11/17 の方向の決定)。"""
+    text = (site / "index.html").read_text(encoding="utf-8")
+    metro = {a["市町村コード"] for a in schema.read_csv("data/shichoson.csv") if a["福岡都市圏"] == "○"}
+    focus = [r for r in rows if r["市町村コード"] in metro and publish.kind_slug(r) in publish.FOCUS_KINDS]
+    for r in focus:
+        assert f'href="id/{r["id"]}/"' in text
+    ari = sum(r["状態"] in ("あり", "予定") for r in focus)
+    miss = sum(r["状態"] == "確認できず" for r in focus)
+    assert f"書かれていたのは {ari} か所、見つからなかったのは {miss} か所" in text
+    area = (site / "shi" / "40219" / "index.html").read_text(encoding="utf-8")
+    assert area.index(publish.KIND_PLAIN["fs-hojo"][0]) < area.index(publish.KIND_PLAIN["shien-center"][0])
