@@ -668,6 +668,7 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <li><strong>数える。</strong>{len(rows)}件すべてが「確かめた記録」(<code>fsl:Record</code>)。制度があると確かめた記録だけが、schema.org の <code>GovernmentService</code> でもある。語彙の説明は <a href="../ns">ns</a>。</li>
 </ul>
 <p>版ごとの中身は Zenodo に保管している(DOI <a href="https://doi.org/{DOI}">{DOI}</a>)。引用するときは、この DOI を使ってほしい。</p>
+<p>作者は、民間の学習施設を運営している。データには作者の事業の情報を入れず、民間の施設の評価もしない。</p>
 <p>データは CC BY 4.0、プログラムは MIT ライセンス。作り方と検査の決まりは、<a href="{REPO}">リポジトリ</a>にある。同じ手順で、ほかの県にも広げられる。</p>
 
 <h2>分かっていないこと、できていないこと</h2>

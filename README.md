@@ -137,6 +137,8 @@ Python と SPARQL で読む例(`examples/tsukaikata.py`)と、CSV だけで読�
 
 個人の体験、施設の評価、口コミ。民間の施設は、自治体が公表している一覧にある範囲だけを扱う。
 
+作者は、民間の学習施設を運営している。データには作者の事業の情報を入れず、民間の施設の評価もしない。
+
 ## ライセンス
 
 - 引用: DOI [10.5281/zenodo.24292049](https://doi.org/10.5281/zenodo.24292049)(Zenodo。Hashimoto, Kazuki)
