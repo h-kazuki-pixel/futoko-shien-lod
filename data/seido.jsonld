@@ -167,7 +167,7 @@
    "source": "https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html",
    "sourceName": "福岡県「ICT活用型不登校児童生徒支援事業(みらいサポーター事業)について」",
    "basisPhrase": "みらいサポーター事業",
-   "note": "大学生のボランティアがオンラインで支援する。利用料は無料、申し込みは学校・市町村の教育センター・チラシから(チラシ /uploaded/attachment/268359.pdf を人が読んで確認。出典のページには無い)"
+   "note": "大学生のボランティアがオンラインで支援する。利用料は無料、申し込みは学校・市町村の教育センター・チラシから(チラシ https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf を人が読んで確認。出典のページには無い)"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40100-fs-hojo",
@@ -291,14 +291,13 @@
    },
    "kind": "fsl:kind-shien-center",
    "status": "fsl:status-ari",
-   "dateChecked": "2026-11-15",
+   "dateChecked": "2026-11-17",
    "checkMethod": "fsl:method-kikai",
    "name": "教育支援センター(まつ風学級・はまかぜ学級・すまいる学級)",
-   "eligibility": "市内在住の小中学生。小学生は保護者の送迎が条件",
-   "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf",
-   "sourceName": "教育支援センターの紹介(福岡市教育委員会)",
-   "basisPhrase": "教育支援センターの紹介",
-   "note": "すまいる学級の各教室は小学校の建物の中にある"
+   "source": "https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html",
+   "sourceName": "福岡市教育委員会「不登校に関する支援」",
+   "basisPhrase": "教育支援センター",
+   "note": "すまいる学級の各教室は小学校の建物の中にある。対象と通い方は案内の PDF にあったが、2026-11-17 時点で PDF が開けない(HTTP 404)ので載せていない"
   },
   {
    "@id": "https://h-kazuki-pixel.github.io/futoko-shien-lod/id/40130-shusseki",

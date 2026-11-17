@@ -7,7 +7,7 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40000-online,福岡県,種類と状態,オンラインでの公的な支援 / あり,https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf,,,
 40000-online,福岡県,制度名,ICT活用型不登校児童生徒支援事業(みらいサポーター事業),https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf,,,
 40000-online,福岡県,対象,県内の公立・私立の小中学校、義務教育学校に在籍する不登校の児童生徒(福岡市・北九州市の公立小中学校を除く),https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf,,,
-40000-online,福岡県,備考,大学生のボランティアがオンラインで支援する。利用料は無料、申し込みは学校・市町村の教育センター・チラシから(チラシ /uploaded/attachment/268359.pdf を人が読んで確認。出典のページには無い),https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf,,,
+40000-online,福岡県,備考,大学生のボランティアがオンラインで支援する。利用料は無料、申し込みは学校・市町村の教育センター・チラシから(チラシ https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf を人が読んで確認。出典のページには無い),https://www.pref.fukuoka.lg.jp/site/kyouiku/miraisupporter.html,https://www.pref.fukuoka.lg.jp/uploaded/attachment/268359.pdf,,,
 40100-tayouka,北九州市,種類と状態,学びの多様化学校 / 予定,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
 40100-tayouka,北九州市,制度名,北九州市立あいおい中学校,https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
 40100-tayouka,北九州市,対象,不登校・不登校傾向の中学生(各学年15名程度),https://www.city.kitakyushu.lg.jp/kyouiku/03200079.html,https://www.city.kitakyushu.lg.jp/kyouiku/03000056.html,,,
@@ -17,10 +17,9 @@ id,市町村,項目,値,見るページ,補助の資料,判定,メモ,確認日
 40130-online,福岡市,制度名,オンラインルーム,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17
 40130-online,福岡市,対象,引きこもりがちで集団への関わりが苦手な不登校の児童生徒,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。案内の PDF は 404,2026-11-17
 40130-online,福岡市,備考,端末を使い、他の児童生徒やスクールカウンセラーと交流する場。参加の方法を書いた案内の PDF は、2026-11-17 に人も機械も開けなかった(HTTP 404),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
-40130-shien-center,福岡市,種類と状態,教育支援センター(校外) / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
-40130-shien-center,福岡市,制度名,教育支援センター(まつ風学級・はまかぜ学級・すまいる学級),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
-40130-shien-center,福岡市,対象,市内在住の小中学生。小学生は保護者の送迎が条件,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
-40130-shien-center,福岡市,備考,すまいる学級の各教室は小学校の建物の中にある,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/documents/kyouikusiencenter.pdf,,,,
+40130-shien-center,福岡市,種類と状態,教育支援センター(校外) / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
+40130-shien-center,福岡市,制度名,教育支援センター(まつ風学級・はまかぜ学級・すまいる学級),https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
+40130-shien-center,福岡市,備考,すまいる学級の各教室は小学校の建物の中にある。対象と通い方は案内の PDF にあったが、2026-11-17 時点で PDF が開けない(HTTP 404)ので載せていない,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
 40130-tayouka,福岡市,種類と状態,学びの多様化学校 / あり,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。生徒募集案内の PDF は 404,2026-11-17
 40130-tayouka,福岡市,制度名,福岡市立百道松原中学校,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,合っている,市のページに記載あり。生徒募集案内の PDF は 404,2026-11-17
 40130-tayouka,福岡市,対象,不登校または不登校傾向の中学生,https://www.city.fukuoka.lg.jp/kyoiku-iinkai/kyoikusodan/child/soudan04.html,,,,
