@@ -507,5 +507,34 @@ def test_top_page_focus_table_matches_the_data(site, rows):
     ari = sum(r["状態"] in ("あり", "予定") for r in focus)
     miss = sum(r["状態"] == "確認できず" for r in focus)
     assert f"書かれていたのは {ari} か所、見つからなかったのは {miss} か所" in text
+    # 文に出した数を足すと、マスの数になる(抜けたマスを黙って落とさない)
+    nashi = sum(r["状態"] == "なし" for r in focus)
+    rest = len(metro) * len(publish.FOCUS_KINDS) - len(focus)
+    assert f"= {len(metro) * len(publish.FOCUS_KINDS)} か所のうち" in text
+    if rest:
+        assert f"まだ読んでいないのは {rest} か所" in text
+    if nashi:
+        assert f"「無い」と答えたのは {nashi} か所" in text
+    assert ari + miss + nashi + rest == len(metro) * len(publish.FOCUS_KINDS)
+    # マスごと: 1列目は利用料の補助、2列目は出席扱い。表示がその行の状態と合う
+    table = text.split('<table class="focus">')[1].split("</table>")[0]
+    by = {(r["市町村コード"], publish.kind_slug(r)): r for r in focus}
+    body_rows = table.split("<tbody>")[1].split("<tr>")[1:]
+    assert len(body_rows) == len(metro)
+    seen_untouched = 0
+    for tr in body_rows:
+        code = tr.split('href="shi/')[1].split("/")[0]
+        tds = tr.split("<td>")[1:]
+        assert len(tds) == len(publish.FOCUS_KINDS)
+        for k, td in zip(publish.FOCUS_KINDS, tds):
+            r = by.get((code, k))
+            if r:
+                assert f'href="id/{r["id"]}/"' in td and publish.badge(r["状態"]) in td
+            else:
+                seen_untouched += 1
+                assert publish.badge("未着手") in td and "href" not in td
+    assert seen_untouched == rest
+    # 市町村のページ: 出席扱いが、教育支援センターより前に来る(元の並びでは後ろ)
     area = (site / "shi" / "40219" / "index.html").read_text(encoding="utf-8")
-    assert area.index(publish.KIND_PLAIN["fs-hojo"][0]) < area.index(publish.KIND_PLAIN["shien-center"][0])
+    pos = [area.index(publish.KIND_PLAIN[k][0]) for k in ("fs-hojo", "shusseki", "shien-center")]
+    assert pos == sorted(pos)

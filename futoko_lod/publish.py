@@ -448,7 +448,8 @@ KIND_PLAIN = {
 }
 
 # 保護者向けのページでの並び順。お金(利用料の補助)と出席扱いを先にする(11/17 の決定。
-# 民間のポータルに無く、市町村ごとに違い、公式ページにも載っていないことが多い制度の情報なので)
+# 市町村ごとに違い、公式ページで見つからないことが多い制度の情報なので。民間のサイトとの比較は
+# 検索結果を見た範囲の話で、中を1ページずつは確かめていない)
 FOCUS_KINDS = ["fs-hojo", "shusseki"]
 PARENT_ORDER = FOCUS_KINDS + [k for k in MATRIX_KINDS if k not in FOCUS_KINDS]
 
@@ -510,10 +511,23 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
         tds = ""
         for k in FOCUS_KINDS:
             r = cell.get((a["市町村コード"], k))
-            tds += (f'<td><a href="id/{e(r["id"])}/">{badge(r["状態"])}</a></td>' if r else f"<td>{badge('未着手')}</td>")
+            if r:
+                tds += f'<td><a href="id/{e(r["id"])}/">{badge(r["状態"])}</a></td>'
+            elif any(q["市町村コード"] == a["市町村コード"] and q["種類"].strip() == k for q in (records or {}).get("toiawase", [])):
+                tds += f"<td>{badge('未着手')}<br><small>問い合わせ中</small></td>"
+            else:
+                tds += f"<td>{badge('未着手')}</td>"
         focus_rows.append(f'<tr><th scope="row"><a href="shi/{e(a["市町村コード"])}/">{e(a["市町村"])}</a></th>{tds}</tr>')
     n_focus = collections.Counter(cell[(a["市町村コード"], k)]["状態"] for a in metro_areas for k in FOCUS_KINDS
                                   if (a["市町村コード"], k) in cell)
+    n_cells = len(metro_areas) * len(FOCUS_KINDS)
+    n_untouched = n_cells - sum(n_focus.values())
+    rest = []
+    if n_focus["なし"]:
+        rest.append(f'市町村が「無い」と答えたのは {n_focus["なし"]} か所')
+    if n_untouched:
+        rest.append(f"公式ページをまだ読んでいないのは {n_untouched} か所")
+    focus_rest = "(" + "、".join(rest) + ")" if rest else ""
     body = f"""<h1>福岡県の不登校支援を、市町村ごとに探す</h1>
 <p class="lead">フリースクールの費用の補助はあるか。フリースクールで過ごした日は出席になるか。市町村ごとに違う不登校支援の制度を、公式ページと市町村への問い合わせで確かめています。</p>
 
@@ -526,7 +540,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 </details>
 
 <h2>費用の補助と、出席扱いの決まり</h2>
-<p>市町村ごとに違い、公式ページに載っていないことも多い2つです。福岡都市圏の17市町で、公式ページに書かれていたのは {n_focus["あり"] + n_focus["予定"]} か所、見つからなかったのは {n_focus["確認できず"]} か所でした。見つからなかった所は、市町村に問い合わせています。</p>
+<p>市町村ごとに違い、公式ページで見つからないことが多い2つです。福岡都市圏の17市町 × 2つ = {n_cells} か所のうち、公式ページに書かれていたのは {n_focus["あり"] + n_focus["予定"]} か所、見つからなかったのは {n_focus["確認できず"]} か所でした{focus_rest}。見つからなかった所は、市町村に問い合わせています。</p>
 <div class="scroll"><table class="focus">
 <thead><tr><th scope="col">市町</th><th scope="col">利用料の補助</th><th scope="col">出席扱いの決まり</th></tr></thead>
 <tbody>
@@ -536,9 +550,9 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 
 <h2>この一覧の作り方</h2>
 <ul>
-<li><strong>公式ページだけを元にしています。</strong>どの支援にも、市町村・県・国の公式ページへのリンクと、確かめた日を付けています。体験談や口コミ、施設の評価は載せていません。</li>
+<li><strong>公式ページを元にしています。</strong>どの支援にも、市町村・県・国の公式ページへのリンクと、確かめた日を付けています。体験談や口コミ、施設の評価は載せていません。</li>
 <li><strong>見つからなかったことも、そのまま書いています。</strong>公式ページに載っていない支援を「無い」とは書かず、「見つかりませんでした」と書いて、探したページを残しています。</li>
-<li><strong>載っていないことは、市町村に聞いています。</strong>回答をもらえたら、回答の日と担当の課を付けて載せます。</li>
+<li><strong>見つからなかったことは、市町村に聞いています。</strong>回答をもらえたら、公式ページとは分けて、回答の日と担当の課を付けて載せます。まだ回答は届いていません。</li>
 <li><strong>古くならないように、毎週確かめ直しています。</strong>公式ページの内容が変わったら、気づけるようにしています。</li>
 </ul>
 
@@ -547,6 +561,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 
 <h2>表示の意味</h2>
 {LEGEND_HTML}
+<p>「未着手」は、公式ページをまだ読んでいない所です。</p>
 
 <h2>支援に関わる方、データを使いたい方へ</h2>
 <p>親の会、フリースクール、相談の仕事をしている方、サイトやアプリを作っている方へ。この一覧の元のデータは、出典を書けば自由に使えます(表のファイルでも取れます)。くわしくは<a href="about/">この一覧について・データ</a>へ。</p>
@@ -884,9 +899,9 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <p>保護者に情報を渡す立場の方(親の会、フリースクール、スクールソーシャルワーカー、相談窓口)や、サイト・アプリ・AI の仕組みを作っている方が、そのまま使えるようにしている。</p>
 <ul>
 <li><strong>表のファイル:</strong> <a href="../seido.csv">seido.csv</a>(Excel や Google スプレッドシートで開ける)。1行が、1市町村の1制度</li>
-<li><strong>使う条件:</strong> CC BY 4.0。出典として「不登校支援制度LOD(h-kazuki-pixel、CC BY 4.0)」と書けば、加工しても、仕事で使ってもよい</li>
+<li><strong>使う条件:</strong> CC BY 4.0。出典として「不登校支援制度LOD(h-kazuki-pixel)、CC BY 4.0」と書けば、加工しても、仕事で使ってもよい</li>
 <li><strong>引用:</strong> DOI <a href="https://doi.org/{DOI}">{DOI}</a></li>
-<li><strong>とくに力を入れている所:</strong> 利用料の補助と、出席扱いの決まり。公式ページに載っていない所は市町村に問い合わせ、回答を日付と担当課つきで載せる</li>
+<li><strong>とくに力を入れている所:</strong> 利用料の補助と、出席扱いの決まり。公式ページで見つからなかった所は市町村に問い合わせ、回答を日付と担当課つきで載せる</li>
 <li><strong>使ったら:</strong> <a href="{REPO}/issues/new?template=tsukaimashita.yml">「使いました」</a>で教えてほしい。足りない項目や市町村の希望も、ここで受ける</li>
 </ul>
 
