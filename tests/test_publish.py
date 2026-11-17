@@ -99,7 +99,7 @@ def test_published_csv_is_the_data_file_itself(site):
 def test_kakunin_dekizu_page_says_it_does_not_mean_none(site, rows):
     for r in rows:
         text = (site / "id" / r["id"] / "index.html").read_text(encoding="utf-8")
-        warned = "制度が無いという意味ではない" in text
+        warned = "無いとは限りません。" in text and "教育委員会に聞いてみてください" in text
         assert warned == (r["状態"] == "確認できず"), r["id"]
         if r["状態"] == "確認できず":
             for place in r["探した場所"].split(schema.SEP.strip()):
@@ -243,7 +243,7 @@ def test_only_existing_systems_are_government_services(site, rows):
 
 
 def test_scope_note_counts_come_from_the_data(site, rows):
-    text = (site / "index.html").read_text(encoding="utf-8")
+    text = (site / "about" / "index.html").read_text(encoding="utf-8")
     areas = schema.read_csv("data/shichoson.csv")
     have = {r["市町村コード"] for r in rows if r["制度の種類"] == "学びの多様化学校"} - {"40000"}
     assert f"県内60市町村のうち {len(have)}" in text
@@ -295,7 +295,7 @@ def test_hojo_page_says_the_data_does_not_hold_the_application_period(site, rows
     assert hojo
     for r in hojo:
         text = (site / "id" / r["id"] / "index.html").read_text(encoding="utf-8")
-        assert "いま申請を受け付けているかは、このデータには無い" in text
+        assert "いま申請を受け付けているかは、この一覧には載せていません" in text
     other = next(r for r in rows if publish.kind_slug(r) == "shien-center" and r["状態"] == "あり")
     assert "いま申請を受け付けているか" not in (site / "id" / other["id"] / "index.html").read_text(encoding="utf-8")
 
@@ -418,3 +418,42 @@ def test_neighbor_gaps_only_unknown_cells_with_ari_next_door(site, rows):
 def test_rinsetsu_is_not_mixed_into_the_rdf(site):
     # DBpedia Japanese の値(CC BY-SA)は、このデータの RDF(CC BY)に入れない
     assert "隣接" not in (site / "seido.ttl").read_text(encoding="utf-8")
+
+
+# ---------- 保護者向けのページ(11/17) ----------
+
+def test_every_area_with_rows_has_a_page_and_is_linked_from_the_top(site, rows):
+    top = (site / "index.html").read_text(encoding="utf-8")
+    codes = {r["市町村コード"] for r in rows} - {"40000"}
+    for c in codes:
+        assert (site / "shi" / c / "index.html").exists(), c
+        assert f'href="shi/{c}/"' in top, c
+    assert not (site / "shi" / "40000").exists()
+
+
+def test_area_page_has_a_card_per_kind_and_plain_words(site, rows):
+    areas = schema.read_csv("data/shichoson.csv")
+    for a in areas:
+        if a["市町村コード"] == "40000" or not (site / "shi" / a["市町村コード"]).exists():
+            continue
+        text = (site / "shi" / a["市町村コード"] / "index.html").read_text(encoding="utf-8")
+        mine = [r for r in rows if r["市町村コード"] == a["市町村コード"]]
+        if a["福岡都市圏"] == "○":
+            for k in publish.MATRIX_KINDS:
+                assert f"<h3>{publish.KIND_PLAIN[k][0]}</h3>" in text, (a["市町村"], k)
+        for r in mine:
+            if r["状態"] in ("あり", "予定"):
+                assert html.escape(r["出典URL"]) in text and f'id/{r["id"]}/' in text
+            if r["状態"] == "確認できず":
+                assert "無いとは限りません" in text
+        # 技術の言葉は、保護者向けのページに出さない
+        for word in ("Turtle", "URI", "SHACL", "照合"):
+            assert word not in text.split("<main>")[1].split("</main>")[0], (a["市町村"], word)
+
+
+def test_top_page_speaks_to_parents_first(site):
+    text = (site / "index.html").read_text(encoding="utf-8")
+    main = text.split("<main>")[1]
+    assert main.index("お住まいの市町村を選んでください") < main.index("17市町を見比べる")
+    for word in ("Turtle", "SHACL", "JSON-LD"):
+        assert word not in main

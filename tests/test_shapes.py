@@ -82,7 +82,7 @@ def test_shapes_page_lists_every_shape(site):
     text = (site / "shapes.html").read_text(encoding="utf-8")
     for name in ("RecordShape", "AriYoteiRule", "NashiRule", "KakuninDekizuRule", "AreaShape", "RefetchShape", "DatasetShape"):
         assert f'id="{name}"' in text
-    assert 'href="shapes"' in (site / "index.html").read_text(encoding="utf-8")
+    assert 'href="../shapes"' in (site / "about" / "index.html").read_text(encoding="utf-8")
 
 
 # ---------- 壊したら落ちる ----------

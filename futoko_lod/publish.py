@@ -332,6 +332,27 @@ dl.rec dt{color:var(--sub)}
 dl.rec dd{overflow-wrap:anywhere}
 .note{background:var(--soft);padding:.75rem 1rem;border-left:4px solid var(--accent)}
 code{font-size:.9em;overflow-wrap:anywhere}
+.areas{display:grid;grid-template-columns:repeat(auto-fill,minmax(7.5rem,1fr));gap:.5rem;padding:0;list-style:none;margin:0 0 1rem}
+.areas a{display:block;padding:.7rem .5rem;text-align:center;border:1px solid var(--accent);border-radius:.4rem;background:#fff;text-decoration:none;font-weight:700}
+.areas a:hover{background:var(--soft)}
+.areas.small a{font-weight:400;padding:.45rem .4rem;font-size:.95rem;border-color:var(--line)}
+.card{border:1px solid var(--line);border-radius:.5rem;background:#fff;padding:1rem 1.1rem;margin:0 0 1rem}
+.card h3{margin:0 0 .35rem;font-size:1.05rem}
+.card .what{color:var(--sub);font-size:.9rem;margin:0 0 .6rem}
+.card .found{font-weight:700;margin:.2rem 0 .5rem}
+.card dl{margin:.25rem 0 .5rem}
+.card dt{color:var(--sub);font-size:.85rem;margin-top:.4rem}
+.card dd{margin:0;overflow-wrap:anywhere}
+tbody th[scope=row]{white-space:nowrap}
+.card.none{background:var(--bg)}
+.btn{display:inline-block;padding:.35rem .8rem;border:1px solid var(--accent);border-radius:.3rem;text-decoration:none;margin:.25rem .4rem .25rem 0}
+.btn.main{background:var(--accent);color:#fff}
+dl.plain dt{font-weight:700;margin-top:.8rem}
+dl.plain dd{margin:.1rem 0 0}
+details{margin:1.5rem 0;border:1px solid var(--line);border-radius:.4rem;padding:.25rem .9rem;background:#fff}
+details summary{cursor:pointer;font-weight:700;padding:.5rem 0}
+.small{font-size:.875rem;color:var(--sub)}
+nav.crumb{font-size:.9rem;margin-bottom:.5rem}
 @media (max-width:36rem){dl.rec{grid-template-columns:1fr}dl.rec dt{border-bottom:0;padding-bottom:0}}
 """
 
@@ -348,13 +369,14 @@ def page(title: str, body: str, root: str, head: str = "") -> str:
 <link rel="stylesheet" href="{root}style.css">
 {head}</head>
 <body>
-<header><a href="{root}">{TITLE}</a> ／ <a href="{root}about/" style="font-weight:400">この作品について</a></header>
+<header><a href="{root}">福岡県 不登校支援の制度さがし</a> ／ <a href="{root}" style="font-weight:400">市町村から探す</a> ／ <a href="{root}about/" style="font-weight:400">この一覧について・データ</a></header>
 <main>
 {body}
 </main>
 <footer>
-<p>データは <a href="{LICENSE}">CC BY 4.0</a>。制度は変わる。使う前に、各行の出典と確認日を確かめてほしい。申請できるかどうかは、市町村の窓口で確かめてほしい。</p>
-<p>誤りや、制度が変わった所を見つけたら、<a href="{REPO}/issues/new?template=teisei.yml">訂正の Issue</a> で知らせてほしい。使ったときは、<a href="{REPO}/issues/new?template=tsukaimashita.yml">「使いました」の Issue</a> で教えてもらえると、どこを深く調べるかを決められる。<a href="{REPO}">リポジトリ</a></p>
+<p>ここにある情報は、それぞれの確認日の時点で、市町村・県・国の公式ページに書かれていたことです。制度は変わるので、利用や申請の前に、必ず市町村の窓口で確かめてください。</p>
+<p>まちがいや、制度が変わった所に気づいたら、<a href="{REPO}/issues/new?template=teisei.yml">こちら</a>から知らせてください(GitHub のアカウントが要ります)。使ったときも、<a href="{REPO}/issues/new?template=tsukaimashita.yml">「使いました」</a>で教えてもらえると助かります。</p>
+<p>{TITLE}。データは <a href="{LICENSE}">CC BY 4.0</a>。<a href="{REPO}">作り方(GitHub)</a></p>
 </footer>
 </body>
 </html>
@@ -388,6 +410,38 @@ def kind_slug(row: dict[str, str]) -> str:
     return schema.KIND_BY_LABEL[row["制度の種類"]]
 
 
+# 保護者向けの言葉。種類の呼び名と、どういう支援か(一般的な説明。各市町村の中身は出典で確かめる)
+KIND_PLAIN = {
+    "fs-hojo": ("フリースクールなどの利用料の補助",
+                "民間のフリースクールなどに通うときの費用の一部を、市町村が補助する制度です。"),
+    "shien-center": ("教育支援センター",
+                     "学校に行きづらい子どもが通える、市町村の教育委員会の教室です(「適応指導教室」とも呼ばれます)。学校の外にあります。"),
+    "tayouka": ("学びの多様化学校",
+                "不登校の子どもに合わせて、授業の時間や内容を工夫できる学校です。国(文部科学大臣)が指定します。以前は「不登校特例校」と呼ばれていました。"),
+    "online": ("オンラインの支援",
+               "家からオンラインで、学習や相談、ほかの子どもとの交流などができる、市町村や県の取り組みです。"),
+    "shusseki": ("出席扱いの決まり",
+                 "フリースクールなどで過ごした日を、在籍する学校の出席として扱うときの決まり(要綱やガイドライン)や、その施設の一覧を、市町村が公表しているかどうかです。"),
+}
+
+PLAIN_STATUS = {
+    "あり": "あります",
+    "予定": "始まる予定です",
+    "なし": "国の一覧に載っていません",
+    "確認できず": "公式ページでは見つかりませんでした",
+}
+
+
+def plain_status(row: dict[str, str] | None) -> str:
+    if row is None:
+        return "まだ調べていません"
+    return PLAIN_STATUS[row["状態"]]
+
+
+def area_links(areas: list[dict[str, str]], root: str = "") -> str:
+    return "".join(f'<li><a href="{root}shi/{e(a["市町村コード"])}/">{e(a["市町村"])}</a></li>' for a in areas)
+
+
 def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict | None = None) -> str:
     cell: dict[tuple[str, str], list[dict[str, str]]] = collections.defaultdict(list)
     for r in rows:
@@ -410,6 +464,50 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
             else:
                 tds.append(f"<td>{badge('未着手')}</td>")
         lines.append(f'<tr><th scope="row">{e(a["市町村"])}</th>{"".join(tds)}</tr>')
+    have = {r["市町村コード"] for r in rows}
+    metro_areas = [a for a in areas if a["福岡都市圏"] == "○"]
+    other_areas = [a for a in areas if a["福岡都市圏"] != "○" and a["市町村コード"] != "40000" and a["市町村コード"] in have]
+    kinds_html = "".join(f"<dt>{e(KIND_PLAIN[k][0])}</dt><dd>{e(KIND_PLAIN[k][1])}</dd>" for k in MATRIX_KINDS)
+    body = f"""<h1>福岡県 市町村ごとの不登校支援</h1>
+<p class="lead">子どもが学校に行きづらくなったとき、市町村が用意している公的な支援をまとめています。お住まいの市町村を選ぶと、その市町村で見つかった支援と、公式ページへのリンクが見られます。</p>
+
+<h2>お住まいの市町村を選んでください</h2>
+<p>福岡都市圏の17市町は、5種類の支援をすべて調べています。</p>
+<ul class="areas">{area_links(metro_areas)}</ul>
+<details>
+<summary>そのほかの市町村({len(other_areas)})</summary>
+<p class="small">都市圏の外の市町村は、いまは「学びの多様化学校」だけを調べています。福岡県が行っている支援も、それぞれのページに載せています。</p>
+<ul class="areas small">{area_links(other_areas)}</ul>
+</details>
+
+<h2>どんな支援があるか</h2>
+<dl class="plain">{kinds_html}</dl>
+
+<h2>見かた</h2>
+<dl class="plain">
+<dt>{badge("あり")} あります</dt><dd>市町村・県・国の公式ページに書かれていました。公式ページへのリンクを付けています。</dd>
+<dt>{badge("確認できず")} 公式ページでは見つかりませんでした</dt><dd><strong>無いとは限りません。</strong>ページに載っていないだけのこともあります。市町村の教育委員会に聞いてみてください。この一覧を作っている側でも、市町村に問い合わせています。</dd>
+<dt>{badge("なし")} 国の一覧に載っていません</dt><dd>学びの多様化学校だけに使っています。文部科学省の一覧に、その市町村の学校が載っていないという意味です。市町村が「無い」と答えたものではありません。</dd>
+</dl>
+
+<h2>17市町を見比べる</h2>
+<p>表の文字を選ぶと、その支援のくわしいページが開きます。「未着手」は、まだ調べていない所です。</p>
+<div class="scroll"><table>
+<thead><tr><th scope="col">市町</th>{"".join(f'<th scope="col">{e(KIND_SHORT[k])}</th>' for k in MATRIX_KINDS)}</tr></thead>
+<tbody>
+{chr(10).join(lines)}
+</tbody></table></div>
+<p class="small">※ の付いた「なし」は、文部科学省の一覧に、その市町が管理する学校が載っていないという意味です。設置の検討や予定は、この一覧からは分かりません。</p>
+
+<h2>この一覧について</h2>
+<p>作り方や確かめ方、データを使いたい方への説明は、<a href="about/">この一覧について・データ</a>にあります。</p>
+"""
+    return page(TITLE, body, "")
+
+
+def data_section(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict) -> str:
+    """件数、確かめ方、データのファイル、対象の範囲。データを使う人と審査の人向け(この一覧について のページに出す)。"""
+    metro = [a for a in areas if a["福岡都市圏"] == "○"]
     by_kind = collections.Counter((kind_slug(r), r["状態"]) for r in rows)
     kind_lines = []
     for k in schema.KINDS:
@@ -442,26 +540,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
     scope_note = (f"都市圏の外の市町村は、主に学びの多様化学校を調べている(ほかの種類の行は {outside_other} 件)。"
                   f"学びの多様化学校の行があるのは、県内60市町村のうち {len(tayouka_codes - {'40000'})}。"
                   + (f"まだ行が無いのは {'、'.join(missing)}。" if missing else ""))
-    legend = "".join(f"<tr><td>{badge(s)}</td><td>{e(m)}</td></tr>" for s, m in STATUS_MEANING.items())
-    legend += f"<tr><td>{badge('未着手')}</td><td>まだ読んでいない。</td></tr>"
-    body = f"""<h1>{TITLE}</h1>
-<p class="lead">市町村ごとに違う不登校支援の制度を、同じ項目で並べ、公式の出典と確認日を付けたデータ。対象は福岡県の市町村、義務教育の段階(小学生・中学生)。</p>
-<p class="note">いちばん大事にしている決まりは一つ。<strong>「制度なし」と「確認できず」を混ぜない。</strong>公式ページで見つからなかっただけのものは「確認できず」と書き、探した場所を残す。</p>
-
-<h2>福岡都市圏の17市町 × 5種類</h2>
-<p>{len(metro) * len(MATRIX_KINDS)}マスのうち、{sum(filled.values())}マスに状態が付いている(あり {filled['あり']}、予定 {filled['予定']}、なし {filled['なし']}、確認できず {filled['確認できず']})。マスを選ぶと、その1件のページが開く。</p>
-<div class="scroll"><table>
-<thead><tr><th scope="col">市町</th>{"".join(f'<th scope="col">{e(KIND_SHORT[k])}</th>' for k in MATRIX_KINDS)}</tr></thead>
-<tbody>
-{chr(10).join(lines)}
-</tbody></table></div>
-<p>※ の付いた「なし」は、公式の一覧(学びの多様化学校では、文部科学省の設置者一覧)に、その市町が管理する学校が載っていないという意味。市町が「無い」と答えたものではない。設置の検討や予定は、この一覧からは分からない。</p>
-<p>「確認できず」は、公式ページで見つからなかっただけで、制度が無いという意味ではない。使えるかどうかは、市町の教育委員会に確かめてほしい。</p>
-
-<h2>状態の意味</h2>
-<div class="scroll"><table><thead><tr><th scope="col">状態</th><th scope="col">意味</th></tr></thead><tbody>{legend}</tbody></table></div>
-
-<h2>種類ごとの件数</h2>
+    return f"""<h2>種類ごとの件数</h2>
 <p>全{len(rows)}件(あり {total['あり']}、予定 {total['予定']}、なし {total['なし']}、確認できず {total['確認できず']})。件数は種類で大きく違うので、分けて示す。{e(scope_note)}</p>
 <div class="scroll"><table>
 <thead><tr><th scope="col">種類</th>{"".join(f'<th scope="col">{e(s)}</th>' for s in schema.STATUSES)}<th scope="col">計</th></tr></thead>
@@ -469,8 +548,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 {chr(10).join(kind_lines)}
 </tbody></table></div>
 <p>「なし」{total['なし']}件のうち、公式の一覧に載っていないことを根拠にしたものは {sum(list_based_none(r) for r in rows)} 件(いまは、すべて学びの多様化学校)。市町村の回答に基づく「なし」は {answered_nashi} 件。</p>
-<p>確かめ方の内訳: {"、".join(f"{e(m)} {methods[m]}件" for m in schema.METHODS)}。確認日のいちばん新しい行は {e(modified)}。</p>
-<p><a href="ichiran/">全{len(rows)}件の一覧</a></p>
+<p>確かめ方の内訳: {"、".join(f"{e(m)} {methods[m]}件" for m in schema.METHODS)}。確認日のいちばん新しい行は {e(modified)}。<a href="../ichiran/">全{len(rows)}件の一覧</a></p>
 
 <h2>確かめ方の現状</h2>
 {checks_html}
@@ -478,20 +556,90 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <div class="scroll"><table>
 <thead><tr><th scope="col">ファイル</th><th scope="col">形式</th></tr></thead>
 <tbody>
-<tr><td><a href="seido.csv">seido.csv</a></td><td>CSV(UTF-8)。1行 = 1市町村の1制度</td></tr>
-<tr><td><a href="seido.jsonld">seido.jsonld</a></td><td>JSON-LD</td></tr>
-<tr><td><a href="seido.ttl">seido.ttl</a></td><td>Turtle</td></tr>
-<tr><td><a href="ns">ns</a> / <a href="ns.ttl">ns.ttl</a></td><td>語彙(項目と、種類・状態などの値)の説明</td></tr>
-<tr><td><a href="shapes">shapes</a> / <a href="shapes.ttl">shapes.ttl</a></td><td>形(SHACL)。公開する RDF が守る決まり。公開のたびに、この形で検査してから公開している</td></tr>
-<tr><td><a href="dataset.ttl">dataset.ttl</a></td><td>このデータセットの説明(DCAT)</td></tr>
-<tr><td><a href="kumiawase/">組み合わせの例</a> / <a href="kumiawase.csv">kumiawase.csv</a></td><td>e-Stat 統計LOD の児童数・生徒数と、標準地域コードの URI で並べた例。数字は e-Stat 統計LOD によるもの</td></tr>
+<tr><td><a href="../seido.csv">seido.csv</a></td><td>CSV(UTF-8)。1行 = 1市町村の1制度</td></tr>
+<tr><td><a href="../seido.jsonld">seido.jsonld</a></td><td>JSON-LD</td></tr>
+<tr><td><a href="../seido.ttl">seido.ttl</a></td><td>Turtle</td></tr>
+<tr><td><a href="../ns">ns</a> / <a href="../ns.ttl">ns.ttl</a></td><td>語彙(項目と、種類・状態などの値)の説明</td></tr>
+<tr><td><a href="../shapes">shapes</a> / <a href="../shapes.ttl">shapes.ttl</a></td><td>形(SHACL)。公開する RDF が守る決まり。公開のたびに、この形で検査してから公開している</td></tr>
+<tr><td><a href="../dataset.ttl">dataset.ttl</a></td><td>このデータセットの説明(DCAT)</td></tr>
+<tr><td><a href="../kumiawase/">組み合わせの例</a> / <a href="../kumiawase.csv">kumiawase.csv</a></td><td>e-Stat 統計LOD の児童数・生徒数と、標準地域コードの URI で並べた例。数字は e-Stat 統計LOD によるもの</td></tr>
 </tbody></table></div>
 <p>1件ごとの URI は <code>{e(BASE)}id/{{id}}</code>。同じ場所に <code>.ttl</code> と <code>.jsonld</code> を付けると、その1件のデータが取れる。市町村は、e-Stat 統計LOD の標準地域コードと、DBpedia Japanese の資源につないでいる。</p>
 
 <h2>対象の範囲</h2>
 <p>根拠の法律({e(LAW)})の範囲に合わせ、義務教育の段階に向けた市町村の制度を対象にしている。福岡都市圏の17市町は5種類すべてを、そのほかの市町村は主に学びの多様化学校を調べている。個人の体験、施設の評価、口コミは載せない。</p>
 """
-    return page(TITLE, body, "")
+
+
+def card_html(k: str, r: dict[str, str] | None, area: str, records: dict, root: str) -> str:
+    """市町村のページの1枚。保護者が読む前提で、中身と公式ページを先に、確かめ方は1件のページに回す。"""
+    name, what = KIND_PLAIN[k]
+    head = f'<h3>{e(name)}</h3>\n<p class="what">{e(what)}</p>\n'
+    if r is None:
+        return (f'<section class="card none">{head}<p class="found">{badge("未着手")} まだ調べていません。</p>'
+                f'<p>{e(area)}の教育委員会に聞いてみてください。</p></section>\n')
+    def v(key: str) -> str:
+        return (r.get(key) or "").strip()
+    st = v("状態")
+    out = [head, f'<p class="found">{badge(st)} {e(plain_status(r))}</p>']
+    if st in ("あり", "予定"):
+        items = []
+        if v("制度名"):
+            items.append(("名前", e(v("制度名"))))
+        if v("対象"):
+            items.append(("だれが使えるか", e(v("対象"))))
+        if v("金額"):
+            items.append(("金額", e(v("金額")) + (f'({e(v("補助の形"))})' if v("補助の形") else "")))
+        if v("開始"):
+            items.append(("いつから", e(v("開始"))))
+        if v("備考"):
+            items.append(("そのほか", e(v("備考"))))
+        out.append("<dl>" + "".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in items) + "</dl>")
+        if k == "fs-hojo":
+            out.append('<p class="small">いま申請を受け付けているか、申請の時期はいつかは、公式ページか窓口で確かめてください。</p>')
+        out.append(f'<p><a class="btn main" href="{e(v("出典URL"))}" rel="noopener">公式ページを見る</a>'
+                   f'<a class="btn" href="{root}id/{e(r["id"])}/">くわしく(確認日・確かめ方)</a></p>')
+        out.append(f'<p class="small">確認日 {e(v("確認日"))}。{e(v("出典名"))}による。</p>')
+    elif st == "確認できず":
+        out.append(f'<p><strong>無いとは限りません。</strong>{e(area)}の公式ページで探しましたが、見つかりませんでした。'
+                   f'使えるかどうかは、{e(area)}の教育委員会に聞いてみてください。</p>')
+        asked = inquiries_for(r, records)
+        if asked:
+            day = min(q["日付"] for q in asked)
+            out.append(f'<p class="small">この一覧を作っている側でも、{e(day)} に{e(area)}へ問い合わせています。回答があれば、ここに反映します。</p>')
+        out.append(f'<p><a class="btn" href="{root}id/{e(r["id"])}/">探したページを見る</a></p>')
+    else:  # なし
+        out.append(f'<p>{e(v("なしの根拠"))}</p>' if v("なしの根拠") else "")
+        out.append('<p class="small">設置の検討や予定は、この一覧からは分かりません。</p>')
+        out.append(f'<p><a class="btn" href="{root}id/{e(r["id"])}/">くわしく</a></p>')
+    return '<section class="card">' + "\n".join(x for x in out if x) + "</section>\n"
+
+
+def shi_html(area: dict[str, str], rows: list[dict[str, str]], pref_rows: list[dict[str, str]], records: dict) -> str:
+    """市町村ごとのページ。保護者が最初に見る所。"""
+    name = area["市町村"]
+    mine = {kind_slug(r): r for r in rows}
+    metro = area["福岡都市圏"] == "○"
+    kinds = MATRIX_KINDS if metro else [k for k in MATRIX_KINDS if k in mine or k == "tayouka"]
+    cards = "".join(card_html(k, mine.get(k), name, records, "../../") for k in kinds)
+    found = [k for k in kinds if mine.get(k) and mine[k]["状態"] in ("あり", "予定")]
+    summary = ("、".join(KIND_PLAIN[k][0] for k in found) + " が見つかりました。") if found else "公式ページで見つかった支援は、まだありません。"
+    scope = ("" if metro else
+             f'<p class="note">{e(name)}は、いまは「学びの多様化学校」だけを調べています。ほかの支援は、まだ調べていません。'
+             f'{e(name)}の教育委員会に聞いてみてください。</p>\n')
+    pref = [r for r in pref_rows if kind_slug(r) in MATRIX_KINDS and r["状態"] in ("あり", "予定")]
+    pref_html = ""
+    if pref:
+        pref_html = ('<h2>福岡県の支援</h2>\n<p>県が行っている支援です。対象に当てはまるかは、「だれが使えるか」を見てください。</p>\n'
+                     + "".join(card_html(kind_slug(r), r, "福岡県", records, "../../") for r in pref))
+    last = max([r["確認日"] for r in rows] or [""])
+    body = f"""<nav class="crumb"><a href="../../">市町村から探す</a> ＞ {e(name)}</nav>
+<h1>{e(name)}の不登校の支援</h1>
+<p class="lead">{e(summary)}</p>
+{scope}<p class="small">公式ページで確かめた内容です(いちばん新しい確認日 {e(last)})。制度は変わるので、利用や申請の前に、{e(name)}の窓口で確かめてください。</p>
+<h2>{e(name)}の支援</h2>
+{cards}{pref_html}"""
+    return page(f"{name}の不登校の支援 | {TITLE}", body, "../../")
 
 
 def ichiran_html(rows: list[dict[str, str]]) -> str:
@@ -537,83 +685,93 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
     def v(key: str) -> str:
         return (row.get(key) or "").strip()
 
-    items: list[tuple[str, str]] = [
-        ("市町村", f'{e(v("市町村"))} (<a href="{e(node["areaServed"]["@id"])}" rel="noopener">標準地域コード {e(v("市町村コード"))}</a>'
-                   + (f'、<a href="{e(node["areaServed"]["sameAs"])}" rel="noopener">DBpedia Japanese</a>' if node["areaServed"].get("sameAs") else "") + ")"),
-        ("制度の種類", e(v("制度の種類"))),
-        ("状態", f'{badge(v("状態"))} {e(STATUS_MEANING[v("状態")])}'),
-    ]
-    for key in ("制度名", "補助の形", "対象", "金額"):
+    k = kind_slug(row)
+    st = v("状態")
+    # 保護者が読む所(上)と、確かめ方・データ(下にたたむ)に分ける
+    main: list[tuple[str, str]] = [("見つかったか", f'{badge(st)} {e(plain_status(row))}')]
+    for key, label in (("制度名", "名前"), ("対象", "だれが使えるか"), ("補助の形", "補助の形"), ("金額", "金額")):
         if v(key):
-            items.append((key, e(v(key))))
+            main.append((label, e(v(key))))
     if v("上限額_円"):
-        items.append(("上限額", f'{int(v("上限額_円")):,}円'))
-    for key in ("補助率", "開始"):
-        if v(key):
-            items.append((key, e(v(key))))
+        main.append(("上限額", f'{int(v("上限額_円")):,}円'))
+    if v("補助率"):
+        main.append(("補助率", e(v("補助率"))))
+    if v("開始"):
+        main.append(("いつから", e(v("開始"))))
+    if v("備考"):
+        main.append(("そのほか", e(v("備考"))))
     if v("出典URL"):
-        items.append(("出典", f'{e(v("出典名"))}<br>{link(v("出典URL"))}'))
+        main.append(("公式ページ", f'<a class="btn main" href="{e(v("出典URL"))}" rel="noopener">公式ページを見る</a><br>'
+                                   f'<span class="small">{e(v("出典名"))}<br>{link(v("出典URL"))}</span>'))
+    if v("なしの根拠"):
+        main.append(("「なし」の根拠", e(v("なしの根拠"))))
+    places = node.get("searchedAt", [])
+    if places and st == "確認できず":
+        main.append(("探したページ", "<br>".join(link(p) for p in places)))
+    main.append(("確認日", e(v("確認日"))))
+
+    more: list[tuple[str, str]] = [("制度の種類", e(v("制度の種類"))), ("状態", f'{badge(st)} {e(STATUS_MEANING[st])}')]
     if v("根拠の箇所"):
-        items.append(("根拠の箇所", f'「{e(v("根拠の箇所"))}」(出典のページにある語句)'))
+        more.append(("根拠の箇所", f'「{e(v("根拠の箇所"))}」(出典のページにある語句)'))
     if v("出典URL_2"):
         fields = "、".join(schema.source2_fields(row))
-        items.append(("第2の出典", f'{e(v("出典名_2"))}<br>{link(v("出典URL_2"))}<br>'
-                      f'根拠の箇所「{e(v("根拠の箇所_2"))}」。この資料で裏付ける項目: {e(fields)}'))
+        more.append(("第2の出典", f'{e(v("出典名_2"))}<br>{link(v("出典URL_2"))}<br>'
+                     f'根拠の箇所「{e(v("根拠の箇所_2"))}」。この資料で裏付ける項目: {e(fields)}'))
     if v("要綱の状況"):
-        items.append(("要綱", e(v("要綱の状況")) + (f'<br>{link(v("要綱URL"))}' if v("要綱URL") else "")))
-    if v("なしの根拠"):
-        items.append(("なしの根拠", e(v("なしの根拠"))))
-    places = node.get("searchedAt", [])
-    if places:
-        items.append(("探した場所", "<br>".join(link(p) for p in places)))
-    if v("備考"):
-        items.append(("備考", e(v("備考"))))
-    items.append(("確認日", e(v("確認日"))))
-    items.append(("確認方法", f'{e(v("確認方法"))}。{e(METHOD_MEANING[v("確認方法")])}'))
+        more.append(("要綱", e(v("要綱の状況")) + (f'<br>{link(v("要綱URL"))}' if v("要綱URL") else "")))
+    if places and st != "確認できず":
+        more.append(("探した場所", "<br>".join(link(p) for p in places)))
+    more.append(("確認方法", f'{e(v("確認方法"))}。{e(METHOD_MEANING[v("確認方法")])}'))
     records = records or {"torinaoshi": [], "saikakunin": [], "toiawase": []}
     recheck = recheck_line(row, records)
     if recheck:
-        items.append(("人の再確認", e(recheck)))
+        more.append(("人の再確認", e(recheck)))
     inquiries = inquiry_lines(row, records)
     if inquiries:
-        items.append(("問い合わせ", "<br>".join(e(x) for x in inquiries)))
+        more.append(("問い合わせ", "<br>".join(e(x) for x in inquiries)))
     refetch = refetch_lines(row, records)
     if refetch:
-        items.append(("定期的な取り直し", "<br>".join(e(x) for x in refetch)))
-    dl = "\n".join(f"<dt>{k}</dt><dd>{val}</dd>" for k, val in items)
+        more.append(("定期的な取り直し", "<br>".join(e(x) for x in refetch)))
+    more.append(("市町村", f'{e(v("市町村"))} (<a href="{e(node["areaServed"]["@id"])}" rel="noopener">標準地域コード {e(v("市町村コード"))}</a>'
+                 + (f'、<a href="{e(node["areaServed"]["sameAs"])}" rel="noopener">DBpedia Japanese</a>' if node["areaServed"].get("sameAs") else "") + ")"))
 
+    def dl(items: list[tuple[str, str]]) -> str:
+        return '<dl class="rec">\n' + "\n".join(f"<dt>{a}</dt><dd>{b}</dd>" for a, b in items) + "\n</dl>\n"
+
+    area = v("市町村")
     caution = ""
-    if v("状態") == "確認できず":
-        caution = ('<p class="note">この1件は、公式ページで見つからなかっただけ。<strong>制度が無いという意味ではない。</strong>'
-                   '探したページは下にある。使えるかどうかは、市町村の教育委員会に確かめてほしい。</p>\n')
+    if st == "確認できず":
+        caution = (f'<p class="note">{e(area)}の公式ページで探しましたが、見つかりませんでした。<strong>無いとは限りません。</strong>'
+                   f'ページに載っていないだけのこともあります。使えるかどうかは、{e(area)}の教育委員会に聞いてみてください。'
+                   '探したページは下にあります。</p>\n')
     elif list_based_none(row):
-        caution = ('<p class="note">この「なし」は、<strong>公式の一覧に載っていない</strong>という意味。市町村が「無い」と答えたものではない。'
-                   '設置の検討や予定は、一覧からは分からない。</p>\n')
-    elif kind_slug(row) in ("fs-hojo", "fs-unei") and v("状態") in ("あり", "予定"):
+        caution = ('<p class="note">この「なし」は、<strong>公式の一覧に載っていない</strong>という意味です。市町村が「無い」と答えたものではありません。'
+                   '設置の検討や予定は、一覧からは分かりません。</p>\n')
+    elif k in ("fs-hojo", "fs-unei") and st in ("あり", "予定"):
         # 申請の受付期間は年度ごとに変わるので、データには持たない(docs/弱い所.md の 33)
-        caution = ('<p class="note">「あり」は、制度があるという意味。<strong>いま申請を受け付けているかは、このデータには無い。</strong>'
-                   '申請の時期や受付の期間は、出典のページで確かめてほしい。</p>\n')
-    sib = "".join(
-        f'<li><a href="../{e(s["id"])}/">{e(KIND_SHORT[kind_slug(s)])}</a> {badge(s["状態"])}</li>'
-        for s in sorted(siblings, key=lambda s: list(schema.KINDS).index(kind_slug(s))) if s["id"] != row["id"])
-    sib_html = f'<h2>{e(v("市町村"))}のほかの種類</h2>\n<ul>{sib}</ul>\n' if sib else ""
+        caution = ('<p class="note">制度はあります。<strong>いま申請を受け付けているかは、この一覧には載せていません。</strong>'
+                   '申請の時期や受付の期間は、公式ページか窓口で確かめてください。</p>\n')
     nb = neighbor_lines(row, records or {}, by_id or {})
-    if nb:
-        sib_html += (f'<h2>隣の市町村の「{e(KIND_SHORT[kind_slug(row)])}」</h2>\n<ul>{"".join(nb)}</ul>\n'
-                     f'<p style="color:var(--sub)">{e(RINSETSU_NOTE)}</p>\n')
+    nb_html = (f'<h3>隣の市町村の「{e(KIND_SHORT[k])}」</h3>\n<ul>{"".join(nb)}</ul>\n'
+               f'<p class="small">{e(RINSETSU_NOTE)}</p>\n') if nb else ""
     uri = node["@id"]
     jsonld = json.dumps({"@context": build.CONTEXT, **node}, ensure_ascii=False, indent=1).replace("</", "<\\/")
     head = (f'<link rel="alternate" type="text/turtle" href="../{e(row["id"])}.ttl">\n'
             f'<link rel="alternate" type="application/ld+json" href="../{e(row["id"])}.jsonld">\n'
             f'<script type="application/ld+json">\n{jsonld}\n</script>\n')
-    title = f'{v("市町村")} {KIND_SHORT[kind_slug(row)]}'
-    body = f"""<h1>{e(title)}</h1>
-{caution}<dl class="rec">
-{dl}
-</dl>
-{sib_html}<h2>この1件のデータ</h2>
-<p>URI: <code>{e(uri)}</code></p>
+    plain_name = KIND_PLAIN.get(k, (KIND_SHORT[k], ""))[0]
+    title = f"{area} {KIND_SHORT[k]}"
+    shi_link = (f'<a href="../../shi/{e(v("市町村コード"))}/">{e(area)}</a>' if v("市町村コード") != "40000" else e(area))
+    what = KIND_PLAIN.get(k, ("", ""))[1]
+    body = f"""<nav class="crumb"><a href="../../">市町村から探す</a> ＞ {shi_link} ＞ {e(plain_name)}</nav>
+<h1>{e(area)}の{e(plain_name)}</h1>
+{f'<p class="small">{e(what)}</p>' if what else ""}
+{caution}{dl(main)}{f'<p><a class="btn" href="../../shi/{e(v("市町村コード"))}/">{e(area)}のほかの支援を見る</a></p>' if v("市町村コード") != "40000" else ""}
+<details>
+<summary>この情報の確かめ方とデータ</summary>
+{dl(more)}{nb_html}<p>URI: <code>{e(uri)}</code></p>
 <p><a href="../{e(row["id"])}.ttl">Turtle</a> / <a href="../{e(row["id"])}.jsonld">JSON-LD</a> / <a href="../../ichiran/">全件の一覧</a></p>
+</details>
 """
     return page(f"{title} | {TITLE}", body, "../../", head)
 
@@ -631,7 +789,8 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
     answered_nashi = sum(r["状態"] == "なし" and r["確認方法"] == "問い合わせ" for r in rows)
     listed_nashi = sum(list_based_none(r) for r in rows)
     refetch = (f"いちばん新しい取り直しでは、{len(pages)}ページのうち {got} ページを取得できた。" if pages else "")
-    body = f"""<h1>この作品について</h1>
+    body = f"""<h1>この一覧について</h1>
+<p class="note">お子さんの支援を探している方は、<a href="../">トップページ</a>からお住まいの市町村を選んでください。このページは、一覧の作り方と、データを使う方への説明です。</p>
 <p class="lead">不登校の子どもと保護者が使える公的な支援は、市町村ごとに違う。このデータは、福岡県の市町村について、制度の有無と中身を同じ項目で並べ、1件ごとに公式の出典と確認日を付けたもの。</p>
 
 <h2>解こうとしている課題</h2>
@@ -661,7 +820,7 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 
 <h2>使い方</h2>
 <ul>
-<li><strong>人が読む。</strong><a href="../">市町×種類の表</a>から、1件のページへ。出典のページへのリンク、確認日、確かめ方が載っている。</li>
+<li><strong>人が読む。</strong><a href="../">トップページ</a>で市町村を選ぶと、その市町村の支援がまとめて見られる。そこから1件のページへ。出典のページへのリンク、確認日、確かめ方が載っている。</li>
 <li><strong>プログラムで読む。</strong><a href="../seido.csv">CSV</a>、<a href="../seido.jsonld">JSON-LD</a>、<a href="../seido.ttl">Turtle</a>。1件ごとに URI があり、<code>.ttl</code> か <code>.jsonld</code> を付けるとその1件が取れる。ほかのサイトの上のプログラムからも読める。Python と SPARQL で読む例と、CSV だけで読む例を<a href="{REPO}/tree/main/examples">リポジトリの examples</a> に置いた(例が動くことはテストで確かめている)。</li>
 <li><strong>つなぐ。</strong>市町村は、e-Stat 統計LOD の標準地域コードの URI で持つ。統計LOD の児童数・生徒数と実際に並べた例が<a href="../kumiawase/">組み合わせの例</a>にある。DBpedia Japanese の市町村の資源にも、<code>schema:sameAs</code> でつないでいる(地方公共団体コードが合うことを、1件ずつ引いて確かめたものだけ)。出典は <code>dct:source</code> で公式ページにつながる。</li>
 <li><strong>隣と並べる。</strong>1件ごとのページに、隣の市町村の同じ種類の状態を出している。隣接は DBpedia Japanese の「隣接自治体」から取った(この部分だけ CC BY-SA 3.0。<a href="../kumiawase/#rinsetsu">組み合わせの例</a>)。</li>
@@ -681,8 +840,8 @@ def about_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <li>GitHub Pages では、制度の URI とページを分ける転送(303)や、形式の出し分けはできない。</li>
 <li>制度は変わる。申請できるかどうかは、必ず市町村の窓口で確かめてほしい。</li>
 </ul>
-"""
-    return page(f"この作品について | {TITLE}", body, "../")
+{data_section(rows, areas, records)}"""
+    return page(f"この一覧について | {TITLE}", body, "../")
 
 
 def neighbor_gaps(rows: list[dict[str, str]], areas: list[dict[str, str]], records: dict) -> list[tuple[dict[str, str], list[dict[str, str]]]]:
@@ -1037,6 +1196,13 @@ def write_site(out: str | Path = "_site", csv_path: str = "data/seido.csv") -> d
     put("style.css", CSS)
     put("index.html", index_html(rows, areas, records))
     put("ichiran/index.html", ichiran_html(rows))
+    pref_rows = [r for r in rows if r["市町村コード"] == "40000"]
+    for a in areas:
+        mine = [r for r in rows if r["市町村コード"] == a["市町村コード"]]
+        if a["市町村コード"] == "40000" or not mine:
+            continue
+        (out / "shi" / a["市町村コード"]).mkdir(parents=True)
+        put(f"shi/{a['市町村コード']}/index.html", shi_html(a, mine, pref_rows, records))
     (out / "about").mkdir()
     put("about/index.html", about_html(rows, areas, records))
     pupils_path = Path(csv_path).parent / "kumiawase" / "jidou_seito.csv"
