@@ -417,6 +417,12 @@ def jst_day(stamp: str) -> str:
         return stamp[:10]
 
 
+def jp_date(day: str) -> str:
+    """2026-11-16 → 2026年11月16日(人が読むページ用)。形が違えば、そのまま返す。"""
+    m = re.fullmatch(r"(\d{4})-(\d{2})-(\d{2})", day or "")
+    return f"{m.group(1)}年{int(m.group(2))}月{int(m.group(3))}日" if m else day
+
+
 def list_based_none(row: dict[str, str]) -> bool:
     """市町村の回答ではなく、公式の一覧に載っていないことを根拠にした「なし」。"""
     return row["状態"] == "なし" and row["確認方法"] != "問い合わせ"
@@ -503,6 +509,13 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 <ul class="areas minor">{area_links(other_areas)}</ul>
 </details>
 <p><a href="hikaku/">17市町を表で見比べる</a></p>
+
+<h2>この一覧の作り方</h2>
+<ul>
+<li><strong>公式ページだけを元にしています。</strong>どの支援にも、市町村・県・国の公式ページへのリンクと、確かめた日を付けています。体験談や口コミ、施設の評価は載せていません。</li>
+<li><strong>見つからなかったことも、そのまま書いています。</strong>公式ページに載っていない支援を「無い」とは書かず、「見つかりませんでした」と書いて、探したページを残しています。</li>
+<li><strong>古くならないように、毎週確かめ直しています。</strong>公式ページの内容が変わったら、気づけるようにしています。</li>
+</ul>
 
 <h2 id="shien">載せている5つの支援</h2>
 <dl class="plain">{kinds_html}</dl>
@@ -618,7 +631,7 @@ def card_html(r: dict[str, str], root: str) -> str:
 <p class="name">{e(v("制度名"))}</p>
 {facts_html}{hojo}
 <p><a class="btn main" href="{e(v("出典URL"))}" rel="noopener">公式ページを見る</a><a class="btn" href="{root}id/{e(r["id"])}/">くわしく</a></p>
-<p class="small">{e(v("確認日"))} に公式ページで確認</p>
+<p class="small">{e(jp_date(v("確認日")))}に公式ページで確認</p>
 </article>
 """
 
@@ -660,7 +673,7 @@ def shi_html(area: dict[str, str], rows: list[dict[str, str]], pref_rows: list[d
             f'<p><a href="{root}id/{e(mine[k]["id"])}/">探したページを見る</a></p></li>' for k in notfound)
         url = ask_url(rows)
         asked = [q for k in notfound for q in inquiries_for(mine[k], records)]
-        asked_html = (f'<p class="small">この一覧を作っている側でも、{e(min(q["日付"] for q in asked))} に{e(name)}へ問い合わせています。'
+        asked_html = (f'<p class="small">この一覧を作っている側でも、{e(jp_date(min(q["日付"] for q in asked)))}に{e(name)}へ問い合わせています。'
                       "回答があれば、ここに反映します。</p>") if asked else ""
         btn = (f'<a class="btn block" href="{e(url)}" rel="noopener">{e(name)}の公式ページを開く</a>'
                '<p class="small">担当の課や連絡先は、公式ページで確かめてください。</p>') if url else ""
@@ -673,7 +686,7 @@ def shi_html(area: dict[str, str], rows: list[dict[str, str]], pref_rows: list[d
     if nashi:
         items = "".join(
             f'<li><h3>{e(KIND_PLAIN[k][0])}</h3><p>{e(name)}が設置する学校は、国(文部科学省)の一覧に載っていません'
-            f'({e(mine[k]["確認日"])} に確認)。設置の検討や予定は、この一覧からは分かりません。</p>'
+            f'({e(jp_date(mine[k]["確認日"]))}に確認)。設置の検討や予定は、この一覧からは分かりません。</p>'
             f'<p><a href="{root}id/{e(mine[k]["id"])}/">くわしく</a></p></li>' for k in nashi)
         parts.append(f'<h2>国の一覧に載っていない支援</h2>\n<ul class="rows">{items}</ul>')
     if todo:
@@ -754,7 +767,7 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
     places = node.get("searchedAt", [])
     if places and st == "確認できず":
         main.append(("探したページ", "<br>".join(link(p) for p in places)))
-    main.append(("確認日", e(v("確認日"))))
+    main.append(("確認日", e(jp_date(v("確認日")))))
 
     more: list[tuple[str, str]] = [("制度の種類", e(v("制度の種類"))), ("状態", f'{badge(st)} {e(STATUS_MEANING[st])}')]
     if v("根拠の箇所"):

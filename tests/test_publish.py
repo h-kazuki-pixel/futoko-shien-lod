@@ -487,3 +487,11 @@ def test_area_summary_counts_match_the_cards(site, rows):
                 and publish.kind_slug(r) in publish.MATRIX_KINDS for r in rows)
         summary = text.split('<p class="summary">')[1].split("</p>")[0]
         assert (f"{n}つ" in summary) if n else ("まだありません" in summary), a["市町村"]
+
+
+def test_dates_on_parent_pages_are_written_in_japanese_style(site, rows):
+    assert publish.jp_date("2026-11-06") == "2026年11月6日" and publish.jp_date("") == ""
+    r = next(r for r in rows if r["状態"] == "あり" and r["市町村コード"] != "40000")
+    text = (site / "shi" / r["市町村コード"] / "index.html").read_text(encoding="utf-8")
+    assert publish.jp_date(r["確認日"]) + "に公式ページで確認" in text
+    assert not re.search(r"\d{4}-\d{2}-\d{2}", re.sub(r"<[^>]+>", "", text.split("<main")[1].split("</main>")[0]))
