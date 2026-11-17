@@ -2,3 +2,4 @@ pytest
 rdflib
 pypdf
 pyshacl
+pyyaml
