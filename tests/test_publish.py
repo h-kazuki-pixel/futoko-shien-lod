@@ -114,20 +114,20 @@ def test_ari_page_shows_source_and_check_date(site, rows):
 
 
 def test_matrix_matches_the_data(site, rows):
-    text = (site / "index.html").read_text(encoding="utf-8")
+    text = (site / "hikaku" / "index.html").read_text(encoding="utf-8")
     areas = [a for a in schema.read_csv("data/shichoson.csv") if a["福岡都市圏"] == "○"]
     tbody = text.split("<tbody>")[1].split("</tbody>")[0]
     trs = [t for t in tbody.split("<tr>") if t.strip()]
     assert len(trs) == len(areas) == 17
     cell = {(r["市町村コード"], schema.KIND_BY_LABEL[r["制度の種類"]]): r for r in rows}
     for a, tr in zip(areas, trs):
-        assert f'<th scope="row">{a["市町村"]}</th>' in tr
+        assert f'<th scope="row"><a href="../shi/{a["市町村コード"]}/">{a["市町村"]}</a></th>' in tr
         tds = re.findall(r"<td>(.*?)</td>", tr)
         assert len(tds) == 5
         for k, td in zip(publish.MATRIX_KINDS, tds):
             r = cell.get((a["市町村コード"], k))
             if r:
-                assert f'href="id/{r["id"]}/"' in td and f">{r['状態']}<" in td
+                assert f'href="../id/{r["id"]}/"' in td and f">{r['状態']}<" in td
                 # 一覧に載っていないことを根拠にした「なし」には、必ず ※ が付く
                 assert ("※" in td) == publish.list_based_none(r)
             else:
@@ -448,12 +448,42 @@ def test_area_page_has_a_card_per_kind_and_plain_words(site, rows):
                 assert "無いとは限りません" in text
         # 技術の言葉は、保護者向けのページに出さない
         for word in ("Turtle", "URI", "SHACL", "照合"):
-            assert word not in text.split("<main>")[1].split("</main>")[0], (a["市町村"], word)
+            assert word not in text.split("<main")[1].split("</main>")[0], (a["市町村"], word)
 
 
 def test_top_page_speaks_to_parents_first(site):
     text = (site / "index.html").read_text(encoding="utf-8")
-    main = text.split("<main>")[1]
-    assert main.index("お住まいの市町村を選んでください") < main.index("17市町を見比べる")
+    main = text.split("<main")[1]
+    assert main.index("お住まいの市町村を選んでください") < main.index("載せている5つの支援")
+    assert "<table" not in main  # 表は見比べるページに分けた
     for word in ("Turtle", "SHACL", "JSON-LD"):
         assert word not in main
+
+
+def test_area_page_puts_found_support_first_and_gives_a_place_to_ask(site, rows):
+    areas = [a for a in schema.read_csv("data/shichoson.csv") if a["福岡都市圏"] == "○"]
+    for a in areas:
+        text = (site / "shi" / a["市町村コード"] / "index.html").read_text(encoding="utf-8")
+        mine = [r for r in rows if r["市町村コード"] == a["市町村コード"]]
+        if any(r["状態"] in ("あり", "予定") for r in mine) and any(r["状態"] == "確認できず" for r in mine):
+            assert text.index("見つかった支援</h2>") < text.index("公式ページでは見つからなかった支援</h2>"), a["市町村"]
+        url = publish.ask_url(mine)
+        if url:
+            assert f'href="{html.escape(url)}"' in text and "公式ページを開く" in text, a["市町村"]
+            assert schema.is_official_url(url, schema.load_extra_domains())
+        # 内部の記録の言葉(なしの根拠)は、このページには出さない
+        for r in mine:
+            if r["なしの根拠"]:
+                assert html.escape(r["なしの根拠"]) not in text
+
+
+def test_area_summary_counts_match_the_cards(site, rows):
+    for a in schema.read_csv("data/shichoson.csv"):
+        f = site / "shi" / a["市町村コード"] / "index.html"
+        if not f.exists():
+            continue
+        text = f.read_text(encoding="utf-8")
+        n = sum(r["市町村コード"] == a["市町村コード"] and r["状態"] in ("あり", "予定")
+                and publish.kind_slug(r) in publish.MATRIX_KINDS for r in rows)
+        summary = text.split('<p class="summary">')[1].split("</p>")[0]
+        assert (f"{n}つ" in summary) if n else ("まだありません" in summary), a["市町村"]
