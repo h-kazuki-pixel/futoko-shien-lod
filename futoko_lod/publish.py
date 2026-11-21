@@ -464,6 +464,8 @@ PLAIN_STATUS = {
 def plain_status(row: dict[str, str] | None) -> str:
     if row is None:
         return "まだ調べていません"
+    if row["状態"] == "なし" and not list_based_none(row):
+        return "市町村が「無い」と答えました"
     return PLAIN_STATUS[row["状態"]]
 
 
@@ -496,7 +498,7 @@ def matrix_lines(rows: list[dict[str, str]], metro: list[dict[str, str]], record
 LEGEND_HTML = f"""<dl class="plain">
 <dt>{badge("あり")}</dt><dd>公式ページに書かれていました。公式ページへのリンクを付けています。</dd>
 <dt>{badge("確認できず")}</dt><dd>公式ページでは見つかりませんでした。<strong>無いとは限りません。</strong>載っていないだけのこともあるので、市町村の教育委員会に聞いてみてください。</dd>
-<dt>{badge("なし")}</dt><dd>学びの多様化学校だけに使っています。国(文部科学省)の一覧に、その市町村の学校が載っていないという意味です。</dd>
+<dt>{badge("なし")}</dt><dd>市町村の教育委員会が「無い」と答えたもの(答えた日と担当課を付けています)。学びの多様化学校では、国(文部科学省)の一覧に、その市町村の学校が載っていないという意味です。</dd>
 </dl>"""
 
 
@@ -523,8 +525,8 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
     n_cells = len(metro_areas) * len(FOCUS_KINDS)
     n_untouched = n_cells - sum(n_focus.values())
     rest = []
-    if n_focus["なし"]:
-        rest.append(f'市町村が「無い」と答えたのは {n_focus["なし"]} か所')
+    # 「無い」と答えたマスは、見つからなかったマスとは別に数える(括弧に入れると、見つからなかった数の内訳に読める)
+    said_no = f'市町村が「無い」と答えたのは {n_focus["なし"]} か所、' if n_focus["なし"] else ""
     if n_untouched:
         rest.append(f"公式ページをまだ読んでいないのは {n_untouched} か所")
     focus_rest = "(" + "、".join(rest) + ")" if rest else ""
@@ -540,7 +542,7 @@ def index_html(rows: list[dict[str, str]], areas: list[dict[str, str]], records:
 </details>
 
 <h2>費用の補助と、出席扱いの決まり</h2>
-<p>市町村ごとに違い、公式ページで見つからないことが多い2つです。福岡都市圏の17市町 × 2つ = {n_cells} か所のうち、公式ページに書かれていたのは {n_focus["あり"] + n_focus["予定"]} か所、見つからなかったのは {n_focus["確認できず"]} か所でした{focus_rest}。見つからなかった所は、市町村に問い合わせています。</p>
+<p>市町村ごとに違い、公式ページで見つからないことが多い2つです。福岡都市圏の17市町 × 2つ = {n_cells} か所のうち、公式ページに書かれていたのは {n_focus["あり"] + n_focus["予定"]} か所、{said_no}見つからなかったのは {n_focus["確認できず"]} か所でした{focus_rest}。見つからなかった所は、市町村に問い合わせています。</p>
 <div class="scroll"><table class="focus">
 <thead><tr><th scope="col">市町</th><th scope="col">利用料の補助</th><th scope="col">出席扱いの決まり</th></tr></thead>
 <tbody>
@@ -713,9 +715,10 @@ def shi_html(area: dict[str, str], rows: list[dict[str, str]], pref_rows: list[d
     if notfound:
         items = "".join(
             f'<li><h3>{e(KIND_PLAIN[k][0])}</h3><p>{e(KIND_PLAIN[k][1])}</p>'
-            f'<p><a href="{root}id/{e(mine[k]["id"])}/">探したページを見る</a></p></li>' for k in notfound)
+            + "".join(f"<p>{e(x)}</p>" for x in said_yes_lines(mine[k], records))
+            + f'<p><a href="{root}id/{e(mine[k]["id"])}/">探したページを見る</a></p></li>' for k in notfound)
         url = ask_url(rows)
-        asked = [q for k in notfound for q in inquiries_for(mine[k], records)]
+        asked = [q for k in notfound for q in inquiries_for(mine[k], records) if not q.get("回答", "").strip()]
         asked_html = (f'<p class="small">この一覧を作っている側でも、{e(jp_date(min(q["日付"] for q in asked)))}に{e(name)}へ問い合わせています。'
                       "回答があれば、ここに反映します。</p>") if asked else ""
         btn = (f'<a class="btn block" href="{e(url)}" rel="noopener">{e(name)}の公式ページを開く</a>'
@@ -726,11 +729,19 @@ def shi_html(area: dict[str, str], rows: list[dict[str, str]], pref_rows: list[d
 {btn}{asked_html}
 </div>
 <ul class="rows">{items}</ul>""")
-    if nashi:
+    answered = [k for k in nashi if not list_based_none(mine[k])]
+    by_list = [k for k in nashi if list_based_none(mine[k])]
+    if answered:
+        items = "".join(
+            f'<li><h3>{e(KIND_PLAIN[k][0])}</h3><p>{e(said_no_line(mine[k], records))}</p>'
+            + (f'<p>{e(SHUSSEKI_NONE_NOTE)}</p>' if k == "shusseki" else "")
+            + f'<p><a href="{root}id/{e(mine[k]["id"])}/">くわしく</a></p></li>' for k in answered)
+        parts.append(f'<h2>{e(name)}が「無い」と答えた支援</h2>\n<ul class="rows">{items}</ul>')
+    if by_list:
         items = "".join(
             f'<li><h3>{e(KIND_PLAIN[k][0])}</h3><p>{e(name)}が設置する学校は、国(文部科学省)の一覧に載っていません'
             f'({e(jp_date(mine[k]["確認日"]))}に確認)。設置の検討や予定は、この一覧からは分かりません。</p>'
-            f'<p><a href="{root}id/{e(mine[k]["id"])}/">くわしく</a></p></li>' for k in nashi)
+            f'<p><a href="{root}id/{e(mine[k]["id"])}/">くわしく</a></p></li>' for k in by_list)
         parts.append(f'<h2>国の一覧に載っていない支援</h2>\n<ul class="rows">{items}</ul>')
     if todo:
         items = "".join(f'<li><h3>{e(KIND_PLAIN[k][0])}</h3><p>{e(KIND_PLAIN[k][1])}</p></li>' for k in todo)
@@ -844,10 +855,17 @@ def record_html(row: dict[str, str], node: dict, siblings: list[dict[str, str]],
 
     area = v("市町村")
     caution = ""
-    if st == "確認できず":
+    yes = said_yes_lines(row, records or {"toiawase": []})
+    if st == "確認できず" and yes:
+        caution = (f'<p class="note">{e(area)}の公式ページでは見つかりませんでした。'
+                   + "".join(e(x) for x in yes) + '公式の案内ページが無いため、この一覧では「確認できず」のままにしています。</p>\n')
+    elif st == "確認できず":
         caution = (f'<p class="note">{e(area)}の公式ページで探しましたが、見つかりませんでした。<strong>無いとは限りません。</strong>'
                    f'ページに載っていないだけのこともあります。使えるかどうかは、{e(area)}の教育委員会に聞いてみてください。'
                    '探したページは下にあります。</p>\n')
+    elif st == "なし" and not list_based_none(row):
+        caution = (f'<p class="note"><strong>{e(said_no_line(row, records or {"toiawase": []}))}</strong>'
+                   + (e(SHUSSEKI_NONE_NOTE) if k == "shusseki" else "") + '</p>\n')
     elif list_based_none(row):
         caution = ('<p class="note">この「なし」は、<strong>公式の一覧に載っていない</strong>という意味です。市町村が「無い」と答えたものではありません。'
                    '設置の検討や予定は、一覧からは分かりません。</p>\n')
@@ -1228,7 +1246,13 @@ def inquiry_lines(row: dict[str, str], records: dict) -> list[str]:
     回答の文面は載せない(自由に書いた文で、人の名前が入るかもしれない)。回答の中身は、反映した行の項目と「なしの根拠」に出る。
     突き合わせ: 「反映したid」があればそれだけを見る。無ければ、同じ市町村・同じ種類の行すべてに出す。
     """
-    return [f"{r['日付']} {r['担当課']}に{r['方法']}で問い合わせた。" + answer_state(r, row) for r in inquiries_for(row, records)]
+    out = []
+    for r in inquiries_for(row, records):
+        if r["回答"].strip() and not r.get("公開の可否", "").strip().startswith("差し支えあり"):
+            out.append(f"{r['日付']} に{r['方法']}で問い合わせ、{r['担当課']}から" + answer_state(r, row))
+        else:
+            out.append(f"{r['日付']} {r['担当課']}に{r['方法']}で問い合わせた。" + answer_state(r, row))
+    return out
 
 
 def inquiries_for(row: dict[str, str], records: dict) -> list[dict[str, str]]:
@@ -1246,13 +1270,63 @@ def inquiries_for(row: dict[str, str], records: dict) -> list[dict[str, str]]:
     return out
 
 
+ANSWER_DAY = re.compile(r"[(（]回答日 (\d{4}-\d{2}-\d{2})[)）]")
+SHUSSEKI_NONE_NOTE = ("基準や施設の一覧を公表していない、という意味です。出席扱いにならないという意味ではありません。"
+                      "出席扱いにできるかは、在籍する学校に相談してください。")
+
+
+def answer_head(r: dict[str, str]) -> str:
+    """回答の頭の語(ある/ない/公表していない/分からない)。data/toiawase.csv の回答は、この語で始めて書く。"""
+    a = r.get("回答", "").strip()
+    for w in ("公表していない", "分からない", "ある", "ない"):
+        if a.startswith(w):
+            return w
+    return ""
+
+
+def answer_day(r: dict[str, str]) -> str:
+    m = ANSWER_DAY.search(r.get("回答", ""))
+    return m.group(1) if m else ""
+
+
+def usable_answers(row: dict[str, str], records: dict) -> list[dict[str, str]]:
+    return [q for q in inquiries_for(row, records)
+            if q.get("回答", "").strip() and not q.get("公開の可否", "").strip().startswith("差し支えあり")]
+
+
+def said_no_line(row: dict[str, str], records: dict) -> str:
+    """「なし」の1件を、市町村が答えた事実として書く。記録が見つからなければ、なしの根拠をそのまま使う。"""
+    for q in usable_answers(row, records):
+        if answer_head(q) in ("ない", "公表していない"):
+            what = "公表していない" if answer_head(q) == "公表していない" else "無い"
+            day = answer_day(q)
+            return f"{row['市町村']}の{q['担当課']}が、{jp_date(day) + 'に' if day else ''}「{what}」と答えました。"
+    return row["なしの根拠"]
+
+
+def said_yes_lines(row: dict[str, str], records: dict) -> list[str]:
+    """「確認できず」のまま市町村が「ある」と答えたもの(公式の案内ページが無い支援)。答えの事実と、市町村の頼みだけを書く。"""
+    if row["状態"] != "確認できず":
+        return []
+    out = []
+    for q in usable_answers(row, records):
+        if answer_head(q) != "ある":
+            continue
+        day = answer_day(q)
+        out.append(f"{row['市町村']}の{q['担当課']}は、{jp_date(day) + 'に' if day else ''}「ある」と答えています。")
+        if "各学校へ相談" in q.get("公開の可否", ""):
+            out.append("使いたいときは、在籍する学校に相談してください(学校を通じて案内しているとのことです)。")
+    return out
+
+
 def answer_state(r: dict[str, str], row: dict[str, str]) -> str:
-    """回答があったかどうかだけ。回答の文面は返さない。"""
+    """回答があったかどうかと、回答の日。回答の文面は返さない。"""
     reflected = r.get("反映したid", "").replace(",", " ").replace("|", " ").split()
     if r.get("公開の可否", "").strip().startswith("差し支えあり"):
         return "回答は、データに使っていない(載せることに差し支えがあるとのこと)"
     if r["回答"].strip():
-        return "回答があり、この1件に反映した" if reflected else "回答があった"
+        day = f"({answer_day(r)})" if answer_day(r) else ""
+        return f"回答があった{day}。この1件に反映した" if reflected else f"回答があった{day}"
     return "回答はまだ無い"
 
 

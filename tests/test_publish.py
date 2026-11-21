@@ -100,7 +100,8 @@ def test_kakunin_dekizu_page_says_it_does_not_mean_none(site, rows):
     for r in rows:
         text = (site / "id" / r["id"] / "index.html").read_text(encoding="utf-8")
         warned = "無いとは限りません。" in text and "教育委員会に聞いてみてください" in text
-        assert warned == (r["状態"] == "確認できず"), r["id"]
+        said_yes = bool(publish.said_yes_lines(r, RECORDS))
+        assert warned == (r["状態"] == "確認できず" and not said_yes), r["id"]
         if r["状態"] == "確認できず":
             for place in r["探した場所"].split(schema.SEP.strip()):
                 assert html.escape(place.strip()) in text
@@ -506,7 +507,9 @@ def test_top_page_focus_table_matches_the_data(site, rows):
         assert f'href="id/{r["id"]}/"' in text
     ari = sum(r["状態"] in ("あり", "予定") for r in focus)
     miss = sum(r["状態"] == "確認できず" for r in focus)
-    assert f"書かれていたのは {ari} か所、見つからなかったのは {miss} か所" in text
+    nashi_ = sum(r["状態"] == "なし" for r in focus)
+    said = f"市町村が「無い」と答えたのは {nashi_} か所、" if nashi_ else ""
+    assert f"書かれていたのは {ari} か所、{said}見つからなかったのは {miss} か所" in text
     # 文に出した数を足すと、マスの数になる(抜けたマスを黙って落とさない)
     nashi = sum(r["状態"] == "なし" for r in focus)
     rest = len(metro) * len(publish.FOCUS_KINDS) - len(focus)
@@ -538,3 +541,49 @@ def test_top_page_focus_table_matches_the_data(site, rows):
     area = (site / "shi" / "40219" / "index.html").read_text(encoding="utf-8")
     pos = [area.index(publish.KIND_PLAIN[k][0]) for k in ("fs-hojo", "shusseki", "shien-center")]
     assert pos == sorted(pos)
+
+
+# --- 市町の回答(11/21 から) ---
+RECORDS = publish.load_records("data")
+
+
+def _text(path):
+    import re as _re
+    t = path.read_text(encoding="utf-8")
+    return html.unescape(_re.sub(r"<[^>]+>", "", t))
+
+
+def test_answered_none_is_not_called_the_national_list(site, rows):
+    """市町村が答えた「なし」を、国の一覧の話として出さない(11/21 に見つけた誤り)。"""
+    for r in rows:
+        if r["状態"] != "なし" or publish.list_based_none(r):
+            continue
+        page = _text(site / "id" / r["id"] / "index.html")
+        assert "国の一覧に載っていません" not in page, r["id"]
+        assert "と答えました" in page, r["id"]
+        shi = _text(site / "shi" / r["市町村コード"] / "index.html")
+        assert f"{r['市町村']}が「無い」と答えた支援" in shi, r["id"]
+        if publish.kind_slug(r) == "shusseki":
+            assert "出席扱いにならないという意味ではありません" in page and "出席扱いにならないという意味ではありません" in shi
+
+
+def test_said_yes_without_page_stays_kakunin_dekizu(site, rows):
+    """「ある」と答えたが公式の案内が無い支援は、確認できずのまま、答えたことを添える。"""
+    yes = [r for r in rows if publish.said_yes_lines(r, RECORDS)]
+    assert {r["id"] for r in yes} >= {"40345-shien-center", "40345-online", "40348-shien-center"}
+    for r in yes:
+        assert r["状態"] == "確認できず"
+        page = _text(site / "id" / r["id"] / "index.html")
+        assert "「ある」と答えています" in page and "「確認できず」のままにしています" in page
+    # 新宮町の頼み(案内のページが無い2つに「各学校へ相談」を添える)
+    for rid in ("40345-shien-center", "40345-online"):
+        assert "在籍する学校に相談してください" in _text(site / "id" / rid / "index.html")
+    assert _text(site / "shi" / "40345" / "index.html").count("在籍する学校に相談してください(学校を通じて") == 2
+
+
+def test_inquiry_answers_start_with_a_known_word():
+    """回答の列は「ある/ない/公表していない/分からない」で始め、回答日を括弧に書く(公開ページはこれで出し分ける)。"""
+    for q in RECORDS["toiawase"]:
+        if q["回答"].strip():
+            assert publish.answer_head(q), q
+            assert publish.answer_day(q), q

@@ -33,6 +33,9 @@ def block() -> str:
         lines.append(f"| {a['市町村']} | " + " | ".join(vals) + " |")
     metro_codes = {a["市町村コード"] for a in metro}
     outside = collections.Counter(r["市町村"] for r in rows if r["市町村コード"] not in metro_codes)
+    answered = sum(r["状態"] == "なし" and r["確認方法"] == "問い合わせ" for r in rows)
+    focus = collections.Counter(cell.get((a["市町村コード"], k), "未着手") for a in metro for k in ("fs-hojo", "shusseki"))
+    n_outside = len([x for x in outside if x != "福岡県"])
     kouho = len(schema.read_csv("data/kouho.csv"))
     horyu = len(schema.read_csv("data/horyu.csv"))
     today = dt.date.today().isoformat()
@@ -45,16 +48,18 @@ def block() -> str:
 | 公開データ(`data/seido.csv`) | {len(rows)} | 読み込み時の検査に通り、出典のある行は出典ページとの照合にも通った行 |
 | うち あり | {c['あり']} | 出典ページに根拠の箇所と数字がある |
 | うち 予定 | {c['予定']} | 同上 |
-| うち なし | {c['なし']} | 公式の一覧に、その市町村が載っていないことを照合した(いまは学びの多様化学校だけ) |
+| うち なし | {c['なし']} | 市町村が「無い」と答えた記録がある({answered})か、公式の一覧に、その市町村が載っていないことを照合した({c['なし'] - answered}。学びの多様化学校) |
 | うち 確認できず | {c['確認できず']} | 照合の対象外。探した場所を記録している |
 | 候補(`data/kouho.csv`) | {kouho} | 照合を待っている行 |
 | 保留(`data/horyu.csv`) | {horyu} | 検査や照合に通らなかった行 |
 
 福岡都市圏の17市町×5種類(85マス)の状況。{sum(filled.values())}マスに状態が付いた(あり {filled['あり']}、予定 {filled['予定']}、なし {filled['なし']}、確認できず {filled['確認できず']})。「未着手」はまだ読んでいないマス。
 
+主役の2種類(利用料の補助、出席扱い)は {len(metro) * 2} マス。あり {focus['あり']}、予定 {focus['予定']}、市町村が答えたなし {focus['なし']}、確認できず {focus['確認できず']}、未着手 {focus['未着手']}。
+
 {chr(10).join(lines)}
 
-都市圏の外は、{len(outside)}の市町村と県で{sum(outside.values())}件。ほとんどが、文部科学省の一覧と突き合わせた学びの多様化学校の行で、ほかの種類はまだ読んでいない。
+都市圏の外は、{n_outside}の市町村と県で{sum(outside.values())}件。ほとんどが、文部科学省の一覧と突き合わせた学びの多様化学校の行で、ほかの種類はまだ読んでいない。
 
 「確認できず」が多いのは、まだ各市町で1〜数ページしか読んでいないため。見つからなかっただけで、制度が無いという意味ではない。探したページは各行の「探した場所」にある。
 
