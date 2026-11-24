@@ -2267,10 +2267,10 @@
     "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-fs-hojo",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
-   "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-24",
+   "checkMethod": "fsl:method-toiawase",
+   "noneBasis": "2026-11-24、志免町 学校教育課がフォームで「ない」と回答",
    "searchedAt": [
     "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
    ]
@@ -2289,10 +2289,11 @@
     "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-online",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
-   "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-24",
+   "checkMethod": "fsl:method-toiawase",
+   "noneBasis": "2026-11-24、志免町 学校教育課がフォームで「ない」と回答",
+   "note": "町独自のオンラインの学習支援・居場所支援はない(回答)",
    "searchedAt": [
     "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
    ]
@@ -2320,7 +2321,7 @@
    "source": "https://ops-jg.d1-law.com/opensearch/SrJbF01/init?jctcd=8A9160EADB&houcd=H508920500006&no=2&totalCount=3&jbnJiten=5081117",
    "sourceName": "志免町例規集「志免町教育支援センター設置要綱」",
    "basisPhrase": "志免町教育支援センター設置要綱",
-   "note": "令和8年7月21日教育委員会告示第6号、令和8年4月1日から適用。生涯学習1号館内。学習支援、体験活動、居場所の提供、相談を行う。費用の定めは要綱に無い",
+   "note": "令和8年7月21日教育委員会告示第6号、令和8年4月1日から適用。生涯学習1号館内。学習支援、体験活動、居場所の提供、相談を行う。費用の定めは要綱に無い。町は、適応指導教室「ぐんぐん」もあると回答(2026-11-24)",
    "searchedAt": [
     "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
    ]
@@ -2339,10 +2340,11 @@
     "sameAs": "http://ja.dbpedia.org/resource/志免町"
    },
    "kind": "fsl:kind-shusseki",
-   "status": "fsl:status-kakunin-dekizu",
-   "dateChecked": "2026-11-15",
-   "checkMethod": "fsl:method-kikai",
-   "note": "公式ページに記載が見つからなかった。無いことは確認していない",
+   "status": "fsl:status-nashi",
+   "dateChecked": "2026-11-24",
+   "checkMethod": "fsl:method-toiawase",
+   "noneBasis": "2026-11-24、志免町 学校教育課がフォームで「公表していない」と回答",
+   "note": "基準・施設一覧とも公表していない(回答)",
    "searchedAt": [
     "https://www.town.shime.lg.jp/site/kouhou/hikikomori-hutoukou-soudann.html"
    ]
